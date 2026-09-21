@@ -1,0 +1,824 @@
+# Graph colour mapping (Prototype 3 corrected)
+
+Single-series bars cycle red → blue → grey by the answer's canonical
+option index, so each answer keeps its colour in every filter state.
+A selected value is overridden with yellow (blue outline + tick) and
+returns to its stored colour when deselected. Boys/girls comparison
+series use blue/red. Missing values use diagonal hatching.
+
+## responses_by_year
+- Year 3 (`y3`): red
+- Year 4 (`y4`): blue
+- Year 5 (`y5`): grey
+- Year 6 (`y6`): red
+- Year 7 (`y7`): blue
+- Year 8 (`y8`): grey
+- Year 9 (`y9`): red
+- Year 10 (`y10`): blue
+- Year 11 (`y11`): grey
+
+## responses_by_gender
+- Boys (`boy`): red
+- Girls (`girl`): blue
+
+## overall_freq
+- No sport reported (`none_reported`): red
+- Less than once a week (`less_weekly_only`): blue
+- 1 time a week (`w1`): grey
+- 2 times a week (`w2`): red
+- 3 times a week (`w3`): blue
+- 4 times a week (`w4`): grey
+- 5 times a week (`w5`): red
+- 6 times a week (`w6`): blue
+- 7 or more times a week (`w7`): grey
+
+## organised_freq
+- No club sport reported (`none_reported`): red
+- Less than once a week (`less_weekly`): blue
+- 1 time a week (`once_week`): grey
+- 2 times a week (`twice_week`): red
+- Three or more times a week (`three_plus`): blue
+- I don’t know (`dont_know`): grey
+
+## participation_settings
+- In PE or lesson time (`pe_lessons`): red
+- In a school club (`school_club`): blue
+- In a club outside of school (`community_club`): grey
+- Somewhere else (`somewhere_else`): red
+
+## sports_participated
+- Aerial (`aerial`): red
+- Airsoft Target Shooting (`airsoft_target_shooting`): blue
+- American Football (`american_football`): grey
+- Archery (`archery`): red
+- Athletics (`athletics`): blue
+- BMX (`bmx`): grey
+- Badminton (`badminton`): red
+- Ballet (`ballet`): blue
+- Baseball (`baseball`): grey
+- Basketball (`basketball`): red
+- Bench Ball (`bench_ball`): blue
+- Boccia (`boccia`): grey
+- Bowls (not 10-pin bowling) (`bowls`): red
+- Boxing (`boxing`): blue
+- Breakdancing (`breakdancing`): grey
+- Canoeing or Kayaking (`canoeing_or_kayaking`): red
+- Caving (`caving`): blue
+- Cheerleading (`cheerleading`): grey
+- Circus Skills (`circus_skills`): red
+- Cricket (`cricket`): blue
+- Croquet (`croquet`): grey
+- Curling (`curling`): red
+- Dance (`dance`): blue
+- Darts (`darts`): grey
+- Diving (`diving`): red
+- Dodgeball (`dodgeball`): blue
+- Fencing (`fencing`): grey
+- Figure Skating (`figure_skating`): red
+- Fishing (`fishing`): blue
+- Fitness Classes (e.g. Yoga, Circuits, Aerobics, etc.) (`fitness_classes`): grey
+- Football (`football`): red
+- Goalball (`goalball`): blue
+- Golf (`golf`): grey
+- Gym / Fitness Training (including CrossFit, not including Fitness Classes or Weightlifting) (`gym_fitness_training`): red
+- Gymnastics (`gymnastics`): blue
+- Hiking / Mountain Walking (`hiking_mountain_walking`): grey
+- Hockey (`hockey`): red
+- Horse Riding (`horse_riding`): blue
+- Ice Hockey (`ice_hockey`): grey
+- Ice Skating (`ice_skating`): red
+- Jiu Jitsu (including Brazilian Jiu Jitsu) (`jiu_jitsu`): blue
+- Judo (`judo`): grey
+- Karate (`karate`): red
+- Kickboxing (`kickboxing`): blue
+- Kung Fu (`kung_fu`): grey
+- Lacrosse (`lacrosse`): red
+- Mixed Martial Arts (MMA) (`mixed_martial_arts`): blue
+- Motor Racing (`motor_racing`): grey
+- Mountain Biking (`mountain_biking`): red
+- Muay Thai (`muay_thai`): blue
+- Netball (`netball`): grey
+- Obstacle Course Racing (`obstacle_course_racing`): red
+- Orienteering (`orienteering`): blue
+- Other sports (composite) (`other_sports`): grey
+- Paddleboarding (`paddleboarding`): red
+- Padel (`padel`): blue
+- Parkour (`parkour`): grey
+- Pickleball (`pickleball`): red
+- Pool or Snooker (`pool_or_snooker`): blue
+- Road or Track Cycling (`road_or_track_cycling`): grey
+- Rock Climbing or Bouldering (`rock_climbing_or_bouldering`): red
+- Roller skating or rollerblading (`roller_skating_or_rollerblading`): blue
+- Ropes Courses (`ropes_courses`): grey
+- Rounders (`rounders`): red
+- Rowing (`rowing`): blue
+- Rugby (`rugby`): grey
+- Running or jogging (`running_or_jogging`): red
+- Sailing (`sailing`): blue
+- Scootering (`scootering`): grey
+- Scuba Diving (`scuba_diving`): red
+- Skateboarding (`skateboarding`): blue
+- Skiing (`skiing`): grey
+- Snorkelling (`snorkelling`): red
+- Snowboarding (`snowboarding`): blue
+- Squash (`squash`): grey
+- Street Dance (`street_dance`): red
+- Surf lifesaving (`surf_lifesaving`): blue
+- Surfing (`surfing`): grey
+- Swimming (`swimming`): red
+- Table Tennis (`table_tennis`): blue
+- Taekwondo (`taekwondo`): grey
+- Target Shooting (`target_shooting`): red
+- Ten-Pin Bowling (`ten_pin_bowling`): blue
+- Tennis (`tennis`): grey
+- Trampolining (`trampolining`): red
+- Triathlon (`triathlon`): blue
+- Ultimate Frisbee (`ultimate_frisbee`): grey
+- Underwater Hockey (Octopush) (`underwater_hockey`): red
+- Volleyball (`volleyball`): blue
+- Wakeboarding (`wakeboarding`): grey
+- Water polo (`water_polo`): red
+- Weightlifting (`weightlifting`): blue
+- Windsurfing (`windsurfing`): grey
+- Wrestling (`wrestling`): red
+
+## school_club_freq
+- Less than once a week (`less_weekly_only`): red
+- 1 time a week (`w1`): blue
+- 2 times a week (`w2`): grey
+- 3 times a week (`w3`): red
+- 4 times a week (`w4`): blue
+- 5 times a week (`w5`): grey
+- 6 times a week (`w6`): red
+- 7 or more times a week (`w7`): blue
+
+## community_club_freq
+- Less than once a week (`less_weekly_only`): red
+- 1 time a week (`w1`): blue
+- 2 times a week (`w2`): grey
+- 3 times a week (`w3`): red
+- 4 times a week (`w4`): blue
+- 5 times a week (`w5`): grey
+- 6 times a week (`w6`): red
+- 7 or more times a week (`w7`): blue
+
+## other_setting_freq
+- Less than once a week (`less_weekly_only`): red
+- 1 time a week (`w1`): blue
+- 2 times a week (`w2`): grey
+- 3 times a week (`w3`): red
+- 4 times a week (`w4`): blue
+- 5 times a week (`w5`): grey
+- 6 times a week (`w6`): red
+- 7 or more times a week (`w7`): blue
+
+## sports_school_club
+- Aerial (`aerial`): red
+- Airsoft Target Shooting (`airsoft_target_shooting`): blue
+- American Football (`american_football`): grey
+- Archery (`archery`): red
+- Athletics (`athletics`): blue
+- BMX (`bmx`): grey
+- Badminton (`badminton`): red
+- Ballet (`ballet`): blue
+- Baseball (`baseball`): grey
+- Basketball (`basketball`): red
+- Bench Ball (`bench_ball`): blue
+- Boccia (`boccia`): grey
+- Bowls (not 10-pin bowling) (`bowls`): red
+- Boxing (`boxing`): blue
+- Breakdancing (`breakdancing`): grey
+- Canoeing or Kayaking (`canoeing_or_kayaking`): red
+- Caving (`caving`): blue
+- Cheerleading (`cheerleading`): grey
+- Circus Skills (`circus_skills`): red
+- Cricket (`cricket`): blue
+- Croquet (`croquet`): grey
+- Curling (`curling`): red
+- Dance (`dance`): blue
+- Darts (`darts`): grey
+- Diving (`diving`): red
+- Dodgeball (`dodgeball`): blue
+- Fencing (`fencing`): grey
+- Figure Skating (`figure_skating`): red
+- Fishing (`fishing`): blue
+- Fitness Classes (e.g. Yoga, Circuits, Aerobics, etc.) (`fitness_classes`): grey
+- Football (`football`): red
+- Goalball (`goalball`): blue
+- Golf (`golf`): grey
+- Gym / Fitness Training (including CrossFit, not including Fitness Classes or Weightlifting) (`gym_fitness_training`): red
+- Gymnastics (`gymnastics`): blue
+- Hiking / Mountain Walking (`hiking_mountain_walking`): grey
+- Hockey (`hockey`): red
+- Horse Riding (`horse_riding`): blue
+- Ice Hockey (`ice_hockey`): grey
+- Ice Skating (`ice_skating`): red
+- Jiu Jitsu (including Brazilian Jiu Jitsu) (`jiu_jitsu`): blue
+- Judo (`judo`): grey
+- Karate (`karate`): red
+- Kickboxing (`kickboxing`): blue
+- Kung Fu (`kung_fu`): grey
+- Lacrosse (`lacrosse`): red
+- Mixed Martial Arts (MMA) (`mixed_martial_arts`): blue
+- Motor Racing (`motor_racing`): grey
+- Mountain Biking (`mountain_biking`): red
+- Muay Thai (`muay_thai`): blue
+- Netball (`netball`): grey
+- Obstacle Course Racing (`obstacle_course_racing`): red
+- Orienteering (`orienteering`): blue
+- Other sports (composite) (`other_sports`): grey
+- Paddleboarding (`paddleboarding`): red
+- Padel (`padel`): blue
+- Parkour (`parkour`): grey
+- Pickleball (`pickleball`): red
+- Pool or Snooker (`pool_or_snooker`): blue
+- Road or Track Cycling (`road_or_track_cycling`): grey
+- Rock Climbing or Bouldering (`rock_climbing_or_bouldering`): red
+- Roller skating or rollerblading (`roller_skating_or_rollerblading`): blue
+- Ropes Courses (`ropes_courses`): grey
+- Rounders (`rounders`): red
+- Rowing (`rowing`): blue
+- Rugby (`rugby`): grey
+- Running or jogging (`running_or_jogging`): red
+- Sailing (`sailing`): blue
+- Scootering (`scootering`): grey
+- Scuba Diving (`scuba_diving`): red
+- Skateboarding (`skateboarding`): blue
+- Skiing (`skiing`): grey
+- Snorkelling (`snorkelling`): red
+- Snowboarding (`snowboarding`): blue
+- Squash (`squash`): grey
+- Street Dance (`street_dance`): red
+- Surf lifesaving (`surf_lifesaving`): blue
+- Surfing (`surfing`): grey
+- Swimming (`swimming`): red
+- Table Tennis (`table_tennis`): blue
+- Taekwondo (`taekwondo`): grey
+- Target Shooting (`target_shooting`): red
+- Ten-Pin Bowling (`ten_pin_bowling`): blue
+- Tennis (`tennis`): grey
+- Trampolining (`trampolining`): red
+- Triathlon (`triathlon`): blue
+- Ultimate Frisbee (`ultimate_frisbee`): grey
+- Underwater Hockey (Octopush) (`underwater_hockey`): red
+- Volleyball (`volleyball`): blue
+- Wakeboarding (`wakeboarding`): grey
+- Water polo (`water_polo`): red
+- Weightlifting (`weightlifting`): blue
+- Windsurfing (`windsurfing`): grey
+- Wrestling (`wrestling`): red
+
+## sports_community_club
+- Aerial (`aerial`): red
+- Airsoft Target Shooting (`airsoft_target_shooting`): blue
+- American Football (`american_football`): grey
+- Archery (`archery`): red
+- Athletics (`athletics`): blue
+- BMX (`bmx`): grey
+- Badminton (`badminton`): red
+- Ballet (`ballet`): blue
+- Baseball (`baseball`): grey
+- Basketball (`basketball`): red
+- Bench Ball (`bench_ball`): blue
+- Boccia (`boccia`): grey
+- Bowls (not 10-pin bowling) (`bowls`): red
+- Boxing (`boxing`): blue
+- Breakdancing (`breakdancing`): grey
+- Canoeing or Kayaking (`canoeing_or_kayaking`): red
+- Caving (`caving`): blue
+- Cheerleading (`cheerleading`): grey
+- Circus Skills (`circus_skills`): red
+- Cricket (`cricket`): blue
+- Croquet (`croquet`): grey
+- Curling (`curling`): red
+- Dance (`dance`): blue
+- Darts (`darts`): grey
+- Diving (`diving`): red
+- Dodgeball (`dodgeball`): blue
+- Fencing (`fencing`): grey
+- Figure Skating (`figure_skating`): red
+- Fishing (`fishing`): blue
+- Fitness Classes (e.g. Yoga, Circuits, Aerobics, etc.) (`fitness_classes`): grey
+- Football (`football`): red
+- Goalball (`goalball`): blue
+- Golf (`golf`): grey
+- Gym / Fitness Training (including CrossFit, not including Fitness Classes or Weightlifting) (`gym_fitness_training`): red
+- Gymnastics (`gymnastics`): blue
+- Hiking / Mountain Walking (`hiking_mountain_walking`): grey
+- Hockey (`hockey`): red
+- Horse Riding (`horse_riding`): blue
+- Ice Hockey (`ice_hockey`): grey
+- Ice Skating (`ice_skating`): red
+- Jiu Jitsu (including Brazilian Jiu Jitsu) (`jiu_jitsu`): blue
+- Judo (`judo`): grey
+- Karate (`karate`): red
+- Kickboxing (`kickboxing`): blue
+- Kung Fu (`kung_fu`): grey
+- Lacrosse (`lacrosse`): red
+- Mixed Martial Arts (MMA) (`mixed_martial_arts`): blue
+- Motor Racing (`motor_racing`): grey
+- Mountain Biking (`mountain_biking`): red
+- Muay Thai (`muay_thai`): blue
+- Netball (`netball`): grey
+- Obstacle Course Racing (`obstacle_course_racing`): red
+- Orienteering (`orienteering`): blue
+- Other sports (composite) (`other_sports`): grey
+- Paddleboarding (`paddleboarding`): red
+- Padel (`padel`): blue
+- Parkour (`parkour`): grey
+- Pickleball (`pickleball`): red
+- Pool or Snooker (`pool_or_snooker`): blue
+- Road or Track Cycling (`road_or_track_cycling`): grey
+- Rock Climbing or Bouldering (`rock_climbing_or_bouldering`): red
+- Roller skating or rollerblading (`roller_skating_or_rollerblading`): blue
+- Ropes Courses (`ropes_courses`): grey
+- Rounders (`rounders`): red
+- Rowing (`rowing`): blue
+- Rugby (`rugby`): grey
+- Running or jogging (`running_or_jogging`): red
+- Sailing (`sailing`): blue
+- Scootering (`scootering`): grey
+- Scuba Diving (`scuba_diving`): red
+- Skateboarding (`skateboarding`): blue
+- Skiing (`skiing`): grey
+- Snorkelling (`snorkelling`): red
+- Snowboarding (`snowboarding`): blue
+- Squash (`squash`): grey
+- Street Dance (`street_dance`): red
+- Surf lifesaving (`surf_lifesaving`): blue
+- Surfing (`surfing`): grey
+- Swimming (`swimming`): red
+- Table Tennis (`table_tennis`): blue
+- Taekwondo (`taekwondo`): grey
+- Target Shooting (`target_shooting`): red
+- Ten-Pin Bowling (`ten_pin_bowling`): blue
+- Tennis (`tennis`): grey
+- Trampolining (`trampolining`): red
+- Triathlon (`triathlon`): blue
+- Ultimate Frisbee (`ultimate_frisbee`): grey
+- Underwater Hockey (Octopush) (`underwater_hockey`): red
+- Volleyball (`volleyball`): blue
+- Wakeboarding (`wakeboarding`): grey
+- Water polo (`water_polo`): red
+- Weightlifting (`weightlifting`): blue
+- Windsurfing (`windsurfing`): grey
+- Wrestling (`wrestling`): red
+
+## sports_other_setting
+- Aerial (`aerial`): red
+- Airsoft Target Shooting (`airsoft_target_shooting`): blue
+- American Football (`american_football`): grey
+- Archery (`archery`): red
+- Athletics (`athletics`): blue
+- BMX (`bmx`): grey
+- Badminton (`badminton`): red
+- Ballet (`ballet`): blue
+- Baseball (`baseball`): grey
+- Basketball (`basketball`): red
+- Bench Ball (`bench_ball`): blue
+- Boccia (`boccia`): grey
+- Bowls (not 10-pin bowling) (`bowls`): red
+- Boxing (`boxing`): blue
+- Breakdancing (`breakdancing`): grey
+- Canoeing or Kayaking (`canoeing_or_kayaking`): red
+- Caving (`caving`): blue
+- Cheerleading (`cheerleading`): grey
+- Circus Skills (`circus_skills`): red
+- Cricket (`cricket`): blue
+- Croquet (`croquet`): grey
+- Curling (`curling`): red
+- Dance (`dance`): blue
+- Darts (`darts`): grey
+- Diving (`diving`): red
+- Dodgeball (`dodgeball`): blue
+- Fencing (`fencing`): grey
+- Figure Skating (`figure_skating`): red
+- Fishing (`fishing`): blue
+- Fitness Classes (e.g. Yoga, Circuits, Aerobics, etc.) (`fitness_classes`): grey
+- Football (`football`): red
+- Goalball (`goalball`): blue
+- Golf (`golf`): grey
+- Gym / Fitness Training (including CrossFit, not including Fitness Classes or Weightlifting) (`gym_fitness_training`): red
+- Gymnastics (`gymnastics`): blue
+- Hiking / Mountain Walking (`hiking_mountain_walking`): grey
+- Hockey (`hockey`): red
+- Horse Riding (`horse_riding`): blue
+- Ice Hockey (`ice_hockey`): grey
+- Ice Skating (`ice_skating`): red
+- Jiu Jitsu (including Brazilian Jiu Jitsu) (`jiu_jitsu`): blue
+- Judo (`judo`): grey
+- Karate (`karate`): red
+- Kickboxing (`kickboxing`): blue
+- Kung Fu (`kung_fu`): grey
+- Lacrosse (`lacrosse`): red
+- Mixed Martial Arts (MMA) (`mixed_martial_arts`): blue
+- Motor Racing (`motor_racing`): grey
+- Mountain Biking (`mountain_biking`): red
+- Muay Thai (`muay_thai`): blue
+- Netball (`netball`): grey
+- Obstacle Course Racing (`obstacle_course_racing`): red
+- Orienteering (`orienteering`): blue
+- Other sports (composite) (`other_sports`): grey
+- Paddleboarding (`paddleboarding`): red
+- Padel (`padel`): blue
+- Parkour (`parkour`): grey
+- Pickleball (`pickleball`): red
+- Pool or Snooker (`pool_or_snooker`): blue
+- Road or Track Cycling (`road_or_track_cycling`): grey
+- Rock Climbing or Bouldering (`rock_climbing_or_bouldering`): red
+- Roller skating or rollerblading (`roller_skating_or_rollerblading`): blue
+- Ropes Courses (`ropes_courses`): grey
+- Rounders (`rounders`): red
+- Rowing (`rowing`): blue
+- Rugby (`rugby`): grey
+- Running or jogging (`running_or_jogging`): red
+- Sailing (`sailing`): blue
+- Scootering (`scootering`): grey
+- Scuba Diving (`scuba_diving`): red
+- Skateboarding (`skateboarding`): blue
+- Skiing (`skiing`): grey
+- Snorkelling (`snorkelling`): red
+- Snowboarding (`snowboarding`): blue
+- Squash (`squash`): grey
+- Street Dance (`street_dance`): red
+- Surf lifesaving (`surf_lifesaving`): blue
+- Surfing (`surfing`): grey
+- Swimming (`swimming`): red
+- Table Tennis (`table_tennis`): blue
+- Taekwondo (`taekwondo`): grey
+- Target Shooting (`target_shooting`): red
+- Ten-Pin Bowling (`ten_pin_bowling`): blue
+- Tennis (`tennis`): grey
+- Trampolining (`trampolining`): red
+- Triathlon (`triathlon`): blue
+- Ultimate Frisbee (`ultimate_frisbee`): grey
+- Underwater Hockey (Octopush) (`underwater_hockey`): red
+- Volleyball (`volleyball`): blue
+- Wakeboarding (`wakeboarding`): grey
+- Water polo (`water_polo`): red
+- Weightlifting (`weightlifting`): blue
+- Windsurfing (`windsurfing`): grey
+- Wrestling (`wrestling`): red
+
+## sports_pe
+- Aerial (`aerial`): red
+- Airsoft Target Shooting (`airsoft_target_shooting`): blue
+- American Football (`american_football`): grey
+- Archery (`archery`): red
+- Athletics (`athletics`): blue
+- BMX (`bmx`): grey
+- Badminton (`badminton`): red
+- Ballet (`ballet`): blue
+- Baseball (`baseball`): grey
+- Basketball (`basketball`): red
+- Bench Ball (`bench_ball`): blue
+- Boccia (`boccia`): grey
+- Bowls (not 10-pin bowling) (`bowls`): red
+- Boxing (`boxing`): blue
+- Breakdancing (`breakdancing`): grey
+- Canoeing or Kayaking (`canoeing_or_kayaking`): red
+- Caving (`caving`): blue
+- Cheerleading (`cheerleading`): grey
+- Circus Skills (`circus_skills`): red
+- Cricket (`cricket`): blue
+- Croquet (`croquet`): grey
+- Curling (`curling`): red
+- Dance (`dance`): blue
+- Darts (`darts`): grey
+- Diving (`diving`): red
+- Dodgeball (`dodgeball`): blue
+- Fencing (`fencing`): grey
+- Figure Skating (`figure_skating`): red
+- Fishing (`fishing`): blue
+- Fitness Classes (e.g. Yoga, Circuits, Aerobics, etc.) (`fitness_classes`): grey
+- Football (`football`): red
+- Goalball (`goalball`): blue
+- Golf (`golf`): grey
+- Gym / Fitness Training (including CrossFit, not including Fitness Classes or Weightlifting) (`gym_fitness_training`): red
+- Gymnastics (`gymnastics`): blue
+- Hiking / Mountain Walking (`hiking_mountain_walking`): grey
+- Hockey (`hockey`): red
+- Horse Riding (`horse_riding`): blue
+- Ice Hockey (`ice_hockey`): grey
+- Ice Skating (`ice_skating`): red
+- Jiu Jitsu (including Brazilian Jiu Jitsu) (`jiu_jitsu`): blue
+- Judo (`judo`): grey
+- Karate (`karate`): red
+- Kickboxing (`kickboxing`): blue
+- Kung Fu (`kung_fu`): grey
+- Lacrosse (`lacrosse`): red
+- Mixed Martial Arts (MMA) (`mixed_martial_arts`): blue
+- Motor Racing (`motor_racing`): grey
+- Mountain Biking (`mountain_biking`): red
+- Muay Thai (`muay_thai`): blue
+- Netball (`netball`): grey
+- Obstacle Course Racing (`obstacle_course_racing`): red
+- Orienteering (`orienteering`): blue
+- Other sports (composite) (`other_sports`): grey
+- Paddleboarding (`paddleboarding`): red
+- Padel (`padel`): blue
+- Parkour (`parkour`): grey
+- Pickleball (`pickleball`): red
+- Pool or Snooker (`pool_or_snooker`): blue
+- Road or Track Cycling (`road_or_track_cycling`): grey
+- Rock Climbing or Bouldering (`rock_climbing_or_bouldering`): red
+- Roller skating or rollerblading (`roller_skating_or_rollerblading`): blue
+- Ropes Courses (`ropes_courses`): grey
+- Rounders (`rounders`): red
+- Rowing (`rowing`): blue
+- Rugby (`rugby`): grey
+- Running or jogging (`running_or_jogging`): red
+- Sailing (`sailing`): blue
+- Scootering (`scootering`): grey
+- Scuba Diving (`scuba_diving`): red
+- Skateboarding (`skateboarding`): blue
+- Skiing (`skiing`): grey
+- Snorkelling (`snorkelling`): red
+- Snowboarding (`snowboarding`): blue
+- Squash (`squash`): grey
+- Street Dance (`street_dance`): red
+- Surf lifesaving (`surf_lifesaving`): blue
+- Surfing (`surfing`): grey
+- Swimming (`swimming`): red
+- Table Tennis (`table_tennis`): blue
+- Taekwondo (`taekwondo`): grey
+- Target Shooting (`target_shooting`): red
+- Ten-Pin Bowling (`ten_pin_bowling`): blue
+- Tennis (`tennis`): grey
+- Trampolining (`trampolining`): red
+- Triathlon (`triathlon`): blue
+- Ultimate Frisbee (`ultimate_frisbee`): grey
+- Underwater Hockey (Octopush) (`underwater_hockey`): red
+- Volleyball (`volleyball`): blue
+- Wakeboarding (`wakeboarding`): grey
+- Water polo (`water_polo`): red
+- Weightlifting (`weightlifting`): blue
+- Windsurfing (`windsurfing`): grey
+- Wrestling (`wrestling`): red
+
+## join_in_easily
+- Yes, always (`always`): red
+- Yes, sometimes (`sometimes`): blue
+- No, not often (`not_often`): grey
+- Never (`never`): red
+
+## disability_condition
+- Yes (`yes`): red
+- No (`no`): blue
+- Not sure (`not_sure`): grey
+- Prefer not to say (`prefer_not_to_say`): red
+
+## learning_difficulty
+- Yes (`yes`): red
+- No (`no`): blue
+- Not sure (`not_sure`): grey
+- Prefer not to say (`prefer_not_to_say`): red
+
+## take_part_method
+- Standing (`standing`): red
+- Seated (`seated`): blue
+- With communication aids (`communication_aids`): grey
+- I’m not sure (`not_sure`): red
+- Prefer not to say (`prefer_not_to_say`): blue
+- Other (`other`): grey
+
+## welsh_speaking
+- I can speak Welsh very well (`very_well`): red
+- I can speak a fair amount of Welsh (`fair_amount`): blue
+- I can speak a little Welsh (`a_little`): grey
+- I can say just a few words in Welsh (`few_words`): red
+- I do not speak Welsh (`none`): blue
+
+## welsh_when_playing_sport
+- Yes (`yes`): red
+- No (`no`): blue
+
+## ethnicity_group
+- White (`white`): red
+- Mixed or multiple ethnic groups (`mixed`): blue
+- Asian, Asian Welsh or Asian British (`asian`): grey
+- Other ethnic groups (`other_grouped`): red
+- I’m not sure (`not_sure`): blue
+- Prefer not to say (`prefer_not_to_say`): grey
+
+## pe_feel_healthy
+- Very (`very`): red
+- Quite (`quite`): blue
+- Not very (`not_very`): grey
+- Not at all (`not_at_all`): red
+
+## pe_feel_confident
+- Very (`very`): red
+- Quite (`quite`): blue
+- Not very (`not_very`): grey
+- Not at all (`not_at_all`): red
+
+## pe_feel_ready
+- Very (`very`): red
+- Quite (`quite`): blue
+- Not very (`not_very`): grey
+- Not at all (`not_at_all`): red
+
+## most_important
+- Having fun (`having_fun`): red
+- Being with friends (`friends`): blue
+- Improving my skills (`improving_skills`): grey
+- Feeling confident (`feeling_confident`): red
+- Winning (`winning`): blue
+- Liking my coach or teacher (`coach_or_teacher`): grey
+- Feeling safe (`feeling_safe`): red
+- Access to good equipment and facilities (`equipment_facilities`): blue
+- Other (`other`): grey
+- None of these (`none_of_these`): red
+
+## would_do_more_if
+- There were more sports I liked (`more_sports_liked`): red
+- I felt more confident (`more_confident`): blue
+- It was easier to take part (`easier_to_take_part`): grey
+- I felt more motivated (`more_motivated`): red
+- It felt more comfortable for me (`more_comfortable`): blue
+- I had what I need or it cost less (`equipment_or_cost`): grey
+- Other (`other`): red
+- None of these (`none_of_these`): blue
+
+## sports_wanted
+- Archery (`archery`): red
+- Athletics (`athletics`): blue
+- BMX (`bmx`): grey
+- Badminton (`badminton`): red
+- Baseball (`baseball`): blue
+- Basketball (`basketball`): grey
+- Boccia (`boccia`): red
+- Bowls (not 10-pin bowling) (`bowls`): blue
+- Boxing (`boxing`): grey
+- Canoeing or Kayaking (`canoeing_or_kayaking`): red
+- Caving (`caving`): blue
+- Cheerleading (`cheerleading`): grey
+- Cricket (`cricket`): red
+- Curling (`curling`): blue
+- Dance (`dance`): grey
+- Dodgeball (`dodgeball`): red
+- Fencing (`fencing`): blue
+- Fishing (`fishing`): grey
+- Fitness activities, like yoga, circuits or aerobics (`fitness_activities_like_yoga_circuits_or_aerobics`): red
+- Football (`football`): blue
+- Goalball (`goalball`): grey
+- Golf (`golf`): red
+- Gymnastics (`gymnastics`): blue
+- Hockey (`hockey`): grey
+- Horse Riding (`horse_riding`): red
+- Ice Hockey (`ice_hockey`): blue
+- Ice Skating (`ice_skating`): grey
+- Judo (`judo`): red
+- Karate (`karate`): blue
+- Motor Racing (`motor_racing`): grey
+- Mountain Biking (`mountain_biking`): red
+- Netball (`netball`): blue
+- Paddleboarding (`paddleboarding`): grey
+- Parkour (`parkour`): red
+- Pool or Snooker (`pool_or_snooker`): blue
+- Road or Track Cycling (`road_or_track_cycling`): grey
+- Rock Climbing or Bouldering (`rock_climbing_or_bouldering`): red
+- Roller skating or rollerblading (`roller_skating_or_rollerblading`): blue
+- Rounders (`rounders`): grey
+- Rowing (`rowing`): red
+- Rugby (`rugby`): blue
+- Running or jogging (`running_or_jogging`): grey
+- Sailing (`sailing`): red
+- Skateboarding (`skateboarding`): blue
+- Skiing (`skiing`): grey
+- Snowboarding (`snowboarding`): red
+- Squash (`squash`): blue
+- Surf lifesaving (`surf_lifesaving`): grey
+- Surfing (`surfing`): red
+- Swimming (`swimming`): blue
+- Table Tennis (`table_tennis`): grey
+- Target Shooting (`target_shooting`): red
+- Tennis (`tennis`): blue
+- Trampolining (`trampolining`): grey
+- Triathlon (`triathlon`): red
+- Volleyball (`volleyball`): blue
+- Water polo (`water_polo`): grey
+- Weightlifting (`weightlifting`): red
+- Windsurfing (`windsurfing`): blue
+- Wrestling (`wrestling`): grey
+
+## unmet_demand
+- Archery (`archery`): red
+- Athletics (`athletics`): blue
+- BMX (`bmx`): grey
+- Badminton (`badminton`): red
+- Baseball (`baseball`): blue
+- Basketball (`basketball`): grey
+- Boccia (`boccia`): red
+- Bowls (not 10-pin bowling) (`bowls`): blue
+- Boxing (`boxing`): grey
+- Canoeing or Kayaking (`canoeing_or_kayaking`): red
+- Caving (`caving`): blue
+- Cheerleading (`cheerleading`): grey
+- Cricket (`cricket`): red
+- Curling (`curling`): blue
+- Dance (`dance`): grey
+- Dodgeball (`dodgeball`): red
+- Fencing (`fencing`): blue
+- Fishing (`fishing`): grey
+- Fitness activities, like yoga, circuits or aerobics (`fitness_activities_like_yoga_circuits_or_aerobics`): red
+- Football (`football`): blue
+- Goalball (`goalball`): grey
+- Golf (`golf`): red
+- Gymnastics (`gymnastics`): blue
+- Hockey (`hockey`): grey
+- Horse Riding (`horse_riding`): red
+- Ice Hockey (`ice_hockey`): blue
+- Ice Skating (`ice_skating`): grey
+- Judo (`judo`): red
+- Karate (`karate`): blue
+- Motor Racing (`motor_racing`): grey
+- Mountain Biking (`mountain_biking`): red
+- Netball (`netball`): blue
+- Paddleboarding (`paddleboarding`): grey
+- Parkour (`parkour`): red
+- Pool or Snooker (`pool_or_snooker`): blue
+- Road or Track Cycling (`road_or_track_cycling`): grey
+- Rock Climbing or Bouldering (`rock_climbing_or_bouldering`): red
+- Roller skating or rollerblading (`roller_skating_or_rollerblading`): blue
+- Rounders (`rounders`): grey
+- Rowing (`rowing`): red
+- Rugby (`rugby`): blue
+- Running or jogging (`running_or_jogging`): grey
+- Sailing (`sailing`): red
+- Skateboarding (`skateboarding`): blue
+- Skiing (`skiing`): grey
+- Snowboarding (`snowboarding`): red
+- Squash (`squash`): blue
+- Surf lifesaving (`surf_lifesaving`): grey
+- Surfing (`surfing`): red
+- Swimming (`swimming`): blue
+- Table Tennis (`table_tennis`): grey
+- Target Shooting (`target_shooting`): red
+- Tennis (`tennis`): blue
+- Trampolining (`trampolining`): grey
+- Triathlon (`triathlon`): red
+- Volleyball (`volleyball`): blue
+- Water polo (`water_polo`): grey
+- Weightlifting (`weightlifting`): red
+- Windsurfing (`windsurfing`): blue
+- Wrestling (`wrestling`): grey
+
+## enjoy_pe
+- A lot (`a_lot`): red
+- A little (`a_little`): blue
+- Not much (`not_much`): grey
+- Not at all (`not_at_all`): red
+- Not sure (`not_sure`): blue
+
+## enjoy_school_clubs
+- A lot (`a_lot`): red
+- A little (`a_little`): blue
+- Not much (`not_much`): grey
+- Not at all (`not_at_all`): red
+- Not sure (`not_sure`): blue
+
+## enjoy_community_clubs
+- A lot (`a_lot`): red
+- A little (`a_little`): blue
+- Not much (`not_much`): grey
+- Not at all (`not_at_all`): red
+- Not sure (`not_sure`): blue
+
+## enjoy_other_settings
+- A lot (`a_lot`): red
+- A little (`a_little`): blue
+- Not much (`not_much`): grey
+- Not at all (`not_at_all`): red
+- Not sure (`not_sure`): blue
+
+## ideas_listened
+- Always (`always`): red
+- Sometimes (`sometimes`): blue
+- Not often (`not_often`): grey
+- Never (`never`): red
+
+## confidence_try_new
+- Very (`very`): red
+- Quite (`quite`): blue
+- Not very (`not_very`): grey
+- Not at all (`not_at_all`): red
+
+## confidence_learn_skill
+- Very (`very`): red
+- Quite (`quite`): blue
+- Not very (`not_very`): grey
+- Not at all (`not_at_all`): red
+
+## confidence_try_again
+- Very (`very`): red
+- Quite (`quite`): blue
+- Not very (`not_very`): grey
+- Not at all (`not_at_all`): red
+
+## confidence_new_place
+- Very (`very`): red
+- Quite (`quite`): blue
+- Not very (`not_very`): grey
+- Not at all (`not_at_all`): red

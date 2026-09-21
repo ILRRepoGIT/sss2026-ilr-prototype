@@ -1,0 +1,1 @@
+Cover assets extracted from 'ILR - SSS2026_school report cover page.docx' (word/media). image1 = white Sport Wales logo (400x160), image3 = official 2026 SSS lockup (1120x331). The V4.6 build wrongly staged media from a feedback docx whose image1/image3 were page screenshots.

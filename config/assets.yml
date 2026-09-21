@@ -1,0 +1,98 @@
+# Asset manifest - School Sport Survey 2026 ILR prototype
+# All images are embedded at build time as optimised WebP (alpha preserved).
+# "credit" text should be confirmed with Sport Wales before production use.
+
+assets:
+  - file: "top of page - full width.png"
+    kind: young_artist
+    section: cover
+    token: __IMG_DRAGON__
+    alt: >-
+      Young Artist competition drawing: the Welsh dragon in a football kit,
+      balancing on a football and holding a rugby ball
+    focal_point: centre
+    credit_required: confirm with Sport Wales
+    publication_status: assumed approved (supplied in 2026 asset pack)
+
+  - file: "football eplosion .png"
+    kind: young_artist
+    section: active_nation_opener
+    token: __IMG_SPLASH__
+    alt: "Young Artist drawing: a football bursting through red and green paint"
+    publication_status: assumed approved
+
+  - file: "idependant page - heasrt.png"
+    kind: young_artist
+    section: everyone_opener
+    token: __IMG_HEART__
+    alt: >-
+      Young Artist drawing: a heart containing four scenes of the Welsh dragon
+      playing football, rugby, cricket and gymnastics
+    publication_status: assumed approved
+
+  - file: "right side of a page - horse.png"
+    kind: young_artist
+    section: lifelong_opener
+    token: __IMG_HORSE__
+    alt: "Young Artist drawing: a rider in red jumping a brown horse"
+    publication_status: assumed approved
+
+  - file: "tennis ball & football.png"
+    kind: young_artist
+    section: enjoyment_opener
+    token: __IMG_TENNIS__
+    alt: "Young Artist drawing: a football and a tennis ball"
+    publication_status: assumed approved
+
+  - file: "balls - bottom of page.png"
+    kind: young_artist
+    section: introduction_decoration
+    token: __IMG_BALLS__
+    alt: ""          # decorative
+    publication_status: assumed approved
+
+  - file: "walesh symbols - bottom of page.png"
+    kind: young_artist
+    section: introduction_decoration
+    token: __IMG_SYMBOLS__
+    alt: ""          # decorative
+    publication_status: assumed approved
+
+  - file: "wheelchair javlin thrower.png"
+    kind: brain_break_character
+    section: how_to_use
+    token: __IMG_BRAIN_JAV__
+    alt: >-
+      Brain Break character: a smiling brain wearing a Sport Wales headband,
+      throwing a javelin from a wheelchair
+    usage_note: guide character; used sparingly per brief section 18
+
+  - file: "football.png"
+    kind: brain_break_character
+    section: conclusions
+    token: __IMG_BRAIN_FOOT__
+    alt: "Brain Break character: a smiling brain in glasses kicking a football"
+
+  - file: "basketball.png"
+    kind: brain_break_character
+    section: unused_reserve
+    token: null
+    alt: "Brain Break character dribbling a basketball"
+    usage_note: reserved; not placed in the prototype to avoid over-use
+
+  - file: "sports wales logo.svg"
+    kind: logo
+    section: cover
+    token: __SW_LOGO__
+    alt: "Sport Wales — Chwaraeon Cymru"
+    usage_note: supplied SVG used as-is
+
+notes:
+  - >-
+    The official 2026 School Sport Survey logo lockup (red "2026" with the
+    yellow "Arolwg Chwaraeon Ysgol" and blue "School Sport Survey" ribbons)
+    was not supplied as a file. The cover reproduces it with type and CSS as
+    a placeholder; swap in the approved asset before any external use.
+  - >-
+    No visible pupil names or signatures were observed in the supplied
+    artwork; confirm publication approval before production.

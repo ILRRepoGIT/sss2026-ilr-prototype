@@ -1,0 +1,33 @@
+{
+ "report": "../SSS2026_ILR_Report_V4.15_Bilingual.html",
+ "runner": "8.0.0",
+ "manifestHash": "c4221bba2cff4dcb",
+ "mode": "release",
+ "command": "python welsh_acceptance_gates_v8.py ../SSS2026_ILR_Report_V4.15_Bilingual.html --framework 01_Framework_v2.7.xlsx --mode release --baseline lock_V415_v8.json --bundle-dir . --json results_release.json --evidence evidence_rerun_release.ndjson.gz",
+ "files": {
+  "runner": {
+   "path": "welsh_acceptance_gates_v8.py",
+   "sha256": "3057fef25b5d54bd564b0ee86affd3ef34048b4c1598c27eeb86ae3da2bde4fe"
+  },
+  "framework": {
+   "path": "01_Framework_v2.7.xlsx",
+   "sha256": "972a3998e2a68cdbe7e701d75924901db6369967c0c2118c322c8aa466317792"
+  },
+  "baseline": {
+   "path": "lock_V415_v8.json",
+   "sha256": "d5db3fb34d1a3589d6f8ffb148a961134d4958b185df3dc36ca7465fd1bfd041"
+  },
+  "evidence": {
+   "path": "evidence.ndjson.gz",
+   "sha256": "94f4a7a77dbb47db648d941f3a1e40f21ca277a287e3692274184aa23634a6e7"
+  },
+  "browserHarness": {
+   "path": "browser_gate_provenance.py",
+   "sha256": "1b053e89396e50979ab9414529a72b2e5802855685cef8e9be6ba4ea1b0120a3"
+  },
+  "report": {
+   "path": "../SSS2026_ILR_Report_V4.15_Bilingual.html",
+   "sha256": "dd5d9959d40c2ed417cdc8eeb937171ff50d3240b690c99583f462ba45891bfd"
+  }
+ }
+}

@@ -1,0 +1,236 @@
+# ---------------------------------------------------------------------------
+# Column mapping: SmartSurvey export -> canonical respondent record
+# School Sport Survey 2026 - Interactive Learning Report prototype
+#
+# Columns in the "Responses wide" sheet are headed "Q_<question_id>_<text>".
+# The pipeline matches on the question id, never on cell addresses.
+# Every expected answer label is listed; unexpected labels are logged as
+# validation warnings, never silently recoded.
+# ---------------------------------------------------------------------------
+
+sheet: "Responses wide"
+
+administrative:
+  respondent_id:      { source_column: "Response_ID" }
+  completion_status:  { source_column: "Completion_Status" }
+  school_id:          { source_column: "School_ID" }
+  school_name:        { source_column: "School_Name" }
+
+acceptance_rules:
+  # Partial records in this export contain no survey answers at all; they are
+  # excluded with a logged reason rather than deleted from the source.
+  require_completion_status: "Complete"
+  require_year_group: true
+  # One completed respondent answered "No" to the screening question
+  # "Are you from [School Name]?" but continued the survey. SmartSurvey's own
+  # completed-response count (366) includes this record, so it is ACCEPTED and
+  # reported as a warning. See LIMITATIONS.md (open data question).
+  screening_question: 26871527
+  screening_expected: "Yes"
+  screening_action: "warn"
+
+demographics:
+  year_group:
+    question: 26871554
+    type: single_choice
+    mapping:
+      "Year 3": 3
+      "Year 4": 4
+      "Year 5": 5
+      "Year 6": 6
+      "Year 7": 7
+      "Year 8": 8
+      "Year 9": 9
+      "Year 10": 10
+      "Year 11": 11
+  gender:
+    question: 26871497
+    type: single_choice
+    mapping:
+      "a boy": boy
+      "a girl": girl
+      "I'd prefer not to say": not_stated
+    notes: >
+      not_stated respondents remain included in "All respondents" views and are
+      never recoded as boys or girls. They are not exposed as a separate filter
+      (brief section 10.2).
+  disability_condition:
+    question: 26871504
+    type: single_choice
+    options: ["Yes", "No", "Not sure", "Prefer not to say"]
+  learning_difficulty:
+    question: 26871505
+    type: single_choice
+    options: ["Yes", "No", "Not sure", "Prefer not to say"]
+
+welsh_language:
+  welsh_speaking:
+    question: 26871567
+    type: single_choice
+    options:
+      - "I can speak Welsh very well"
+      - "I can speak a fair amount of Welsh"
+      - "I can speak a little Welsh"
+      - "I can say just a few words in Welsh"
+      - "I do not speak Welsh"
+  welsh_when_playing_sport:
+    question: 26871590
+    type: single_choice
+    options: ["Yes", "No"]
+    routing: 'asked unless welsh_speaking == "I do not speak Welsh"'
+
+sports_participated:
+  # Ten category multi-selects; answers are "; "-separated labels.
+  # "None of these" and "My sport isn't here" are recorded but are not sports.
+  type: multi_select_group
+  non_sport_labels: ["None of these", "My sport isn’t here"]
+  questions:
+    fitness: 26871507
+    team: 26871508
+    water: 26871509
+    cycling: 26871510
+    games_target: 26871511
+    performance: 26871512
+    racket_paddle: 26871513
+    adventure: 26871514
+    combat: 26871515
+    snow_ice: 26871516
+
+sport_settings:
+  # Matrix: sport (row) x setting (column); JSON-fragment cell encoding.
+  type: matrix_group
+  questions: [26871517, 26871518, 26871519, 26871520, 26871521,
+              26871522, 26871523, 26871524, 26871525, 26871526]
+  columns:
+    "In PE or Lesson Time": pe_lessons
+    "In a school club": school_club
+    "In a club outside of school": community_club
+    "Somewhere else": somewhere_else
+
+frequency_matrices:
+  # Frequency per sport per setting. Derived per-respondent frequency =
+  # highest frequency reported across any sport in the setting
+  # (three_plus > twice_week > once_week > less_weekly > dont_know).
+  # Base = respondents routed to the page (any cell present).
+  columns:
+    "Less than once a week": less_weekly
+    "1 time a week": once_week
+    "2 times a week": twice_week
+    "Three or more times a week": three_plus
+    "I don’t know": dont_know
+  groups:
+    pe_lessons:      [26871531, 26871532, 26871533, 26871534, 26871535,
+                      26871536, 26871537, 26871538, 26871539, 26871540]
+    school_club:     [26871591, 26871592, 26871593, 26871594, 26871595,
+                      26871596, 26871597, 26871598, 26871599, 26871600]
+    community_club:  [26871541, 26871542, 26871543, 26871544, 26871545,
+                      26871546, 26871547, 26871548, 26871549, 26871550]
+    somewhere_else:  [26871568, 26871569, 26871570, 26871571, 26871572,
+                      26871573, 26871574, 26871575, 26871576, 26871577]
+
+demand:
+  sports_wanted:
+    question: 26871551
+    type: multi_select
+    notes: "Sports respondents would like to do more of. ~60 distinct options; discovered and slugged."
+
+attitudes:
+  join_in_easily:
+    question: 26871565
+    type: single_choice
+    options: ["Yes, always", "Yes, sometimes", "No, not often", "Never"]
+  ideas_listened:
+    question: 26871566
+    type: single_choice
+    options: ["Always", "Sometimes", "Not often", "Never"]
+  would_do_more_if:
+    question: 26871588
+    type: multi_select
+    other_prefix: "Other / "        # free text recoded to aggregate "Other"
+    options:
+      - "There were more sports I liked"
+      - "I felt more confident"
+      - "It was easier to take part"
+      - "I felt more motivated"
+      - "It felt more comfortable for me"
+      - "I had what I need or it cost less"
+      - "None of these"
+  most_important:
+    question: 26871589
+    type: multi_select
+    other_prefix: "Other / "
+    options:
+      - "Having fun"
+      - "Being with friends"
+      - "Improving my skills"
+      - "Feeling confident"
+      - "Winning"
+      - "Liking my coach or teacher"
+      - "Feeling safe"
+      - "Access to good equipment and facilities"
+      - "None of these"
+
+matrix_questions:
+  enjoyment_places:
+    question: 26871552
+    type: matrix
+    rows:
+      "PE lessons": pe_lessons
+      "School sports clubs": school_clubs
+      "Sports clubs outside of school": community_clubs
+      "Other settings, like in the park or garden": other_settings
+    columns:
+      "A lot": a_lot
+      "A little": a_little
+      "Not much": not_much
+      "Not at all": not_at_all
+      "Not sure": not_sure
+  confidence:
+    question: 26871586
+    type: matrix
+    rows:
+      "Try a new sport?": try_new
+      "Learn a new skill?": learn_skill
+      "Try again when sport is hard?": try_again
+      "Try sport in a new place?": new_place
+    columns:
+      "Very": very
+      "Quite": quite
+      "Not very": not_very
+      "Not at all": not_at_all
+  pe_feelings:
+    question: 26871587
+    type: matrix
+    rows:
+      "Healthy?": healthy
+      "Confident?": confident
+      "Ready to learn?": ready_to_learn
+    columns:
+      "Very": very
+      "Quite": quite
+      "Not very": not_very
+      "Not at all": not_at_all
+
+routed_questions:
+  take_part_method:
+    question: 26871506
+    type: single_choice
+    routing: 'asked only when disability_condition in ["Yes", "Not sure", "Prefer not to say"]'
+    other_prefix: "Other (please specify): / "
+    options:
+      - "Standing"
+      - "Seated"
+      - "With communication aids"
+      - "I’m not sure"
+      - "Prefer not to say"
+
+excluded_from_prototype:
+  # Present in the export but deliberately not reported (privacy / scope).
+  - question: 26871527   # screening question (administrative)
+  - question: 26871498   # ethnic group (plus 26871499-26871503 follow-ups): sensitive; small cells; needs disclosure sign-off
+  - question: 26871555   # age (year group is the reporting dimension)
+  - question: 26871557   # detailed mobility-aid question: very small base, free text
+  - questions: [26871578, 26871579, 26871580, 26871581, 26871582,
+                26871583, 26871584, 26871585, 26871553]   # "Other sports" free-text pages
+  - column: IP_Address   # never leaves the loader
+  - column: Entry_URL

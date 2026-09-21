@@ -1,0 +1,126 @@
+# ---------------------------------------------------------------------------
+# Narrative template catalogue - deterministic, reviewed wording only.
+#
+# Placeholders in {braces} are filled from calculated fact objects at build
+# time. No live text generation occurs in the deployed report. Every rendered
+# sentence is stored with its fact object in generated/narrative-audit.csv.
+#
+# Wording rules (brief section 14.5):
+#   - counts and "respondents", never rates or school-population claims
+#   - "selected", never language implying exclusive choice, for multi-selects
+#   - ties always identified, never broken arbitrarily
+#   - no causal claims, no significance claims
+#   - suppressed / no-data / not-asked are distinct messages
+# ---------------------------------------------------------------------------
+
+chart_insights:
+  unique_leader_count_v1: >-
+    Among the {base} respondents in the current view, {leader} was selected
+    most frequently, by {count} {respondent_word}.
+  unique_leader_count_single_v1: >-
+    Of the {base} respondents who answered this question in the current view,
+    the largest group, {count} {respondent_word}, answered
+    ‘{leader}’.
+  two_way_tie_v1: >-
+    {leader_1} and {leader_2} were selected jointly most often in the current
+    view, with {count} respondents selecting each option.
+  multi_way_tie_v1: >-
+    {tie_n} responses were selected jointly most often in the current view:
+    {leaders}, with {count} selections each.
+  runner_up_clause_v1: "{runner_up} was next, selected by {count} {respondent_word}."
+  distribution_pair_v1: >-
+    {count_1} {respondent_word_1} answered ‘{answer_1}’, compared
+    with {count_2} who answered ‘{answer_2}’.
+  no_valid_responses_v1: >-
+    No valid responses are available for this question in the current view.
+  not_asked_v1: >-
+    This question was not asked of respondents in the current view.
+  suppressed_v1: >-
+    Results are not shown because the number of respondents in this view is
+    below the reporting threshold.
+  rank_suppressed_v1: >-
+    A leading answer is not reported for this view because every answer count
+    is below the reporting threshold.
+  multi_select_note_v1: >-
+    Respondents could select more than one option, so the total number of
+    selections may exceed the number of respondents.
+
+key_findings:
+  base_sentence_v1: >-
+    There {are_word} {base} accepted survey {response_word} in the current view.
+  top_sport_v1: >-
+    {leader} was the most frequently selected sport or activity, chosen by
+    {count} {respondent_word}.
+  top_sport_excl_cohort_v1: >-
+    Apart from {cohort_sport}, which defines the current cohort, the most
+    frequently selected sport was {leader}, chosen by {count} {respondent_word}.
+  top_sport_tie_v1: >-
+    {leaders} were the most frequently selected sports, chosen by {count}
+    respondents each.
+  demand_v1: >-
+    {leader} leads the list of sports respondents would like to do more of,
+    selected by {count} {respondent_word}.
+  demand_tie_v1: >-
+    {leaders} jointly lead the list of sports respondents would like to do
+    more of, with {count} selections each.
+  suppressed_v1: >-
+    A summary is not shown because the number of respondents in this view is
+    below the reporting threshold.
+
+conclusion:
+  active_nation_v1: >-
+    {leader} was the most selected sport or activity in this view
+    ({count} {respondent_word}). {club_count} of the {club_base} respondents
+    asked reported doing club sport outside school at least once a week.
+  active_nation_no_club_v1: >-
+    {leader} was the most selected sport or activity in this view
+    ({count} {respondent_word}).
+  active_nation_cohort_alt_v1: >-
+    Apart from {cohort_sport}, the most selected sport in this cohort was
+    {leader} ({count} {respondent_word}).
+  everyone_v1: >-
+    Asked whether they can join in with sports and games easily, the largest
+    group of respondents in this view ({count} of {base} who answered) said
+    ‘{leader_label}’.
+  everyone_alt_v1: >-
+    Within this cohort, {count} of the {base} respondents who answered feel
+    their ideas about sport are listened to at least sometimes.
+  lifelong_v1: >-
+    The strongest demand in this view is for {leader} ({count}
+    {respondent_word}). The most selected reason for doing more sport was
+    ‘{more_if_leader}’ ({more_if_count} respondents).
+  lifelong_demand_only_v1: >-
+    The strongest demand in this view is for {leader}, selected by {count}
+    {respondent_word}.
+  enjoyment_v1: >-
+    {count} of the {base} respondents who answered enjoy sport in PE lessons
+    ‘a lot’, and {listened_count} feel their ideas are listened to
+    always or sometimes.
+  enjoyment_alt_v1: >-
+    Within this cohort, {count} of the {base} respondents who answered enjoy
+    sport in school sports clubs ‘a lot’.
+  theme_suppressed_v1: >-
+    Results for this theme are not shown because the number of respondents in
+    this view is below the reporting threshold.
+  theme_no_data_v1: >-
+    No valid responses are available for this theme in the current view.
+
+# Tautology guard (brief section 14.6): when the active cohort is derived
+# from a metric, that metric's own trivially-true result must not be used as
+# the section's main finding. The generator swaps to the alternate fact:
+tautology_alternates:
+  sports_participated: use "apart from {cohort sport}" leader exclusion
+  community_club_freq: lead Active Nation on sports_participated instead
+  enjoy_pe: lead Enjoyment on enjoy_school_clubs instead
+  join_in_easily: lead Everyone on ideas_listened instead
+
+state_messages:
+  suppressed_base: "Fewer than 5 respondents"
+  suppressed_chart_title: "Results not shown"
+  suppressed_chart_body: >-
+    The number of respondents in this view is below the reporting threshold.
+  no_data_title: "No responses"
+  no_data_body: "No respondents in the current view answered this question."
+  zero_cell: "No responses"
+  not_asked_title: "Not applicable"
+  not_asked_body: "This question was not asked of respondents in the current view."

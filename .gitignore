@@ -1,0 +1,18 @@
+# Pupil-level data never enters the repository (brief section 6): the survey
+# response export and any school response data stay on the owner's machine.
+# The build takes the export as an argument (see docs/SSS2026_ILR_Key_Documents_V4.15.md §3).
+*response_export*.xlsx
+*Response_Data*.xlsx
+*YPD_export*.xlsx
+inputs/*.xlsx
+# Build outputs that are reproduced from this repository + the export (179 MB each):
+generated/report.html
+generated/*.report.json
+generated/*.narrative-audit.csv
+generated/*.qa.csv
+generated/SSS2026_ILR_Report_*.html
+# Rebuild-kit archives contain the export
+SSS2026_ILR_Rebuild_Kit_*.zip
+__pycache__/
+.pytest_cache/
+*.pyc

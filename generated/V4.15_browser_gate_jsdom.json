@@ -1,0 +1,25 @@
+{
+ "document_lang": "en",
+ "states_sampled": 8,
+ "distinct_strings_seen": 5157,
+ "english_without_provenance": 0,
+ "english_with_provenance": 347,
+ "english_with_provenance_by_family": {
+  "static": 30,
+  "handoff": 170,
+  "frame": 134,
+  "narrative": 10,
+  "label": 3
+ },
+ "welsh_without_provenance": 0,
+ "typography_faults": 0,
+ "typography_by_kind": {},
+ "toggle": {
+  "static_keys": 192,
+  "attr_consumers": 16,
+  "en_ok": 1536,
+  "cy_ok": 1536,
+  "restored_ok": 1536,
+  "failures": 0
+ }
+}

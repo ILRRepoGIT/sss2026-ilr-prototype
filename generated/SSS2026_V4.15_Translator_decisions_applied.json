@@ -1,0 +1,1676 @@
+{
+ "applied": [
+  {
+   "target": "handoff",
+   "key": "ui034",
+   "change": "reviewer suggestion confirmed → applied as the exact substitution",
+   "before": "Yn wahanol i adroddiad statig, gall yr adroddiad hwn gael ei archwilio’n fanylach trwy gymhwyso hidlyddion. Pan fydd un neu fwy o hidlyddion yn cael eu cymhwyso, mae’r siartiau a’r canfyddiadau ysgrifenedig yn diweddaru gyda’i gilydd i gyflwyno gwedd newydd ar y data sydd wedi’i gipio yn eich ysgol, ar sail yr hidlyddion a ddewisoch. Yn eich tro, gallwch weld, arbed ac argraffu fersiynau lluosog o’r adroddiad o sawl safbwynt gwahanol. Gallwch ddysgu sut i gymhwyso hidlyddion trwy ddarllen y tab ‘Sut rydw i’n defnyddio hidlyddion?’ isod.",
+   "after": "Yn wahanol i adroddiad statig, gall yr adroddiad hwn gael ei archwilio’n fanylach trwy gymhwyso hidlyddion. Pan fydd un neu fwy o hidlyddion yn cael eu cymhwyso, mae’r siartiau a’r canfyddiadau ysgrifenedig yn diweddaru gyda’i gilydd i gyflwyno gwedd newydd ar y data sydd wedi’i gipio yn eich ysgol, ar sail yr hidlyddion a ddewisoch. Yn ei dro, gallwch weld, arbed ac argraffu fersiynau lluosog o’r adroddiad o sawl safbwynt gwahanol. Gallwch ddysgu sut i gymhwyso hidlyddion trwy ddarllen y tab ‘Sut rydw i’n defnyddio hidlyddion?’ isod.",
+   "source": "sheet 1 ui034: Use the reviewer’s suggestion"
+  },
+  {
+   "target": "handoff",
+   "key": "ui057",
+   "change": "translator's version (whole cell)",
+   "before": "Mae barrau’n ymddangos am yn ail mewn coch a glas i helpu i wahaniaethu rhwng categorïau ateb gwahanol. Nid yw’r lliwiau hyn yn golygu bod un ateb yn well neu yn waeth na’r llall. Mae llwyd golau yn dangos barrau na allant gael eu dewis fel hidlyddion ac mae marciau llwyd tywyll yn dangos gwerthoedd cuddiedig. Pan fydd gwerth yn cael ei ddewis i archwilio ymatebion eraill y grŵp hwnnw, mae’r gwerth yn troi’n felyn i farcio’i fod wedi’i ddewis – gan gyfateb i flwch y grŵp a ddewiswyd ym mhanel Archwilio’r canlyniadau.",
+   "after": "Mae barrau’n ymddangos am yn ail mewn coch a glas i helpu i wahaniaethu rhwng categorïau ateb gwahanol. Nid yw’r lliwiau hyn yn golygu bod un ateb yn well neu yn waeth na’r llall. Mae llwyd golau yn dangos barrau na allant gael eu dewis fel hidlyddion ac mae llwyd tywyll yn dynodi gwerthoedd cuddiedig. Pan fydd gwerth yn cael ei ddewis i archwilio ymatebion eraill y grŵp hwnnw, mae’r gwerth yn troi’n felyn i farcio’i fod wedi’i ddewis – gan gyfateb i flwch y grŵp a ddewiswyd ym mhanel Archwilio’r canlyniadau.",
+   "source": "sheet 1 ui057: Use my version below"
+  },
+  {
+   "target": "handoff",
+   "key": "ui064",
+   "change": "reviewer suggestion confirmed → applied as the exact substitution",
+   "before": "Pam mae rhai barrau yn llwyd, yn wag neu nid oes modd clicio arnyn nhw?",
+   "after": "Pam mae rhai barrau’n llwyd neu’n wag, neu pam na ellir clicio arnynt?",
+   "source": "sheet 1 ui064: Use the reviewer’s suggestion"
+  },
+  {
+   "target": "handoff",
+   "key": "ui086",
+   "change": "translator's version (whole cell)",
+   "before": "Dim ond i rai disgyblion y gofynnwyd rhai cwestiynau (er enghraifft, mae cwestiynau dilynol am leoliad yn cael eu holi dim ond i ddisgyblion a ddefnyddiodd y lleoliad hwnnw), gadawodd rhai disgyblion gwestiynau’n wag, ac mae cwestiynau amlddewis yn cyfrif pob dewis – felly, gall cyfansymiau fod yn llai neu’n fwy na chyfanswm nifer y disgyblion. Defnyddiwch y rhif sylfaen i helpu i ddeall pwy mae’r canlyniadau hynny yn eu cynrychioli.",
+   "after": "Dim ond i rai disgyblion pennodol y gofynnwyd rhai cwestiynau (er enghraifft, gofynnwyd gwestynnau dilynol am leoliad penodol dim ond I’r disgyblion a ddefnyddiwyd y lleoliad yno), gadawodd rhai disgyblion gwestiynau’n wag, ac mae cwestiynau amlddewis yn cyfrif pob dewis – felly, gall cyfansymiau fod yn llai neu’n fwy na chyfanswm nifer y disgyblion. Defnyddiwch y rhif sylfaen i helpu i ddeall pwy mae’r canlyniadau hynny yn eu cynrychioli.",
+   "source": "sheet 1 ui086: Use my version below"
+  },
+  {
+   "target": "handoff",
+   "key": "ui087",
+   "change": "reviewer suggestion confirmed → applied as the exact substitution",
+   "before": "Pam mae rhai rhifau yn cuddio ar ôl cymhwyso hidlyddion?",
+   "after": "Pam mae rhai rhifau’n cael eu cuddio ar ôl cymhwyso hidlyddion?",
+   "source": "sheet 1 ui087: Use the reviewer’s suggestion"
+  },
+  {
+   "target": "handoff",
+   "key": "ui095",
+   "change": "reviewer suggestion confirmed → applied as the exact substitution",
+   "before": "Mae’r adran hon yn dangos pwy yn eich ysgol gymerodd ran yn yr Arolwg Chwaraeon Ysgol yn 2026. Darperir y wybodaeth hon fel y gallwch ystyried pwy mae’r canlyniadau’n eu cynrychioli. Hefyd, mae’n caniatáu i chi ystyried p’un a oes unrhyw fylchau mewn gwybodaeth o ganlyniad i garfannau disgyblion sydd ar goll o gylch hwn yr arolwg neu sy’n cael eu tangynrychioli ynddo.",
+   "after": "Mae’r adran hon yn dangos pwy yn eich ysgol gymerodd ran yn yr Arolwg Chwaraeon Ysgol yn 2026. Darperir y wybodaeth hon fel y gallwch ystyried pwy mae’r canlyniadau’n eu cynrychioli. Hefyd, mae’n caniatáu i chi ystyried p’un a oes unrhyw fylchau mewn gwybodaeth o ganlyniad i garfannau disgyblion sydd ar goll o gylch yr arolwg hwn neu sy’n cael eu tangynrychioli ynddo.",
+   "source": "sheet 1 ui095: Use the reviewer’s suggestion"
+  },
+  {
+   "target": "handoff",
+   "key": "ui104",
+   "change": "reviewer suggestion confirmed → applied as the exact substitution",
+   "before": "Cliciwch ar bob bar ac archwilio sut mae’r data’n newid ar draws siartiau gwahanol.",
+   "after": "Cliciwch ar bob bar ac archwiliwch sut mae’r data’n newid ar draws siartiau gwahanol.",
+   "source": "sheet 1 ui104: Use the reviewer’s suggestion"
+  },
+  {
+   "target": "handoff",
+   "key": "ui143",
+   "change": "translator's version (whole cell)",
+   "before": "Er mwyn deall yn well y gwahanol ffyrdd y mae disgyblion yn profi chwaraeon ac yn cael at chwaraeon, gofynnwyd i disgyblion a ddywedodd fod ganddynt anabledd neu gyflwr hirdymor, nad oeddent yn siŵr, neu roedd yn well ganddynt beidio â dweud, sut roeddent yn cymryd rhan, fel arfer. Gall pob ateb gael ei ddewis i hidlo’r adroddiad ehangach. Ni all atebion gan lai na phum disgybl gael eu defnyddio fel hidlyddion.",
+   "after": "Er mwyn deall yn well y gwahanol ffyrdd y mae disgyblion yn profi chwaraeon ac yn cael mynediad at chwaraeon, gofynnwyd i ddisgyblion a atebodd fod ganddynt anabledd neu gyflwr hirdymor, y rhai atebodd nad oeddent yn siŵr, neu y rhai atebodd yn well ganddynt beidio â dweud, sut roeddent yn cymryd rhan, fel arfer. Gall pob ateb gael ei ddewis i hidlo’r adroddiad ehangach. Ni all atebion gan lai na phum disgybl gael eu defnyddio fel hidlyddion.",
+   "source": "sheet 1 ui143: Use my version below — comment: Also added the word 'mynediad' in the first sentence as it read as \"get at sport\" rather than access sport."
+  },
+  {
+   "target": "handoff",
+   "key": "ui154",
+   "change": "reviewer suggestion confirmed → applied as the exact substitution",
+   "before": "Sut mae AG neu Wersi Actif yn gwneud i’n disgyblion deimlo?",
+   "after": "Sut mae AG a Gwersi Actif yn gwneud i’n disgyblion deimlo?",
+   "source": "sheet 1 ui154: Use the reviewer’s suggestion"
+  },
+  {
+   "target": "handoff",
+   "key": "ui157",
+   "change": "translator's version (whole cell)",
+   "before": "Gofynnwyd i ddisgyblion beth oedd bwysicaf iddynt pan roeddent yn gwneud chwaraeon. Gallai disgyblion ddewis mwy nag un ateb. Hefyd, gallai disgyblion deipio’u hateb os nad oedd yr un o’r opsiynau yn addas iddynt",
+   "after": "Gofynnwyd i ddisgyblion beth oedd bwysicaf iddynt pan roeddent yn gwneud chwaraeon. Gallai disgyblion ddewis mwy nag un ateb. Hefyd, gallai disgyblion deipio’u hateb os nad oedd yr un o’r opsiynau yn addas iddynt.",
+   "source": "sheet 1 ui157: Use my version below — comment: \"Roeddent\" fits better in this context"
+  },
+  {
+   "target": "handoff",
+   "key": "ui190",
+   "change": "reviewer suggestion confirmed → applied as the exact substitution",
+   "before": "Diolch i bob disgybl a rannodd eu barn, ac i’r staff a sicrhaodd bod yr arolwg yn cael ei gynnal. Y canfyddiadau hyn yw llais eich disgyblion: y cam nesaf mwyaf grymus yw eu trafod – gyda staff, gyda llywodraethwyr ac, yn anad dim, gyda’r disgyblion eu hunain.",
+   "after": "Diolch i’r holl ddisgyblion a rannodd eu barn, ac i’r staff a sicrhaodd bod yr arolwg yn cael ei gynnal. Y canfyddiadau hyn yw llais eich disgyblion: y cam nesaf mwyaf grymus yw eu trafod – gyda staff, gyda llywodraethwyr ac, yn anad dim, gyda’r disgyblion eu hunain.",
+   "source": "sheet 1 ui190: Use the reviewer’s suggestion"
+  },
+  {
+   "target": "handoff",
+   "key": "ui197",
+   "change": "reviewer suggestion confirmed → applied as the exact substitution",
+   "before": "Rhestri cyflawn o atebion ar gyfer pob cwestiwn yr adroddwyd arnynt, gan barchu’r hidlyddion presennol. Yng ngwedd yr ysgol gyfan a’r cyfnod, mae’r prif restri hefyd yn dangos nifer y bechgyn a nifer y merched.",
+   "after": "Rhestrau cyflawn o atebion ar gyfer pob cwestiwn yr adroddwyd arnynt, gan barchu’r hidlyddion presennol. Yng ngwedd yr ysgol gyfan a’r cyfnod, mae’r prif restrau hefyd yn dangos nifer y bechgyn a nifer y merched.",
+   "source": "sheet 1 ui197: Use the reviewer’s suggestion"
+  },
+  {
+   "target": "handoff",
+   "key": "ui250",
+   "change": "translator's version (the bracketed sentence)",
+   "before": "Mae’r siart yn dangos nifer y merched a’r bechgyn ym mhob grŵp blwyddyn a ddywedodd eu bod yn cymryd rhan ym mhob lleoliad. (Ni ddangosir rhywedd arall fan hyn oherwydd bod maint y samplau yn fach.)",
+   "after": "Mae’r siart yn dangos nifer y merched a’r bechgyn ym mhob grŵp blwyddyn a ddywedodd eu bod yn cymryd rhan ym mhob lleoliad. (Ni ddangosir rhywiau eraill yn fan hyn oherwydd bod maint y samplau yn fach.)",
+   "source": "sheet 1 ui250: Use my version below"
+  },
+  {
+   "target": "handoff",
+   "key": "ui254",
+   "change": "reviewer suggestion confirmed → applied as the exact substitution",
+   "before": "Defnyddio panel Archwilio’r canlyniadau ar ochr dde eich sgrin i ddewis grwpiau penodol o ddisgyblion.",
+   "after": "Defnyddiwch banel Archwilio’r canlyniadau ar ochr dde eich sgrin i ddewis grwpiau penodol o ddisgyblion.",
+   "source": "sheet 1 ui254: Use the reviewer’s suggestion"
+  },
+  {
+   "target": "handoff",
+   "key": "ui255",
+   "change": "translator's version (whole cell)",
+   "before": "Nid yw bar llwyd golau’n gallu cael ei ddewis fel hidlydd. Mae hwn yn cynnwys opsiynau ymateb na wnaethant gyrraedd y trothwy cymhwysedd ysgol gyfan i’w ddefnyddio fel hidlydd, sef pump. Gall niferoedd o dan 5 gael eu harddangos o hyd o fewn gwedd ddemograffig y gellir adrodd arni fel arall. Mae bar llwyd tywyll gyda “—” ynddo yn guddiedig: ni ellir adrodd y gwerth hwn yn y wedd bresennol.",
+   "after": "Nid yw bar llwyd golau’n gallu cael ei ddewis fel hidlydd. Mae hyn yn cynnwys opsiynau ymateb na wnaethant gyrraedd y trothwy cymhwysedd ysgol gyfan i’w ddefnyddio fel hidlydd, sef pump. Gall niferoedd o dan 5 gael eu harddangos o hyd o fewn gwedd ddemograffig y gellir adrodd arni fel arall. Mae bar llwyd tywyll gyda “—” ynddo yn guddiedig: ni ellir adrodd y gwerth hwn yn y wedd bresennol.",
+   "source": "sheet 1 ui255: Use my version below — comment: The singular agreement is correct in this context as it stays in the singular whether the subject is singular or plural."
+  },
+  {
+   "target": "handoff",
+   "key": "ui257",
+   "change": "reviewer suggestion confirmed → applied as the exact substitution",
+   "before": "Mae <strong>barrau llwyd tywyll</strong> yn cynrychioli data cuddiedig – gwerth na ellir ei ddangos gan fod y grŵp wrth wraidd y data yn rhy fach i adrodd arno’n ddiogel. Mae <strong>barrau llwyd golau</strong> yn opsiynau na allant gael eu dewis fel hidlyddion oherwydd gall y data gamarwain pan na fydd yn cael ei ystyried yng nghyd-destun y ffordd y gofynnwyd y cwestiwn. Hefyd, gall adrannau cyfan ymddangos mewn llwyd gyda neges pan fyddwch wedi dewis grŵp sy’n rhy fach i gynnig mewnwelediadau. Os byddwch yn parhau i sgrolio, gall fod mewnwelediadau a gwybodaeth mewn adrannau eraill sydd heb gael eu cuddio, yn dibynnu ar faint o ddata sydd ar gael.",
+   "after": "Mae <strong>barrau llwyd tywyll</strong> yn cynrychioli data cuddiedig – gwerthoedd na ellir eu dangos gan fod y grŵp wrth wraidd y data yn rhy fach i adrodd arno’n ddiogel. Mae <strong>barrau llwyd golau</strong> yn opsiynau na allant gael eu dewis fel hidlyddion oherwydd gall y data gamarwain pan na fydd yn cael ei ystyried yng nghyd-destun y ffordd y gofynnwyd y cwestiwn. Hefyd, gall adrannau cyfan ymddangos mewn llwyd gyda neges pan fyddwch wedi dewis grŵp sy’n rhy fach i gynnig mewnwelediadau. Os byddwch yn parhau i sgrolio, gall fod mewnwelediadau a gwybodaeth mewn adrannau eraill sydd heb gael eu cuddio, yn dibynnu ar faint o ddata sydd ar gael.",
+   "source": "sheet 1 ui257: Use the reviewer’s suggestion"
+  },
+  {
+   "target": "handoff",
+   "key": "community_club_freq",
+   "change": "reviewer suggestion confirmed → applied as the exact substitution",
+   "before": "Pa mor aml y mae ein disgyblion yn actif drwy chwaraeon yn ystod Clwb y tu allan i’r ysgol bob wythnos?",
+   "after": "Pa mor aml y mae ein disgyblion yn actif drwy chwaraeon mewn clwb y tu allan i’r ysgol bob wythnos?",
+   "source": "sheet 1 community_club_freq: Use the reviewer’s suggestion"
+  },
+  {
+   "target": "handoff",
+   "key": "other_setting_freq",
+   "change": "reviewer suggestion confirmed → applied as the exact substitution",
+   "before": "Pa mor aml y mae ein disgyblion yn actif drwy chwaraeon Rhywle arall?",
+   "after": "Pa mor aml y mae ein disgyblion yn actif drwy chwaraeon yn rhywle arall?",
+   "source": "sheet 1 other_setting_freq: Use the reviewer’s suggestion"
+  },
+  {
+   "target": "handoff",
+   "key": "sports_other_setting",
+   "change": "reviewer suggestion confirmed → applied as the exact substitution",
+   "before": "Pa chwaraeon y mae disgyblion yn dweud eu bod yn eu gwneud Rhywle arall?",
+   "after": "Pa chwaraeon y mae disgyblion yn dweud eu bod yn eu gwneud yn rhywle arall?",
+   "source": "sheet 1 sports_other_setting: Use the reviewer’s suggestion"
+  },
+  {
+   "target": "handoff",
+   "key": "ui009",
+   "change": "translator's version (whole cell)",
+   "before": "Yr Arolwg Chwaraeon Ysgol yw un o’r cyfleoedd y pen mwyaf yn y byd i blant a phobl ifanc gael dweud eu dweud am chwaraeon. Ni fyddai’r arolwg yn bosibl heb amser ac ymrwymiad ysgolion, athrawon a disgyblion fel chi. Diolch am ein helpu i lunio darlun cliriach o brofiad plant a phobl ifanc o chwaraeon yng Nghymru, a sut olwg yr hoffent fod ar chwaraeon yn y dyfodol.",
+   "after": "Yr Arolwg Chwaraeon Ysgol yw un o’r cyfleoedd y pen mwyaf yn y byd i blant a phobl ifanc gael dweud eu dweud am chwaraeon. Ni fyddai’r arolwg yn bosibl heb amser ac ymrwymiad ysgolion, athrawon a disgyblion fel chi. Diolch am ein helpu i lunio darlun cliriach o brofiad plant a phobl ifanc o chwaraeon yng Nghymru, a sut hoffent i chwaraeon edrych yn y dyfodol.",
+   "source": "sheet 2 ui009: Use my version below"
+  },
+  {
+   "target": "handoff",
+   "key": "ui016",
+   "change": "suggested wording → applied as the exact substitution",
+   "before": "Gyda’i gilydd, mae eich ymatebion yn helpu Chwaraeon Cymru, ysgolion a phartneriaid ar draws Cymru i ddeall beth sydd bwysicaf i blant a phobl ifanc yn well, gan sicrhau bod eu lleisiau nhw yn llywio penderfyniadau yn y dyfodol.",
+   "after": "Gyda’i gilydd, mae eich ymatebion yn helpu Chwaraeon Cymru, ysgolion a phartneriaid ar draws Cymru i ddeall yn well beth sydd bwysicaf i blant a phobl ifanc, gan sicrhau bod eu lleisiau nhw yn llywio penderfyniadau yn y dyfodol.",
+   "source": "sheet 2 ui016: Use the suggested wording"
+  },
+  {
+   "target": "handoff",
+   "key": "ui027",
+   "change": "kept (translator: keep as it is)",
+   "before": "Manylion camp wrth gamp: beth mae disgyblion yn ei wneud ym mhob lleoliad, a’r campau yr hoffent wneud mwy ohonynt.",
+   "after": "Manylion camp wrth gamp: beth mae disgyblion yn ei wneud ym mhob lleoliad, a’r campau yr hoffent wneud mwy ohonynt.",
+   "source": "sheet 2 ui027: Keep as it is — Either version can be used, but the original \"y campau yr hoffent wneud mwy ohonynt\" reads better."
+  },
+  {
+   "target": "handoff",
+   "key": "ui084",
+   "change": "suggested wording → applied as the exact substitution",
+   "before": "Mae dau reswm pam nad yw canrannau efallai’n adio i 100%. Yn gyntaf, caiff ffigurau eu talgrynnu i’r ganran gyfan agosaf, ac felly mae’n bosibl na fydd ffigurau cyffredinol yn adio i 100% yn union. Yn ail, lle gallai disgyblion roi tic i fwy nag un ateb, mae canrannau’n disgrifio cyfran y disgyblion a ddewisodd yr opsiwn hwnnw, yn hytrach na segmentau o’r cyfan.",
+   "after": "Mae dau reswm pam efallai nad yw’r canrannau’n adio i 100%. Yn gyntaf, caiff ffigurau eu talgrynnu i’r ganran gyfan agosaf, ac felly mae’n bosibl na fydd ffigurau cyffredinol yn adio i 100% yn union. Yn ail, lle gallai disgyblion roi tic i fwy nag un ateb, mae canrannau’n disgrifio cyfran y disgyblion a ddewisodd yr opsiwn hwnnw, yn hytrach na segmentau o’r cyfan.",
+   "source": "sheet 2 ui084: Use the suggested wording"
+  },
+  {
+   "target": "handoff",
+   "key": "ui088",
+   "change": "suggested wording → applied as the exact substitution",
+   "before": "Mae rhai ymatebion yn cael eu cuddio os bydd perygl o allu adnabod disgybl unigol trwy’r wybodaeth sy’n cael ei chyflwyno. Yn ei thro, mae gwybodaeth yn cael ei chuddio i amddiffyn hunaniaeth disgyblion, yn unol â’r Rheoliad Cyffredinol ar Ddiogelu Data (GDPR). Mae hyn yn aml yn digwydd pan fydd gormod o hidlyddion yn cael eu cymhwyso ac mae nifer y disgyblion yn disgyn yn ddigon isel i ddatgelu, o bosibl, pwy yw’r disgybl a roddodd yr ymatebion hynny.",
+   "after": "Mae rhai ymatebion yn cael eu cuddio os bydd perygl o allu adnabod disgybl unigol trwy’r wybodaeth sy’n cael ei chyflwyno. O ganlyniad, mae gwybodaeth yn cael ei chuddio i amddiffyn hunaniaeth disgyblion, yn unol â’r Rheoliad Cyffredinol ar Ddiogelu Data (GDPR). Mae hyn yn aml yn digwydd pan fydd gormod o hidlyddion yn cael eu cymhwyso ac mae nifer y disgyblion yn disgyn yn ddigon isel i ddatgelu, o bosibl, pwy yw’r disgybl a roddodd yr ymatebion hynny.",
+   "source": "sheet 2 ui088: Use the suggested wording"
+  },
+  {
+   "target": "handoff",
+   "key": "ui099",
+   "change": "suggested wording → applied as the exact substitution",
+   "before": "Y weledigaeth ar gyfer Chwaraeon yng Nghymru yw cenedl actif, lle mae cynifer o bobl â phosibl yn cael eu hysbrydoli i fod yn actif drwy chwaraeon. Mae’r bennod hon yn archwilio pa mor aml mae disgyblion yn actif drwy chwaraeon, ym mha leoliadau y mae disgyblion yn gwneud chwaraeon, a sut mae lefelau cymryd rhan yn newid rhwng gwahanol leoliadau. Mae’r Weledigaeth i Bawb – o ddisgyblion nad ydynt yn hoff iawn o chwaraeon i’r rhai sy’n ennill medalau. Mae’r bennod hon hefyd yn archwilio canfyddiadau eich ysgol yn ôl carfanau gwahanol.",
+   "after": "Y weledigaeth ar gyfer Chwaraeon yng Nghymru yw cenedl actif, lle mae cynifer o bobl â phosibl yn cael eu hysbrydoli i fod yn actif drwy chwaraeon. Mae’r bennod hon yn archwilio pa mor aml y mae disgyblion yn actif drwy chwaraeon, ym mha leoliadau y mae disgyblion yn gwneud chwaraeon, a sut mae lefelau cymryd rhan yn newid rhwng gwahanol leoliadau. Mae’r Weledigaeth i Bawb – o ddisgyblion nad ydynt yn hoff iawn o chwaraeon i’r rhai sy’n ennill medalau. Mae’r bennod hon hefyd yn archwilio canfyddiadau eich ysgol yn ôl carfanau gwahanol.",
+   "source": "sheet 2 ui099: Use the suggested wording"
+  },
+  {
+   "target": "handoff",
+   "key": "ui109",
+   "change": "suggested wording → applied as the exact substitution",
+   "before": "Sut mae ein disgyblion yn actif drwy chwaraeon yn yr Ysgol?",
+   "after": "Sut mae ein disgyblion yn actif drwy chwaraeon yn yr ysgol?",
+   "source": "sheet 2 ui109: Use the suggested wording"
+  },
+  {
+   "target": "handoff",
+   "key": "ui110",
+   "change": "suggested wording → applied as the exact substitution",
+   "before": "Cipiom arferion chwaraeon disgyblion ar draws 2 gyd-destun ysgol: <strong>yn ystod amser gwersi</strong> (h.y. cwricwlaidd) a <strong>chlybiau chwaraeon yn yr ysgol</strong> (h.y. allgyrsiol). Yn benodol, gofynnom i ddisgyblion ddweud wrthym pa chwaraeon roeddent yn eu gwneud mewn ‘Addysg Gorfforol neu Wersi’, a ddisgrifiwyd fel ‘chwaraeon sy’n cael eu gwneud yn ystod gwersi ysgol arferol’. Cafodd y cyd-destun hwn ei gynnwys i gyd-fynd yn well â’r Cwricwlwm i Gymru. Hefyd, gofynnom i ddisgyblion ddweud wrthym pa chwaraeon roeddent yn eu gwneud ‘Mewn clwb ysgol’. Dyma ‘chwaraeon sy’n cael eu gwneud yn ystod amser cinio neu ar ôl ysgol sy’n cael eu harwain gan athro neu hyfforddwr’.",
+   "after": "Cipiom arferion chwaraeon disgyblion ar draws dau gyd-destun ysgol: <strong>yn ystod amser gwersi</strong> (h.y. cwricwlaidd) a <strong>chlybiau chwaraeon yn yr ysgol</strong> (h.y. allgyrsiol). Yn benodol, gofynnom i ddisgyblion ddweud wrthym pa chwaraeon roeddent yn eu gwneud mewn ‘Addysg Gorfforol neu Wersi’, a ddisgrifiwyd fel ‘chwaraeon sy’n cael eu gwneud yn ystod gwersi ysgol arferol’. Cafodd y cyd-destun hwn ei gynnwys i gyd-fynd yn well â’r Cwricwlwm i Gymru. Hefyd, gofynnom i ddisgyblion ddweud wrthym pa chwaraeon roeddent yn eu gwneud ‘Mewn clwb ysgol’. Dyma ‘chwaraeon sy’n cael eu gwneud yn ystod amser cinio neu ar ôl ysgol sy’n cael eu harwain gan athro neu hyfforddwr’.",
+   "source": "sheet 2 ui110: Use the suggested wording"
+  },
+  {
+   "target": "handoff",
+   "key": "ui120",
+   "change": "suggested wording → applied as the exact substitution",
+   "before": "Sut mae ein disgyblion yn actif drwy chwaraeon y Tu allan i’r Ysgol?",
+   "after": "Sut mae ein disgyblion yn actif drwy chwaraeon y tu allan i’r ysgol?",
+   "source": "sheet 2 ui120: Use the suggested wording"
+  },
+  {
+   "target": "handoff",
+   "key": "ui121",
+   "change": "suggested wording → applied as the exact substitution",
+   "before": "Cipiom arferion chwaraeon disgyblion ar draws 2 gyd-destun y tu allan i’r ysgol:",
+   "after": "Cipiom arferion chwaraeon disgyblion ar draws dau gyd-destun y tu allan i’r ysgol:",
+   "source": "sheet 2 ui121: Use the suggested wording"
+  },
+  {
+   "target": "handoff",
+   "key": "ui144",
+   "change": "suggested wording → applied as the exact substitution",
+   "before": "Ble mae ein disgyblion o gefndiroedd amrywiol yn ethnig yn actif?",
+   "after": "Ble mae ein disgyblion o gefndiroedd ethnig amrywiol yn actif?",
+   "source": "sheet 2 ui144: Use the suggested wording"
+  },
+  {
+   "target": "handoff",
+   "key": "ui163",
+   "change": "suggested wording → applied as the exact substitution",
+   "before": "Gall mwynhad amrywio rhwng grwpiau o ddisgyblion a newid wrth i ddisgyblion fynd yn hŷn. Mae’r tabl yn dangos faint o ddisgyblion ym mhob grŵp blwyddyn ddywedodd eu bod yn mwynhau chwaraeon ‘llawer’ ym mhob lleoliad.",
+   "after": "Gall mwynhad amrywio rhwng grwpiau o ddisgyblion a newid wrth i ddisgyblion fynd yn hŷn. Mae’r tabl yn dangos faint o ddisgyblion ym mhob grŵp blwyddyn a ddywedodd eu bod yn mwynhau chwaraeon ‘llawer’ ym mhob lleoliad.",
+   "source": "sheet 2 ui163: Use the suggested wording"
+  },
+  {
+   "target": "handoff",
+   "key": "ui166",
+   "change": "suggested wording → applied as the exact substitution",
+   "before": "Pa mor hyderus mae ein disgyblion yn teimlo?",
+   "after": "Pa mor hyderus y mae ein disgyblion yn teimlo?",
+   "source": "sheet 2 ui166: Use the suggested wording"
+  },
+  {
+   "target": "handoff",
+   "key": "ui171",
+   "change": "kept (translator: keep as it is)",
+   "before": "Mae’r bennod hon yn dwyn ynghyd cymryd rhan mewn chwaraeon a galw am chwaraeon: y chwaraeon a’r gweithgareddau y mae disgyblion wedi’u gwneud yn y flwyddyn ysgol hon, y chwaraeon yr hoffent wneud mwy ohonynt, ac ymhle nad yw’r galw’n cael ei fodloni. Defnyddiwch yr hidlyddion, neu dewiswch gamp sydd wedi’i hamlygu, i archwilio unrhyw grŵp o ddisgyblion.",
+   "after": "Mae’r bennod hon yn dwyn ynghyd cymryd rhan mewn chwaraeon a galw am chwaraeon: y chwaraeon a’r gweithgareddau y mae disgyblion wedi’u gwneud yn y flwyddyn ysgol hon, y chwaraeon yr hoffent wneud mwy ohonynt, ac ymhle nad yw’r galw’n cael ei fodloni. Defnyddiwch yr hidlyddion, neu dewiswch gamp sydd wedi’i hamlygu, i archwilio unrhyw grŵp o ddisgyblion.",
+   "source": "sheet 2 ui171: Keep as it is"
+  },
+  {
+   "target": "handoff",
+   "key": "ui202",
+   "change": "suggested wording → applied as the exact substitution",
+   "before": "Cliciwch i Neidio i ran o’r adroddiad",
+   "after": "Cliciwch i neidio i ran o’r adroddiad",
+   "source": "sheet 2 ui202: Use the suggested wording"
+  },
+  {
+   "target": "handoff",
+   "key": "ui217",
+   "change": "suggested wording → applied as the exact substitution",
+   "before": "A yw AG a Gwersi Actif yn gwneud i chi deimlo: Yn iach?",
+   "after": "A yw AG a Gwersi Actif yn gwneud i chi deimlo’n iach?",
+   "source": "sheet 2 ui217: Use the suggested wording"
+  },
+  {
+   "target": "handoff",
+   "key": "ui218",
+   "change": "suggested wording → applied as the exact substitution",
+   "before": "A yw AG a Gwersi Actif yn gwneud i chi deimlo: Yn hyderus?",
+   "after": "A yw AG a Gwersi Actif yn gwneud i chi deimlo’n hyderus?",
+   "source": "sheet 2 ui218: Use the suggested wording"
+  },
+  {
+   "target": "handoff",
+   "key": "ui219",
+   "change": "suggested wording → applied as the exact substitution",
+   "before": "A yw AG a Gwersi Actif yn gwneud i chi deimlo: Yn barod i ddysgu?",
+   "after": "A yw AG a Gwersi Actif yn gwneud i chi deimlo’n barod i ddysgu?",
+   "source": "sheet 2 ui219: Use the suggested wording"
+  },
+  {
+   "target": "handoff",
+   "key": "ui220",
+   "change": "suggested wording → applied as the exact substitution",
+   "before": "Faint mae disgyblion yn mwynhau chwaraeon: mewn Gwersi AG?",
+   "after": "Faint mae disgyblion yn mwynhau chwaraeon mewn gwersi AG?",
+   "source": "sheet 2 ui220: Use the suggested wording"
+  },
+  {
+   "target": "handoff",
+   "key": "ui221",
+   "change": "suggested wording → applied as the exact substitution",
+   "before": "Faint mae disgyblion yn mwynhau chwaraeon: mewn Clybiau Chwaraeon Ysgol?",
+   "after": "Faint mae disgyblion yn mwynhau chwaraeon mewn clybiau chwaraeon ysgol?",
+   "source": "sheet 2 ui221: Use the suggested wording"
+  },
+  {
+   "target": "handoff",
+   "key": "ui222",
+   "change": "suggested wording → applied as the exact substitution",
+   "before": "Faint mae disgyblion yn mwynhau chwaraeon: mewn Clybiau’r tu allan i’r ysgol?",
+   "after": "Faint mae disgyblion yn mwynhau chwaraeon mewn clybiau y tu allan i’r ysgol?",
+   "source": "sheet 2 ui222: Use the suggested wording"
+  },
+  {
+   "target": "handoff",
+   "key": "ui223",
+   "change": "suggested wording → applied as the exact substitution",
+   "before": "Faint mae disgyblion yn mwynhau chwaraeon: Mewn Lleoliadau eraill, fel y parc neu’r ardd?",
+   "after": "Faint mae disgyblion yn mwynhau chwaraeon mewn lleoliadau eraill, fel y parc neu’r ardd?",
+   "source": "sheet 2 ui223: Use the suggested wording"
+  },
+  {
+   "target": "handoff",
+   "key": "ui224",
+   "change": "suggested wording → applied as the exact substitution",
+   "before": "Beth mae’r Siart hon yn ei ddangos?",
+   "after": "Beth mae’r siart hon yn ei ddangos?",
+   "source": "sheet 2 ui224: Use the suggested wording"
+  },
+  {
+   "target": "handoff",
+   "key": "ui249",
+   "change": "suggested wording → applied as the exact substitution",
+   "before": "Gofynnwyd i ddisgyblion am eu gallu i siarad Cymraeg. Mae disgyblion y dywedont eu bod yn siarad Cymraeg yn dda iawn, eithaf tipyn neu ychydig yn cael eu dangos yma. Gosodwyd y disgyblion hyn yn y categori ‘Yn siarad Cymraeg’. Hefyd, gofynnwyd i’r disgyblion hyn a oeddent fel arfer yn siarad Cymraeg wrth wneud chwaraeon.",
+   "after": "Gofynnwyd i ddisgyblion am eu gallu i siarad Cymraeg. Mae disgyblion a ddywedodd eu bod yn siarad Cymraeg yn dda iawn, eithaf tipyn neu ychydig yn cael eu dangos yma. Gosodwyd y disgyblion hyn yn y categori ‘Yn siarad Cymraeg’. Hefyd, gofynnwyd i’r disgyblion hyn a oeddent fel arfer yn siarad Cymraeg wrth wneud chwaraeon.",
+   "source": "sheet 2 ui249: Use the suggested wording"
+  },
+  {
+   "target": "handoff",
+   "key": "ui256",
+   "change": "suggested wording → applied as the exact substitution",
+   "before": "Mae’r canlyniadau yn <strong>niferoedd heb eu pwysoli o ymatebion disgyblion,</strong> sef atebion real gan ddisgyblion real, heb gynyddu dim yn gymesur. Mae pob brawddeg yn enwi’r grŵp y mae’n ei ddisgrifio. Dyma enghraifft ymarferol: <em>“Y campau a ddewiswyd amlaf oedd bocsio a phêl-droed yn gyfartal, gyda saith dewis yr un, ymhlith bechgyn Blwyddyn 5”</em> — ystyr “yn gyfartal” yw bod y ddau wedi’u dewis gan yr un nifer o ddisgyblion, ac mae “ymhlith bechgyn Blwyddyn 5” yn dweud wrthych mai dim ond i’r grŵp hwnnw y mae’r canfyddiad yn berthnasol.",
+   "after": "Mae’r canlyniadau yn <strong>niferoedd heb eu pwysoli o ymatebion disgyblion,</strong> sef atebion real gan ddisgyblion real, heb gynyddu dim yn gymesur. Mae pob brawddeg yn enwi’r grŵp y mae’n ei ddisgrifio. Dyma enghraifft ymarferol: <em>“Y campau a ddewiswyd amlaf oedd bocsio a phêl-droed yn gyfartal, gyda saith dewis yr un, ymhlith bechgyn Blwyddyn 5”</em> — ystyr “yn gyfartal” yw bod y ddwy gamp wedi’u dewis gan yr un nifer o ddisgyblion, ac mae “ymhlith bechgyn Blwyddyn 5” yn dweud wrthych mai dim ond i’r grŵp hwnnw y mae’r canfyddiad yn berthnasol.",
+   "source": "sheet 2 ui256: Use the suggested wording"
+  },
+  {
+   "target": "handoff",
+   "key": "disability_condition",
+   "change": "suggested wording → applied as the exact substitution",
+   "before": "Faint o’n disgyblion sydd ag anabledd neu gyflwr tymor hir?",
+   "after": "Faint o’n disgyblion sydd ag anabledd neu gyflwr hirdymor?",
+   "source": "sheet 2 disability_condition: Use the suggested wording"
+  },
+  {
+   "target": "handoff",
+   "key": "settings_ed",
+   "change": "suggested wording → applied as the exact substitution",
+   "before": "Ble mae ein disgyblion o gefndiroedd amrywiol yn ethnig yn actif drwy chwaraeon?",
+   "after": "Ble mae ein disgyblion o gefndiroedd ethnig amrywiol yn actif drwy chwaraeon?",
+   "source": "sheet 2 settings_ed: Use the suggested wording"
+  },
+  {
+   "target": "handoff",
+   "key": "sports_wanted",
+   "change": "kept (translator: keep as it is)",
+   "before": "Pa chwaraeon hoffai ein disgyblion wneud mwy ohonynt?",
+   "after": "Pa chwaraeon hoffai ein disgyblion wneud mwy ohonynt?",
+   "source": "sheet 2 sports_wanted: Keep as it is"
+  },
+  {
+   "target": "handoff",
+   "key": "unmet_demand",
+   "change": "kept (translator: keep as it is)",
+   "before": "Pa chwaraeon hoffai ein disgyblion wneud mwy ohonynt, ond nid ydynt yn eu gwneud ar hyn o bryd?",
+   "after": "Pa chwaraeon hoffai ein disgyblion wneud mwy ohonynt, ond nid ydynt yn eu gwneud ar hyn o bryd?",
+   "source": "sheet 2 unmet_demand: Keep as it is"
+  },
+  {
+   "target": "handoff",
+   "key": "ui005",
+   "change": "NEW Welsh (row was untranslated)",
+   "before": null,
+   "after": "Adroddiad Dysgu Rhyngweithiol:",
+   "source": "sheet 3 ui005"
+  },
+  {
+   "target": "handoff",
+   "key": "ui183",
+   "change": "NEW Welsh (row was untranslated)",
+   "before": null,
+   "after": "Arolwg Chwaraeon Ysgol 2026",
+   "source": "sheet 3 ui183"
+  },
+  {
+   "target": "handoff",
+   "key": "ui032",
+   "change": "NEW Welsh (row was untranslated)",
+   "before": null,
+   "after": "Popeth y mae angen i chi ddarllen yr adroddiad hwn yn hyderus — dewiswch gwestiwn i weld ei ateb.",
+   "source": "sheet 3 ui032"
+  },
+  {
+   "target": "handoff",
+   "key": "ui186",
+   "change": "NEW Welsh (row was untranslated)",
+   "before": null,
+   "after": "Camau nesaf",
+   "source": "sheet 3 ui186"
+  },
+  {
+   "target": "handoff",
+   "key": "ui187",
+   "change": "NEW Welsh (row was untranslated)",
+   "before": null,
+   "after": "Beth gallai eich canfyddiadau eich helpu i’w archwilio",
+   "source": "sheet 3 ui187"
+  },
+  {
+   "target": "handoff",
+   "key": "ui188",
+   "change": "NEW Welsh (row was untranslated)",
+   "before": null,
+   "after": "Diolch",
+   "source": "sheet 3 ui188"
+  },
+  {
+   "target": "handoff",
+   "key": "ui189",
+   "change": "NEW Welsh (row was untranslated)",
+   "before": null,
+   "after": "Diolch a cammau nesaf",
+   "source": "sheet 3 ui189"
+  },
+  {
+   "target": "handoff",
+   "key": "ui195",
+   "change": "NEW Welsh (row was untranslated)",
+   "before": null,
+   "after": "Atodiadau",
+   "source": "sheet 3 ui195"
+  },
+  {
+   "target": "handoff",
+   "key": "ui200",
+   "change": "NEW Welsh (row was untranslated)",
+   "before": null,
+   "after": "Cofnod adroddiad technegol",
+   "source": "sheet 3 ui200"
+  },
+  {
+   "target": "handoff",
+   "key": "ui225",
+   "change": "NEW Welsh (row was untranslated)",
+   "before": null,
+   "after": "Beth mae’r tabl hwn yn ei ddangos?",
+   "source": "sheet 3 ui225"
+  },
+  {
+   "target": "handoff",
+   "key": "ui226",
+   "change": "NEW Welsh (row was untranslated)",
+   "before": null,
+   "after": "Beth mae’r siartiau hyn yn ei ddangos?",
+   "source": "sheet 3 ui226"
+  },
+  {
+   "target": "handoff",
+   "key": "ui227",
+   "change": "NEW Welsh (row was untranslated)",
+   "before": null,
+   "after": "Beth mae’r adran hon yn ei ddangos?",
+   "source": "sheet 3 ui227"
+  },
+  {
+   "target": "handoff",
+   "key": "ui228",
+   "change": "NEW Welsh (row was untranslated)",
+   "before": null,
+   "after": "Wrth flwyddyn",
+   "source": "sheet 3 ui228"
+  },
+  {
+   "target": "handoff",
+   "key": "ui230",
+   "change": "NEW Welsh (row was untranslated)",
+   "before": null,
+   "after": "Mae pob disgybyl yn cael ei gyfrif unwaith fesul camp, yn ol yr amylder uchaf a adroddasant mewn unrhyw leoliad.",
+   "source": "sheet 3 ui230"
+  },
+  {
+   "target": "handoff",
+   "key": "ui247",
+   "change": "NEW Welsh (row was untranslated)",
+   "before": null,
+   "after": "Rhywle arall (megis y Parc, Traeth neu Ardd)",
+   "source": "sheet 3 ui247"
+  },
+  {
+   "target": "handoff",
+   "key": "ui004",
+   "change": "NEW Welsh (row was untranslated)",
+   "before": null,
+   "after": "Clirio",
+   "source": "sheet 3 ui004"
+  },
+  {
+   "target": "handoff",
+   "key": "ui000",
+   "change": "NEW Welsh (row was untranslated)",
+   "before": null,
+   "after": "Neidio i’r adroddiad",
+   "source": "sheet 3 ui000"
+  },
+  {
+   "target": "handoff",
+   "key": "ui054",
+   "change": "NEW Welsh (row was untranslated)",
+   "before": null,
+   "after": "Blwyddyn 5 · Bechgyn · Wedi dewis Pêl droed",
+   "source": "sheet 3 ui054"
+  },
+  {
+   "target": "handoff",
+   "key": "ui055",
+   "change": "NEW Welsh (row was untranslated)",
+   "before": null,
+   "after": "7 ymateb disgybl wedi’u cynnwys",
+   "source": "sheet 3 ui055"
+  },
+  {
+   "target": "handoff",
+   "key": "ui001",
+   "change": "NEW Welsh (row was untranslated)",
+   "before": null,
+   "after": "FERSIWN ADOLYGU – ar gyfer adolygiad Chwaraeon Cymru ac ILR yn unig, nid ar gyfer ysgolion. Mae mesurau dros dro a phenderfyniadau heb eu cwblhau wedi’u nodi; mae hidlo sensitif sy’n seiliedig ar siartiau wedi’i alluogi at ddibenion gwerthuso ac mae’n amodol ar gymeradwyaeth ar gyfer datgelu (O09/O10).",
+   "source": "sheet 3 ui001"
+  },
+  {
+   "target": "handoff",
+   "key": "ui185",
+   "change": "NEW Welsh (row was untranslated)",
+   "before": null,
+   "after": "Dros Dro — geiriad y crynodeb wedi’i osod o dan benderfyniad D22 nes bod y mesurau a’r rhyngweithiadau wedi’u cymeradwyo.",
+   "source": "sheet 3 ui185"
+  },
+  {
+   "target": "handoff",
+   "key": "dl_combined",
+   "change": "NEW Welsh (row was untranslated)",
+   "before": null,
+   "after": "Disgyblion gyda anabledd neu/ac anhawster dysgu",
+   "source": "sheet 3 dl_combined"
+  },
+  {
+   "target": "handoff",
+   "key": "ed_combined",
+   "change": "NEW Welsh (row was untranslated)",
+   "before": null,
+   "after": "Cefndir ethnig amrywiol (grŵp hidlo cyfun)",
+   "source": "sheet 3 ed_combined"
+  },
+  {
+   "target": "handoff",
+   "key": "ws_combined",
+   "change": "NEW Welsh (row was untranslated)",
+   "before": null,
+   "after": "Yn siarad Cymraeg  (grŵp hidlo cyfun)",
+   "source": "sheet 3 ws_combined"
+  },
+  {
+   "target": "handoff",
+   "key": "settings_dl",
+   "change": "NEW Welsh (row was untranslated)",
+   "before": null,
+   "after": "Ble mae ein disgyblion sydd ag anabledd a/neu anawsterau dysgu yn cymryd rhan mewn chwaraeon?",
+   "source": "sheet 3 settings_dl"
+  },
+  {
+   "target": "handoff",
+   "key": "settings_dy",
+   "change": "NEW Welsh (row was untranslated)",
+   "before": null,
+   "after": "Disgyblion ag anabledd neu gyflwr hirdymor",
+   "source": "sheet 3 settings_dy"
+  },
+  {
+   "target": "handoff",
+   "key": "settings_ly",
+   "change": "NEW Welsh (row was untranslated)",
+   "before": null,
+   "after": "Disgyblion gyda anhawster dysgu",
+   "source": "sheet 3 settings_ly"
+  },
+  {
+   "target": "handoff",
+   "key": "responses_by_gender_base_note",
+   "change": "NEW Welsh (row was untranslated)",
+   "before": null,
+   "after": "Dangosir pob opsiwn ymateb, gan gynnwys opsiynau na chafodd eu dewis gan unrhyw ddisgyblion, fel bod cyfanswm y bariau yn cyfateb yn union i’r gwerth sylfaenol.",
+   "source": "sheet 3 responses_by_gender_base_note"
+  },
+  {
+   "target": "handoff",
+   "key": "ethnicity_group_base_note",
+   "change": "NEW Welsh (row was untranslated)",
+   "before": null,
+   "after": "Mae categorïau a ddewiswyd gan lai na phump o ymatebwyr ar draws yr ysgol gyfan yn cael eu cyfuno o dan “Grwpiau ethnig eraill” er mwyn diogelu disgyblion unigol.",
+   "source": "sheet 3 ethnicity_group_base_note"
+  },
+  {
+   "target": "handoff",
+   "key": "h2_generic_reflect",
+   "change": "NEW ROW (key declared by the payload, no row before)",
+   "before": null,
+   "after": "Pa ganfyddiadau sy’n cyfateb i’r hyn a welwch o ddydd i ddydd, ac sy’n syndod?",
+   "source": "sheet 3 h2_generic_reflect"
+  },
+  {
+   "target": "handoff",
+   "key": "h2_generic_discussion",
+   "change": "NEW ROW (key declared by the payload, no row before)",
+   "before": null,
+   "after": "A allai trafodaeth bellach â disgyblion helpu i egluro’r canfyddiadau hyn cyn cynllunio’r newidiadau i’r ddarpariaeth?",
+   "source": "sheet 3 h2_generic_discussion"
+  },
+  {
+   "target": "handoff",
+   "key": "ui193",
+   "change": "term: y wedd hon → y golwg hwn",
+   "before": "Argraffu neu arbed y wedd hon",
+   "after": "Argraffu neu arbed y golwg hwn",
+   "source": "sheet 2 AW-4 item 7 (‘Y golwg hwn’ for ‘this view’ everywhere)"
+  },
+  {
+   "target": "handoff",
+   "key": "ui264",
+   "change": "term: y wedd hon → y golwg hwn",
+   "before": "I gadw cofnod o unrhyw wedd, defnyddiwch <strong>Argraffu neu arbed y wedd hon</strong> ym mhanel Archwilio’r canlyniadau.",
+   "after": "I gadw cofnod o unrhyw wedd, defnyddiwch <strong>Argraffu neu arbed y golwg hwn</strong> ym mhanel Archwilio’r canlyniadau.",
+   "source": "sheet 2 AW-4 item 7 (‘Y golwg hwn’ for ‘this view’ everywhere)"
+  },
+  {
+   "target": "framework 43 Interface frames",
+   "key": "ui.chart_sports_total_club",
+   "change": "EDIT (translated)",
+   "before": null,
+   "after": "Mae’r siart bar hwn yn dangos y 10 camp fwyaf cyffredin y dywedodd disgyblion eu bod yn eu gwneud mewn clwb chwaraeon ysgol, a pha mor aml y dywedon nhw eu bod fel arfer yn eu gwneud. Roedd cyfanswm o {n} camp i ddewis ohonynt. Cliciwch ar ‘Gweld y Tabl Data’ i weld y canlyniadau llawn.",
+   "source": "sheet 3 ui.chart_sports_total_club"
+  },
+  {
+   "target": "framework 43 Interface frames",
+   "key": "ui.chart_sports_total_community",
+   "change": "EDIT (translated)",
+   "before": null,
+   "after": "Mae’r siart bar hwn yn dangos y 10 camp fwyaf cyffredin y dywedodd disgyblion eu bod yn eu gwneud mewn clwb y tu allan i’r ysgol, a pha mor aml y dywedasant eu bod fel arfer yn eu gwneud. Roedd cyfanswm o {n} camp i ddewis ohonynt. Cliciwch ar ‘Gweld y Tabl Data’ i weld y canlyniadau llawn.",
+   "source": "sheet 3 ui.chart_sports_total_community"
+  },
+  {
+   "target": "framework 43 Interface frames",
+   "key": "ui.chart_sports_total_other",
+   "change": "EDIT (translated)",
+   "before": null,
+   "after": "Mae’r siart bar hwn yn dangos y 10 camp fwyaf cyffredin y dywedodd disgyblion eu bod yn eu gwneud ‘Rhywle Arall’, a pha mor aml y dywedasant eu bod fel arfer yn eu gwneud. Roedd cyfanswm o {n} camp i ddewis ohonynt. Cliciwch ar ‘Gweld y Tabl Data’ i weld y canlyniadau llawn.",
+   "source": "sheet 3 ui.chart_sports_total_other"
+  },
+  {
+   "target": "framework 43 Interface frames",
+   "key": "ui.doc_title",
+   "change": "EDIT (translated)",
+   "before": null,
+   "after": "Adroddiad Dysgu Rhyngweithiol — {school}",
+   "source": "sheet 3 ui.doc_title"
+  },
+  {
+   "target": "framework 43 Interface frames",
+   "key": "ui.fsm_context_title",
+   "change": "EDIT (translated)",
+   "before": null,
+   "after": "Cyd-destun prydau ysgol am ddim",
+   "source": "sheet 3 ui.fsm_context_title"
+  },
+  {
+   "target": "framework 43 Interface frames",
+   "key": "ui.fsm_context_body",
+   "change": "EDIT (translated)",
+   "before": null,
+   "after": "Mae Chwaraeon Cymru yn defnyddio cyfran y disgyblion sy’n gymwys i gael Prydau Ysgol am Ddim fel dangosydd ar gyfer amddifadedd. Ffigwr eich ysgol (data PLASC): {value}",
+   "source": "sheet 3 ui.fsm_context_body"
+  },
+  {
+   "target": "framework 43 Interface frames",
+   "key": "ui.fsm_context_value",
+   "change": "EDIT (translated)",
+   "before": null,
+   "after": "i’w gadarnhau",
+   "source": "sheet 3 ui.fsm_context_value"
+  },
+  {
+   "target": "framework 43 Interface frames",
+   "key": "ui.review_note",
+   "change": "EDIT (translated)",
+   "before": null,
+   "after": "Fersiwn Adolygu: mae {done} o {total} o resi testun tudalen yn Gymraeg; mae {pending} yn dal i aros am gyfieithiad ac yn ymddangos yn Saesneg wedi’i farcio.",
+   "source": "sheet 3 ui.review_note"
+  },
+  {
+   "target": "framework 43 Interface frames",
+   "key": "ui.meta_version_value",
+   "change": "EDIT (translated)",
+   "before": null,
+   "after": "{report} · sgema {schema}",
+   "source": "sheet 3 ui.meta_version_value"
+  },
+  {
+   "target": "framework 43 Interface frames",
+   "key": "ui.meta_survey_year",
+   "change": "EDIT (translated)",
+   "before": null,
+   "after": "Blwyddyn yr arolwg",
+   "source": "sheet 3 ui.meta_survey_year"
+  },
+  {
+   "target": "framework 43 Interface frames",
+   "key": "ui.meta_report_version",
+   "change": "EDIT (translated)",
+   "before": null,
+   "after": "Fersiwn yr adroddiad",
+   "source": "sheet 3 ui.meta_report_version"
+  },
+  {
+   "target": "framework 43 Interface frames",
+   "key": "ui.meta_pipeline",
+   "change": "EDIT (translated)",
+   "before": null,
+   "after": "Fersiwn piblinell",
+   "source": "sheet 3 ui.meta_pipeline"
+  },
+  {
+   "target": "framework 43 Interface frames",
+   "key": "ui.meta_suppression",
+   "change": "EDIT (translated)",
+   "before": null,
+   "after": "Model ataliad",
+   "source": "sheet 3 ui.meta_suppression"
+  },
+  {
+   "target": "framework 43 Interface frames",
+   "key": "ui.meta_generated",
+   "change": "EDIT (translated)",
+   "before": null,
+   "after": "Cynhyrchwyd",
+   "source": "sheet 3 ui.meta_generated"
+  },
+  {
+   "target": "framework 43 Interface frames",
+   "key": "ui.meta_checksum",
+   "change": "EDIT (translated)",
+   "before": null,
+   "after": "Ffynhonnell swm gwirio",
+   "source": "sheet 3 ui.meta_checksum"
+  },
+  {
+   "target": "framework 43 Interface frames",
+   "key": "ui.meta_weighting",
+   "change": "EDIT (translated)",
+   "before": null,
+   "after": "Pwysoliad",
+   "source": "sheet 3 ui.meta_weighting"
+  },
+  {
+   "target": "framework 43 Interface frames",
+   "key": "ui.meta_weighting_value",
+   "change": "EDIT (translated)",
+   "before": null,
+   "after": "Dim — cyfrifon crai o ymatebwyr",
+   "source": "sheet 3 ui.meta_weighting_value"
+  },
+  {
+   "target": "framework 43 Interface frames",
+   "key": "ui.gdpr_body_full",
+   "change": "EDIT (translated)",
+   "before": "(EXCEPTION EXCEPTION Q17: English served as data)",
+   "after": "Mae llai na phum disgybl yn cyfateb i’r dewis hwn, felly mae eu canlyniadau’n cael eu hatal i ddiogelu hunaniaeth y disgybl, yn unol â GDPR. Mae’r siartiau llwyd yn dangos yr ysgol gyfan ar gyfer cyd-destun. Ehangu’r detholiad i weld canfyddiadau’r grŵp hwn.",
+   "source": "sheet 3 ui.gdpr_body_full"
+  },
+  {
+   "target": "framework 43 Interface frames",
+   "key": "ui.gdpr_body_module",
+   "change": "EDIT (translated)",
+   "before": "(EXCEPTION EXCEPTION Q17: English served as data)",
+   "after": "Mae llai na phum disgybl yn y grŵp hwn i’r farn bresennol, felly mae’r canfyddiadau hyn yn cael eu hatal i amddiffyn hunaniaeth disgyblion, yn unol â GDPR. Mae’r siartiau llwyd yn dangos yr ysgol gyfan ar gyfer cyd-destun.",
+   "source": "sheet 3 ui.gdpr_body_module"
+  },
+  {
+   "target": "framework 43 Interface frames",
+   "key": "ui.a11y_switch",
+   "change": "EDIT (translated)",
+   "before": null,
+   "after": "Nodweddion hygyrchedd",
+   "source": "sheet 3 ui.a11y_switch"
+  },
+  {
+   "target": "framework 43 Interface frames",
+   "key": "ui.a11y_glossary_heading",
+   "change": "PENDING (English returned)",
+   "before": null,
+   "after": null,
+   "source": "sheet 3 ui.a11y_glossary_heading"
+  },
+  {
+   "target": "framework 43 Interface frames",
+   "key": "ui.a11y_glossary_intro",
+   "change": "EDIT (translated)",
+   "before": null,
+   "after": "Dewiswch derm i agor ei esboniad yn y canllaw.",
+   "source": "sheet 3 ui.a11y_glossary_intro"
+  },
+  {
+   "target": "framework 43 Interface frames",
+   "key": "ui.aria_cover",
+   "change": "EDIT (translated)",
+   "before": null,
+   "after": "Clawr adroddiad",
+   "source": "sheet 3 ui.aria_cover"
+  },
+  {
+   "target": "framework 43 Interface frames",
+   "key": "ui.aria_toc",
+   "change": "EDIT (translated)",
+   "before": null,
+   "after": "Cynnwys adroddiad",
+   "source": "sheet 3 ui.aria_toc"
+  },
+  {
+   "target": "framework 43 Interface frames",
+   "key": "ui.nav_aria",
+   "change": "EDIT (translated)",
+   "before": null,
+   "after": "Llywio adran",
+   "source": "sheet 3 ui.nav_aria"
+  },
+  {
+   "target": "framework 43 Interface frames",
+   "key": "ui.note_other_sports",
+   "change": "EDIT (suggested wording chosen)",
+   "before": "Mae “Campau eraill” yn cyfeirio at unrhyw gampau a ddewisodd disgyblion o restr atodol o gampau os nad oedd eu camp wedi’i chynnwys yn y brif restr. Mae’r rhain wedi’u grwpio gyda’i gilydd er hwylustod adrodd. Adroddir arnynt yn fanwl yn yr atodiad.",
+   "after": "Mae “Campau eraill” yn cyfeirio at unrhyw gamp a ddewisodd disgyblion o restr atodol o gampau os nad oedd eu camp wedi’i chynnwys yn y brif restr. Mae’r rhain wedi’u grwpio gyda’i gilydd er hwylustod adrodd. Adroddir arnynt yn fanwl yn yr atodiad.",
+   "source": "sheet 2 ui.note_other_sports: Use the suggested wording"
+  },
+  {
+   "target": "framework 43 Interface frames",
+   "key": "ui.stack_caption_sex",
+   "change": "CONFIRMED (no edit)",
+   "before": "Disgyblion a wnaeth o leiaf un gamp ym mhob lleoliad, fesul grŵp blwyddyn a rhywedd.",
+   "after": "Disgyblion a wnaeth o leiaf un gamp ym mhob lleoliad, fesul grŵp blwyddyn a rhywedd.",
+   "source": "sheet 2 ui.stack_caption_sex: Use the suggested wording"
+  },
+  {
+   "target": "framework 23 Answer labels",
+   "key": "Not at all",
+   "change": "EDIT",
+   "before": "Dim o gwbl",
+   "after": "Dim o gwbl  |  Ddim yn hyderus o gwbl  [confidence grid]",
+   "source": "sheet 2b rows 43–45 (Use survey wording): the confidence question's survey option is ‘Ddim yn hyderus o gwbl’ (sheet 30, Q24); enjoyment / PE-feel keep ‘Dim o gwbl’"
+  },
+  {
+   "target": "framework 23 Answer labels",
+   "key": "Other",
+   "change": "EDIT",
+   "before": "Arall",
+   "after": "Arall  |  Arall, rho fanylion  [take-part grid]",
+   "source": "sheet 2b row 12 (Use survey wording): take-part question option ‘Arall, rho fanylion’ (sheet 30, Q6a); every other ‘Other’ keeps ‘Arall’ (row 23: keep today's)"
+  },
+  {
+   "target": "framework 23 Answer labels",
+   "key": "I don’t know",
+   "change": "NEW ROW",
+   "before": null,
+   "after": "Dydw i ddim yn gwybod",
+   "source": "v2.7 (2026-09-21): approved survey (S0) p.19, 20 — the frequency grid's option. Replaces the code alias ‘Ddim yn gwybod’ (welsh_render LABEL_ALIASES, never seen by a translator). Handover 2b row 58 / AW-1: survey wording."
+  },
+  {
+   "target": "framework 23 Answer labels",
+   "key": "White Welsh, English, Scottish, Northern Irish, or British",
+   "change": "NEW ROW",
+   "before": null,
+   "after": "Gwyn Cymreig, Saesneg, Albanaidd, Gwyddel Gwyn o Ogledd Iwerddon, neu Wyn Brydeinig",
+   "source": "v2.7 (2026-09-21): profile table label. Translator's document 15 Sep 2026 (‘Your School’ table), chosen on handover 2b row 49 (Use document wording)."
+  },
+  {
+   "target": "framework 23 Answer labels",
+   "key": "Asian, Asian Welsh, or Asian British",
+   "change": "NEW ROW",
+   "before": null,
+   "after": "Asiaidd, Asiaidd Cymreig, neu Asiaidd Prydeinig",
+   "source": "v2.7 (2026-09-21): profile table label. Approved survey (S0) p.4; handover 2b row 51 (Use survey wording)."
+  },
+  {
+   "target": "framework 23 Answer labels",
+   "key": "Black, Black Welsh, Black British, Caribbean, or African",
+   "change": "NEW ROW",
+   "before": null,
+   "after": "Du, Du Cymreig, Du Prydeinig, Caribïaidd, neu Affricanaidd",
+   "source": "v2.7 (2026-09-21): profile table label. Approved survey (S0) p.4 — NOT on handover 2b (the row is never a chart option); applied by extension of rows 50–53 (survey wording for every survey-attested profile row). FLAGGED."
+  },
+  {
+   "target": "framework 23 Answer labels",
+   "key": "Other ethnic groups (for example, Arab)",
+   "change": "NEW ROW",
+   "before": null,
+   "after": "Grwpiau ethnig eraill [er enghraifft Arabaidd]",
+   "source": "v2.7 (2026-09-21): profile table label. Approved survey (S0) p.4, verbatim including the square brackets; handover 2b row 52 (Use survey wording)."
+  },
+  {
+   "target": "framework 23 Answer labels",
+   "key": "*",
+   "change": "CONFIRMED",
+   "before": "survey wording",
+   "after": "survey wording",
+   "source": "AW-1 ‘Keep the survey wording’; AW-2 ‘Keep the survey wording’; AW-5 ‘Keep the survey wording’"
+  },
+  {
+   "target": "framework 58 Chip prefixes",
+   "key": "cohort prefix dy",
+   "change": "EDIT",
+   "before": "Anabledd neu gyflwr tymor hir: {x}",
+   "after": "Anabledd neu gyflwr hirdymor: {x}",
+   "source": "sheet 2b row 3: Use document wording"
+  },
+  {
+   "target": "framework 58 Chip prefixes",
+   "key": "cohort prefix ed",
+   "change": "CONFIRMED (same wording)",
+   "before": "Cefndir ethnig amrywiol: {x}",
+   "after": "Cefndir ethnig amrywiol: {x}",
+   "source": "sheet 2b row 4: Keep today’s report wording"
+  },
+  {
+   "target": "framework 58 Chip prefixes",
+   "key": "cohort prefix st",
+   "change": "CONFIRMED (same wording)",
+   "before": "Yn gwneud chwaraeon: {x}",
+   "after": "Yn gwneud chwaraeon: {x}",
+   "source": "sheet 2b row 5: Use document wording"
+  },
+  {
+   "target": "framework 58 Chip prefixes",
+   "key": "cohort prefix ov",
+   "change": "EDIT",
+   "before": "Amcangyfrif o weithiau’n actif drwy chwaraeon bob wythnos: {x}",
+   "after": "Amcan o’r amser y mae’n actif drwy chwaraeon bob wythnos: {x}",
+   "source": "sheet 2b row 6: Use document wording"
+  },
+  {
+   "target": "framework 58 Chip prefixes",
+   "key": "cohort prefix cb",
+   "change": "CONFIRMED (same wording)",
+   "before": "Amcangyfrif o weithiau’n actif drwy chwaraeon clwb bob wythnos: {x}",
+   "after": "Amcangyfrif o weithiau’n actif drwy chwaraeon clwb bob wythnos: {x}",
+   "source": "sheet 2b row 8: Use document wording — not applied (DIS-scope)"
+  },
+  {
+   "target": "framework 58 Chip prefixes",
+   "key": "cohort prefix tp",
+   "change": "CONFIRMED (same wording)",
+   "before": "Cymryd rhan: {x}",
+   "after": "Cymryd rhan: {x}",
+   "source": "sheet 2b row 9: Keep today’s report wording"
+  },
+  {
+   "target": "framework 58 Chip prefixes",
+   "key": "cohort prefix im",
+   "change": "CONFIRMED (same wording)",
+   "before": "Yn gwerthfawrogi: {x}",
+   "after": "Yn gwerthfawrogi: {x}",
+   "source": "sheet 2b row 13: Keep today’s report wording"
+  },
+  {
+   "target": "framework 58 Chip prefixes",
+   "key": "cohort prefix mi",
+   "change": "EDIT",
+   "before": "Byddai’n gwneud mwy o chwaraeon: {x}",
+   "after": "Byddai’n gwneud mwy o chwaraeon os: {x}",
+   "source": "sheet 2b row 17: Use document wording"
+  },
+  {
+   "target": "framework 58 Chip prefixes",
+   "key": "cohort prefix ep",
+   "change": "EDIT",
+   "before": "Mwynhau AG: {x}",
+   "after": "Yn Mwynhau Addysg Gorfforol: {x}",
+   "source": "sheet 2b row 24: Use document wording"
+  },
+  {
+   "target": "framework 58 Chip prefixes",
+   "key": "cohort prefix eb",
+   "change": "EDIT",
+   "before": "Mwynhau clybiau chwaraeon ysgol: {x}",
+   "after": "Yn Mwynhau Clybiau Chwaraeon Ysgol: {x}",
+   "source": "sheet 2b row 29: Use document wording"
+  },
+  {
+   "target": "framework 58 Chip prefixes",
+   "key": "cohort prefix eo",
+   "change": "EDIT",
+   "before": "Mwynhau lleoliadau eraill: {x}",
+   "after": "Yn mwynhau lleoliadau eraill: {x}",
+   "source": "sheet 2b row 34: Use document wording"
+  },
+  {
+   "target": "framework 58 Chip prefixes",
+   "key": "cohort prefix li",
+   "change": "EDIT",
+   "before": "Gwrando ar syniadau: {x}",
+   "after": "Mae athrawon yn gwrando ar eu syniadau: {x}",
+   "source": "sheet 2b row 39: Use document wording"
+  },
+  {
+   "target": "framework 58 Chip prefixes",
+   "key": "cohort prefix ct",
+   "change": "CONFIRMED (same wording)",
+   "before": "Hyder i roi cynnig ar gamp newydd: {x}",
+   "after": "Hyder i roi cynnig ar gamp newydd: {x}",
+   "source": "sheet 2b row 43: Use document wording"
+  },
+  {
+   "target": "framework 58 Chip prefixes",
+   "key": "cohort prefix cs",
+   "change": "CONFIRMED (same wording)",
+   "before": "Hyder i ddysgu sgil newydd: {x}",
+   "after": "Hyder i ddysgu sgil newydd: {x}",
+   "source": "sheet 2b row 44: Use document wording"
+  },
+  {
+   "target": "framework 58 Chip prefixes",
+   "key": "cohort prefix cg",
+   "change": "CONFIRMED (same wording)",
+   "before": "Hyder i roi cynnig arall arni pan fydd camp yn anodd: {x}",
+   "after": "Hyder i roi cynnig arall arni pan fydd camp yn anodd: {x}",
+   "source": "sheet 2b row 45: Use document wording"
+  },
+  {
+   "target": "framework 58 Chip prefixes",
+   "key": "cohort prefix et",
+   "change": "CONFIRMED (same wording)",
+   "before": "Ethnigrwydd: {x}",
+   "after": "Ethnigrwydd: {x}",
+   "source": "sheet 2b row 51: Keep today’s report wording"
+  },
+  {
+   "target": "framework 58 Chip prefixes",
+   "key": "cohort prefix ec",
+   "change": "EDIT",
+   "before": "Mwynhau clybiau y tu allan i’r ysgol: {x}",
+   "after": "Yn mwynhau clybiau’r tu allan i’r ysgol: {x}",
+   "source": "not on sheet 2b; document row ‘Enjoys clubs outside of school: …’"
+  },
+  {
+   "target": "framework 58 Chip prefixes",
+   "key": "cohort prefix cn",
+   "change": "EDIT",
+   "before": "Hyder i roi cynnig ar chwaraeon mewn lle newydd: {x}",
+   "after": "Hyder i roi cynnig ar gamp mewn lle newydd: {x}",
+   "source": "not on sheet 2b; document row ‘Confidence trying sports in a new place: …’"
+  },
+  {
+   "target": "framework 58 Chip prefixes",
+   "key": "cohort prefix gy",
+   "change": "EDIT",
+   "before": "Anabledd neu gyflwr tymor hir · chwaraeon {x}",
+   "after": "Anabledd neu gyflwr hirdymor · chwaraeon {x}",
+   "source": "sheet 2 AW-4 item 1"
+  },
+  {
+   "target": "framework 58 Chip prefixes",
+   "key": "gender label all",
+   "change": "EDIT",
+   "before": "Pob disgybl",
+   "after": "Pob Ymatebwr",
+   "source": "sheet 2b row 2 (All Respondents): Use document wording"
+  },
+  {
+   "target": "framework 58 Chip prefixes",
+   "key": "scope label whole",
+   "change": "CONFIRMED (same wording)",
+   "before": "Yr ysgol gyfan",
+   "after": "Yr ysgol gyfan",
+   "source": "sheet 2b row 1 (Whole School): Keep today’s report wording"
+  },
+  {
+   "target": "framework 58 Chip prefixes",
+   "key": "banner label all",
+   "change": "CONFIRMED (same wording)",
+   "before": "Pob disgybl",
+   "after": "Pob disgybl",
+   "source": "banner audience part — unchanged"
+  },
+  {
+   "target": "framework 31 Yes-No forms",
+   "key": "disability_condition",
+   "change": "EDIT (term)",
+   "before": "Anabledd neu gyflwr tymor hir: Oes / Nac oes",
+   "after": "Anabledd neu gyflwr hirdymor: Oes / Nac oes",
+   "source": "sheet 2 AW-4 item 1; 2b row 3 (prefix: document)"
+  },
+  {
+   "target": "framework 22 Qualifier frames",
+   "key": "dy / reported a disability or long-term condition",
+   "change": "EDIT (term)",
+   "before": "a nododd anabledd neu gyflwr tymor hir",
+   "after": "a nododd anabledd neu gyflwr hirdymor",
+   "source": "sheet 2 AW-4 item 1"
+  },
+  {
+   "target": "framework 22 Qualifier frames",
+   "key": "dy / reported no disability or long-term condition",
+   "change": "EDIT (term)",
+   "before": "na nododd anabledd na chyflwr tymor hir",
+   "after": "na nododd anabledd na chyflwr hirdymor",
+   "source": "sheet 2 AW-4 item 1"
+  },
+  {
+   "target": "framework 22 Qualifier frames",
+   "key": "dy / were not sure whether they have a disability or lo",
+   "change": "EDIT (term)",
+   "before": "nad oeddent yn siŵr a oedd ganddynt anabledd neu gyflwr tymor hir",
+   "after": "nad oeddent yn siŵr a oedd ganddynt anabledd neu gyflwr hirdymor",
+   "source": "sheet 2 AW-4 item 1"
+  },
+  {
+   "target": "framework 22 Qualifier frames",
+   "key": "dy / preferred not to say whether they have a disabilit",
+   "change": "EDIT (term)",
+   "before": "y byddai’n well ganddynt beidio â dweud a oedd ganddynt anabledd neu gyflwr tymor hir",
+   "after": "y byddai’n well ganddynt beidio â dweud a oedd ganddynt anabledd neu gyflwr hirdymor",
+   "source": "sheet 2 AW-4 item 1"
+  },
+  {
+   "target": "framework 22 Qualifier frames",
+   "key": "gy / reported a disability or long-term condition and d",
+   "change": "EDIT (term)",
+   "before": "a nododd anabledd neu gyflwr tymor hir ac a gymerodd ran mewn chwaraeon yn ystod Addysg Gorfforol neu Amser Gwersi",
+   "after": "a nododd anabledd neu gyflwr hirdymor ac a gymerodd ran mewn chwaraeon yn ystod Addysg Gorfforol neu Amser Gwersi",
+   "source": "sheet 2 AW-4 item 1"
+  },
+  {
+   "target": "framework 22 Qualifier frames",
+   "key": "gy / reported a disability or long-term condition and d",
+   "change": "EDIT (term)",
+   "before": "a nododd anabledd neu gyflwr tymor hir ac a gymerodd ran mewn chwaraeon mewn clwb ysgol",
+   "after": "a nododd anabledd neu gyflwr hirdymor ac a gymerodd ran mewn chwaraeon mewn clwb ysgol",
+   "source": "sheet 2 AW-4 item 1"
+  },
+  {
+   "target": "framework 22 Qualifier frames",
+   "key": "gy / reported a disability or long-term condition and d",
+   "change": "EDIT (term)",
+   "before": "a nododd anabledd neu gyflwr tymor hir ac a gymerodd ran mewn chwaraeon mewn clwb y tu allan i’r ysgol",
+   "after": "a nododd anabledd neu gyflwr hirdymor ac a gymerodd ran mewn chwaraeon mewn clwb y tu allan i’r ysgol",
+   "source": "sheet 2 AW-4 item 1"
+  },
+  {
+   "target": "framework 22 Qualifier frames",
+   "key": "gy / reported a disability or long-term condition and d",
+   "change": "EDIT (term)",
+   "before": "a nododd anabledd neu gyflwr tymor hir ac a gymerodd ran mewn chwaraeon rhywle arall",
+   "after": "a nododd anabledd neu gyflwr hirdymor ac a gymerodd ran mewn chwaraeon rhywle arall",
+   "source": "sheet 2 AW-4 item 1"
+  },
+  {
+   "target": "framework 44 Singleton frames",
+   "key": "dy / preferred not to say whether they have a disabilit",
+   "change": "EDIT (term)",
+   "before": "y byddai’n well ganddynt beidio â dweud a oedd ganddynt anabledd neu gyflwr tymor hir",
+   "after": "y byddai’n well ganddynt beidio â dweud a oedd ganddynt anabledd neu gyflwr hirdymor",
+   "source": "sheet 2 AW-4 item 1"
+  },
+  {
+   "target": "framework 44 Singleton frames",
+   "key": "dy / preferred not to say whether they have a disabilit",
+   "change": "EDIT (term)",
+   "before": "y byddai’n well ganddo beidio â dweud a oedd ganddo anabledd neu gyflwr tymor hir",
+   "after": "y byddai’n well ganddo beidio â dweud a oedd ganddo anabledd neu gyflwr hirdymor",
+   "source": "sheet 2 AW-4 item 1"
+  },
+  {
+   "target": "framework 44 Singleton frames",
+   "key": "dy / preferred not to say whether they have a disabilit",
+   "change": "EDIT (term)",
+   "before": "y byddai’n well ganddi beidio â dweud a oedd ganddi anabledd neu gyflwr tymor hir",
+   "after": "y byddai’n well ganddi beidio â dweud a oedd ganddi anabledd neu gyflwr hirdymor",
+   "source": "sheet 2 AW-4 item 1"
+  },
+  {
+   "target": "framework 44 Singleton frames",
+   "key": "dy / preferred not to say whether they have a disabilit",
+   "change": "EDIT (term)",
+   "before": "y byddai’n well ganddo beidio â dweud a oedd ganddo anabledd neu gyflwr tymor hir",
+   "after": "y byddai’n well ganddo beidio â dweud a oedd ganddo anabledd neu gyflwr hirdymor",
+   "source": "sheet 2 AW-4 item 1"
+  },
+  {
+   "target": "framework 44 Singleton frames",
+   "key": "dy / were not sure whether they have a disability or lo",
+   "change": "EDIT (term)",
+   "before": "nad oeddent yn siŵr a oedd ganddynt anabledd neu gyflwr tymor hir",
+   "after": "nad oeddent yn siŵr a oedd ganddynt anabledd neu gyflwr hirdymor",
+   "source": "sheet 2 AW-4 item 1"
+  },
+  {
+   "target": "framework 44 Singleton frames",
+   "key": "dy / were not sure whether they have a disability or lo",
+   "change": "EDIT (term)",
+   "before": "nad oedd yn siŵr a oedd ganddo anabledd neu gyflwr tymor hir",
+   "after": "nad oedd yn siŵr a oedd ganddo anabledd neu gyflwr hirdymor",
+   "source": "sheet 2 AW-4 item 1"
+  },
+  {
+   "target": "framework 44 Singleton frames",
+   "key": "dy / were not sure whether they have a disability or lo",
+   "change": "EDIT (term)",
+   "before": "nad oedd yn siŵr a oedd ganddi anabledd neu gyflwr tymor hir",
+   "after": "nad oedd yn siŵr a oedd ganddi anabledd neu gyflwr hirdymor",
+   "source": "sheet 2 AW-4 item 1"
+  },
+  {
+   "target": "framework 44 Singleton frames",
+   "key": "dy / were not sure whether they have a disability or lo",
+   "change": "EDIT (term)",
+   "before": "nad oedd yn siŵr a oedd ganddo anabledd neu gyflwr tymor hir",
+   "after": "nad oedd yn siŵr a oedd ganddo anabledd neu gyflwr hirdymor",
+   "source": "sheet 2 AW-4 item 1"
+  },
+  {
+   "target": "framework 17 Lexicon core nouns",
+   "key": "long-term condition",
+   "change": "NEW ROW",
+   "before": null,
+   "after": "cyflwr hirdymor",
+   "source": "sheet 2 AW-4 item 1 / disability_condition"
+  },
+  {
+   "target": "framework 11 Conjunctions",
+   "key": "CONJ-06",
+   "change": "RULE CHANGED (MODE=figure)",
+   "before": "Read the figure as its VIGESIMAL Welsh word and apply CONJ-01..04",
+   "after": "MODE=figure — a figure written in digits is a SYMBOL: it takes ‘a’ (never ‘ac’) and never mutates; words keep CONJ-01..04. (Translator's ruling, handover sheet 4 rule 15: readers read the figures as decimal numbers, ‘ac 36’ is wrong; sheet 5 #12: ‘… 12 eu bod yn hyderus a 11 eu bod yn barod i ddysgu’.) MODE=decimal (a/ac by the decimal reading: ac 11, a 36, ac 8) and MODE=vigesimal (the v1.5–v2.6 rule) remain available to the engine; only the marker changes.",
+   "source": "sheet 4 rule 15: Wrong — Given this report deals with a lot of numbers, its more likely that readers will be reading the numbers as decimal numbers rather than vigesimal so the rule should reflect this. ; sheet 5 #12: Needs change — eu bod yn hyderus a 11 eu bod yn barod i ddysgu"
+  },
+  {
+   "target": "framework 09 Ordinals",
+   "key": "2 (ail)",
+   "change": "RULE NOTE (mutation after ail)",
+   "before": "Article yr — vowel-initial",
+   "after": "Article yr — vowel-initial · v2.7 (2026-09-21): ‘ail’ takes the SOFT MUTATION of the following noun in both genders — yr ail gamp, yr ail leoliad, yr ail ateb. Translator: sheet 4 rule 16 WRONG (‘\"Camp\" should mutate after \"ail\" as suggested. ’), sheet 5 #34 ‘Yr ail gamp mwyaf cyffredin oedd rhedeg neu loncian’. Engine: welsh_render.ail_np().",
+   "source": "sheet 4 rule 16: Wrong; sheet 5 #34: Needs change"
+  },
+  {
+   "target": "framework 39 Provisional rulings",
+   "key": "PR-01",
+   "change": "CONFIRMED",
+   "before": "Welsh linguist",
+   "after": "Welsh linguist; confirmed by the translator 2026-09-21 (handover sheet 4 rule 35: Correct)",
+   "source": "sheet 4 rule 35"
+  },
+  {
+   "target": "framework 39 Provisional rulings",
+   "key": "PR-02",
+   "change": "CONFIRMED",
+   "before": "Welsh linguist",
+   "after": "Welsh linguist; confirmed by the translator 2026-09-21 (handover sheet 4 rule 10: Correct)",
+   "source": "sheet 4 rule 10"
+  },
+  {
+   "target": "framework 39 Provisional rulings",
+   "key": "PR-03",
+   "change": "CONFIRMED",
+   "before": "Welsh linguist + Sport Wales",
+   "after": "Welsh linguist + Sport Wales; confirmed by the translator 2026-09-21 (handover sheet 4 rule 11: Correct)",
+   "source": "sheet 4 rule 11"
+  },
+  {
+   "target": "framework 39 Provisional rulings",
+   "key": "PR-04",
+   "change": "CONFIRMED",
+   "before": "Welsh linguist",
+   "after": "Welsh linguist; confirmed by the translator 2026-09-21 (handover sheet 4 rule 21: Correct)",
+   "source": "sheet 4 rule 21"
+  },
+  {
+   "target": "framework 39 Provisional rulings",
+   "key": "PR-05",
+   "change": "CONFIRMED",
+   "before": "Welsh linguist",
+   "after": "Welsh linguist; confirmed by the translator 2026-09-21 (handover sheet 4 rule 27: Correct)",
+   "source": "sheet 4 rule 27"
+  },
+  {
+   "target": "framework 39 Provisional rulings",
+   "key": "PR-06",
+   "change": "CONFIRMED",
+   "before": "Welsh linguist",
+   "after": "Welsh linguist; confirmed by the translator 2026-09-21 (handover sheet 4 rule 36: Correct)",
+   "source": "sheet 4 rule 36"
+  },
+  {
+   "target": "framework 39 Provisional rulings",
+   "key": "PR-07",
+   "change": "CONFIRMED",
+   "before": "Welsh linguist",
+   "after": "Welsh linguist; confirmed by the translator 2026-09-21 (handover sheet 4 rule 37: Correct)",
+   "source": "sheet 4 rule 37"
+  },
+  {
+   "target": "framework 39 Provisional rulings",
+   "key": "PR-08",
+   "change": "CONFIRMED",
+   "before": "Welsh linguist",
+   "after": "Welsh linguist; confirmed by the translator 2026-09-21 (handover sheet 4 rule 4: Correct)",
+   "source": "sheet 4 rule 4"
+  },
+  {
+   "target": "framework 39 Provisional rulings",
+   "key": "PR-10",
+   "change": "CONFIRMED",
+   "before": "Welsh linguist",
+   "after": "Welsh linguist; confirmed by the translator 2026-09-21 (handover sheet 4 rule 28: Correct)",
+   "source": "sheet 4 rule 28"
+  },
+  {
+   "target": "framework 39 Provisional rulings",
+   "key": "PR-11",
+   "change": "CONFIRMED",
+   "before": "Welsh linguist",
+   "after": "Welsh linguist; confirmed by the translator 2026-09-21 (handover sheet 4 rule 40: Correct)",
+   "source": "sheet 4 rule 40"
+  },
+  {
+   "target": "framework 39 Provisional rulings",
+   "key": "PR-13",
+   "change": "CONFIRMED",
+   "before": "Welsh linguist",
+   "after": "Welsh linguist; confirmed by the translator 2026-09-21 (handover sheet 4 rule 21: Correct)",
+   "source": "sheet 4 rule 21"
+  },
+  {
+   "target": "framework 39 Provisional rulings",
+   "key": "PR-14",
+   "change": "CONFIRMED",
+   "before": "Welsh linguist",
+   "after": "Welsh linguist; confirmed by the translator 2026-09-21 (handover sheet 4 rule 11: Correct)",
+   "source": "sheet 4 rule 11"
+  },
+  {
+   "target": "framework 02 Project decisions",
+   "key": "D84",
+   "change": "NEW DECISION",
+   "before": null,
+   "after": "FIGURE AS A SYMBOL: ‘a’ before every figure written in digits (a 11, a 36, a 8); no mutation of or after a figure; words keep CONJ-01..04 (MODE=figure on sheet 11 CONJ-06).",
+   "source": "translator's completed handover, 21 Sep 2026: sheet 4 rule 15, sheet 5 #12"
+  },
+  {
+   "target": "framework 02 Project decisions",
+   "key": "D85",
+   "change": "NEW DECISION",
+   "before": null,
+   "after": "SOFT MUTATION after ‘ail’ in both genders: yr ail gamp, yr ail leoliad (welsh_render.ail_np; _ord_np already did this).",
+   "source": "translator's completed handover, 21 Sep 2026: sheet 4 rule 16, sheet 5 #34"
+  },
+  {
+   "target": "framework 02 Project decisions",
+   "key": "D86",
+   "change": "NEW DECISION",
+   "before": null,
+   "after": "cyflwr hirdymor — everywhere the report writes it (chip prefixes, chart heading, qualifier and singleton frames, the e5 sentences, sheet 31 form label). The survey text on sheet 30 is quoted unchanged.",
+   "source": "translator's completed handover, 21 Sep 2026: sheet 2 AW-4, disability_condition"
+  },
+  {
+   "target": "framework 02 Project decisions",
+   "key": "D87",
+   "change": "NEW DECISION",
+   "before": null,
+   "after": "ANSWER LABELS: the survey's wording (AW-1, AW-2, AW-5, 2b column O) — including the profile table's long labels (sheet 23 rows added v2.7) and the confidence grid's ‘Ddim yn hyderus o gwbl’ (D32 branch). CHIP PREFIXES: the translator's document where chosen (2b column P), otherwise today's; sheet 58 is the record. The filter option ‘All Respondents’ is ‘Pob Ymatebwr’; the banner's ‘All pupils’ stays ‘Pob disgybl’.",
+   "source": "translator's completed handover, 21 Sep 2026: sheet 2b, AW-1..5"
+  }
+ ],
+ "flags": [
+  {
+   "key": "AW-4 ‘Ddim yn siŵr’",
+   "what": "AW-4 vs sheet 2b rows 11 / 53 and AW-1",
+   "detail": "AW-4 chose ‘Ddim yn siŵr’ as the one form; rows 11 and 53 chose the survey wording ‘Dydw i ddim yn siŵr’ for the answer option ‘I’m not sure’ and AW-1 keeps survey wording for quoted options. Applied: ‘Not sure’ = ‘Ddim yn siŵr’ (the survey's option), ‘I’m not sure’ = ‘Dydw i ddim yn siŵr’ (the survey's option) — the per-row decisions.",
+   "action": "confirm the two survey forms stay distinct"
+  },
+  {
+   "key": "AW-4 ‘Mae’n well gennyf beidio â dweud’",
+   "what": "AW-4 vs sheet 2b row 46 and AW-1",
+   "detail": "AW-4 chose ‘gennyf’; row 46 chose the survey wording ‘Mae’n well gen i beidio â dweud’ for the answer option and AW-1 keeps survey wording. Applied: the answer label keeps ‘gen i’; the translator's own page text keeps ‘gennyf’ verbatim.",
+   "action": "confirm"
+  },
+  {
+   "key": "AW-4 ‘Sefyll / Eistedd’",
+   "what": "AW-4 vs sheet 2b rows 9, 10, 59, 60 and AW-1",
+   "detail": "AW-4 chose ‘Sefyll / Eistedd’; the four per-row decisions and AW-1 keep the survey's ‘Yn sefyll / Yn eistedd’. Applied: the survey wording (labels and chips unchanged).",
+   "action": "confirm"
+  },
+  {
+   "key": "AW-4 ‘Y golwg hwn’ vs the translator's ‘gwedd’",
+   "what": "term applied only to the exact phrase",
+   "detail": "‘y wedd hon’ → ‘y golwg hwn’ applied in ui193 (‘Argraffu neu arbed y golwg hwn’) and ui264. The translator's other uses of ‘gwedd’ (ui034 ‘gwedd newydd ar y data’, ui197 ‘Yng ngwedd yr ysgol gyfan’, ui255 ‘gwedd ddemograffig’, ‘y wedd bresennol’, ui264 ‘unrhyw wedd’) are their prose and are left word for word.",
+   "action": "say whether those should also become ‘golwg’"
+  },
+  {
+   "key": "ui086",
+   "what": "typos left word for word",
+   "detail": "the translator's version carries ‘pennodol’, ‘gwestynnau’, ‘I’r’ (capital I) and ‘a ddefnyddiwyd y lleoliad yno’; applied exactly as written (only the straight apostrophe was curled).",
+   "action": "confirm or correct"
+  },
+  {
+   "key": "ui189",
+   "what": "typo left word for word",
+   "detail": "‘Diolch a cammau nesaf’ — ‘cammau’ (camau / chamau?) applied as written.",
+   "action": "confirm or correct"
+  },
+  {
+   "key": "ui230",
+   "what": "typos left word for word",
+   "detail": "‘disgybyl’, ‘yn ol’, ‘amylder’ applied as written.",
+   "action": "confirm or correct"
+  },
+  {
+   "key": "ws_combined",
+   "what": "double space left word for word",
+   "detail": "‘Yn siarad Cymraeg  (grŵp hidlo cyfun)’ — two spaces before the bracket (collapsed by the browser).",
+   "action": "confirm"
+  },
+  {
+   "key": "dl_combined / settings_dl",
+   "what": "two forms of ‘and/or’",
+   "detail": "the filter group says ‘neu/ac anhawster dysgu’ (dl_combined) and the chart heading ‘a/neu anawsterau dysgu’ (settings_dl); both applied as written.",
+   "action": "confirm"
+  },
+  {
+   "key": "ui.gdpr_body_module",
+   "what": "‘for the current view’ = ‘i’r farn bresennol’",
+   "detail": "applied as written; elsewhere ‘this view’ is ‘y golwg hwn’ (AW-4).",
+   "action": "confirm"
+  },
+  {
+   "key": "ui.chart_sports_total_*",
+   "what": "‘dywedon nhw’ / ‘dywedasant’",
+   "detail": "the three sibling notes use ‘y dywedon nhw eu bod’ (club) and ‘y dywedasant eu bod’ (community, other); applied as written.",
+   "action": "confirm the register"
+  },
+  {
+   "key": "ui255 vs AW-4",
+   "what": "‘gwedd’ in the translator's version",
+   "detail": "the ‘Use my version’ text keeps ‘gwedd ddemograffig’ and ‘y wedd bresennol’; AW-4 chose ‘golwg’ for ‘this view’. Left as written (see the ‘gwedd’ flag).",
+   "action": "confirm"
+  },
+  {
+   "key": "ui054",
+   "what": "example banner assembled from the translator's three quoted words",
+   "detail": "cell: '\"Blwyddyn 5\" \"Bechgyn\" \"Wedi dewis Pêl droed\"' → 'Blwyddyn 5 · Bechgyn · Wedi dewis Pêl droed'. The live chip for a selected sport reads 'Dewiswyd Pêl Droed' (sheet 58 prefix 'Dewiswyd {x}'); the example says 'Wedi dewis Pêl droed'.",
+   "action": "confirm the example wording, or align it with the live chip"
+  },
+  {
+   "key": "ui055",
+   "what": "banner example: AW-4 form applied over the cell's participle",
+   "detail": "cell: \"7 ymateb disgybl wedi'i gynnwys\"; AW-4 (item 8) chose '{n} ymateb disgybl wedi’u cynnwys' for the banner count — applied with n = 7: '7 ymateb disgybl wedi’u cynnwys'",
+   "action": "confirm"
+  },
+  {
+   "key": "ui.a11y_glossary_heading",
+   "what": "translator returned the English text unchanged",
+   "detail": "sheet 3 row ui.a11y_glossary_heading: Welsh cell = 'Glossary of terms used in this report' (identical to the English). Left PENDING (shown in marked English when the accessibility switch is on).",
+   "action": "re-ask the translator for the Welsh heading"
+  },
+  {
+   "key": "Not at all (confidence chips)",
+   "what": "sheet 2b showed the wrong survey question",
+   "detail": "rows 43–45 column I showed ‘Dim o gwbl’, which is the ENJOYMENT question's option; the confidence question the chips belong to (survey Q24) offers ‘Ddim yn hyderus o gwbl’. ‘Use survey wording’ was applied with the confidence question's own option.",
+   "action": "confirm ‘Hyder i roi cynnig ar gamp newydd: Ddim yn hyderus o gwbl’ (and the two sibling chips / charts)"
+  },
+  {
+   "key": "Other (take-part chip)",
+   "what": "English label is ‘Other’; Welsh now the full survey option",
+   "detail": "row 12 chose the survey wording ‘Arall, rho fanylion’ for ‘Takes part: Other’; the English report label abbreviates the survey's ‘Other, please specify.’ to ‘Other’. Applied as decided.",
+   "action": "confirm the asymmetry is intended"
+  },
+  {
+   "key": "Black, Black Welsh, Black British, Caribbean, or African",
+   "what": "profile-table row not on sheet 2b",
+   "detail": "the ethnicity profile table lists this survey option but the handover did not ask about it; the survey's Welsh ‘Du, Du Cymreig, Du Prydeinig, Caribïaidd, neu Affricanaidd’ was applied by extension of the sibling decisions (rows 50–53: survey wording). The translator's document wrote it without the comma before ‘neu’.",
+   "action": "confirm"
+  },
+  {
+   "key": "Other ethnic groups (for example, Arab)",
+   "what": "square brackets from the survey",
+   "detail": "row 52 chose the survey wording, which carries square brackets (‘[er enghraifft Arabaidd]’) where the English report label uses round brackets. Applied verbatim.",
+   "action": "confirm, or choose the round-bracket form"
+  },
+  {
+   "key": "Ethnically diverse background chip",
+   "what": "row 4 contradicts AW-3 (comment) and rows 47–48",
+   "detail": "2b row 4 chose ‘Use document wording’ for the answer (‘Oes’); AW-3's dropdown says ‘Use my document's wording’ but its comment says ‘Keep the named form.’, and rows 47–48 keep ‘Cefndir ethnig amrywiol / Heb fod o gefndir ethnig amrywiol’. The named form (PR-11) is kept; the chip's prefix is unchanged as decided.",
+   "action": "confirm the named form for the filter group"
+  },
+  {
+   "key": "cb chip prefix (Estimated times active through club sport each week)",
+   "what": "NOT APPLIED — the translator's prefix is identical to the ‘through sport’ chip's",
+   "detail": "2b row 8 chose ‘Use document wording’: ‘Amcan o’r amser y mae’n actif drwy chwaraeon bob wythnos’, which is exactly the prefix chosen for the ‘through sport’ chip (rows 6–7). Two English filters (‘…through sport each week: 3’ / ‘…through club sport each week: 3’) would then carry one Welsh label; the acceptance gate DIS-scope rejected that build (504 view labels). Today's prefix ‘Amcangyfrif o weithiau’n actif drwy chwaraeon clwb bob wythnos’ is kept for this chip only.",
+   "action": "give a distinct Welsh prefix for ‘through CLUB sport’ (the ‘through sport’ chip already has the document's)"
+  },
+  {
+   "key": "mi chip prefix (Would do more sport if)",
+   "what": "prefix ends in ‘os’ before a ‘Pe bai …’ answer",
+   "detail": "2b rows 17–23 chose the document prefix ‘Byddai’n gwneud mwy o chwaraeon os’ and the survey answers (‘Pe bai mwy o chwaraeon rydw i’n eu hoffi’ …): the chip reads ‘… os: Pe bai …’. Applied as decided.",
+   "action": "confirm"
+  },
+  {
+   "key": "ec chip prefix (Enjoys clubs outside school)",
+   "what": "not asked on sheet 2b — applied by extension",
+   "detail": "the three sibling enjoyment prefixes (PE, school clubs, other settings) were all switched to the translator's document form; the document's form for this one, ‘Yn mwynhau clybiau’r tu allan i’r ysgol’, was applied for consistency.",
+   "action": "confirm"
+  },
+  {
+   "key": "cn chip prefix (Confidence trying sport in a new place)",
+   "what": "not asked on sheet 2b — applied by extension",
+   "detail": "the three sibling confidence prefixes were confirmed as the document's form (identical to today's); the document's form for this one differs (‘ar gamp mewn lle newydd’ for ‘ar chwaraeon mewn lle newydd’) and was applied for consistency.",
+   "action": "confirm"
+  },
+  {
+   "key": "CONJ-06 (a/ac before a figure)",
+   "what": "rule comment and corrected sentence differ",
+   "detail": "sheet 4 rule 15: WRONG, ‘readers will be reading the numbers as decimal numbers … the rule should reflect this’ (so ‘ac 36’ → ‘a 36’). Sheet 5 #12 corrects ‘ac 11’ → ‘a 11’ — but the decimal reading of 11 (‘un deg un’) begins with a vowel and would take ‘ac’. The only rule that produces both of the translator's outputs is ‘a before every figure written in digits’ (figures as symbols, as the translator also reasons for mutation in rule 17: ‘written as a figure, there would be no mutation’). Implemented as MODE=figure; ‘y’ before figures was already the engine's practice.",
+   "action": "confirm ‘a’ before every figure (a 11, a 8, a 36), or specify the decimal-reading rule (ac 11, ac 8, a 36)"
+  }
+ ],
+ "typography": [
+  {
+   "where": "sheet 1 ui086",
+   "kind": "typography (rule 41)",
+   "before": "Dim ond i rai disgyblion pennodol y gofynnwyd rhai cwestiynau (er enghraifft, gofynnwyd gwestynnau dilynol am leoliad penodol dim ond I'r disgyblion a ddefnyddiwyd y lleoliad yno), gadawodd rhai disgyblion gwestiynau’n wag, ac mae cwestiynau amlddewis yn cyfrif pob dewis – felly, gall cyfansymiau fod yn llai neu’n fwy na chyfanswm nifer y disgyblion. Defnyddiwch y rhif sylfaen i helpu i ddeall pwy mae’r canlyniadau hynny yn eu cynrychioli.",
+   "after": "Dim ond i rai disgyblion pennodol y gofynnwyd rhai cwestiynau (er enghraifft, gofynnwyd gwestynnau dilynol am leoliad penodol dim ond I’r disgyblion a ddefnyddiwyd y lleoliad yno), gadawodd rhai disgyblion gwestiynau’n wag, ac mae cwestiynau amlddewis yn cyfrif pob dewis – felly, gall cyfansymiau fod yn llai neu’n fwy na chyfanswm nifer y disgyblion. Defnyddiwch y rhif sylfaen i helpu i ddeall pwy mae’r canlyniadau hynny yn eu cynrychioli."
+  },
+  {
+   "where": "sheet 1 ui143",
+   "kind": "typography (rule 41)",
+   "before": "Er mwyn deall yn well y gwahanol ffyrdd y mae disgyblion yn profi chwaraeon ac yn cael mynediad at chwaraeon, gofynnwyd i ddisgyblion a atebodd fod ganddynt anabledd neu gyflwr hirdymor, y rhai atebodd nad oeddent yn siŵr, neu y rhai atebodd yn well ganddynt beidio â dweud, sut roeddent yn cymryd rhan, fel arfer. Gall pob ateb gael ei ddewis i hidlo’r adroddiad ehangach. Ni all atebion gan lai na phum disgybl gael eu defnyddio fel hidlyddion.",
+   "after": "Er mwyn deall yn well y gwahanol ffyrdd y mae disgyblion yn profi chwaraeon ac yn cael mynediad at chwaraeon, gofynnwyd i ddisgyblion a atebodd fod ganddynt anabledd neu gyflwr hirdymor, y rhai atebodd nad oeddent yn siŵr, neu y rhai atebodd yn well ganddynt beidio â dweud, sut roeddent yn cymryd rhan, fel arfer. Gall pob ateb gael ei ddewis i hidlo’r adroddiad ehangach. Ni all atebion gan lai na phum disgybl gael eu defnyddio fel hidlyddion."
+  },
+  {
+   "where": "sheet 3 ui187",
+   "kind": "typography (rule 41)",
+   "before": "Beth gallai eich canfyddiadau eich helpu i'w archwilio",
+   "after": "Beth gallai eich canfyddiadau eich helpu i’w archwilio"
+  },
+  {
+   "where": "sheet 3 ui225",
+   "kind": "typography (rule 41)",
+   "before": "Beth mae'r tabl hwn yn ei ddangos?",
+   "after": "Beth mae’r tabl hwn yn ei ddangos?"
+  },
+  {
+   "where": "sheet 3 ui226",
+   "kind": "typography (rule 41)",
+   "before": "Beth mae'r siartiau hyn yn ei ddangos?",
+   "after": "Beth mae’r siartiau hyn yn ei ddangos?"
+  },
+  {
+   "where": "sheet 3 ui227",
+   "kind": "typography (rule 41)",
+   "before": "Beth mae'r adran hon yn ei ddangos?",
+   "after": "Beth mae’r adran hon yn ei ddangos?"
+  },
+  {
+   "where": "sheet 3 ui000",
+   "kind": "typography (rule 41)",
+   "before": "Neidio i'r adroddiad",
+   "after": "Neidio i’r adroddiad"
+  },
+  {
+   "where": "sheet 3 ui001",
+   "kind": "typography (rule 41)",
+   "before": "FERSIWN ADOLYGU – ar gyfer adolygiad Chwaraeon Cymru ac ILR yn unig, nid ar gyfer ysgolion. Mae mesurau dros dro a phenderfyniadau heb eu cwblhau wedi'u nodi; mae hidlo sensitif sy'n seiliedig ar siartiau wedi'i alluogi at ddibenion gwerthuso ac mae'n amodol ar gymeradwyaeth ar gyfer datgelu (O09/O10).",
+   "after": "FERSIWN ADOLYGU – ar gyfer adolygiad Chwaraeon Cymru ac ILR yn unig, nid ar gyfer ysgolion. Mae mesurau dros dro a phenderfyniadau heb eu cwblhau wedi’u nodi; mae hidlo sensitif sy’n seiliedig ar siartiau wedi’i alluogi at ddibenion gwerthuso ac mae’n amodol ar gymeradwyaeth ar gyfer datgelu (O09/O10)."
+  },
+  {
+   "where": "sheet 3 ui185",
+   "kind": "typography (rule 41)",
+   "before": "Dros Dro — geiriad y crynodeb wedi'i osod o dan benderfyniad D22 nes bod y mesurau a'r rhyngweithiadau wedi'u cymeradwyo.",
+   "after": "Dros Dro — geiriad y crynodeb wedi’i osod o dan benderfyniad D22 nes bod y mesurau a’r rhyngweithiadau wedi’u cymeradwyo."
+  },
+  {
+   "where": "sheet 3 responses_by_gender_base_note",
+   "kind": "typography (rule 41)",
+   "before": "Dangosir pob opsiwn ymateb, gan gynnwys opsiynau na chafodd eu dewis gan unrhyw ddisgyblion, fel bod cyfanswm y bariau yn cyfateb yn union i'r gwerth sylfaenol.",
+   "after": "Dangosir pob opsiwn ymateb, gan gynnwys opsiynau na chafodd eu dewis gan unrhyw ddisgyblion, fel bod cyfanswm y bariau yn cyfateb yn union i’r gwerth sylfaenol."
+  },
+  {
+   "where": "sheet 3 ethnicity_group_base_note",
+   "kind": "typography (rule 41)",
+   "before": "Mae categorïau a ddewiswyd gan lai na phump o ymatebwyr ar draws yr ysgol gyfan yn cael eu cyfuno o dan \"Grwpiau ethnig eraill\" er mwyn diogelu disgyblion unigol.",
+   "after": "Mae categorïau a ddewiswyd gan lai na phump o ymatebwyr ar draws yr ysgol gyfan yn cael eu cyfuno o dan “Grwpiau ethnig eraill” er mwyn diogelu disgyblion unigol."
+  },
+  {
+   "where": "sheet 3 h2_generic_reflect",
+   "kind": "typography (rule 41)",
+   "before": "Pa ganfyddiadau sy'n cyfateb i'r hyn a welwch o ddydd i ddydd, ac sy'n syndod?",
+   "after": "Pa ganfyddiadau sy’n cyfateb i’r hyn a welwch o ddydd i ddydd, ac sy’n syndod?"
+  },
+  {
+   "where": "sheet 3 h2_generic_discussion",
+   "kind": "typography (rule 41)",
+   "before": "A allai trafodaeth bellach â disgyblion helpu i egluro'r canfyddiadau hyn cyn cynllunio'r newidiadau i'r ddarpariaeth?",
+   "after": "A allai trafodaeth bellach â disgyblion helpu i egluro’r canfyddiadau hyn cyn cynllunio’r newidiadau i’r ddarpariaeth?"
+  },
+  {
+   "where": "sheet 3 ui.chart_sports_total_club",
+   "kind": "typography (rule 41)",
+   "before": "Mae'r siart bar hwn yn dangos y 10 camp fwyaf cyffredin y dywedodd disgyblion eu bod yn eu gwneud mewn clwb chwaraeon ysgol, a pha mor aml y dywedon nhw eu bod fel arfer yn eu gwneud. Roedd cyfanswm o {n} camp i ddewis ohonynt. Cliciwch ar ‘Gweld y Tabl Data’ i weld y canlyniadau llawn.",
+   "after": "Mae’r siart bar hwn yn dangos y 10 camp fwyaf cyffredin y dywedodd disgyblion eu bod yn eu gwneud mewn clwb chwaraeon ysgol, a pha mor aml y dywedon nhw eu bod fel arfer yn eu gwneud. Roedd cyfanswm o {n} camp i ddewis ohonynt. Cliciwch ar ‘Gweld y Tabl Data’ i weld y canlyniadau llawn."
+  },
+  {
+   "where": "sheet 3 ui.chart_sports_total_community",
+   "kind": "typography (rule 41)",
+   "before": "Mae'r siart bar hwn yn dangos y 10 camp fwyaf cyffredin y dywedodd disgyblion eu bod yn eu gwneud mewn clwb y tu allan i'r ysgol, a pha mor aml y dywedasant eu bod fel arfer yn eu gwneud. Roedd cyfanswm o {n} camp i ddewis ohonynt. Cliciwch ar ‘Gweld y Tabl Data’ i weld y canlyniadau llawn.",
+   "after": "Mae’r siart bar hwn yn dangos y 10 camp fwyaf cyffredin y dywedodd disgyblion eu bod yn eu gwneud mewn clwb y tu allan i’r ysgol, a pha mor aml y dywedasant eu bod fel arfer yn eu gwneud. Roedd cyfanswm o {n} camp i ddewis ohonynt. Cliciwch ar ‘Gweld y Tabl Data’ i weld y canlyniadau llawn."
+  },
+  {
+   "where": "sheet 3 ui.chart_sports_total_other",
+   "kind": "typography (rule 41)",
+   "before": "Mae'r siart bar hwn yn dangos y 10 camp fwyaf cyffredin y dywedodd disgyblion eu bod yn eu gwneud 'Rhywle Arall', a pha mor aml y dywedasant eu bod fel arfer yn eu gwneud. Roedd cyfanswm o {n} camp i ddewis ohonynt. Cliciwch ar ‘Gweld y Tabl Data’ i weld y canlyniadau llawn.",
+   "after": "Mae’r siart bar hwn yn dangos y 10 camp fwyaf cyffredin y dywedodd disgyblion eu bod yn eu gwneud ‘Rhywle Arall’, a pha mor aml y dywedasant eu bod fel arfer yn eu gwneud. Roedd cyfanswm o {n} camp i ddewis ohonynt. Cliciwch ar ‘Gweld y Tabl Data’ i weld y canlyniadau llawn."
+  },
+  {
+   "where": "sheet 3 ui.fsm_context_body",
+   "kind": "typography (rule 41)",
+   "before": "Mae Chwaraeon Cymru yn defnyddio cyfran y disgyblion sy'n gymwys i gael Prydau Ysgol am Ddim fel dangosydd ar gyfer amddifadedd. Ffigwr eich ysgol (data PLASC): {value}",
+   "after": "Mae Chwaraeon Cymru yn defnyddio cyfran y disgyblion sy’n gymwys i gael Prydau Ysgol am Ddim fel dangosydd ar gyfer amddifadedd. Ffigwr eich ysgol (data PLASC): {value}"
+  },
+  {
+   "where": "sheet 3 ui.fsm_context_value",
+   "kind": "typography (rule 41)",
+   "before": "i'w gadarnhau",
+   "after": "i’w gadarnhau"
+  },
+  {
+   "where": "sheet 3 ui.review_note",
+   "kind": "typography (rule 41)",
+   "before": "Fersiwn Adolygu: mae {done} o {total} o resi testun tudalen yn Gymraeg; mae {pending} yn dal i aros am gyfieithiad ac yn ymddangos yn Saesneg wedi'i farcio.",
+   "after": "Fersiwn Adolygu: mae {done} o {total} o resi testun tudalen yn Gymraeg; mae {pending} yn dal i aros am gyfieithiad ac yn ymddangos yn Saesneg wedi’i farcio."
+  },
+  {
+   "where": "sheet 3 ui.gdpr_body_full",
+   "kind": "typography (rule 41)",
+   "before": "Mae llai na phum disgybl yn cyfateb i'r dewis hwn, felly mae eu canlyniadau'n cael eu hatal i ddiogelu hunaniaeth y disgybl, yn unol â GDPR. Mae'r siartiau llwyd yn dangos yr ysgol gyfan ar gyfer cyd-destun. Ehangu'r detholiad i weld canfyddiadau'r grŵp hwn.",
+   "after": "Mae llai na phum disgybl yn cyfateb i’r dewis hwn, felly mae eu canlyniadau’n cael eu hatal i ddiogelu hunaniaeth y disgybl, yn unol â GDPR. Mae’r siartiau llwyd yn dangos yr ysgol gyfan ar gyfer cyd-destun. Ehangu’r detholiad i weld canfyddiadau’r grŵp hwn."
+  },
+  {
+   "where": "sheet 3 ui.gdpr_body_module",
+   "kind": "typography (rule 41)",
+   "before": "Mae llai na phum disgybl yn y grŵp hwn i'r farn bresennol, felly mae'r canfyddiadau hyn yn cael eu hatal i amddiffyn hunaniaeth disgyblion, yn unol â GDPR. Mae'r siartiau llwyd yn dangos yr ysgol gyfan ar gyfer cyd-destun.",
+   "after": "Mae llai na phum disgybl yn y grŵp hwn i’r farn bresennol, felly mae’r canfyddiadau hyn yn cael eu hatal i amddiffyn hunaniaeth disgyblion, yn unol â GDPR. Mae’r siartiau llwyd yn dangos yr ysgol gyfan ar gyfer cyd-destun."
+  }
+ ]
+}

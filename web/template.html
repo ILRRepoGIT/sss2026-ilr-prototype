@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="cy">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Interactive Learning Report — __SCHOOL_NAME__</title>
+<style>
+/*__FONTS_CSS__*/
+:root {
+  --red: #FA2A3C; --blue: #094B68; --yellow: #FEBD06; --grey: #B3B3B3;
+  --page: #EEF1F4; --panel: #F6F8FA; --line: #DCE3E8;
+  --fd: "Montserrat", Arial, sans-serif;
+  --rail-w: 296px; --col-w: 940px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; animation: none !important; }
+}
+body { margin: 0; font: 16px/1.55 var(--fd); color: var(--blue); background: var(--page); }
+h1,h2,h3,h4 { font-family: var(--fd); font-weight: 800; line-height: 1.14; margin: 0 0 .45em; }
+h2 { font-size: 28px; } h3 { font-size: 19px; } h4 { font-size: 16px; }
+p { margin: 0 0 .9em; }
+.visually-hidden { position:absolute; width:1px; height:1px; margin:-1px; clip-path:inset(50%); overflow:hidden; white-space:nowrap; }
+.skip-link { position:absolute; left:-999px; top:0; z-index:100; background:var(--blue); color:#fff; padding:10px 16px; font-weight:600; }
+.skip-link:focus { left:8px; }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; border-radius: 4px; }
+button { font-family: var(--fd); }
+
+/* ------------------------------------------------------------- layout */
+.app { display:flex; justify-content:center; gap:22px; padding:20px 14px 90px; }
+main.report { width:100%; max-width:var(--col-w); min-width:0; }
+.module {
+  background:#fff; border-radius:12px; border:1px solid var(--line);
+  box-shadow:0 1px 2px rgba(9,75,104,.06); padding:30px 34px; margin-bottom:18px;
+}
+.module.omitted { display:none; }
+.mod-kicker { display:inline-block; font:800 11.5px var(--fd); letter-spacing:.1em;
+  text-transform:uppercase; color:#fff; background:var(--blue); border-radius:20px;
+  padding:4px 12px; margin-bottom:10px; }
+.mod-kicker.red { background:var(--red); }
+.context { font-size:14.5px; color:#2b5d78; max-width:72ch; }
+.reported { background:var(--panel); border-radius:10px; padding:16px 20px 8px; margin:14px 0; }
+.reported .rep-h { font:800 12px var(--fd); text-transform:uppercase; letter-spacing:.08em;
+  color:var(--red); margin-bottom:8px; }
+.reported p { font-size:15.5px; margin:0 0 .7em; }
+.reported p.k-primary { font-size:16.5px; font-weight:600; }
+.reported p.k-comparison { border-left:4px solid var(--blue); padding-left:12px; }
+.reported p.k-cross { border-left:4px solid var(--yellow); padding-left:12px; }
+.reported p.k-definition, .reported p.k-note { font-size:14px; font-style:italic; opacity:.85; }
+.prompts { background:var(--yellow); color:var(--blue); border-radius:10px; padding:14px 18px; margin-top:14px; }
+.prompts .p-h { font:800 12px var(--fd); text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px; }
+.prompts ul { margin:0; padding-left:20px; } .prompts li { margin-bottom:6px; font-size:14.5px; }
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+@media (max-width:860px){ .grid2 { grid-template-columns:1fr; } }
+
+/* chapter openers: two-column layout with an integrated Brain Break
+   character (section 9.2) — no boxes, no captions, transparent background */
+.chapter-open { padding:0; overflow:hidden; }
+.chapter-band { background:var(--red); color:#fff; padding:30px 34px; }
+.chapter-band h2 { color:#fff; font-size:38px; margin:0; }
+.chapter-band .cy { color:var(--yellow); font-weight:600; font-size:17px; }
+.chapter-body { display:grid; grid-template-columns:1fr 220px; gap:30px;
+  padding:26px 34px; align-items:center; }
+.chapter-body p { max-width:62ch; font-size:15.5px; margin:0; }
+.chapter-char img { width:100%; max-width:220px; height:auto; display:block; margin:0 auto; }
+.chapter-char img.flip, .intro-brain-break img.flip { transform:scaleX(-1); }
+@media (max-width:760px){ .chapter-body { grid-template-columns:1fr; }
+  .chapter-char img { max-width:170px; } }
+
+/* introduction two-column Vision layout (Corrective Brief section 6.2) */
+.intro-vision-grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(280px,46%);
+  gap:32px; align-items:start; margin-top:6px; }
+.intro-brain-break { margin:0; }
+.intro-brain-break img { display:block; width:100%; height:auto; }
+@media (max-width:760px){
+  .intro-vision-grid { grid-template-columns:1fr; }
+  .intro-brain-break { margin:8px auto 0; max-width:240px; }
+}
+
+/* ---------------------------------------------------------------- cover */
+.cover { position:relative; background:#fff; border-radius:12px; overflow:hidden;
+  aspect-ratio: 1 / 1.28; min-height:640px; margin-bottom:18px;
+  border:1px solid var(--line); box-shadow:0 1px 2px rgba(9,75,104,.06); }
+.cover-red { position:absolute; inset:0;
+  clip-path: polygon(0 0, 93% 0, 76% 100%, 0 100%); background:var(--red); }
+.cover-inner { position:relative; z-index:2; height:100%; display:flex;
+  flex-direction:column; padding:6% 8%; }
+.cover-sw { width:34%; max-width:250px; }
+.cover-sw img { width:100%; height:auto; display:block; }
+.cover-lockup { width:62%; max-width:470px; margin-top:14%; }
+.cover-lockup img { width:100%; height:auto; display:block; }
+.cover-title { margin-top:9%; color:#fff; }
+.cover-title .t1 { font:800 clamp(20px,3.4vw,32px) var(--fd); }
+.cover-title .t2 { font:italic 700 clamp(18px,3vw,28px) var(--fd); margin-top:4px; }
+/* the blue shape straddles the red-white diagonal (section 8) */
+.cover-para { position:absolute; left:70%; bottom:7%; width:15%; height:21%;
+  background:#174963; transform:skewX(-10deg); }
+
+/* report footer (section 7): yellow rule + school + title */
+.report-footer { border-top:3px solid var(--yellow); margin:6px 4px 20px;
+  padding:8px 4px 0; display:flex; justify-content:space-between; gap:12px;
+  font-size:12.5px; font-weight:600; color:var(--blue); }
+#print-footer { display:none; }
+
+/* ------------------------------------------------- v2.3 additions */
+#review-banner { background:repeating-linear-gradient(45deg,#FEBD06 0 14px,#f7d979 14px 28px);
+  color:var(--blue); font:700 12.5px var(--fd); padding:7px 14px; border-radius:8px;
+  margin-bottom:10px; }
+.d22-marker { color:#8a6d00; font-style:italic; }
+.method-list { padding-left:20px; }
+.method-list li { margin-bottom:9px; font-size:13.5px; }
+.prov-mark { font-style:italic; color:#8a6d00; font-size:13px; }
+body.no-summaries #m-summary { display:none; }
+@media print { #review-banner { display:block; } }
+/* ------------------------------------------------- v2 additions */
+.toc-list { margin:10px 0 4px 0; padding-left:22px; }
+.toc-list li { margin-bottom:10px; }
+.toc-list a { font:700 15px var(--fd); color:var(--blue); text-decoration:none;
+  border-bottom:2px solid transparent; }
+.toc-list a:hover { color:var(--red); border-bottom-color:var(--yellow); }
+.toc-list span { display:block; font-size:13.5px; margin-top:2px; }
+details.faq { border:1.5px solid var(--blue); border-radius:9px; margin-bottom:9px;
+  background:#fff; }
+details.faq summary { cursor:pointer; padding:10px 14px; font:700 15px var(--fd);
+  color:var(--blue); }
+details.faq summary:hover { color:var(--red); }
+details.faq[open] summary { border-bottom:1.5px solid var(--panel); }
+details.faq > p, details.faq > div { padding:10px 14px; margin:0; }
+.rail-toc { margin-bottom:14px; border-bottom:1.5px solid var(--panel); padding-bottom:10px; }
+.rail-toc .toc-h { font:800 14px var(--fd); color:var(--blue); margin:0 0 6px;
+  text-transform:none; letter-spacing:0; }
+.rail-toc a { display:block; font:600 12.5px var(--fd); color:var(--blue);
+  text-decoration:none; padding:3px 0; }
+.rail-toc a:hover { color:var(--red); }
+.prompts.tip { border-left-color:var(--red); }
+.note-red { color:var(--red); }
+.chart-click-note { color:var(--red); font:600 12px var(--fd); margin:2px 0 6px; }
+/* V4.2: Welsh review markers - untranslated content is flagged, not hidden */
+.cy-missing { border-bottom:1px dotted var(--red); }
+#btn-lang { margin-bottom:10px; font-weight:800; }
+/* V4.10 language slider */
+.lang-switch { display:inline-flex; align-items:center; gap:8px; background:none; border:0;
+  padding:4px 0; cursor:pointer; font:800 14px var(--fd); color:#4A4A4A; }
+.lang-switch .ls-track { position:relative; width:46px; height:26px; border-radius:13px;
+  background:var(--blue); border:2px solid var(--blue); box-sizing:border-box; flex:none; }
+.lang-switch .ls-knob { position:absolute; top:2px; left:2px; width:18px; height:18px;
+  border-radius:50%; background:#fff; transition:left .15s ease; }
+.lang-switch[aria-checked="true"] .ls-knob { left:22px; }
+/* V4.11 (assessment §9.2): both label states ≥ 4.5:1 on white —
+   inactive #4A4A4A (≈ 8.9:1), active var(--blue) #094B68 (≈ 9.6:1), underlined */
+.lang-switch .ls-label { color:#4A4A4A; opacity:1; }
+.lang-switch .ls-label.on { color:var(--blue); text-decoration:underline; text-underline-offset:3px; }
+.lang-switch:focus-visible { outline:3px solid var(--yellow); outline-offset:3px; border-radius:8px; }
+#review-note-cy { display:none; background:#FFF4D6; border:1.5px solid var(--yellow);
+  border-radius:8px; padding:8px 12px; font-size:12.5px; margin-bottom:10px; }
+/* v5 (build 012): light grey = non-selectable, dark grey = suppressed */
+.bar-dgrey { background:#5F6E76 !important; }
+.hval-sup, .cell-blank .hval { color:#5F6E76; }
+/* paywall suppression: content stays visible, greyed, box on top */
+.module.paywalled { position:relative; }
+.module.paywalled > *:not(.paywall-box) { filter:grayscale(1); opacity:.35; }
+.module.paywalled { pointer-events:none; }
+.paywall-box { position:absolute; top:120px; left:50%; transform:translateX(-50%);
+  background:#fff; border:2.5px solid var(--blue); border-radius:12px;
+  padding:16px 22px; z-index:5; max-width:420px; text-align:center;
+  filter:none; opacity:1; box-shadow:0 4px 18px rgba(9,75,104,.18); }
+.paywall-box .t { font:800 15px var(--fd); color:var(--blue); margin-bottom:4px; }
+.paywall-box .b { font-size:12.5px; color:#5F5E5A; }
+.cosel-wrap { margin-top:10px; }
+/* v6 (build 012.1): take-part section joined to the disability section */
+[data-module="e7"] { margin-top:-16px; border-top-left-radius:0;
+  border-top-right-radius:0; }
+[data-module="n_dl"] { margin-bottom:0; border-bottom-left-radius:0;
+  border-bottom-right-radius:0; }
+/* v3 (build 010): stacked sport-frequency charts */
+.stackrow { display:flex; align-items:center; gap:8px; margin-bottom:7px; }
+.stackrow .hlab { flex:0 0 150px; font:600 12.5px var(--fd); text-align:right; }
+.stacktrack { flex:1; }
+.stackbar { display:flex; height:21px; border-radius:4px; overflow:hidden; }
+.stackseg { height:100%; }
+.stackrow .hval { flex:0 0 44px; font:700 13px var(--fd); }
+.stack-legend { display:flex; flex-wrap:wrap; gap:12px; font-size:12.5px;
+  margin:8px 0 4px; }
+.stack-legend span { display:inline-flex; align-items:center; gap:5px; }
+.stack-legend i { width:12px; height:12px; border-radius:3px; display:inline-block; }
+.headline-note { font-size:11px; }
+.pagenav { display:flex; justify-content:space-between; gap:10px; margin:6px 0 22px; }
+.pagenav a { font:600 13px var(--fd); color:var(--blue); text-decoration:none;
+  border:1.5px solid var(--blue); border-radius:999px; padding:6px 14px; }
+.pagenav a:hover { background:var(--blue); color:#fff; }
+.h2-toc-link { font:600 12px var(--fd); margin-left:10px; text-decoration:none;
+  color:var(--blue); border:1px solid var(--grey); border-radius:999px; padding:2px 9px;
+  vertical-align:middle; white-space:nowrap; }
+.h2-toc-link:hover { border-color:var(--blue); }
+.hval-wide { min-width:110px; }
+.intro-chapters { padding-left:22px; margin:8px 0 12px; }
+.intro-chapters li { margin-bottom:4px; }
+.var-table { width:100%; border-collapse:collapse; font-size:13.5px; }
+.var-table th { text-align:left; font-family:var(--fd); font-size:12.5px; color:var(--blue);
+  border-bottom:2px solid var(--blue); padding:6px 8px; }
+.var-table td { border-bottom:1px solid var(--panel); padding:6px 8px; }
+.var-table td.num { text-align:right; font-variant-numeric:tabular-nums; }
+@media print { .rail-toc, .pagenav, .h2-toc-link { display:none !important; } }
+.vtrack { position:relative; width:76%; max-width:66px; display:flex; align-items:flex-end;
+  justify-content:center; }
+.vtrack .vbar { width:100%; max-width:none; position:relative; }
+.vghost { position:absolute; bottom:0; left:0; right:0; border:1.5px dashed var(--grey);
+  border-bottom:0; border-radius:5px 5px 0 0; }
+.htrack { position:relative; }
+.hghost { position:absolute; left:0; top:0; bottom:0; border:1.5px dashed var(--grey);
+  border-radius:4px; }
+/* ------------------------------------------------------------------ rail */
+.filter-rail { width:var(--rail-w); flex-shrink:0; }
+.rail-inner { position:sticky; top:14px; background:#fff; border-radius:12px;
+  border-top:6px solid var(--red); box-shadow:0 1px 3px rgba(9,75,104,.15);
+  padding:16px 16px 18px; max-height:calc(100vh - 34px); overflow:auto; }
+.rail-inner h2 { font-size:18px; margin-bottom:10px; color:var(--red); }
+.rail-field { margin-bottom:14px; }
+.rail-field label, .rail-field .lbl { display:block; font-weight:600; font-size:13px; margin-bottom:5px; }
+.rail-field select { width:100%; padding:9px 10px; font:600 14.5px var(--fd);
+  color:var(--blue); border:2px solid var(--blue); border-radius:8px; background:#fff; }
+.seg { display:flex; border:2px solid var(--blue); border-radius:8px; overflow:hidden; }
+.seg button { flex:1; padding:8px 4px; border:0; background:#fff; color:var(--blue);
+  font:600 13.5px var(--fd); cursor:pointer; }
+.seg button + button { border-left:2px solid var(--blue); }
+.seg button[aria-pressed="true"] { background:var(--blue); color:#fff; }
+.chip { display:flex; align-items:center; gap:8px; background:var(--yellow); color:var(--blue);
+  font-weight:600; font-size:13px; border-radius:20px; padding:7px 8px 7px 14px;
+  border:2px solid var(--blue); }
+.chip button { border:0; background:var(--blue); color:#fff; border-radius:50%;
+  width:24px; height:24px; font-weight:800; cursor:pointer; flex-shrink:0; }
+.chip-none { font-size:13px; font-style:italic; }
+.rail-base { background:var(--panel); border-left:5px solid var(--red); padding:10px 12px;
+  border-radius:6px; margin:12px 0; font-size:13.5px; }
+.rail-base strong { font-size:22px; font-family:var(--fd); font-weight:800; display:block; }
+.rail-cov { font-size:12px; margin-top:4px; }
+.btn { padding:9px 12px; border-radius:8px; border:2px solid var(--blue); background:#fff;
+  color:var(--blue); font:600 13.5px var(--fd); cursor:pointer; width:100%; margin-top:8px; }
+.btn:hover { background:var(--panel); }
+.btn-primary { background:var(--blue); color:#fff; }
+.rail-toggle { display:none; }
+/* --- persistent controls (Corrective Brief sections 3-4) --------------
+   The sticky You are viewing banner and Explore results panel must survive
+   every width. overflow-x:hidden on html/body created a scroll context
+   that detached sticky elements; overflow-x:clip does not. */
+html { overflow-x: clip; }
+body { overflow-x: clip; overflow-y: visible; max-width: 100%; }
+.app, main.report { overflow: visible; }
+
+@media (min-width:1051px) {
+  .filter-rail { position: sticky; top: 14px; align-self: flex-start;
+    height: max-content; }
+  .rail-inner { position: static; max-height: calc(100vh - 28px);
+    overflow-y: auto; }
+}
+/* One dedicated sticky control stack at narrow widths (Prototype 4.1 §2.5):
+   banner first, compact filter control directly below, in DOM = visual =
+   keyboard order. The expanded filters are an absolutely positioned drawer
+   so opening them never changes the report's flow position. */
+#mobile-stack { display:none; }
+@media (max-width:1050px) {
+  .app { flex-direction:column; align-items:center; }
+  #mobile-stack { display:block; position:sticky; top:0; z-index:1000;
+    width:100%; max-width:var(--col-w); margin:0 auto 10px; }
+  #mobile-stack .view-banner { position:static; margin:0 0 6px; z-index:auto; }
+  #mobile-stack .filter-rail { position:static; width:100%; }
+  #mobile-stack .rail-inner { position:relative; max-height:none; overflow:visible;
+    border-top-width:4px; padding:6px 10px 8px;
+    box-shadow:0 3px 10px rgba(9,75,104,.22); }
+  #mobile-stack .rail-collapsible { display:none; }
+  #mobile-stack .rail-inner.open .rail-collapsible { display:block;
+    position:absolute; top:calc(100% + 4px); left:0; right:0; z-index:1001;
+    background:#fff; border:2px solid var(--blue); border-radius:10px;
+    padding:14px 14px 16px; max-height:min(68vh, 540px); overflow-y:auto;
+    box-shadow:0 12px 30px rgba(9,75,104,.35); }
+  .rail-toggle { display:block; margin:0; text-align:left; font-size:12.5px;
+    padding:7px 10px; }
+}
+@media (max-width:520px) {
+  #mobile-stack .view-banner .vb-t { position:absolute; width:1px; height:1px;
+    margin:-1px; clip-path:inset(50%); overflow:hidden; }
+  #vb-clear .btn-full { display:none; }
+  #vb-clear .btn-short { display:inline; }
+}
+#vb-clear .btn-short { display:none; }
+main.report section, main.report .module { scroll-margin-top:118px; }
+img { max-width:100%; }
+@media (max-width:720px) {
+  .app { padding:10px 8px 60px; }
+  .module { padding:20px 16px; border-radius:10px; }
+  .chapter-band { padding:20px 18px; } .chapter-band h2 { font-size:28px; }
+  .view-banner { padding:7px 10px; border-radius:8px; gap:2px 10px; }
+  .view-banner .vb-d { font-size:12.5px; } .view-banner .vb-b { font-size:12px; }
+  .view-banner button { padding:3px 8px; font-size:11px; }
+  .hrow, button.hrowbtn { grid-template-columns:104px 1fr 40px; gap:6px; }
+  .hlab { font-size:11.5px; }
+  .vchart { gap:4px; min-height:150px; overflow-x:auto; }
+  .vbar { width:86%; } .vval { font-size:12px; } .vlab { font-size:10px; }
+  .cover { aspect-ratio:auto; min-height:0; padding-bottom:36px; }
+  .cover-inner { position:relative; padding:8% 7% 30px; }
+  .cover-lockup { width:78%; margin-top:10%; }
+  .cover-para { bottom:2%; height:12%; }
+  .cards { grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:8px; }
+}
+/* the cover title stays within the red field on narrow screens (§3.1) */
+@media (max-width:520px) {
+  .cover-title { max-width:72%; }
+  .cover-title .t1 { font-size:20px; line-height:1.08; }
+  .cover-title .t2 { font-size:17px; }
+  .vcol, button.vcolbtn { min-width:66px; flex:1 0 66px; }
+}
+
+/* --------------------------------------------------------- view banner */
+.view-banner { position:sticky; top:0; z-index:1000; background:var(--blue); color:#fff;
+  border-radius:10px; padding:10px 16px; margin-bottom:14px; display:flex; flex-wrap:wrap;
+  gap:4px 16px; align-items:center; box-shadow:0 2px 10px rgba(9,75,104,.35); }
+.view-banner .vb-t { font:800 11.5px var(--fd); text-transform:uppercase;
+  letter-spacing:.07em; color:var(--yellow); }
+.view-banner .vb-d { font-weight:600; font-size:14px; }
+.view-banner .vb-b { font-size:13.5px; margin-left:auto; white-space:nowrap; }
+.view-banner .vb-b strong { font-size:16px; }
+.view-banner button { border:2px solid #fff; background:transparent; color:#fff;
+  border-radius:6px; font:600 12px var(--fd); padding:4px 10px; cursor:pointer; }
+.view-banner button:hover { background:rgba(255,255,255,.15); }
+
+.section-nav { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:14px; }
+.section-nav a { font-size:12px; font-weight:600; text-decoration:none; color:var(--blue);
+  border:1.5px solid var(--blue); padding:4px 11px; border-radius:16px; background:#fff; }
+.section-nav a:hover { background:var(--blue); color:#fff; }
+
+/* ---------------------------------------------------------------- charts */
+.chart-card { background:var(--panel); border-radius:10px; border:1px solid var(--line);
+  padding:16px 18px 12px; margin:14px 0; }
+.chart-card h4 { font-size:15.5px; margin-bottom:2px; }
+.chart-base { font-size:12.5px; opacity:.85; margin-bottom:10px; }
+.chart-hint { font-size:12px; font-weight:600; color:var(--red); margin:2px 0 8px; }
+.chart-note { font-size:12px; opacity:.8; margin:6px 0 0; }
+.legend { display:flex; gap:14px; font-size:12px; margin:4px 0 8px; }
+.legend span::before { content:""; display:inline-block; width:11px; height:11px;
+  border-radius:3px; margin-right:5px; vertical-align:-1px; background:var(--blue); }
+.legend .lg-y::before { background:var(--yellow); }
+/* Multi-colour bar system (Corrective Brief section 7): red, blue and grey
+   cycle by answer code within every single-series chart; the colour is
+   attached to the answer, never to its current rank. Yellow is reserved for
+   the selected value, which keeps its outline and tick in print and
+   greyscale. Missing values use diagonal hatching, distinct from grey. */
+.hchart { display:flex; flex-direction:column; gap:6px; }
+.hrow, button.hrowbtn { display:grid; grid-template-columns:158px 1fr 46px; align-items:center; gap:9px; }
+button.hrowbtn { width:100%; background:none; border:0; padding:0; text-align:inherit;
+  color:inherit; font:inherit; cursor:pointer; border-radius:4px; }
+.hlab { font-size:13px; font-weight:600; text-align:right; line-height:1.2; }
+.htrack { background:#EEF2F4; border-radius:4px; height:20px; }
+.hbar { display:block; height:100%; border-radius:4px; background:var(--blue); min-width:2px; transition:width .3s ease; }
+.hval { font:800 13.5px var(--fd); }
+.bar-red { background:var(--red) !important; }
+.bar-blue { background:var(--blue) !important; }
+.bar-grey { background:var(--grey) !important;
+  box-shadow: inset 0 0 0 1px rgba(9,75,104,.22); }
+button.hrowbtn:hover .hbar, button.hrowbtn:focus-visible .hbar,
+button.vcolbtn:hover .vbar, button.vcolbtn:focus-visible .vbar {
+  box-shadow: 0 0 0 2px rgba(9,75,104,.4); }
+button.hrowbtn[aria-pressed="true"] .hbar,
+button.vcolbtn[aria-pressed="true"] .vbar {
+  background: var(--yellow) !important;
+  outline: 2.5px solid var(--blue); outline-offset: 1px; box-shadow: none; }
+button.hrowbtn[aria-pressed="true"]:hover .hbar,
+button.vcolbtn[aria-pressed="true"]:hover .vbar {
+  background: var(--yellow) !important; }
+.sel-tick { color:var(--blue); font-weight:800; font-size:10.5px; }
+.vchart { display:flex; align-items:flex-end; gap:8px; min-height:190px; padding-top:6px; }
+.vcol, button.vcolbtn { flex:1; display:flex; flex-direction:column; align-items:center;
+  justify-content:flex-end; gap:4px; min-width:0; }
+button.vcolbtn { background:none; border:0; padding:0; color:inherit; font:inherit; cursor:pointer; border-radius:4px; }
+.vval { font:800 14px var(--fd); }
+.vbar { width:76%; max-width:66px; background:var(--blue); border-radius:5px 5px 0 0; transition:height .3s ease; }
+.vlab { font-size:11.5px; font-weight:600; text-align:center; line-height:1.18; min-height:28px; }
+.cell-blank .vbar, .cell-blank .hbar {
+  background:repeating-linear-gradient(45deg,#c8d2d8 0 6px,#f2f5f7 6px 12px) !important;
+  box-shadow:none; outline:1.5px dashed var(--grey); }
+.pairwrap { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media (max-width:760px){ .pairwrap { grid-template-columns:1fr; } }
+.pairwrap .hbar { background:var(--blue); }        /* boys */
+.pairwrap .hbar.g { background:var(--red); }       /* girls */
+.pairwrap h5 { margin:0 0 8px; font:800 13px var(--fd); }
+.legend .lg-r::before { background:var(--red); }
+
+.state-msg { border:2px dashed var(--grey); border-radius:10px; background:#fff;
+  padding:20px 18px; text-align:center; margin:8px 0; }
+.state-msg .t { font:800 15px var(--fd); margin-bottom:4px; }
+.state-msg .b { font-size:13.5px; max-width:52ch; margin:0 auto; }
+.state-msg.sup { border-color:var(--red); } .state-msg.sup .t { color:var(--red); }
+
+details.dtable { margin-top:10px; }
+details.dtable summary { cursor:pointer; font-weight:600; font-size:13px; padding:5px 2px; }
+details.dtable table { border-collapse:collapse; width:100%; margin-top:6px; background:#fff; font-size:13px; }
+details.dtable th, details.dtable td { border:1px solid #cdd7dd; padding:5px 9px; text-align:left; }
+details.dtable th { background:var(--blue); color:#fff; font-weight:600; }
+details.dtable th.rowh { background:#fff; color:var(--blue); }
+details.dtable td.num { text-align:right; font-variant-numeric:tabular-nums; }
+details.dtable caption { text-align:left; font-size:12px; padding-bottom:4px; opacity:.85; }
+
+/* key statistics cards */
+.cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; margin:14px 0 6px; }
+.card { background:var(--blue); color:#fff; border-radius:10px; padding:13px 15px; min-height:118px;
+  display:flex; flex-direction:column; }
+.card:nth-child(4n+2) { background:var(--red); }
+.card:nth-child(4n+3) { background:var(--yellow); color:var(--blue); }
+.card .c-t { font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.05em;
+  opacity:.95; margin-bottom:6px; }
+.card .c-v { font:800 21px/1.12 var(--fd); margin-top:auto; }
+.card .c-s { font-size:11px; opacity:.9; margin-top:3px; }
+.card .c-sc { font-size:10.5px; font-weight:700; margin-top:7px; padding-top:6px;
+  border-top:1px solid rgba(255,255,255,.4); text-transform:uppercase; letter-spacing:.04em; }
+.card:nth-child(4n+3) .c-sc { border-top-color:rgba(9,75,104,.35); }
+
+/* availability + suppressed view */
+.avail-panel { border:1.5px solid var(--line); border-radius:10px; background:#fff; padding:14px 18px; }
+.avail-panel h4 { margin-bottom:6px; }
+.avail-panel ul { margin:0; padding-left:20px; font-size:13.5px; }
+.avail-ok { color:#1e6b46; font-weight:700; }
+
+.meta-table { font-size:13px; border-collapse:collapse; }
+.meta-table td { padding:3px 14px 3px 0; vertical-align:top; }
+.meta-table td:first-child { font-weight:600; white-space:nowrap; }
+.howto-brain { width:170px; float:right; margin:0 0 10px 18px; }
+.howto-brain img { width:100%; height:auto; }
+.example-banner { background:var(--blue); color:#fff; border-radius:10px; padding:12px 16px;
+  max-width:360px; font-size:13.5px; margin:10px 0; }
+.example-banner .vb-t { color:var(--yellow); font:800 11px var(--fd); text-transform:uppercase; letter-spacing:.07em; }
+.covmark { display:inline-block; border-radius:14px; padding:2px 11px; font:700 12px var(--fd); background:var(--panel); border:1.5px solid var(--line); }
+
+/* ------------------------------------------------ V4.13 accessibility
+   Everything below is scoped to html.a11y — the state of the accessibility
+   switch (#btn-a11y, hash a11y=1). With the switch off nothing here applies,
+   so the default rendering is unchanged. Source: "School Reports
+   Accessibility Feedback.docx" (17 Sep 2026). */
+.a11y-switch { margin-bottom:10px; }
+.a11y-switch .ls-track { background:#fff; border-color:#4A4A4A; }
+.a11y-switch .ls-knob { background:#4A4A4A; }
+.a11y-switch[aria-checked="true"] .ls-track { background:var(--blue); border-color:var(--blue); }
+.a11y-switch[aria-checked="true"] .ls-knob { background:#fff; }
+.a11y-switch[aria-checked="true"] .ls-label { color:var(--blue); text-decoration:underline; text-underline-offset:3px; }
+html:not(.a11y) .a11y-only { display:none !important; }
+/* font (feedback: Aptos or Arial) and size (nothing below 14px; body 18px) */
+html.a11y { --fd: Aptos, "Aptos Display", Arial, Helvetica, sans-serif;
+  --blue:#0B2E44; --red:#B3261E; --panel:#fff; --line:#5F6E76; --grey:#8C8C8C; --page:#F4F4F4; }
+html.a11y body { font-size:18px; line-height:1.6; color:#1B1B1B; }
+html.a11y h2 { font-size:32px; } html.a11y h3 { font-size:23px; } html.a11y h4 { font-size:19px; }
+html.a11y .chart-card h4 { font-size:19px; }
+html.a11y .chapter-band h2 { font-size:40px; } html.a11y .chapter-band .cy { font-size:19px; }
+html.a11y .context, html.a11y .reported p, html.a11y .chapter-body p, html.a11y .prompts li,
+html.a11y .avail-panel ul, html.a11y .state-msg .b, html.a11y .example-banner,
+html.a11y details.dtable table, html.a11y .var-table, html.a11y .meta-table,
+html.a11y .method-list li, html.a11y .toc-list span, html.a11y .toc-list a,
+html.a11y details.faq summary, html.a11y .rail-field select,
+html.a11y .btn, html.a11y .chip, html.a11y .rail-base, html.a11y .pagenav a,
+html.a11y .section-nav a, html.a11y .rail-toc a, html.a11y .lang-switch,
+html.a11y .paywall-box .b, html.a11y .paywall-box .t, html.a11y .rep-body-also,
+html.a11y .stack-legend, html.a11y .legend, html.a11y .hlab, html.a11y .vlab,
+html.a11y .hval, html.a11y .vval, html.a11y .chart-base, html.a11y .chart-note,
+html.a11y .chart-hint, html.a11y .chart-click-note, html.a11y .headline-note,
+html.a11y .stackrow .hlab, html.a11y .stackrow .hval, html.a11y .rail-cov,
+html.a11y .rail-field label, html.a11y .rail-field .lbl, html.a11y .chip-none,
+html.a11y .view-banner .vb-d, html.a11y .view-banner .vb-b, html.a11y .view-banner button,
+html.a11y .report-footer, html.a11y .card .c-t, html.a11y .card .c-s, html.a11y .card .c-sc,
+html.a11y .covmark, html.a11y .h2-toc-link, html.a11y .prov-mark, html.a11y .d22-marker,
+html.a11y .rail-toggle, html.a11y .sel-tick, html.a11y .a11y-cap,
+html.a11y .reported p.k-definition, html.a11y .reported p.k-note, html.a11y #review-banner,
+html.a11y #review-note-cy, html.a11y details.dtable summary, html.a11y details.dtable caption,
+html.a11y .var-table th, html.a11y .mod-kicker, html.a11y .reported .rep-h, html.a11y .prompts .p-h,
+html.a11y .view-banner .vb-t, html.a11y .example-banner .vb-t { font-size:16px; }
+html.a11y .reported p.k-primary { font-size:18px; } html.a11y .seg button { font-size:15px; } html.a11y .card .c-v { font-size:24px; }
+html.a11y .rail-base strong { font-size:24px; } html.a11y .view-banner .vb-b strong { font-size:18px; }
+html.a11y .hrow, html.a11y button.hrowbtn { grid-template-columns:200px 1fr 56px; }
+html.a11y .hlab, html.a11y .vlab { line-height:1.25; } html.a11y .vlab { min-height:36px; }
+html.a11y .htrack, html.a11y .stackbar { height:24px; }
+/* contrast (feedback: dark blue on light blue / on yellow): near-black text,
+   yellow and light-blue fields become white or pale with a dark border */
+html.a11y .context { color:#333; }
+html.a11y .reported, html.a11y .chart-card, html.a11y .rail-base, html.a11y .avail-panel,
+html.a11y .covmark { background:#fff; border:1.5px solid #5F6E76; }
+html.a11y .rail-base { border-left-width:5px; }
+html.a11y .prompts, html.a11y .chip, html.a11y .card:nth-child(4n+3) { background:#FFF8E1; color:#1B1B1B; border:2px solid #6B5900; }
+html.a11y .card:nth-child(4n+3) .c-sc { border-top-color:#6B5900; }
+html.a11y .prompts .p-h, html.a11y .reported .rep-h, html.a11y .chart-hint, html.a11y .chart-click-note,
+html.a11y .note-red, html.a11y .rail-inner h2, html.a11y .state-msg.sup .t { color:#B3261E; }
+html.a11y .htrack { background:#E6E6E6; }
+html.a11y .chapter-band { background:#2F3E4E; } html.a11y .chapter-band .cy { color:#fff; }
+html.a11y .rail-inner { border-top-color:#2F3E4E; }
+html.a11y .cy-missing { border-bottom-color:#B3261E; }
+html.a11y #review-banner { background:#FFF8E1; border:2px solid #6B5900; }
+html.a11y :focus-visible { outline:3px solid #000; outline-offset:3px; }
+html.a11y .lang-switch:focus-visible { outline-color:#000; }
+/* colour-blind-safe chart palette (Okabe–Ito): vermillion / blue / grey,
+   the selected value in light yellow with a black outline, the stack
+   segments by their position (data-seg) */
+html.a11y .bar-red, html.a11y .pairwrap .hbar.g { background:#D55E00 !important; }
+html.a11y .bar-blue, html.a11y .hbar, html.a11y .vbar, html.a11y .pairwrap .hbar, html.a11y .legend span::before,
+html.a11y .card { background:#0072B2; }
+html.a11y .card:nth-child(4n+2) { background:#B3261E !important; }
+html.a11y .bar-grey { background:#8C8C8C !important; box-shadow:inset 0 0 0 1px #000; }
+html.a11y .bar-dgrey { background:#4D4D4D !important; }
+html.a11y .legend .lg-y::before { background:#F0E442; outline:1.5px solid #000; }
+html.a11y .legend .lg-r::before { background:#D55E00; }
+html.a11y button.hrowbtn[aria-pressed="true"] .hbar, html.a11y button.vcolbtn[aria-pressed="true"] .vbar,
+html.a11y button.hrowbtn[aria-pressed="true"]:hover .hbar, html.a11y button.vcolbtn[aria-pressed="true"]:hover .vbar {
+  background:#F0E442 !important; outline:3px solid #000; }
+html.a11y .stackseg[data-seg="0"], html.a11y .stack-legend i[data-seg="0"] { background:#E0E0E0 !important; box-shadow:inset 0 0 0 1px #000; }
+html.a11y .stackseg[data-seg="1"], html.a11y .stack-legend i[data-seg="1"] { background:#56B4E9 !important; }
+html.a11y .stackseg[data-seg="2"], html.a11y .stack-legend i[data-seg="2"] { background:#0072B2 !important; }
+html.a11y .stackseg[data-seg="3"], html.a11y .stack-legend i[data-seg="3"] { background:#D55E00 !important; }
+html.a11y .stackseg[data-seg="4"], html.a11y .stack-legend i[data-seg="4"] { background:#4D4D4D !important; }
+html.a11y .stackseg[data-seg="s0"], html.a11y .stack-legend i[data-seg="s0"] { background:#0072B2 !important; }
+html.a11y .stackseg[data-seg="s1"], html.a11y .stack-legend i[data-seg="s1"] { background:#D55E00 !important; }
+html.a11y .stackseg[data-seg="s2"], html.a11y .stack-legend i[data-seg="s2"] { background:#56B4E9 !important; }
+html.a11y .stackseg[data-seg="s3"], html.a11y .stack-legend i[data-seg="s3"] { background:#4D4D4D !important; }
+html.a11y .stackseg + .stackseg { border-left:1px solid #fff; }
+html.a11y .vghost, html.a11y .hghost { border-color:#000; }
+html.a11y .cell-blank .vbar, html.a11y .cell-blank .hbar { outline-color:#4D4D4D; }
+/* softened cover and character images (Expert by Experience feedback),
+   with a visible caption stating each character image's purpose */
+html.a11y .cover-red { background:#4E5D6C; } html.a11y .cover-para { background:#2F3E4E; }
+html.a11y .cover-lockup img, html.a11y .chapter-char img, html.a11y .intro-brain-break img,
+html.a11y .howto-brain img { filter:saturate(.55) contrast(.95); }
+html.a11y .a11y-cap { display:block; font-size:16px; color:#333; text-align:center; margin:6px auto 0; max-width:240px; }
+html.a11y .howto-brain .a11y-cap { max-width:none; }
+/* glossary panel */
+html.a11y .a11y-glossary { border:2px solid #5F6E76; border-radius:9px; padding:14px 18px; margin:12px 0 16px; background:#fff; }
+html.a11y .a11y-glossary ul { margin:0; padding-left:22px; } html.a11y .a11y-glossary li { margin-bottom:6px; }
+html.a11y .a11y-glossary a { color:#0B2E44; font-weight:600; }
+/* data tables open beside every chart; tables focusable for keyboard readers */
+html.a11y details.dtable table { border-collapse:collapse; }
+html.a11y details.dtable th, html.a11y details.dtable td { border:1px solid #4D4D4D; padding:7px 10px; }
+html.a11y details.dtable th { background:#0B2E44; color:#fff; }
+html.a11y details.dtable th.rowh { background:#fff; color:#1B1B1B; }
+html.a11y details.dtable caption { opacity:1; color:#1B1B1B; }
+html.a11y table:focus-visible { outline:3px solid #000; outline-offset:2px; }
+
+/* ----------------------------------------------------------------- print */
+@media print {
+  /* V4.13 (feedback: PDF export cut off part-way down the page): no clipped
+     or scrolling ancestors and no sticky positioning while printing */
+  html, body { overflow:visible !important; height:auto !important; max-width:none; }
+  .app, main.report, .rail-inner, #mobile-stack { position:static !important; overflow:visible !important;
+    max-height:none !important; height:auto !important; }
+  main.report section, main.report .module { scroll-margin-top:0; }
+  body { background:#fff; padding-bottom:44px; }
+  .app { display:block; padding:0; }
+  .filter-rail, .section-nav, .view-banner button, .skip-link,
+  .chart-hint, .rail-toggle, .report-footer { display:none !important; }
+  /* chart data tables stay collapsed; appendix tables are auto-expanded by
+     the beforeprint handler (section 22.1) */
+  .module details.dtable:not([open]) { display:none; }
+  #m-appendices details.dtable { display:block !important; }
+  .view-banner { position:static; box-shadow:none; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .module { box-shadow:none; border-radius:0; border:0; border-top:1px solid var(--line);
+    margin:0; padding:14px 0; }
+  .chart-card { page-break-inside:avoid; }
+  .module.omitted { display:none !important; }
+  .chapter-open, .cover { page-break-before:always; border:0; }
+  .cover { border-radius:0; }
+  .cover-red, .chapter-band, .card, .prompts, .hbar, .vbar, .mod-kicker, .reported,
+  .chip, .chart-card, .cover-para { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  /* repeating yellow-rule footer (section 7.3); browser print settings can
+     add page numbers until @page margin boxes are widely supported */
+  #print-footer { display:flex; position:fixed; bottom:0; left:0; right:0;
+    background:#fff; border-top:3px solid var(--yellow); padding:5px 10mm 0;
+    justify-content:space-between; font:600 11px var(--fd); color:var(--blue); }
+  @page { size: A4; margin: 13mm 13mm 18mm; }
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#report">Skip to report</a>
+<div class="visually-hidden" aria-live="polite" id="live-region" data-i18n-source="catalogue:announce"></div>
+
+<div class="app">
+<div id="mobile-stack"></div>
+<main class="report" id="report">
+  <div id="review-banner" role="note" data-i18n-source="handoff:static-furniture">REVIEW BUILD — for Sport Wales and ILR review only,
+    not for schools. Provisional measures and open decisions are marked; sensitive
+    chart-derived filtering is enabled for evaluation and is subject to disclosure
+    sign-off (O09/O10).</div>
+
+
+  <div class="view-banner" id="view-banner" data-i18n-source="frame:ui.banner_showing">
+    <span class="vb-t">You are viewing</span>
+    <span class="vb-d" id="vb-desc"></span>
+    <span class="vb-b" id="vb-base"></span>
+    <button type="button" id="vb-clear"><span class="btn-full">Clear all filters</span><span class="btn-short">Clear</span></button>
+  </div>
+
+  <!-- A1 · mandatory title page -->
+  <section class="cover" id="m-cover" aria-label="Report cover" data-frame-attr="aria-label:ui.aria_cover" data-i18n-source="handoff:static-furniture">
+    <div class="cover-red"></div>
+    <div class="cover-para" aria-hidden="true"></div>
+    <div class="cover-inner">
+      <div class="cover-sw"><img src="__SW_LOGO_WHITE__" alt="Sport Wales — Chwaraeon Cymru"></div>
+      <div class="cover-lockup"><img src="__LOCKUP_2026__" alt="2026 — Arolwg Chwaraeon Ysgol — School Sport Survey"></div>
+      <div class="cover-title">
+        <div class="t1">Interactive Learning Report:</div>
+        <div class="t2" id="cover-school">__SCHOOL_NAME__</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- A2 · introduction -->
+  <section class="module intro-module" id="m-intro" aria-labelledby="h-intro" data-i18n-source="handoff:static-furniture">
+    <span class="mod-kicker">Introduction</span>
+    <h2 id="h-intro">Welcome to your school’s results</h2>
+    <p class="intro-opening">The School Sport Survey is one of the largest per-capita
+       opportunities in the world for children and young people to have their say on sport.
+       The survey would not be possible without the time and commitment of schools, teachers
+       and pupils like you. Thank you for helping us build a clearer picture of how children
+       and young people experience sport in Wales, and how they want sport to look in the
+       future.</p>
+    <div class="intro-vision-grid">
+      <div class="intro-vision-copy">
+        <p>Your school’s findings are presented in line with the Vision for Sport in Wales
+           across four chapters:</p>
+        <ul class="intro-chapters">
+          <li><strong>An Active Nation for Everyone</strong></li>
+          <li><strong>A Lifelong Enjoyment of Sport</strong></li>
+          <li><strong>Sport Specific Data</strong></li>
+          <li><strong>Appendix</strong></li>
+        </ul>
+        <p>Within each section, you’ll find questions that aim to help consider the findings
+           and what they might mean for your school. We hope it helps you celebrate what’s
+           working well, identify opportunities for development, and support conversations
+           about how to create even more positive sporting experiences for all learners.</p>
+        <p>Together, your responses are helping Sport Wales, schools and partners across
+           Wales better understand what matters most to children and young people, ensuring
+           that future decisions are informed by their voices.</p>
+        <p class="chart-note" id="intro-sentence"></p>
+      </div>
+      <figure class="intro-brain-break">
+        <img src="__IMG_BRAIN_JAV__"
+          alt="Brain Break character: a smiling brain wearing a Sport Wales headband, throwing a javelin from a wheelchair" data-frame-attr="alt:ui.alt_brain_javelin">
+      </figure>
+    </div>
+  </section>
+
+
+  <!-- A2b · contents page (v2, Sport Wales feedback: primary navigation hub) -->
+  <section class="module" id="m-contents" aria-labelledby="h-contents" data-i18n-source="handoff:static-furniture">
+    <span class="mod-kicker">Contents</span>
+    <h2 id="h-contents">Contents</h2>
+    <p class="context">Use the links below, or the navigation panel on the right hand side
+       of the page, to move through the report.</p>
+    <ol class="toc-list" start="2">
+      <li><a href="#m-guide">How to use this report</a>
+          <span>Quick answers about filters, numbers, percentages, colours and privacy.</span></li>
+      <li><a href="#m-overview">Which pupils in our school took part in 2026?</a>
+          <span>Who the results represent — and any gaps to keep in mind while reading.</span></li>
+      <li><a href="#ch-anfe">An Active Nation for Everyone</a>
+          <span>How often pupils are active through sport, where they take part, and how
+          participation differs between groups of pupils.</span></li>
+      <li><a href="#ch-lifelong">A Lifelong Enjoyment of Sport</a>
+          <span>Participation across school stages, enjoyment, confidence, feeling listened
+          to, and what could help more pupils take part.</span></li>
+      <li><a href="#ch-sport">Sport Specific Data</a>
+          <span>Sport-by-sport detail: what pupils do in each setting, and the sports they
+          would like to do more of.</span></li>
+      <li><a href="#m-summary">Summary of the pupils you are viewing</a>
+          <span>The findings for the pupils you are viewing, at a glance.</span></li>
+      <li><a href="#m-appendices">Appendix</a>
+          <span>Full data tables and the pupil profile detail for the pupils you are
+          viewing.</span></li>
+    </ol>
+  </section>
+
+  <!-- A3-A5 · how to use (FAQ format, v2 Sport Wales feedback) -->
+  <section class="module" id="m-guide" aria-labelledby="h-guide" data-i18n-source="handoff:static-furniture">
+    <span class="mod-kicker">Guide</span>
+    <h2 id="h-guide">How to use this report</h2>
+    <p class="context">Everything you need to read this report with confidence — select a
+       question to see its answer.</p>
+    <!-- V4.13: accessibility glossary — shown only while the accessibility
+         switch is on. Heading and note are sheet-43 frames; the entries are
+         links to the guide's own FAQ answers, so it adds no new definitions. -->
+    <div class="a11y-only a11y-glossary" id="a11y-glossary" role="region" aria-labelledby="h-a11y-glossary">
+      <h3 id="h-a11y-glossary" data-frame="ui.a11y_glossary_heading">Glossary of terms used in this report</h3>
+      <p class="chart-note" data-frame="ui.a11y_glossary_intro">Select a term to open its explanation in the guide.</p>
+      <ul id="a11y-glossary-list"></ul>
+    </div>
+    <details class="faq" id="faqd-interactive"><summary>What is an interactive report?</summary>
+      <p>Unlike a static report, this report can be explored in more detail by applying
+         filters. When one or more filters are applied, the charts and written findings
+         update together to present a new view of the data captured in your school, based
+         on the filters you have selected. In turn, you can view, save and print multiple
+         versions of the report through many different lenses. You can learn how to apply
+         filters by reading the ‘How do I use filters?’ tab below.</p></details>
+    <details class="faq" id="faqd-included"><summary>Who is included in this report?</summary>
+      <p id="faq-included"></p></details>
+    <details class="faq" id="faqd-missing"><summary>Why are some pupil responses missing?</summary>
+      <p id="faq-missing"></p></details>
+    <details class="faq" id="faqd-filters"><summary>How do I use filters?</summary>
+      <p>There are two ways to use filters in this report:</p>
+      <ul>
+        <li>Use the <strong style="color:var(--red)">Explore results</strong> panel on the
+            right-hand side of your screen to select specific groups of pupils.</li>
+        <li>You can also click on bar charts to filter the report by the pupils who
+            selected that response option.</li>
+      </ul>
+      <p>By clicking on the different filters, the whole report will adjust to show
+         information for that specific group. You can then print or save the report with
+         those filters applied. You can reset the report by clicking <strong>“Reset to
+         whole school”</strong>. This will clear all filters.</p></details>
+    <details class="faq" id="faqd-banner"><summary>What does the “You are viewing” banner at the top of the page tell me?</summary>
+      <p>It always shows which pupils you are looking at and how many pupil responses are
+         included — so every number on screen can be read in context. For example:</p>
+      <div class="example-banner"><span class="vb-t">You are viewing (example)</span><br>
+        Year 5 · Boys · Selected Football<br><strong>7 pupil responses included</strong></div></details>
+    <details class="faq" id="faqd-colours"><summary>What do the different colours mean?</summary>
+      <p>Bars alternate between red and blue to help distinguish different answer
+         categories. These colours do not mean that one answer is better or worse than
+         another. <strong>Light grey</strong> marks bars that cannot be selected as filters,
+         and <strong>dark grey</strong> marks suppressed values. When a value is selected to
+         explore that group’s other responses, the
+         value turns <strong>yellow</strong> and is marked as selected — matching the
+         selected-group box in the Explore results panel.</p></details>
+    <details class="faq" id="faqd-grey"><summary>Why are some bars grey, blank or not clickable?</summary>
+      <p>A <strong>light grey</strong> bar cannot be selected as a filter. This includes
+         response options that did not meet the whole-school eligibility threshold of five
+         for use as a filter. Counts below five may still be displayed within an
+         otherwise reportable demographic view. A <strong>dark grey</strong> bar marked
+         “—” is suppressed: the value is not reportable in the current view.</p></details>
+    <details class="faq" id="faqd-base"><summary>What is the ‘base’ number?</summary>
+      <p>Each chart says <em>“Based on: X pupils”</em>. This is the total number of pupils
+         who answered that particular question. Some questions were asked only of certain
+         pupils, so the ‘base’ number can differ from chart to chart.</p></details>
+    <details class="faq" id="faqd-numbers"><summary>What do the numbers tell me?</summary>
+      <p>Results are <strong>unweighted counts of pupil responses</strong> — real
+         answers from real pupils, with nothing scaled up. Every sentence names the group it describes. A worked example: <em>“Boxing and football were tied as the
+         most frequently selected sports, with seven selections each, among Year 5 boys”</em>
+         — “tied” means both were selected by the same number of pupils, and “among Year 5
+         boys” tells you the finding applies only to that group.</p></details>
+    <details class="faq" id="faqd-percentages"><summary>What do the percentages tell me?</summary>
+      <p>Percentages represent the share of the base. In other words, a percentage shows
+         the proportion of pupils who chose that response option, out of the total number
+         of pupils who answered that question. Percentages appear only in whole-school and
+         phase views, always together with their count and base, because percentages of
+         very small groups can mislead.</p></details>
+    <details class="faq" id="faqd-100"><summary>Why don’t some percentages add to 100%?</summary>
+      <p>There are two reasons why percentages may not add to 100%. Firstly, figures are
+         rounded to the nearest whole percent, and so overall figures may not add exactly
+         to 100%. Secondly, where pupils could tick more than one answer, the percentages
+         describe the proportion of pupils who selected that option, rather than segments
+         of a whole.</p></details>
+    <details class="faq" id="faqd-total"><summary>Why don’t some numbers add to the total number of pupil responses?</summary>
+      <p>Some questions were only asked of certain pupils (for example, follow-up questions
+         about a setting are asked only of pupils who used that setting), some pupils left
+         questions blank, and multi-choice questions count every selection — so totals can
+         be smaller or larger than the number of pupil responses. Use the Base number to
+         help understand who those results are representing.</p></details>
+    <details class="faq" id="faqd-hidden"><summary>Why do some numbers become hidden after applying filters?</summary>
+      <p>Responses become hidden when there is a risk of being able to identify an
+         individual pupil via the information presented. In turn, information is suppressed
+         to protect pupil identity, in line with GDPR. This often happens when too many
+         filters are applied, and pupil numbers fall low enough to potentially identify the
+         pupil who gave those responses.</p></details>
+    <details class="faq" id="faqd-greyed"><summary>What do the grey bars and greyed-out sections mean?</summary>
+      <p><strong>Dark grey bars</strong> represent suppressed data — values that cannot be
+         shown because the group behind them is too small to report safely.
+         <strong>Light grey bars</strong> are options that cannot be selected as filters,
+         as the data can become misleading when not considered in the context of the way
+         the question was asked. Whole sections may also appear greyed out with a message when
+         the group you have selected is too small to provide insights. If you continue
+         scrolling, there may still be insights and information in other sections that have
+         not been suppressed, depending on the amount of data available.</p></details>
+    <details class="faq" id="faqd-fsm"><summary>What are Free School Meal Quartiles?</summary>
+      <p>Sport Wales uses the proportion of pupils eligible for Free School Meals (FSM) as
+         an indicator of deprivation. Schools are grouped into four FSM quartiles based on
+         the proportion of pupils eligible for Free School Meals.</p>
+      <p><strong>FSM Q1</strong> includes schools with the lowest proportion of pupils
+         eligible for FSM. This quartile represents the 25% of schools with the lowest
+         levels of deprivation.</p>
+      <p><strong>FSM Q2</strong> includes schools with a lower-than-average proportion of
+         pupils eligible for FSM, but not the lowest. This quartile represents the 25% of
+         schools with below-average levels of deprivation, but not the lowest levels.</p>
+      <p><strong>FSM Q3</strong> includes schools with a higher-than-average proportion of
+         pupils eligible for FSM, but not the highest. This quartile represents the 25% of
+         schools with above-average levels of deprivation, but not the highest levels.</p>
+      <p><strong>FSM Q4</strong> includes schools with the highest proportion of pupils
+         eligible for FSM. This quartile represents the 25% of schools with the highest
+         levels of deprivation in Wales.</p>
+      <p><em>Note: These quartiles provide a high-level measure of deprivation at school
+         level. They do not indicate the individual circumstances of pupils attending
+         those schools. Pupils experiencing deprivation may attend schools in any FSM
+         quartile.</em></p></details>
+  </section>
+
+  <!-- A6/B1/B2 · fixed school overview -->
+  <section class="module" id="m-overview" aria-labelledby="h-overview" data-i18n-source="handoff:static-furniture">
+    <span class="mod-kicker">Your school</span>
+    <h2 id="h-overview">Which pupils in our school took part in 2026?</h2>
+    <p class="context">This section shows who in your school participated in the School Sport
+       Survey in 2026. This information is provided so that you can take into account who the
+       results represent. It also allows you to consider whether there are any knowledge gaps
+       due to underrepresented or missing pupil cohorts from this survey cycle.
+       <strong class="note-red">Note — this section is not affected by filters.</strong></p>
+    <table class="meta-table" id="overview-table"></table>
+    <h3 style="margin-top:18px">Who took part?</h3>
+    <div id="static-profile"></div>
+    <p class="context" id="overview-note" style="font-size:15px"></p>
+    <div id="profile-extra"></div>
+  </section>
+
+
+  <!-- D · ACTIVE NATION -->
+  <section class="module chapter-open dynamic" id="ch-anfe" aria-labelledby="h-active" data-i18n-source="handoff:static-furniture">
+    <div class="chapter-band"><div><h2 id="h-active">An Active Nation for Everyone</h2>
+      <div class="cy">Cenedl Actif i Bawb</div></div></div>
+    <div class="chapter-body">
+      <p>The vision for sport in Wales is an active nation, where as many people as possible
+         are inspired to be active through sport. This chapter explores how often pupils are
+         active through sport, in which settings pupils do sport, and how participation
+         levels change between different settings. The Vision is for Everyone — from pupils
+         who don’t yet see themselves as sporty to those who win medals. This chapter also
+         explores the findings from your school by different cohorts.</p>
+      <div class="chapter-char"><img src="__IMG_BRAIN_FOOT__"
+        alt="Brain Break character: a smiling brain in glasses kicking a football" data-frame-attr="alt:ui.alt_brain_football"></div>
+    </div>
+  </section>
+
+  <!-- v2.2 (decision D02): top-line any-participation statement -->
+  <div class="module dynamic" id="m-headline" data-i18n-source="handoff:static-furniture">
+    <h3>How many of our pupils take part in sport?</h3>
+    <div class="reported"><div id="any-activity-note"></div></div>
+  </div>
+
+  <div class="module dynamic" data-module="d3" data-i18n-source="handoff:static-furniture">
+    <h3>Where are our pupils active through sport?</h3>
+    <p class="context">The chart below gives an overall picture of where pupils are active
+       through sport. The data shows the number of pupils who do at least one sport in that
+       setting. Pupils may take part in sport in multiple settings.</p>
+    <div data-chart="participation_settings"></div>
+    <div class="mod-narrative"></div>
+    <div class="prompts tip"><div class="p-h">Top tip</div><ul>
+      <li>Click on each bar and explore how the data changes across different charts.</li>
+    </ul></div>
+  </div>
+
+  <div class="module dynamic" data-module="d0" data-i18n-source="handoff:static-furniture">
+    <h3>How active are our pupils through sport?</h3>
+    <p class="context">The chart below gives an estimate of the number of times pupils are
+       active through sport during a typical week, across all sports and settings. This
+       estimate can help you consider how many pupils may be close to meeting physical
+       activity guidelines, and where that activity happens.</p>
+    <div data-chart="freq_estimate"></div>
+    <div class="mod-narrative"></div>
+    <h4 style="margin:18px 0 6px">Which sports are our pupils doing — and how often?</h4>
+    <p class="context">The stacked bar chart below shows the 10 sports pupils selected most
+       often across all settings, and how often pupils said they usually do them. The
+       number at the end of each bar is the total number of pupils who selected that
+       sport.</p>
+    <div data-stack="overall" data-sh-key="ui230"><div class="chart-card"><div class="stack-slot"></div><div class="reported stack-note"><div class="rep-h"></div><p>Each pupil is counted once per sport, at the highest frequency they reported for it in any setting.</p></div><div class="stack-table-slot"></div></div></div>
+  </div>
+
+
+
+
+  <!-- v2.1 (page 10): school-based activity -->
+  <div class="module dynamic" id="m-inschool" data-i18n-source="handoff:static-furniture">
+    <span class="mod-kicker red">An Active Nation for Everyone</span>
+    <h2 id="h-inschool">How are our pupils active through sport in School?</h2>
+    <p class="context">We captured pupils’ sporting habits across two school-based contexts:
+       <strong>during lesson time</strong> (i.e., curricular) and <strong>at school sport
+       clubs</strong> (i.e., extracurricular). Specifically, we asked pupils to tell us which
+       sports they did in ‘PE or Lessons’, described as ‘sports done during normal school
+       lessons’. This context was included to align better to the Curriculum for Wales. We
+       also asked pupils to tell us which sports they did ‘In a school club’. These are
+       ‘sports that are done during lunch time or after school that are led by a teacher or
+       a coach’.</p>
+  </div>
+
+  <div class="module dynamic" data-module="s1" data-i18n-source="handoff:static-furniture">
+    <h3>PE or lesson time</h3>
+    <div data-stack="pe_lessons"></div>
+    <p class="chart-note" data-frame="ui.chart_sports_total_pe"></p>
+    <div class="mod-narrative"></div>
+  </div>
+
+  <div class="module dynamic" data-module="d4" data-i18n-source="handoff:static-furniture">
+    <h3>School sports clubs</h3>
+    <div data-stack="school_club"></div>
+    <p class="chart-note" data-frame="ui.chart_sports_total_club"></p>
+    <div class="mod-narrative"></div>
+  </div>
+
+  <!-- v2.1 (page 11): activity outside of school -->
+  <div class="module dynamic" id="m-outschool" data-i18n-source="handoff:static-furniture">
+    <span class="mod-kicker red">An Active Nation for Everyone</span>
+    <h2 id="h-outschool">How are our pupils active through sport Outside of School?</h2>
+    <p class="context">We captured pupils’ sporting habits across two contexts outside of
+       school: <strong>in a club outside of school</strong> and <strong>somewhere
+       else</strong>. Specifically, when we asked pupils to tell us which sports they did in
+       ‘A club outside of school’, we asked pupils to include sports they did ‘with a club
+       that is not part of their school, led by a coach’. This refers to community club
+       sport. We also asked pupils to tell us which sports they did ‘Somewhere Else’. We
+       asked pupils to include sports they did ‘casually without a coach or teacher. These
+       might be done in the park, the beach or the garden’. This context is included to
+       capture any other sports done outside of formal or structured contexts.</p>
+  </div>
+
+  <div class="module dynamic" data-module="d5" data-i18n-source="handoff:static-furniture">
+    <h3>Clubs outside of school</h3>
+    <div data-stack="community_club"></div>
+    <p class="chart-note" data-frame="ui.chart_sports_total_community"></p>
+    <div class="mod-narrative"></div>
+  </div>
+
+  <div class="module dynamic" data-module="d6" data-i18n-source="handoff:static-furniture">
+    <h3>Somewhere Else (such as the Park, Beach or Garden)</h3>
+    <div data-stack="somewhere_else"></div>
+    <p class="chart-note" data-frame="ui.chart_sports_total_other"></p>
+    <div class="mod-narrative"></div>
+  </div>
+
+  <div class="module dynamic" data-module="d2" data-i18n-source="handoff:static-furniture">
+    <h3>Club Sports</h3>
+    <p class="context">This section brings together sport done in a <strong>school sports
+       club</strong> (extracurricular) and/or a <strong>club outside of school</strong>.</p>
+    <div data-chart="club_freq_estimate"></div>
+    <div class="mod-narrative"></div>
+  </div>
+
+
+
+
+
+
+
+  <!-- E · the Everyone part of An Active Nation for Everyone -->
+  <div class="module dynamic" id="m-everyone-sub" data-i18n-source="handoff:static-furniture">
+    <span class="mod-kicker red">An Active Nation for Everyone</span>
+    <h2 id="h-everyone">How does participation differ between groups of pupils?</h2>
+    <p class="context">The Vision is for Everyone. This part of the chapter explores where
+       different groups of pupils are active through sport, across all four settings, so the
+       school can see where the offer is reaching everyone and where it may not be.
+       Differences reported here are descriptive; they do not explain their own causes.
+       Remember you can use the Explore results panel — or any highlighted bar — to follow
+       one group of pupils through every page of this report.</p>
+  </div>
+
+
+
+
+  <div class="module dynamic" data-module="n_dl" data-i18n-source="handoff:static-furniture">
+    <h3>Where are our pupils with a disability and/or learning difficulty active?</h3>
+    <p class="context">Pupils were asked whether they have a disability or long-term
+       condition that often makes things hard — including asthma, diabetes, anxiety, ADHD,
+       and difficulties with hearing, vision or mobility — and separately whether they have
+       a learning difficulty, including dyslexia or dyspraxia. The chart shows the number
+       of these pupils who do at least one sport in each setting.</p>
+    <div class="grid2 dl-sep"><div data-chart="settings_dy"></div><div data-chart="settings_ly"></div></div>
+    <div class="dl-comb" data-chart="settings_dl"></div>
+    <div class="mod-narrative"></div>
+    <div class="prompts tip"><div class="p-h">Explore further</div><ul>
+      <li>Remember, you can explore responses from these pupils in more detail by adding
+          more filters from the filter panel.</li>
+    </ul></div>
+  </div>
+
+  <div class="module dynamic" data-module="e7" data-i18n-source="handoff:static-furniture">
+    <h3>How do our pupils with a disability or long-term condition take part in sport?</h3>
+    <p class="context">To better understand the different ways pupils experience and access
+       sport, pupils who said that they had a disability or long-term condition, were not
+       sure, or preferred not to say, were asked how they usually take part. Each answer can
+       be selected to filter the wider report. Answers with fewer than five pupils cannot be
+       used as filters.</p>
+    <div data-chart="take_part_method"></div>
+    <div class="mod-narrative"></div>
+  </div>
+
+  <div class="module dynamic" data-module="n_ed" data-i18n-source="handoff:static-furniture">
+    <h3>Where are our pupils from ethnically diverse backgrounds active?</h3>
+    <p class="context">Pupils were asked to report their ethnicity by first selecting a
+       high level ethnic group, followed by the option to choose a more detailed ethnic
+       group. The following chart represents all pupils from ethnic minority groups,
+       including White minority groups such as Gypsy, Roma and Traveller communities.</p>
+    <div data-chart="settings_ed"></div>
+    <div class="mod-narrative"></div>
+    <div class="prompts tip"><div class="p-h">Explore further</div><ul>
+      <li>Remember, you can explore responses from these pupils in more detail by adding
+          more filters from the filter panel.</li>
+    </ul></div>
+  </div>
+
+  <div class="module dynamic" data-module="n_wl" data-i18n-source="handoff:static-furniture">
+    <h3>Where are our pupils who speak Welsh active?</h3>
+    <p class="context">Pupils were asked about their ability to speak Welsh. Pupils who
+       said they speak Welsh very well, a fair amount or a little are shown here. These
+       pupils are categorised as ‘Speaks Welsh’. These pupils were also asked whether they
+       usually speak Welsh when they play sport.</p>
+    <div class="grid2"><div data-chart="settings_wl"></div><div data-chart="welsh_when_playing_sport"></div></div>
+    <div class="mod-narrative"></div>
+    <div class="prompts tip"><div class="p-h">Explore further</div><ul>
+      <li>Remember, you can explore responses from these pupils in more detail by adding
+          more filters from the filter panel.</li>
+    </ul></div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+  <!-- F · A LIFELONG ENJOYMENT OF SPORT (merged Lifelong + Enjoyment, v2) -->
+  <section class="module chapter-open dynamic" id="ch-lifelong" aria-labelledby="h-lifelong" data-i18n-source="handoff:static-furniture">
+    <div class="chapter-band"><div><h2 id="h-lifelong">A Lifelong Enjoyment of Sport</h2>
+      <div class="cy">Mwynhad Gydol Oes o Chwaraeon</div></div></div>
+    <div class="chapter-body">
+      <p>The vision is for life, and sporting offers should cater for different needs at
+         different life stages. This chapter explores how participation trends differ between
+         age groups and school stages. The vision also focuses on creating a wide range of
+         positive experiences so everyone can enjoy sport. This chapter explores enjoyment in
+         different settings, whether pupils feel their ideas about sport are listened to, and
+         different forms of confidence.</p>
+      <div class="chapter-char"><img src="__IMG_BRAIN_BASK__"
+        alt="Brain Break character: a smiling brain in glasses dribbling a basketball" data-frame-attr="alt:ui.alt_brain_basketball"></div>
+    </div>
+  </section>
+
+  <div class="module dynamic" data-module="f2" data-nh-key="ui224" data-i18n-source="handoff:static-furniture">
+    <h3>How does participation change between Year Groups?</h3>
+    <p class="context">Participation habits can change as pupils move through school. The
+       chart shows the number of pupils who said they did at least one sport in each
+       setting, by year group. These are participation questions, not frequency questions,
+       so there is no “Don’t know” category here.</p>
+    <div id="rows-f2"></div>
+    <div class="mod-narrative"><div class="reported"><div class="rep-h">What is this chart showing?</div><div class="rep-body"></div></div></div>
+  </div>
+
+  <div class="module dynamic" data-module="e4" data-nh-key="ui224" data-i18n-source="handoff:static-furniture">
+    <h3>How does participation change between Year Groups and Genders?</h3>
+    <p class="context">The chart shows the number of girls and boys in each year group who
+       said they participated in each setting. (Other genders are not shown here due to
+       small sample sizes.)</p>
+    <div id="rows-e4"></div>
+    <div class="mod-narrative"><div class="reported"><div class="rep-h">What is this chart showing?</div><div class="rep-body"></div></div></div>
+  </div>
+
+  <div class="module dynamic" data-module="f3f5" data-i18n-source="handoff:static-furniture">
+    <h3>How do PE and Active Lessons make our pupils feel?</h3>
+    <p class="context">Pupils reported whether PE and Active Lessons make them feel healthy,
+       confident and ready to learn.</p>
+    <div class="grid2"><div data-chart="pe_feel_healthy" data-ct-key="ui217"><div class="chart-card"><h4>Do PE and Active Lessons make you feel: Healthy?</h4><div class="chart-slot"></div></div></div><div data-chart="pe_feel_confident" data-ct-key="ui218"><div class="chart-card"><h4>Do PE and Active Lessons make you feel: Confident?</h4><div class="chart-slot"></div></div></div></div>
+    <div class="grid2"><div data-chart="pe_feel_ready" data-ct-key="ui219"><div class="chart-card"><h4>Do PE and Active Lessons make you feel: Ready to learn?</h4><div class="chart-slot"></div></div></div><div></div></div>
+    <div class="mod-narrative"></div>
+  </div>
+
+  <div class="module dynamic" data-module="f6" data-i18n-source="handoff:static-furniture">
+    <h3>What matters to our pupils when they play sport?</h3>
+    <p class="context">Pupils were asked what is most important to them when they play
+       sport. Pupils could select more than one answer. Pupils could also type in their
+       answer if none of the options suited them.</p>
+    <div data-chart="most_important"></div>
+    <div class="mod-narrative"></div>
+  </div>
+
+  <div class="module dynamic" data-module="f7" data-i18n-source="handoff:static-furniture">
+    <h3>What would help our pupils do more sport?</h3>
+    <p class="context">Pupils were asked to complete the sentence “I would do more sport
+       if...” by selecting the best answer from the list of options below. Pupils could
+       choose more than one option. Pupils could also type in their answer if none of the
+       options suited them.</p>
+    <div data-chart="would_do_more_if"></div>
+    <div class="mod-narrative"></div>
+  </div>
+
+
+
+
+
+
+
+
+
+  <!-- G · enjoyment content continues within A Lifelong Enjoyment of Sport -->
+  <div class="module dynamic" data-module="g2" data-i18n-source="handoff:static-furniture">
+    <h3>Enjoyment across settings</h3>
+    <p class="context">Pupils reported how much they enjoy sport in PE lessons, school
+       sports clubs, clubs outside school, and other settings like the park or garden.
+       Reportable answers on each of the four charts can be selected to filter the wider
+       report by the pupils who gave that answer.</p>
+    <div class="grid2"><div data-chart="enjoy_pe" data-ct-key="ui220"><div class="chart-card"><h4>How much do pupils enjoy sport: in PE Lessons?</h4><div class="chart-slot"></div></div></div><div data-chart="enjoy_school_clubs" data-ct-key="ui221"><div class="chart-card"><h4>How much do pupils enjoy sport: in School Sports Clubs?</h4><div class="chart-slot"></div></div></div></div>
+    <div class="grid2"><div data-chart="enjoy_community_clubs" data-ct-key="ui222"><div class="chart-card"><h4>How much do pupils enjoy sport: in Clubs Outside of School?</h4><div class="chart-slot"></div></div></div><div data-chart="enjoy_other_settings" data-ct-key="ui223"><div class="chart-card"><h4>How much do pupils enjoy sport: in Other Settings, like the park or garden?</h4><div class="chart-slot"></div></div></div></div>
+    <div class="mod-narrative"></div>
+  </div>
+
+  <div class="module dynamic" data-module="g3" data-nh-key="ui225" data-also="g4" data-also-h-key="ui228" data-i18n-source="handoff:static-furniture">
+    <h3>How does enjoyment differ between groups of pupils?</h3>
+    <p class="context">Enjoyment can differ between groups and change as pupils get older.
+       The table shows how many pupils in each year group said they enjoy sport ‘a lot’ in
+       each setting.</p>
+    <div class="mod-narrative"><div class="reported"><div class="rep-h">What is this table showing?</div><div class="rep-body"></div><h4 class="rep-also" style="margin:10px 0 6px">By year</h4><div class="rep-body-also"></div></div></div>
+    <div id="rows-g4"></div>
+  </div>
+
+
+  <div class="module dynamic" data-module="g5" data-i18n-source="handoff:static-furniture">
+    <h3>Do our pupils feel listened to?</h3>
+    <p class="context">Pupil voice matters. Pupils were asked whether they feel their
+       ideas about sport are listened to by their teachers.</p>
+    <div data-chart="ideas_listened"></div>
+    <div class="mod-narrative"></div>
+  </div>
+
+
+  <div class="module dynamic" data-module="g8" data-nh-key="ui226" data-i18n-source="handoff:static-furniture">
+    <h3>How confident do our pupils feel?</h3>
+    <p class="context">Pupils were asked how confident they are in and around sport in four
+       different ways; trying a new sport, learning a new skill, trying again when sport is
+       hard, and trying sport in a new place.</p>
+    <div class="grid2"><div data-chart="confidence_try_new"></div><div data-chart="confidence_learn_skill"></div></div>
+    <div class="grid2"><div data-chart="confidence_try_again"></div><div data-chart="confidence_new_place"></div></div>
+    <div class="mod-narrative"><div class="reported"><div class="rep-h">What are these charts showing?</div><div class="rep-body"></div></div></div>
+  </div>
+
+
+  <div class="module dynamic" data-module="e2" data-i18n-source="handoff:static-furniture">
+    <h3>Feeling able to join in</h3>
+    <p class="context">Pupils were asked whether they felt able to join in with sports and
+       games easily.</p>
+    <div data-chart="join_in_easily"></div>
+    <div class="mod-narrative"></div>
+  </div>
+
+
+
+
+
+
+
+  <!-- S · SPORT (new chapter, v2 Sport Wales feedback) -->
+  <section class="module chapter-open dynamic" id="ch-sport" aria-labelledby="h-sport" data-i18n-source="handoff:static-furniture">
+    <div class="chapter-band"><div><h2 id="h-sport">Sport Specific Data</h2>
+      <div class="cy">Chwaraeon</div></div></div>
+    <div class="chapter-body">
+      <p>This chapter brings together overall sport participation and demand: the sports
+         and activities pupils have done this school year, the sports they would like to do
+         more of, and where demand is not being met. Use the filters, or select a
+         highlighted sport, to explore any group of pupils.</p>
+      <div class="chapter-char" aria-hidden="true">
+        <!-- brand-form graphic placeholder until a further Brain Break pose is
+             supplied: sanctioned red/blue/yellow forms -->
+        <svg viewBox="0 0 220 200" role="img" aria-label="">
+          <path d="M30 150 L70 30 L110 150 Z" fill="#094B68"/>
+          <path d="M85 150 L125 45 L165 150 Z" fill="#FA2A3C" opacity=".92"/>
+          <circle cx="168" cy="60" r="26" fill="#FEBD06"/>
+          <rect x="24" y="152" width="172" height="10" rx="5" fill="#FEBD06"/>
+          <circle cx="52" cy="60" r="9" fill="#FA2A3C"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <div class="module dynamic" data-module="d7" data-i18n-source="handoff:static-furniture">
+    <h3>Which sports and activities have our pupils done this school year?</h3>
+    <p class="context">Pupils could tick every sport and activity they had done this school year,
+       so totals can exceed the number of respondents. Highlighted bars can be selected to focus
+       the whole report on the pupils who chose that sport.</p>
+    <div data-chart="sports_participated"></div>
+    <div class="mod-narrative"></div>
+  </div>
+
+
+
+
+
+  <div class="module dynamic" data-module="f10" data-i18n-source="handoff:static-furniture">
+    <h3>Latent demand — sports pupils want more of</h3>
+    <p class="context"><em>Latent demand</em> is where pupils say they would like to do more of a
+       particular sport. More than one sport could be selected.</p>
+    <div data-chart="sports_wanted"></div>
+    <div class="mod-narrative"></div>
+  </div>
+
+  <div class="module dynamic" data-module="f11" data-nh-key="ui227" data-also="f12" data-also-h-key="ui229" data-i18n-source="handoff:static-furniture">
+    <h3>Which sports do different groups want more of?</h3>
+    <p class="context">Demand can differ between groups. This comparison shows the sports
+       each group most wants to do more of, using counts of selections.</p>
+    <div class="mod-narrative"><div class="reported"><div class="rep-h">What is this section showing?</div><div class="rep-body"></div><h4 class="rep-also" style="margin:10px 0 6px">By year and phase</h4><div class="rep-body-also"></div></div></div>
+  </div>
+
+  <div class="module dynamic" data-module="f13" data-i18n-source="handoff:static-furniture">
+    <h3>Unmet demand</h3>
+    <p class="context"><em>Unmet demand</em> refers to sports that pupils said they would
+       like to do more of, but have not participated in since the start of the academic
+       year. This may highlight where pupils have demand that is not currently being met.
+       Please note, the 2026 survey newly captures information on sports pupils did in PE
+       or Lesson time. In turn, Unmet Demand is calculated differently in 2026 compared
+       with 2022, as it accounts for sports done in PE or Lesson Time, whilst previous
+       Unmet Demand calculations could not. Caution is therefore advised if comparing with
+       previous survey findings.</p>
+    <div data-chart="unmet_demand"></div>
+    <div class="mod-narrative"></div>
+  </div>
+
+  <div class="module dynamic" data-module="f14" data-nh-key="ui225" data-i18n-source="handoff:static-furniture">
+    <h3>Participation and Unmet Demand Together</h3>
+    <p class="context">Comparing what pupils currently do with what they want more of suggests
+       where provision and appetite may not yet meet.</p>
+    <div id="f14-table"></div>
+    <div class="mod-narrative"><div class="reported"><div class="rep-h">What is this table showing?</div><div class="rep-body"></div></div></div>
+    <div class="report-footer" data-i18n-source="handoff:static-furniture"><span>__SCHOOL_NAME__</span><span>School Sport Survey 2026</span></div>
+  </div>
+
+
+
+  <section class="module dynamic" id="m-summary" aria-labelledby="h-summary" data-i18n-source="handoff:static-furniture">
+    <span class="mod-kicker red">Summary</span>
+    <p class="chart-note d22-marker">Provisional — summary wording parked under decision
+       D22 until the measures and interactions are signed off.</p>
+    <h2 id="h-summary">Summary of the pupils you are viewing</h2>
+    <p class="chart-base" id="h1-view"></p>
+    <div class="reported"><div class="rep-h">An Active Nation for Everyone</div>
+      <div id="h1-an"></div><div id="h1-ev"></div></div>
+    <div class="reported"><div class="rep-h">A Lifelong Enjoyment of Sport</div>
+      <div id="h1-ll"></div><div id="h1-en"></div></div>
+
+  </section>
+
+  <section class="module dynamic" id="m-explore" aria-labelledby="h-explore" data-i18n-source="handoff:static-furniture">
+    <span class="mod-kicker">Next steps</span>
+    <h2 id="h-explore">What your findings may help you explore</h2>
+    <div class="howto-brain" style="width:140px"><img src="__IMG_BRAIN_FOOT__"
+      alt="Brain Break character: a smiling brain in glasses kicking a football" data-frame-attr="alt:ui.alt_brain_football"></div>
+    <ul id="h2-list" style="padding-left:20px"></ul>
+  </section>
+
+
+  <section class="module" id="m-thanks" aria-labelledby="h-thanks" data-i18n-source="handoff:static-furniture">
+    <span class="mod-kicker">Thank you</span>
+    <h2 id="h-thanks">Thank you and next steps</h2>
+    <p>Thank you to every pupil who shared their views, and to the staff who made the survey
+       happen. These findings are your pupils’ voices: the most powerful next step is to discuss
+       them — with staff, with governors, and above all, with pupils themselves.</p>
+    <p>In Autumn 2026, Sport Wales will publish the national findings from the survey. This
+       will help you place your school’s findings in the wider context. Sport Wales will also
+       publish supporting resources to help your school act on results, alongside a technical
+       report detailing methodological information. Your local authority sport team can help
+       you use these resources to plan your next steps in provision.</p>
+    <p>To keep a record of any view, use <strong>Print or save this view</strong> in the
+       Explore results panel.</p>
+  </section>
+
+  <!-- I · appendices -->
+  <section class="module dynamic" id="m-appendices" aria-labelledby="h-appendices" data-i18n-source="handoff:static-furniture">
+    <span class="mod-kicker">Appendices</span>
+    <h2 id="h-appendices">Appendix — full results for the pupils you are viewing</h2>
+    <p class="context">Complete answer lists for every reported question, respecting the current
+       filters. In whole-school and phase views the main lists also show boys’ and girls’ counts.</p>
+    <div id="appendices"></div>
+    <details class="dtable"><summary>Technical report record</summary>
+      <table class="meta-table" id="meta-table"></table>
+    </details>
+    <div class="report-footer" data-i18n-source="handoff:static-furniture"><span>__SCHOOL_NAME__</span><span>School Sport Survey 2026</span></div>
+  </section>
+
+
+
+</main>
+
+<div id="print-footer" aria-hidden="true" data-i18n-source="handoff:static-furniture">
+  <span>__SCHOOL_NAME__<span id="pf-view"></span></span>
+  <span>School Sport Survey 2026</span>
+</div>
+
+<aside class="filter-rail" aria-label="Explore results" data-frame-attr="aria-label:ui.aria_rail" data-i18n-source="handoff:static-furniture">
+  <div class="rail-inner" id="rail">
+    <button type="button" class="btn rail-toggle" id="rail-toggle" aria-expanded="false">Explore results ▾</button>
+    <div class="rail-collapsible">
+      <nav class="rail-toc" id="rail-toc" aria-label="Report contents" data-frame-attr="aria-label:ui.aria_toc">
+        <h3 class="toc-h">Click to navigate to a report section</h3>
+        <a href="#m-contents">1. Contents</a>
+        <a href="#m-guide">2. How to use this report</a>
+        <a href="#m-overview">3. Who took part</a>
+        <a href="#ch-anfe">4. An Active Nation for Everyone</a>
+        <a href="#ch-lifelong">5. A Lifelong Enjoyment of Sport</a>
+        <a href="#ch-sport">6. Sport Specific Data</a>
+        <a href="#m-summary">7. Summary</a>
+        <a href="#m-appendices">8. Appendix</a>
+      </nav>
+      <!-- V4.10: the language control is a two-position slider in the same
+           place as the V4.9 button — left English, right Cymraeg. It stays a
+           <button role="switch"> so keyboard, focus and the click handler are
+           unchanged. V4.11: the two language names are present in the markup
+           from first paint (the 179 MB payload is parsed before the script
+           runs, so a script-written label appears late); the client re-applies
+           them from the catalogue (language_label / language_label_en) and
+           keeps the active one highlighted. The control is client-owned. -->
+      <button type="button" class="lang-switch" id="btn-lang" role="switch"
+              aria-checked="true" aria-label="Newid iaith / Change language"><span
+              class="ls-label ls-en" lang="en">English</span><span class="ls-track" aria-hidden="true"><span
+              class="ls-knob"></span></span><span class="ls-label ls-cy on" lang="cy">Cymraeg</span></button>
+      <!-- V4.13: accessibility switch — same control pattern as the language
+           slider; off by default. On, html.a11y scopes the accessibility
+           presentation (fonts, sizes, contrast, chart palette, opened data
+           tables, image captions, glossary) in BOTH languages; the content is
+           unchanged. The label is the sheet-43 frame ui.a11y_switch (its
+           English literal is present from first paint and overwritten from
+           the catalogue). Client-owned. -->
+      <button type="button" class="lang-switch a11y-switch" id="btn-a11y" role="switch"
+              aria-checked="false"><span class="ls-track" aria-hidden="true"><span
+              class="ls-knob"></span></span><span class="ls-label a11y-lbl" data-frame="ui.a11y_switch">Accessibility features</span></button>
+      <div id="review-note-cy"></div>
+      <h2>Explore results</h2>
+      <div class="rail-field">
+        <label for="f-scope">School phase or year group</label>
+        <select id="f-scope"></select>
+      </div>
+      <div class="rail-field">
+        <span class="lbl" id="lbl-gender">Gender</span>
+        <div class="seg" role="group" aria-labelledby="lbl-gender" id="f-gender"></div>
+      </div>
+      <div class="rail-field">
+        <label for="f-group">Pupil group</label>
+        <select id="f-group"></select>
+      </div>
+      <div class="rail-field">
+        <span class="lbl">Selected group (from chart selection)</span>
+        <div id="f-cohort"><span class="chip-none">None — select a highlighted chart value to add one</span></div>
+      </div>
+      <div class="rail-base" id="rail-base"></div>
+      <button type="button" class="btn" id="btn-reset">Reset to whole school</button>
+      <button type="button" class="btn btn-primary" id="btn-print">Print or save this view</button>
+    </div>
+  </div>
+</aside>
+</div>
+
+<script id="report-data" type="application/json">__REPORT_JSON__</script>
+<script>
+/*__APP_JS__*/
+</script>
+</body>
+</html>

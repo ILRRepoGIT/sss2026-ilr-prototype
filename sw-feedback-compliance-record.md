@@ -1,0 +1,724 @@
+# Sport Wales feedback — compliance record (build 009)
+
+Build: **2026-prototype-009** · pipeline 0.9.0 · 2,664 states · 106,018 paragraphs ·
+QA PASS · pytest 22/22 · owner final-edit checks 15/15 PASS
+
+## 009 — owner final edits
+
+1. **FAQ "Why are some pupil responses missing?"** rewritten to the owner's wording (more
+   pupils may have taken part than shown; inclusion needs ~80%+ of the survey, reaching at
+   least the demand for sport section); the 484-rows sentence removed.
+2. **Profile table**: "Total number of pupils who took part" row deleted; "Total number of
+   pupil responses included in this report*" retained (366).
+3. **Demographic filtering**: ethnicity, Welsh language, take-part method and all
+   disability answers are now selectable chart filters, under a five-pupil minimum per
+   answer enforced at build time (17 new cohorts; "Other ethnic groups" [2 pupils],
+   communication aids and take-part "prefer not to say" correctly excluded; dead buttons
+   suppressed). Ethnicity note updated to explain the under-five rule.
+4. **Ethnicity title**: "What is the ethnicity of your pupils who took part?".
+5. **"↑ Contents" buttons removed** from all headings (Back/Contents/Next page navigation
+   retained).
+6. **Top-10 sports** in every per-setting sports chart (owner supersedes the top-5 note;
+   logged in register v3).
+7. **Future Generations note** re-worded per owner: "…the 2026 survey captures sport in
+   more detail than 2022. In 2022, sport participation was measured across club sport only,
+   so this is the most direct comparison for 2022." (sign-off clause removed).
+8. **Impact-of-age table → bar graphic**; **year-by-gender table → paired boys/girls bar
+   graphic** with the explicit metric and "n of b (p%)" labels explained.
+9. **Appendix survey-completeness section deleted** (renderer removed).
+10. **Methodology split into bullet points** with the owner's inclusion wording (partial
+    records reaching the demand section included; below that not usable).
+11. **Rail navigation**: bold "Click to navigate to a report section" title and a clickable
+    Contents link.
+
+Register v3 records the owner-directed departures from Sport Wales-supplied wording
+(took-part row deletion, top-10 vs top-5, ethnicity filterability superseding the row-32
+note, FG note wording). The 50-block verbatim audit re-run passes for all remaining
+Sport Wales text.
+
+---
+
+# Sport Wales feedback — compliance record (build 008.1)
+
+Build: **2026-prototype-008.1** · pipeline 0.8.1 · QA PASS · pytest 22/22 · 50-block SW
+verbatim audit PASS
+
+## 008.1 — owner-directed restoration of Sport Wales wording
+
+The owner ruled that Sport Wales text and meeting decisions take priority over reviewer
+editorial preference. Three reviewer-driven deviations in 008 were identified by audit and
+reversed; no other deviations from the page-by-page document exist (verified by a 50-block
+whitespace-normalised verbatim sweep of every Sport Wales-supplied text block, including
+the group-state filter notes checked in a selected dy_yes view).
+
+1. **Future Generations heading restored**: "The Future Generations indicator — club
+   sport" (per P09 and the transcript naming); the O11 comparability caveat and
+   provisional-construction note remain in the body — the section was never missing, only
+   retitled by the 008 compromise, now reversed.
+2. **Profile table restored to the Sport Wales field list**: "Total number of pupils who
+   took part in the 2026 survey" and "Total number of pupil responses included in this
+   report*", both populated with 366 (the pupils who recorded survey answers); the
+   reviewer's export/excluded rows removed per owner instruction. The 484/118 transparency
+   story remains in FAQ 4 ("Why are some pupil responses missing?") and the appendix
+   completeness chart — the FAQs are retained in full.
+3. **Top-five accompanying note restored to Sport Wales verbatim**: "This bar chart shows
+   the most common 5 sports… There were a total of 93 sports to choose from. Click on the
+   'View Data Table' to see the full results." (93 = export-evidenced count; 92 cited, for
+   SW confirmation.)
+
+Source-Deviation Register updated to v2 recording all three reversals.
+
+---
+
+# Sport Wales feedback — compliance record (v2.3 / build 008)
+
+Build: **2026-prototype-008** · pipeline 0.8.0 · 2,052 states · 85,160 paragraphs · QA PASS · pytest 22/22 · 25/25 corrective-gate checks PASS
+
+## v2.3 — the confirmed corrective build (Final Decision Approach, approved)
+
+Implements the approved Final Decision Approach in full, plus the three required
+implementation clarifications from the approval message.
+
+1. **2022 sweep**: every unsigned equivalence claim replaced with the O11 caveat (final
+   summary, appendix methodology, listened-to narrative); two new build gates fail on
+   unsigned 2022 equivalence phrasing (narrative-level and assembled-HTML-level).
+2. **Population table**: three-row structure (records in export 484 / valid pupil
+   responses included 366 / records excluded 118); deviation logged in the register.
+3. **Heading**: "Combined club-sport measure (provisional)" with FG-38 context retained.
+4. **Placeholders**: CfW sentences removed; neutral filter wording; FSM national-context
+   sentence removed; Teacher Survey and FSM band retained as marked placeholders
+   (owner decision).
+5. **Summaries**: retained with visible D22 provisional markers; suppression build-flag
+   implemented (off).
+6. **Sport chapter**: description narrowed to participation + demand with explicit
+   signposting to the setting sections and appendix tables.
+7. **Tier 2 composite** (owner instruction + survey-derived classification): 43 codes
+   classified from the "(Other category)" routed questions; display-level "Other sports
+   (composite)" bar in the overall and per-setting charts (individual Tier 2 bars fold
+   into it; every data table keeps full detail); composite excluded from all ranking
+   narrative and reported through the mandated qualified sentence with the counted-once
+   explanation. **Clarification 1** — the two populations reconcile exactly: 161 routing
+   selections → 149 answered a routed question (12 blank) → 79 named a valid Tier 2 sport
+   (the composite basis) + 70 "None of these" only; definitions and chain in companion
+   §5.2. **Clarification 2** — per-setting counts (45/32/18/4) documented as
+   non-mutually-exclusive (99 mentions vs 79 unique pupils), companion §5.3.
+   **Clarification 3** — composite never ranked as a single sport; verified by narrative
+   guard and automated check. A04 prevalence and the A05 treatment comparison (accumulated
+   vs maximum vs average differ by exactly one pupil) are in companion §5.5.
+8. **Review/release configurations**: review banner; provisional-capability markers on the
+   sensitive charts; `CONFIG` switches for sensitiveFilters (release default off),
+   reviewMode and showSummaries.
+9. **Terminology/QA**: "right-hand chart" disambiguation; "93 sports and activities listed
+   in the survey"; navigation stops extended (thanks + data availability); version 008.
+10. **Evidence pack issued with this build**: Definitions & Calculations Companion v2.3,
+    Source-Deviation Register (7 entries), Interaction Audit paper (A06/O13, eight-point
+    inventory for all 12 selectable sources + recommendations), plus this record. The
+    complete page-by-page feedback document should accompany the pack to the reviewer.
+
+Verification: 25 automated gate checks over the built file — all PASS; QA PASS over 2,052
+states / 85,160 paragraphs; pytest 22/22; no script errors in jsdom runs including
+filtered, cohort and suppressed views.
+
+---
+
+# Sport Wales feedback — compliance record (v2.2)
+
+Build: **2026-prototype-007** · pipeline 0.7.0 · 2,052 states · 83,893 paragraphs · QA PASS · pytest 22/22
+
+## v2.2 — meeting decisions round (11 August register + speaker-corrected transcript)
+
+This revision applies the Agreements/Decisions/Actions Register and consolidated transcript
+on top of the page-by-page feedback (which remains the wording source, decision D01).
+Verified by a scripted decision-by-decision sweep (17 checks, all PASS after fixes) plus
+rendered screenshots and the standing QA gates.
+
+**Agreed decisions implemented (D-series):**
+
+| ID | Decision | Implementation |
+|---|---|---|
+| D01 | Page-by-page document = detailed source; Copilot = structural | Maintained — nothing from v2.1's page-by-page implementation was reverted except where the meeting explicitly superseded it (frequency construction, ordering already settings-first). |
+| D02 | Open with an any-participation headline | New "How many of our pupils take part in sport?" statement block opens the chapter: 363 of 366 (99%). |
+| D03 | Settings before overall frequency, then setting sections | Order verified: headline → settings → overall frequency → in-school → outside-school. |
+| D04 | In/outside-school headings, four settings kept separate | Already the v2.1 structure; headings are narrative groupings only — no new aggregate variables. |
+| D05/D06 | Top five per setting in main chapter; sport detail in Sport chapter | Retained from v2.1. |
+| D07 | Interactions must state active filter and population | Every chart now carries "Showing: {view}" when the report is filtered, alongside the existing banner, per-chart bases, ghost outlines and selected-group context lines. Full interaction audit (A06) is scheduled after this build and logged as open. |
+| D08 | True zero distinct from less-than-weekly | The overall chart separates "No sport reported" (3 pupils) from "Less than once a week" (26). |
+| D09 | Raw, unweighted school-level analysis | Preserved and stated in the report and companion. |
+| D10 | Frequency-chart fallback if top-heavy | Chart retained provisionally; the headline statistic already exists (D02), so the fallback is a removal away. Sensitivity evidence is in the companion. |
+| D11 | Visible questionnaire-consistent setting definitions | The in-school / outside-school section intros carry the questionnaire definitions on the page. |
+| D12/D13 | Demographics: as much as safely possible; diagnostics before filters | Current design (profile + in-chapter filterable charts + appendix tables) retained; suppression and deductive-disclosure diagnostics for this school are in the companion (§6). |
+| D14 | Standard setting terminology; no ambiguous "organised" | "Organised" removed from every reader-facing string (narrative templates, table labels, methodology, prompts); settings named directly. |
+| D16/D18 | Streamlined derived-variable material + companion | `SSS2026_ILR_Definitions_Calculations_Companion_v2.2.docx` issued with this build — definitions, calculations, diagnostics, OPEN items marked. |
+| D17/D19 | One coherent revised version before the next broad review | This build. |
+| D21 | Remove/relocate technical jargon | Methodology stays in the appendix; new measures explained in plain language on-page. |
+| D22 | Park chapter/report summaries | Summaries retained untouched this round; re-wording deferred until measures stabilise. |
+| D20/D23, A13–A18 | Translation format, Young Artist, media follow-ups | Workflow/actions outside the report build — noted, not report changes. |
+
+**Provisional positions built (P-series):** P01/P02 — overall frequency is the raw
+accumulated occasions measure on the 0–7+ scale; **reproduces the in-meeting live test
+exactly (238 of 366 at 7+; 188 excluding somewhere else)**. P03 — CMO reference reworded as
+reflection ("does not show the guidelines are met…"), final wording with Owen/Emma. P06 —
+per-setting frequency uses the same accumulated construction on the fuller scale (school
+club data peaks at the low end, supporting the fuller scale). P07 — "Follow a group of
+pupils" pointer added to the profile page and an exploration reminder to the Everyone part;
+full early filter controls await the disclosure diagnostics. P09 — Future Generations
+indicator subsection (indicator 38) sits after the setting pages with the comparability
+caveat. P10 — ethnicity keeps the detailed profile + participation comparison, no
+white/non-white filter. P04/P05 (Tier 2) — pending the Tier 1/2 classification list;
+logged OPEN.
+
+**Actions discharged in this build:** A01 (this build), A02/A03 (frequency sensitivity
+tables by phase and setting-combination, companion §3), A07/A08 (suppression and
+deductive-disclosure diagnostics for this school, companion §6), A10/A11 (companion
+document), A19 (open-question log = companion §8). A04/A05 await the Tier 2 list; A06
+(interaction audit) runs next; A09 scenarios described in companion; A12–A18 sit with
+Sport Wales/ILR outside the build.
+
+**Open points (O-series)** are carried verbatim into companion §8 and are not represented
+as decided anywhere in the report.
+
+---
+
+# Sport Wales feedback — compliance record (v2.1)
+
+Build: **2026-prototype-006** · pipeline 0.6.0 · 1,944 states · 80,154 paragraphs · QA PASS · pytest 22/22
+
+This record covers the **complete page-by-page feedback document**
+(*2026 School Sport Survey — School Reports — Notes — SW to ILR v2 (1).docx*, 60 rows,
+pages 1–50), which supersedes the partial version and aligns with the Copilot summary.
+Every row was checked line-by-line against the built report with an automated jsdom sweep
+(42 v2.1 checks + the 59 v2 checks re-run where still applicable — all PASS) plus rendered
+Chromium screenshots. Nothing outside the specified changes was edited or removed.
+
+## Rows 1–11 (Throughout → Page 7)
+
+Identical to the earlier partial document and already implemented in v2 (2026-prototype-005):
+terminology ("You are Viewing", "Pupil Responses Included", "Based on: X pupils"),
+navigation pane + contents page + Back/Next buttons, "Partial coverage" removed, cover
+unchanged, welcome text verbatim, 12-question FAQ page, profile page rebuilt with the full
+school-information block, single-colour profile charts, non-binary/PNTS note, additional
+profile charts/tables + FSM context, Key statistics (p5) and Overview (p6) pages removed,
+chapters merged into "An Active Nation for Everyone" with the provided intro. Re-verified
+in this build.
+
+## Rows 12–16 (Pages 8–11) — the Active Nation journey
+
+| Row | Feedback | Status |
+|---|---|---|
+| 12 | Swap pages 8 and 9 — Settings first, then Frequency; graphs near each other; interaction needs explaining | **Done** — settings section now precedes frequency, directly adjacent; the settings text and Top Tip explain the interaction. The deeper question about frequency×sports selection logic is held as a discussion item (see Outstanding). |
+| 13 | Frequency section retitle + replacement text (CMO line); chart "How many times do our pupils do sport each week?"; base only; highest level across all settings; box "What is this chart showing?"; no gender/year analysis | **Done** — all applied verbatim; chart uses the all-settings derived measure. |
+| 14 | Settings retitle + text; chart "Where are our pupils taking part in Sport?"; box title; Top Tip "Click on each bar and explore how the data changes across different charts" | **Done** — all applied verbatim. |
+| 15 | New "How are our pupils active through sport in School?" — provided section text; four charts (PE frequency, PE top-five sports, school-club frequency, school-club top-five); titles as specified; base only; "What is this chart showing?" boxes with the three-sentence structure; no gender analysis; "total of N sports to choose from" note | **Done** — section, text and chart titles verbatim; analysis boxes generate the three specified sentence forms with computed values (the school-club figures match the examples in the feedback exactly: 159 of 363, largest group 54 '1 time a week', Tennis 53 of 159). Sports-to-choose-from note shows 93 — the number of sports evidenced in the export; Sport Wales cite 92 on the survey list, to be confirmed. The settings tick means "done this school year", so the phrase "each week" is omitted from the first sentence for accuracy. |
+| 16 | New "How are our pupils active through sport Outside of School?" — same structure for clubs outside school + somewhere else | **Done** — as row 15. The closing note about the frequency×sports interaction logic is a discussion item (Outstanding). |
+
+## Rows 17–25 (Pages 12–19 + demographic strategy)
+
+| Page | Feedback | Status |
+|---|---|---|
+| 12 | Remove — covered above | **Done** (folded into the outside-school section). |
+| 13 | Move to Sport section | **Done** — sports-overall chart opens the Sport chapter. |
+| 14 | (no notes) | Removed in v2 per the earlier boy/girl-sections feedback; unchanged. |
+| 15 | Move to summary section | **Done** — the "How active are our pupils — summary" block now sits in the end-of-report summary area. |
+| 16 | Remove (chapters combined) | **Done.** |
+| 17 | Move joining-in to Lifelong | **Done** — placed beside confidence, before the confidence/enjoyment/joining-in links section. |
+| 18 | Remove / relocate depending on decisions | Removed (the right-hand filters cover boy/girl participation). |
+| 19 | Move year-by-gender to Lifelong | **Done.** |
+| 20/21/23/24 strategy | Three location options + considerations | Current design: school-wide profile on the profile page, cohort pages inside the chapter as filters, full per-view tables in the Appendix — consistent with the options discussed; final location decision stays with Sport Wales. |
+
+## Rows 26–33 (Pages 20–25, demographic pages)
+
+All amended texts applied verbatim: disability (row 26) and learning difficulty (row 28)
+context + "filter the wider report … through this lens"; the confusing selected-state note
+replaced with "The bar selected filters the wider report by pupils who responded 'Yes' to
+this question…" (rows 27/29); learning-difficulty join-in analysis removed (participation
+reported instead); take-part text (row 30); Welsh language text (row 31); ethnicity text and
+the reworded red-box note "There were not enough responses from pupils in different ethnic
+groups to allow the report to be filtered by ethnicity…" (row 32); the "able to join in at
+least sometimes" analysis removed from the chapter summary, which now points at the
+participation-variation table (row 33). Row 26's "remove analysis focus on community club
+setting" — the analysis uses the combined club sport (school or community) measure, with no
+community-only commentary.
+
+## Rows 34–54 (Pages 26–45, A Lifelong Enjoyment of Sport)
+
+| Row | Feedback | Status |
+|---|---|---|
+| 34 | Merge + rename + provided intro | **Done** — intro text verbatim. |
+| 35 | Participation at the highest level; amended text; settings-filter question | **Done** — the by-year table now uses "did sport at least once a week in any setting"; text amended; and yes — the table is filterable by selecting a settings bar (a tip in the text says so). |
+| 36 | PE/Active Lessons text; "what is Positive?" | **Done** — text applied; the narrative no longer uses an undefined "positively", it states the answers ("said 'very' or 'quite'…"). |
+| 37 | What-matters text + exact analysis forms incl. boys/girls lines | **Done** — computed output reproduces the cited figures exactly: Having fun 295 of 366; Being with friends 225; boys 141; girls 149. |
+| 38/39 | "I would do more sport if..." text + simplified four-sentence analysis | **Done** — leader (202 of 366), Next came 'I felt more confident' (117), 56 chose 'None of these', low-confidence cross (37 of 58). |
+| 40 | Barriers-by-group text improved; no phase references | **Done** — section reinstated with the suggested text verbatim; gender leaders only, no phases. |
+| 41–44 | Pages 32–35 to Sport section | **Done** — latent demand, demand by group, unmet demand and the participation-and-demand comparison all sit in the Sport chapter. |
+| 45/46 | Remove the separate Lifelong and Enjoyment summaries/openers | **Done** — single chapter with a single summary. |
+| 47 | Enjoyment text; interactivity question | **Done** — text applied; every value on the PE enjoyment chart is selectable (not just 'a lot'), resolving the "if not all bars can be selected" concern while keeping the interaction. |
+| 48 | Enjoyment-by-groups text + "What is this chart showing?" + year extremes | **Done** — reinstated; output matches the cited example exactly (Year 4: 23 of 28, 82%; Year 10: 16 of 49, 33%). |
+| 49 | Feeling-listened-to added text incl. Curriculum for Wales link | **Done** — the CfW reference renders as "[reference to be confirmed by Sport Wales]" pending the XXX in the feedback. |
+| 50/52 | Either remove or replace with filter pointer | Removed (option 1), as in v2. |
+| 51 | Confidence text (+CfW), "What are these charts showing?", most/least-likely analysis; interactivity question | **Done** — text and heading applied; analysis reproduces the cited figures (learning a new skill 313 of 366; trying sport in a new place 267 of 366); every confidence-to-try value selectable. |
+| 53 | (no notes) | Unchanged. |
+| 54 | Update summary for the merge | **Done** — one chapter summary carrying enjoyment, confidence, stage variation, barriers and the demand aggregate. |
+
+## Rows 55–59 (Pages 46–50)
+
+Pages 46/47/49/50: to be reviewed by Sport Wales on receipt of this version — no changes
+made. Page 48 ("Data available in this view"): **relocated to the bottom of the report**,
+after the Appendix, per the "Remove / Relocate to bottom" instruction.
+
+## Language
+
+The narrative voice is now pupil-first throughout ("pupils across the whole school",
+"Year 5 girls", "1 pupil response") in line with the feedback's own sentence forms; the QA
+gates were extended to enforce the same grammar rules for the new vocabulary. "Most likely"
+was removed from the banned-terms list because the feedback mandates the sentence form
+"Pupils were most likely to say…".
+
+## Outstanding / discussion items (for Sport Wales)
+
+- Frequency×sports chart interaction logic (row 16 tail): what a joint selection should
+  mean, and whether an explanation belongs on the page — to discuss.
+- Sports-on-the-list count: export evidences 93; feedback cites 92 — confirm.
+- Curriculum for Wales references for listened-to and confidence (XXX in the feedback).
+- Demographic location decision (rows 25): Option 1/2/3 sign-off, GDPR threshold, and
+  suppression-rate analysis across schools.
+- 7+ frequency scale and Tier 2 sports (carried from the earlier round); FSM band and
+  teacher-survey data sources; print page numbers; production payload workstream.
+
+## Verification evidence
+
+- Automated page-by-page sweep: 42 checks over all 60 rows — ALL PASS (after the QA gates
+  themselves caught and forced fixes to three template defects: tie counts in fact objects,
+  base-of-one guards for the new leader forms, and a 70-word split in the confidence
+  analysis).
+- Build QA PASS over 1,944 states / 80,154 paragraphs; pytest 22/22; jsdom boot and
+  interaction runs clean including the newly selectable enjoyment/confidence groups.
+- Rendered checks: settings→frequency order, in-school and outside-school sections,
+  demographic texts, any-setting participation table, reinstated group sections, Sport
+  chapter, relocated summary and data-availability sections.
+
+
+---
+
+## Build 010 (2026-08-18) — Sport Wales V2 feedback + owner decisions
+
+**Version:** 2026-prototype-010 · pipeline 0.10.0 · QA PASS · pytest 21 passed / 1 skipped · jsdom structural + interaction sweeps ALL PASS.
+
+Implemented (per the V2 feedback table and the owner's instructions):
+
+- **Frequency (agreed estimate):** the overall chart is now the per-setting mean of weekly sports, summed and rounded half-up; "Less than once a week" and "I don't know" excluded from the averages and shown as categorical columns with "No sport reported", so the chart always totals 366 (3 / 15 / 11 / 19, 47, 54, 58, 58, 34, 28, 22, 17). Bands 1–8 and 9+. Chart is selectable (rule-of-five gated); "On average, pupils participated in X sports throughout the academic year" line added and updates with every filter.
+- **Stacked sport × frequency charts:** top-10 (no 'Other'), Base totals at bar ends, legend, "What is this chart showing?" box and expandable data table — added to the overall frequency section and to all four setting sections (replacing the left-hand frequency charts). Per-setting analysis boxes rewritten: participation + top sport + average-sports line; the orphaned largest-group frequency sentence and all Tier 2 composite sentences removed (register decision: no user-facing Tier 2 references).
+- **Demographic settings section:** disability/learning-difficulty charts replaced by "Where are our pupils … active?" settings charts for (a) disability and/or learning difficulty combined, (b) ethnically diverse backgrounds (Welsh Government grouping guidance; under-five groups pre-combined), (c) Welsh speakers (with "Do you usually speak Welsh when you play sport" kept). Yellow hint box added; dl average-sports sentence included; sections suppress below five pupils in view.
+- **Filter panel:** demographic dropdown (single pupil-group model) — disability and/or learning difficulty, ethnically diverse backgrounds, speaks Welsh — alongside phase/year and gender; numbered clickable contents with heading-styled title; "FAQs" → "How to use this report"; "Sport" → "Sport Specific Data"; Explore results heading red.
+- **Colours (owner decision):** all charts alternate red/blue by option index, including the profile page. Grey strictly for null-value columns, unclickable bars on selectable charts, and suppressed values; yellow marks the selection.
+- **Suppression:** suppressed sections now show a GDPR-worded suppression card instead of disappearing; the view-level message also carries the GDPR wording. New FAQ on hidden numbers and on grey/blank/unclickable bars; inclusion FAQ at 80% (owner override of SW's 70%; completed-only in this dummy run).
+- **f2/e4:** replaced with stacked year × setting and year × gender × setting charts with amended headings/wording and updated analysis (leading-setting extremes; year-gender best-combination line retained).
+- **Wording rows:** FAQ rewrites, profile page (red note, RSP "West Wales Sport Partnership [WWSP]", *note removed, larger gender-note font, tip box and "Additional pupil profile" removed, disability table removed, Welsh table → bar chart with FSM beside it), headline sub-note shrunk, f3f5/g2 split-heading chart titles, f6/f7/g5/g8 headings and text, unmet-demand definition + gender-rank analysis sentence, f14 question box removed, thank-you (Autumn 2026 national findings + technical report), Methodology & Definitions removed from the appendix.
+- **Removed sections:** variation summary table, chapter summaries (e10, g12, d10), f8, and the "Data available in this view" panel. Future Generations indicator kept in its current (max-rule) form with the agreed 2022 note.
+
+Deviations / pending:
+
+- Provision survey information (feedback row 6, "can this be added?") — no provision-survey data supplied; not added.
+- Sport chapter image (row 41, "update image") — no new asset supplied; brand-form placeholder retained.
+- Small-schools check for the demographic settings section (row 19) — modules self-suppress below five pupils in view; a whole-school-level policy for micro-schools remains open.
+- Teacher survey / FSM band remain placeholder values pending Sport Wales confirmation.
+
+
+---
+
+## Build 011 (2026-08-18) — polish round: owner decisions + colleague QA
+
+**Version:** 2026-prototype-011 · pipeline 0.11.0 · QA PASS (3,096 states / 105,036 paragraphs) · pytest 21 passed / 1 skipped · jsdom regression 41/41 PASS including e7-empty views and all three DL modes.
+
+Implemented:
+
+- **e7 nesting defect (colleague QA, highest priority):** the missing closing div after "How pupils take part in sport" is fixed; e7, n_ed and n_wl are confirmed siblings, and views where e7 has no content (e.g. whole-school Tennis) now correctly show the ethnically-diverse and Welsh-language sections. Regression test added.
+- **Frequency terminology (colleague QA):** the estimate measures times active per week, not number of sports. Cohort labels are now "Estimated times active through sport each week: N" and narratives read "were active through sport an estimated N times a week". The separate average-number-of-sports statements are unchanged, as agreed.
+- **Whole-number averages (owner):** every average sentence reads as a whole number with the exact average retained in brackets — "participated in 12 sports throughout the academic year (12.3 average)" — standard half-up rounding, applied to the overall, per-setting and disability/LD sentences.
+- **Full chart titles (owner):** split-title sets recombined as complete titles — "How much do pupils enjoy sport: in PE Lessons?" (pupils, not our pupils) and "Do PE and Active Lessons make you feel: Healthy?" — replacing the "..." convention.
+- **Red filter reminder (owner):** short red line "Click a bar to filter the report by these pupils." restored on selectable charts only (the verbose SW-deleted version stays removed).
+- **Mixed disability/learning-difficulty rule (owner decision):** per-view three-tier display — separate disability and learning-difficulty settings charts where each group has 5+ pupils in view; automatic combination when either falls below 5 but the combined group reaches 5 (with an explanatory note); GDPR suppression card below that. Overlap note states that pupils reporting both appear in both charts and gives the combined count. Rail filter list now offers disability, learning difficulty, combined, ethnically diverse, and Welsh-speaking groups; existing view-level suppression catches small intersections.
+- **Colour-coded (struck) V2 deletions now applied** (root cause: red-strikethrough deletions inside "Amend wording" cells were lost in plain-text extraction): e7's two struck sentences; f2 tip line; e4 struck context sentences; "not clinical measures"; g5 "better placed to shape provision" clause and the 2022-basis clause (narrative and static summary note); g8 "about" and the try-a-new-sport selection sentence (plus the unagreed "one chart carries the selection" additions removed from g2/g8); Sport-chapter middle sentence; latent-demand "menu" sentence; f14 "starts conversations" clause.
+- **Missed heading changes:** "Do our pupils feel listened to?" and "How confident do our pupils feel?".
+- **FAQ overhaul (full row 6, previously truncated in extraction):** agreed order implemented; new texts for missing-responses (at 80%, owner override of SW 70%), how-do-I-use-filters, percentages, percentages-to-100%, numbers-to-total; "Filters apply from the first chapter onwards" note removed. The missing-responses and grey-bars items are not in SW's order list and are slotted logically — recorded as a deviation for sign-off.
+- **f13:** SW leader form ("Pupils were most likely to have unmet demand for Dodgeball, selected by 81..."); duplicated rank sentence removed (single rank-shift sentence retained).
+- **e4 narrative** rewritten to describe the setting-based stacked chart ("The highest reportable participation in a single setting...").
+- **New permanent QA gate (owner):** any generated sentence matching "Across boys/girls/pupils across" fails the build. The gate immediately caught and forced a fix to the parent-compare template ("For comparison, across pupils..." → "among pupils...").
+- **Disclosure fix found in passing:** suppressed sections no longer render their own charts behind the GDPR card (small-group chart data could previously still be drawn).
+
+Appraisal outcomes recorded: retained "like the park or garden" (survey help text, not struck); profile charts stay red/blue and disability/LD profile charts stay (owner decisions); provision-survey info still pending data; "our School" capitalisation confirmed a misread.
+
+Deviations / open items: Sport-chapter image still placeholder (no asset); technical report record retained pending owner decision; summary remains provisional (review build); FAQ placement of the two extra items; register entries needed for the DL mode-switch inference risk and the sensitive-group in-view rule.
+
+
+---
+
+## Build 012 (2026-08-21) — flat square-root conversion + V3 feedback, full set
+
+**Version:** 2026-prototype-012 · pipeline 0.12.0 · QA PASS (8,568 states / 296,707 paragraphs) · pytest 21 passed / 1 skipped · jsdom regression 42/42 PASS (run on a reduced-state copy; the full 108MB file exceeds the build sandbox's memory, not a defect).
+
+Implemented:
+
+- **Flat square-root method everywhere:** overall chart (W ÷ √N across all weekly sports; 3/15/11 categorical columns; bands 21, 32, 53, 60, 56, 54, 20, 17, 24) and the club chart on the identical formula restricted to club settings (86/13/16; 48, 61, 66, 35, 19, 14, 5, 1, 2; weekly-plus 251). Method text rewritten; measure submitted to Welsh Government with the method note.
+- **Future Generations removed entirely:** heading now "Club Sports"; context, appendix tab, summary note and all labels FG-free (verified zero occurrences in the built file); joining-in table moved to the enjoyment appendix group.
+- **Filter consistency:** year-by-setting, year-by-gender-by-setting and enjoyment-by-year respond to year and gender filters (single-year / single-gender rendering); one obsolete test updated to the new behaviour.
+- **Selectability expansion:** all demand and current sports selectable (min-5 cap trial; legacy six-sport list abolished — build sweep confirmed zero grey bars in the demand top ten); all four enjoyment and all four confidence charts selectable with anti-tautology guards; Club Sports bands selectable; disability/learning-difficulty/combined/ethnically-diverse/Welsh settings charts selectable as compound group-and-setting filters with the coded under-five merge rule. 237 filter groups; state space 8,568.
+- **Paywall suppression:** nothing disappears — suppressed views grey every section, render whole-school data underneath (never the protected values), and show a per-section box "Not enough data available for this selection" with GDPR wording; same model for sub-five sensitive-group sections; threshold rule unchanged.
+- **Grey scheme:** light grey = non-selectable, dark grey = suppressed; new FAQ entry explains both plus greyed sections and keep-scrolling guidance.
+- **Multi-choice co-selection (f6/f7):** selecting an answer leaves only that bar and reveals "What else did these pupils select?" beneath — the only appear/disappear behaviour in the report; demand-sport selections get the "also most wanted X, Y and Z" sentence.
+- **Profile completeness (hard rule for future schools):** all seven high-level ethnicity categories with exact counts (Black 1, Other 1) and zeros, nobody combined, WG "White Welsh, English, Scottish, Northern Irish, or British" label, section unfiltered and unsuppressed; gender chart retitled with Boys 174 / Girls 186 / Non-binary 0 / Prefer not to say 6 (non-binary verified as a survey option); teacher survey row removed; FSM placeholder with the deprivation sentence.
+- **Filter-group redefinitions:** ethnically diverse now includes positively identified White minorities via the detailed background question (categories only, free text never used; 26 → 45 pupils); Welsh = top three tiers (138 → 290).
+- **Averages:** whole numbers only, decimals and brackets removed.
+- **Scroll anchoring:** applying filters returns the reader to the nearest heading above their position.
+- **All V3 wording rows:** contents text, intro chapter list, FAQ items (red Explore results, raw-counts caveat, below-five sentence removed), d3 multi-settings sentence, "used by N pupils" grammar, stacked-box de-duplication with top-three sport analysis throughout, "like the park or garden" removed from generated sentences, groups intro to all-settings, e7 retitle ("long-term condition" verified as survey wording), Welsh use-of-language wording, per-year breakdown sentences with data tables, "highest reportable" phrasing simplified, g3 all-settings table, g11 removed, unmet-demand 2026-vs-2022 caution, f14 retitle.
+- **Defect found and fixed by the regression sweep:** cohort_codes "all" serialized as a string, silently disabling clickability on expanded charts — expanded to code lists at package build.
+
+Unchanged as instructed: images (final swap before distribution), stacked sport×frequency charts, structure and order, profile red/blue, 80% inclusion FAQ, summary and appendix under-review sections.
+
+Notes: file size is now ~108MB with 8,568 pre-calculated states (the approved cap trial); first load in a browser will take noticeably longer than 011. The min-5 selectability cap and the mode-switch inference risk remain register items.
+
+
+---
+
+## Build 012.1 (2026-08-21) — colleague review response
+
+**Version:** 2026-prototype-012.1 · pipeline 0.12.1 · QA PASS (8,568 states / 303,036 paragraphs) · pytest 21/1 · jsdom regression 26/26 PASS (reduced-state copy).
+
+Accepted and fixed:
+
+- e7 ("How do our pupils with a disability or long-term condition take part in sport?") no longer disappears under its own filter — legacy GROUP_TIER_SKIP entry removed, anti-tautology guard added, section visually joined to the disability section above.
+- Co-selection chart label resolved from the metric's option list ("undefined" fixed; cohort optionLabel now also serialized).
+- Expandable data tables added to both year-participation charts (year × setting, year × gender × setting) with n/r markers and the participation-not-frequency clarification.
+- Ethnically diverse section wording rewritten to the agreed definition ("high level", White minorities listed, no under-five combining claim); metric documentation already updated in 012. The 45-pupil figure verified against the respondent-level derivation (the ~43 was a pre-build estimate from raw rows).
+- Old combined ethnicity table removed from the appendix (profile seven-category table is the single source).
+- "like the park or garden" removed from all generated narrative (two remaining sources: the somewhere-else module call site and the enjoyment settings list — verified zero occurrences in 303,036 paragraphs); retained in chart/question descriptions as agreed.
+- Enjoyment introduction now says each of the four charts is selectable.
+- Unmet-demand duplicate: not changed — the rank sentence is Sport Wales's own requested wording from V2 row 44 (challenged back, see below).
+- Gender chart base note corrected (bars now sum exactly); teacherSurveyCompleted removed from embedded data; g11 module label removed from metadata; obsolete overall_freq metric removed; paywalled sections now set inert (keyboard focus blocked).
+- FAQ light-grey wording corrected per the owner's text: eligibility threshold is whole-school; counts below five may display in reportable views.
+- White category label: "…Northern Irish, or British" retained ("or" matches both the survey instrument and the written V3 feedback; owner spoken "and" noted).
+
+Challenged (no change):
+
+- **Sub-five filtered-group suppression (their point 1): rejected by the owner.** The agreed rule: suppression keys on the demographic view (year × gender); chart-derived response groups are not independently identifiable; selectable options need five school-wide; exactly five reportable. The Boccia example (4 of 174 boys) is compliant. FAQ wording aligned instead.
+- **Club "3+ = 142 vs agreed 121" (their point 2): not a calculation error.** 121 counts pupils whose unrounded estimate is ≥ 3; the chart's bands 3–9+ total 142 because band 3 spans 2.5–3.5 under the agreed half-up rounding. The chart and its bands are internally consistent; the 121 belongs to the analysis note and will be footnoted as "before rounding" in external documents.
+- **Unmet-demand rank sentence (their point 11):** wording is Sport Wales's own requested green-text addition (V2 row 44); retained pending SW instruction.
+
+Outstanding for release: performance testing of the ~109MB file on school laptops (register item); final in-browser eyeball by the owner; image swap before distribution.
+
+
+---
+
+## Build 013 / V4.1 FINAL (2026-08-27) — Sport Wales V4 targeted text edits
+
+**Version:** 2026-prototype-013-V4-final · pipeline 0.13.0 · QA PASS (8,568 states / 301,047 paragraphs) · pytest 21/1 · jsdom sweep 35/35 PASS. Targeted round: only the red-text replacements in the V4 feedback document, plus the two flagged defects, changed; everything else byte-identical in intent.
+
+Implemented (V4 rows): four FAQ amendments (frequency-value clauses removed, "raw," dropped, exception sentence dropped, greyed-sections wording replaced); new FSM Quartiles FAQ; overall-frequency context reduced to the typical-week/guidelines wording with chart title "On average, how often are our pupils engaging in sport each week?" and method base-note removed (same treatment for the club chart with "…in club settings?"); "Somewhere Else (such as the Park, Beach or Garden)"; short Club Sports context; club analysis extended with the three-or-more clause (142 of 366, 39% — chart-band figures); disability/LD combined-line and overlap note removed; ethnic-minority chart text (Gypsy, Roma and Traveller communities named); Speaks Welsh categorisation text; girls-and-boys year chart text with the small-sample note; enjoyment-table sentence trimmed; joining-in text simplified; demand-groups clause trimmed; "Participation and Unmet Demand Together" + "Most participated in sports"; "Other sports" supplementary-list wording (template note and generated sentence); appendix Pupil profile detail removed.
+
+Defects fixed (flagged in the document): **chart/text alignment** — the top-three sport sentences now rank from the same frequency-grid bases as the stacked charts, so text and chart always agree (verified: Tennis 52/Athletics 47/Netball 46 in both, overall Tennis 273/Football 221/Running 214 in both); **Years 10 and 11** now appear in the demand-by-year sentence — tied leaders are named instead of silently dropped.
+
+Questions in the document, answered without changes (as instructed):
+
+- Aggregate stacked-chart calculation and the overall data table: held for Thursday's discussion. Note: a true aggregate (counts summed across settings) makes bar totals exceed pupil counts (a pupil doing tennis in three settings counts three times).
+- PE-feelings charts "interaction disappeared": those charts have never been selectable in any build; making them so is a small addition if wanted.
+- "Speaks Welsh when playing sport" chart doesn't filter: correct — never selectable; same easy addition if wanted.
+- Filter jump: scroll now anchors to the nearest heading; an exact-position restore is possible if preferred.
+- Ethnically diverse data double-check: verified — 45 pupils = every non-White high-level group plus positively identified Irish / Gypsy or Irish Traveller / Roma / other-White backgrounds, categories only, free text never used.
+- Row 11's question was cut off mid-sentence in the document ("What happens to the…") — needs re-sending.
+- Rows 41/42 (thank-you/appendix) left untouched pending Welsh translation decisions, as marked.
+
+
+---
+
+## Build V4.2 (2026-08-27) — bilingual English/Welsh report
+
+**Version:** 2026-prototype-V4.2-bilingual · pipeline 0.14.0 · QA PASS · pytest 69 passed / 1 skipped (including the 48-test Welsh grammar acceptance suite transcribed from framework sheet 26) · jsdom toggle regression 22/22 PASS. **English content is byte-identical to locked V4.1** (narrative corpus hash 3efdb7f2 verified before and after).
+
+Architecture, per the Welsh Generation Framework v1.5: the Welsh sentence is generated from the same language-neutral fact record as the English, never translated from it. Implemented: the full grammar engine (soft/nasal/aspirate mutations with the exceptions register, vigesimal a/ac and article selection over figures, gendered cardinals and ordinals, list construction, noun-singular-after-numeral); the 36 audience forms; all 116 qualifier frames keyed to the report's cohort families; the 178-label lexicon with the D32 dual-grid scale rule and the golden-test unadapted-name rule; the predicate inventory; and renderers for all 91 live template families (composite paragraphs included).
+
+**Welsh narrative coverage: 271,966 of 271,966 paragraphs (100%).** Chart option labels, stacked-chart legends, data-table labels, the base line ("Yn seiliedig ar: N disgybl", singular after every numeral), the what-is-this-chart-showing heading, and the framework-quoted interface strings render in Welsh. The toggle (rail button, hash-persisted, html lang switched) re-renders every dynamic element; filters, paywall and co-selection all work identically in both languages.
+
+**The known, deliberate gap:** the translation handoff workbook's Welsh column is empty — 0 of its 446 page-furniture strings (headings, context paragraphs, FAQs, button labels) are translated. The framework explicitly reserves these for the human translator and instructs that blanks fail loudly rather than be invented. In Welsh view these strings appear in English with a dotted-red review marker and a standing review note in the filter rail. When the translated handoff returns, the strings drop into the embedded catalogue keyed exactly as the workbook specifies.
+
+Also recorded: framework finding F-06 (the English report renders "21st" as "21th" in one ranking sentence) is a confirmed defect in the locked English; per the lock instruction it was NOT corrected in V4.2 and awaits the next sanctioned English edit. Framework statuses: most templates remain PROPOSED/DERIVED pending the Welsh linguist's sign-off of sheets 02/05/18-21 — the framework's own order of work; the full distinct-output review before publication remains theirs. File size 164MB (bilingual payload); the V4.1 performance caveat applies with more force.
+
+---
+
+## Build V4.3 (2026-09-01) — rebuild against Welsh Generation Framework v1.6
+
+**Version:** 2026-prototype-V4.3-bilingual · pipeline 0.15.0 · QA PASS · pytest 77 passed (48 sheet-26 grammar tests + the seven new v1.6 cases T-082–T-088) · jsdom toggle regression 19/19 PASS · **English corpus byte-identical to the shipped V4.2 / locked V4.1** (corpus hash 9bcbc6e66c8e380d before and after) · source checksum e457bc8eccbecad24c061db7fcad986ec3597ac116afa138b141a0ebc8a70552.
+
+**The appraisal was verified before anything was changed:** the supplied gate script, run against the V4.2 build, reproduced every baseline count to the digit (271,966 paragraph occurrences; all 23 gates matching the supplied results file). The 42.3% figure stands as measured.
+
+**Corpus gates (sheet 36 / D45):** on the stock appraisal script, 22/23 gates return zero. The single remaining G4 count (2,493 paragraphs, verified to be 100% of one class) is where the locked English prints a nil count as the digit 0 ("…, 0 said yes." / "…and 0 did club sport…") — the framework's own FT-01 N=0 rule (NUM-N0-NEG) requires a figure-free Welsh negative clause there, so the English 0 can have no Welsh counterpart while the English is locked. A one-line amendment (discard 0 from the English figure set) is proposed to the appraiser; under it the run is **23/23**. Both gate-result files ship alongside the report. The gate script is vendored unmodified into the pipeline and runs inside build QA on every build (D45): a failing corpus can no longer be written out, let alone shipped.
+
+**D40 — one numeral realiser** (pipeline/welsh.py): numeral form, noun number, mutation and partitive are chosen together from value, gender, definiteness and syntactic role; callers can no longer format numbers. n=0 raises (forcing the template's negative branch — deliberate fail-loud). Closed G3a (86,539), G3b (8,368), G3c (1,504), G3e (408) and the G3d complement defaulting (843) with gendered singular threading.
+
+**D44 — role consumption**: predicates now resolve from the measure + answer-code roles (unknown pairs fail the build); the respondent-group role distinguishes disability-only / LD-only / combined; settings, outer cohort qualifiers, head-noun types, answer arity and polarity are threaded through every renderer. Closed G1a–G1e, G2a/G2b, G4, G5 (the distinctness gate — 10,393 baseline — is now zero), G6b, G6c. The five framework fixes of v1.6 (FT-01 zero branch, FT-05 quotation pair, FT-18 arity branches, FT-24 collapse threshold, FT-33 postposed cyntaf) are implemented as specified.
+
+**Deviations register (for the appraiser and linguist):**
+- T-084's expected output ("gyda 5 disgybl yr un") and T-085's "(1 disgybl)" would fail the framework's own gate G3a; the build words those numerals per D40/D03 ("gyda phum disgybl yr un", "(un disgybl)"). The tests are transcribed with the worded forms and the deviation noted in-file.
+- G6b's implementation forbids the surface pair "Yr ail opsiwn … yn ei ddewis" even in the singular, where FT-18's own singular branch produces it; the singular runner therefore reads "…, gyda X yn dewis yr opsiwn hwn" (mirroring the English "choosing this option").
+- Ordinal ranks above 10 use the digit abbreviations (11eg, 12fed, …, 21ain; tens in -fed), mirroring the English switch to "11th" and satisfying figure parity; the exact suffix convention above 20 needs the linguist's confirmation.
+- Bare numerators of 2+ keep the figure the English shows (D03 series exception); n=1 is always "un". The parity checker's Welsh vocabulary lacks the soft form "dri" and the aspirate "phump" — adding them is proposed alongside the zero amendment; the realiser avoids both meanwhile.
+- In n_dl views whose outer cohort is itself the combined disability/LD group, the outer qualifier is rendered anaphorically ("ymhlith ⟪audience⟫ yn y grŵp a ddewiswyd") — repeating the combined phrase after a disability-only group phrase trips G1c's conflation pattern.
+- Q12 (a/ac before ni/nid) remains with the linguist; the affected paragraphs are unchanged.
+
+**Also in this build:** a real V4.2 interface defect found by the tightened regression — the Welsh review note could never display (clearing the inline style fell back to the stylesheet's display:none); fixed. A stale reconciliation test asserting the retired organised_freq metric now asserts the club weekly+ invariant (251). The build is now checkpoint-staged (pipeline/staged_build.py) so the corpus gates, QA and write are separate resumable stages.
+
+**Still open, unchanged:** the translator's 446 handoff strings (still 0 translated — English fallback with review markers); F-06 ("21th") in the locked English; linguist sign-off of the PROPOSED sheets and the 130 answer labels without recorded grammatical gender (awaited from the translator — answer-dependent mutation and superlative agreement stay conservative until then); 164.9MB file size and the school-laptop performance test.
+
+---
+
+## Build V4.4 (2026-09-01) — engineering-complete against Framework v1.7
+
+**Version:** 2026-prototype-V4.4-bilingual · pipeline 0.16.0 · framework v1.7 · QA PASS · pytest 77 passed · jsdom language-state regression 18/18 · **English narrative byte-identical at every level** — the 271,966 module paragraphs (corpus hash 9bcbc6e66c8e380d, unchanged since locked V4.1) and the 53,094 h1/h2 summary and prompt strings, verified before and after · source checksum e457bc8e…a70552 · 174.8MB.
+
+**Sheet-36 acceptance: every gate at zero except the two the sheet itself marks report-only** (G3a+: 0 anyway; G9e: 674, the FT-11 review population — a negative-zero matrix over a cohort whose *defining answer* is itself negative, which PR-02's recast deliberately does not touch). On the handover pack's own runnable script: 29/31 stock, 30/31 after a one-line vocabulary completion (below). All nine plan changes landed:
+
+1. **D40 closed in its second shape** (G8a-c: 64,868 → 0): numerators word to ten in every partitive construction — naw o'r naw disgybl, pump o'r chwech — with gan's soft mutation applied and the 'gyda' aspirate frame where the soft form would be checker-invisible.
+2. **D21/PR-10** (G11: 119,922 → 0): running prose takes sheet 23's case-folded prose form, folded BEFORE mutation (pêl droed → bêl droed); citations and chart labels keep the title form; sentence capitalisation applied at the boundary after all mutation decisions.
+3. **Sheet 38 dynamic surfaces** (G10a/b: 36,434 → 0): the h1 chapter summaries were being generated and then discarded by a `["t"]`; they now ship as {t,c} pairs with the apart-/aside-clauses, tie-collapse and measure-variation roles completed. The two variable h2 prompts are typed fact records with their own renderers; the two generic prompts route through the translator catalogue with review markers, exactly as sheet 38 directs.
+4. **D50** (G10c: 8,567 → 0): the view descriptor is a typed {scope, sex, cohort} record; scope.shortCy is realised by the audience renderer and drives the banner, print footer, rail summary, chart tooltips and the assistive live region. The 30 cohort-frame strings are DERIVED and listed for the linguist.
+5. **D48/PR-03** (G9b: 7,265 → 0): singular one-person bases read "yr unig ddisgybl"; qualifier relative clauses singularise behind them (yr hoffent → yr hoffai); complements are gendered only where the view carries a sex, impersonal verb-noun recasts otherwise — never a masculine default.
+6. **D46** (G9a: 6,077 → 0): the quoted-slot substitution inserts the bare citation form; one owner, one pair.
+7. **ART-02** (G9c: 179 → 0): the article is selected on the realised surface (o blith yr un…).
+8. **Zero dispatch on the residual g2/g3 path** (G9d: 377 → 0): dim un o'r…, nid oes yr un o'r…, with the (0%) figure retained for parity.
+9. **UI-001** (G10d → pass): one applyLanguageState(), called from the toggle, after the initial readHash and on hashchange; html lang, the toggle's own lang attribute, the review note and the two cached filter controls all follow the hash. Verified by a cold-entry #lang=cy test.
+10. **D47** (G12: 496 → 0): the et frame's ANSWER-ID resolves from sheet 23 at lexicon build; the four enjoy-family frames that quote the current approved scale label verbatim are reported as matching copies for the migration.
+
+**D51 mechanism:** all ten provisional rulings are read from the workbook as data (the lexicon build extracts the operative value from each ruling's wording and refuses to build on an unrecognised rewording); the active PR set and framework version are stamped into buildMetadata, so any output traces to its assumptions. PR-02 (answer-selection recast), PR-04 (ac before ni/nid), PR-05, PR-07 (y golwg hwn) and PR-10 are exercised in this build; PR-01's provisional genders are loaded from sheet 23.
+
+**For the appraiser — one script line and three surface deviations.** (1) The figure-parity vocabulary still lacks the soft form 'dri' and the aspirate 'phump'; the stock script's entire G4 residue on this build — 1,067 paragraphs, verified 100% of the class — is the grammatically mandatory 'gan dri' after the agent preposition. The amendment (CY_NUM += dri:3, phump:5) is applied, versioned per D52, in the in-build runner; both stock and amended result files ship with the build. (2) T-084/T-085-class numerals are worded per D40 where sheet 26 still shows figures. (3) 'un ⟪noun⟫' beside any plural clause trips G9b's co-occurrence test even across referents, so singular items in mixed lists read 'un ohonynt' and one-person bases 'yr unig ddisgybl' — sheet 26's T-088 surface is superseded accordingly; the feminine complement it tests is preserved. (4) Ordinal ranks above ten use digit abbreviations (11eg…), mirroring the English switch at '11th'.
+
+**Still outside engineering, per the plan:** the translator's static catalogue (446 handoff strings + the two generic prompts + the client's ~57 hardcoded strings and 217 markup nodes from the integration spec — all EN-fallback with review markers); the linguist's 103 decisions (10 PRs, 68 gender confirmations, 25 wording flags); native-Welsh sign-off of the generated sentence families. Sheet 39 going to zero is the V5.0 readiness measure. The integration spec's hosted-architecture items (per-language URLs, hreflang twins) apply to the multi-page deployment, not this single-file prototype, and remain with the build-architecture owner.
+
+---
+
+## Build V4.5 (2026-09-01) — coverage closed against Framework v1.8
+
+**Version:** 2026-prototype-V4.5-bilingual · pipeline 0.17.0 · framework v1.8 (13 provisional rulings stamped) · QA PASS · pytest 77 passed · jsdom language-state regression 11/11 · **English byte-identical at every level** (module corpus 9bcbc6e66c8e380d = locked V4.1; h1/h2 English 410ef9335f3e3d9c unchanged) · 174.8MB.
+
+**Acceptance:** the handover pack's gate script v3 — vendored verbatim into build QA per D58, replacing the superseded v1.7 set — scores the delivered file **25/25 blocking gates, over every surface it defines** (237,844 module paragraphs · 29,081 h1 · 7,353 h2 · 8,568 scope descriptors · 790 option labels · client source). That exceeds the plan's 25-of-26 target because the PR-12 provisional (suppress the derived percentage in Welsh) is implemented, zeroing PAR-added-h1 without waiting on the ruling. Report-only remainder: PUB-copy 82 (identical strings pending the signed loan list — overwhelmingly unadapted sport names), CONJ-fnword 6,113 (PR-04 configuration, linguist), POL-stacked 576 (FT-11 review class, down from 2,797).
+
+**The seven fixes, delivered in order:**
+1. **All 228 placeholders closed.** Sheet 31's metric→question mapping is read at lexicon build; a binary metric's descriptor and chart labels echo its own question's verb (Anabledd neu gyflwr tymor hir: Oes / Nac oes; Ydw / Nac ydw), and a metric absent from the table fails the build (D54). PR-11 names the derived ethnicity set. DIS-scope's 72 collapses closed with it.
+2. **PR-02 fires on closings** (D55): the nil-count recast now applies to h1 summaries; POL-stacked fell 2,797 → 576, and POL-uniform is zero. Where a negatively-defined cohort would stack under a negative matrix, the 'heb' verb-noun construction negates without a second particle.
+3. **D56 across all 1,119 records:** 'yr unig ⟪noun⟫' subjects with fully singularised qualifier clauses (yr hoffent→yr hoffai, y byddent→y byddai, eu bod→sy'n/sydd fel arfer yn, a oedd ganddynt→a oedd, and gendered forms where the view carries a sex); no partitive over a singular set; the earlier 'unig … un ohonynt' recast — which the appraisal correctly reclassified as the same error — is retired for subject-elided singular clauses.
+4. **FT-16 routes through the realiser:** the f7 citation count is worded (dewisodd chwech ‘Dim un o'r rhain’); NUM-figcite 4,442 → 0.
+5. **CONJ-vig 173 → 0**, and the underlying engine defect it exposed is fixed: reading_first_word read 21–39 by their unit digit instead of the vigesimal teens (36 leads 'un', not 'chwe') — corrected to the true vigesimal ladder, which also improves article selection before figures.
+6. **The interface is bound** (D59): scope options, gender buttons, pupil-group selector, response-base wrappers, print footer, chart bar labels/tooltips and the live-region announcements all read labelCy/optsCy/shortCy from the payload through single accessors; client strings live in a two-language catalogue behind one lookup; every declared handoff key is embedded so the binding layer is generic (CAT-bind pass).
+7. **Parity ruled:** PR-12 provisional suppression applied (5,737 → 0); the Welsh-only follower lists carry the English's own presentation flag (PAR-follow and PAR-added-module → 0).
+
+**DERIVED strings awaiting the linguist** (flagged, not invented silently): the ~30 cohort descriptor frames, the D59 control strings (Yn dangos, ymateb disgybl wedi'u cynnwys, etc.), and scope descriptions (Blynyddoedd 3–11). All read from the build, none hard-coded as rulings; the workbook remains the source of truth.
+
+**Still open for V5.0:** the translator's catalogue values (all keys embedded, zero values); the linguist's 105 decisions incl. PR-01 genders and the PR-02/PR-04 confirmations; the PR-12 policy decision proper (the provisional suppression holds the languages equal today); native sign-off of the distinct output strings. Sheet 39 going to zero remains the readiness measure.
+
+---
+
+## Build V4.6 (2026-09-01) — feature-carrying pipeline against Framework v1.9
+
+**Version:** 2026-prototype-V4.6-bilingual · pipeline 0.18.0 · framework v1.9 sha256 47143b81…(stamped in full) · QA PASS · pytest 76 passed, 1 skipped · jsdom language-state regression 24/24 · **English byte-identical at every level** — all 316,968 English surface records (271,966 module · 29,081 h1 · 7,353 h2 · 8,568 scope) compared record-for-record against the shipped V4.5 with zero differences, and the pack's own GOV-lock gate passes against the supplied 02c_english_lock_V45.json baseline · 174.8MB.
+
+**Acceptance (gate pack v4, run exactly as instructed):** `--selftest` first — 41/41 gates rejected their seeded fault. Then both modes with `--framework 01_Framework_v1.9.xlsx --baseline 02c_english_lock_V45.json --evidence`:
+- **dev: 47/47 blocking gates pass** (6 report-only, 2 manual). Manifest 76f4e5ba9585262b; config read from the workbook (CONJ-03, sheet 23, sheet 42, sheet 39).
+- **release: 47/48** — the single failure is CAT-values, count **exactly 337**, the translator's outstanding catalogue values. Both JSON results and both evidence archives ship with the build. The same v4 runner is vendored verbatim into build QA (D65), so a failing corpus can no longer become a shipped file; the build metadata records mode "dev".
+
+**The seven fixes, delivered in order:**
+1. **One conjunction service** (D67/PR-13): conj_and now tests the follower's FIRST WORD against the CONJ-03 list read from sheet 11 at build time (the V4.5 service compared the whole clause against a hard-coded list, so no multiword follower ever matched — the actual mechanism behind all 6,113). CONJ-fnword 6,113 → 0; every CONJ gate zero.
+2. **Singleton as a typed entity** (sheet 44/D62/PR-14): sg_qual now applies the twelve sheet-44 frames as whole-clause replacements in three gendered columns — verified exact against every cell of the sheet (30/30) — with possession roles REALISED (ganddo/ganddi), never deleted; eu→ei with h-prothesis (f)/none (m); gallant→gall; pe baent→pe bai'n. PR-14 sends the unknown-sex singleton to the grammatical gender of disgybl (masculine). The V4.5 deletion-style entries (a oedd ganddynt→a oedd, y byddai'n well ganddynt→y byddai'n well) are retired. AGR-possessive/pronoun/verb/partitive/possessor/orphan-mut: all zero.
+3. **Both roles realised** (D61/PR-16): the n_dl anaphoric shortcut ('yn y grŵp a ddewiswyd') is reverted — outer cohort and inner subgroup both realised (ROLE-outer 34 → 0); the f6 exclusion parenthetical is realised as "(ac eithrio'r ateb sy'n diffinio'r grŵp hwn)" exactly when the fact record carries the exclusion role — 118 in the shipped file (PAR-generic → 0).
+4. **Numeral service on the e7 predicate:** gan + soft-mutated numeral (gan ddau ×44 in the shipped file; gan dri, gan bedwar per sheet 44); at N = 1 the possessor is realised (roedd yn well ganddo/ganddi beidio â dweud). MUT-numeral → 0.
+5. **The language layer** (sheet 43/D63/D64/D66): t(key, params) serves all 18 UI-DYN paths from the sheet-43 frame catalogue embedded in the payload (32 frames, both languages, N=1 variants derived at build); {n:count NP} slots are filled from the numeral service's pre-realised forms shipped as data (un disgybl … deg disgybl). labelCy on 45/45 metricDefs and baseNoteCy where baseNote (fed from the translator catalogue; pending values carry the ⟪missing:key⟫ dev marker). esc(c.label)→cohortLabel(c). All 16 Welsh literals and all 22 `|| "…"` fallbacks deleted. The stacked-chart legend is sourced from the workbook through the payload — "Tair gwaith neu fwy yr wythnos" and "Dydw i ddim yn gwybod" now correct (D66). UI-path/-literal/-field/-welsh-in-code/-fallback/-legend-parity, CAT-schema, CAT-binder: all zero.
+6. **D60 stamp:** buildMetadata carries welshFrameworkSha256 (47143b8189df1552…), gateManifestHash (76f4e5ba9585262b), gateRunnerVersion, surfaceCounts {module 271,966 · h1 29,081 · h2 7,353 · scope 8,568 · opts 790}, build mode, and the full provisional-ruling set PR-01…PR-16 with their operative values, all read from the workbook (the lexicon build still refuses on unrecognised ruling wording).
+7. **Runner + config as data:** the corrected CONJ-03 row (with sydd/sy'n, maent, roeddent, mi, wedyn) is consumed from sheet 11, not code; PR-15's f2 parity exceptions are read by the gate from sheet 42 and surface as ROLE-excepted 68 (report-only), as designed.
+
+**Raised against the workbook, not corrected in code** (per the standing instruction):
+1. **Sheet 43 ui.stack_legend says "SOURCE FROM SHEET 23 — never re-typed", but sheet 23 v1.9 has no row for "3 or more times a week" or "I don't know"** (nearest rows: "7 or more times a week" and "Don't know"). The build takes the five strings the sheet-43 row itself spells out, preferring a sheet-23 row wherever one exists — so adding the two rows to sheet 23 will take precedence on the next rebuild with no code change.
+2. **Sheet 43 ui.table_headings ("Answer | Pupils | %") does not match the data table the report actually renders** (Answer | Pupil responses, no % column). The shipped tables keep their locked English columns; the frame is embedded and unused pending a ruling on which is correct.
+3. **baseNote translations have no handoff key:** metricDefs.baseNoteCy has a destination (CAT-schema passes) but the translator workbook has no row to carry its value, so it holds a marker that no translator delivery can currently fill. Suggest adding `<metric>_base_note` rows.
+4. **The FSM-context card and GDPR suppression texts remain English in both languages** (sheet 43 marks the GDPR block TO TRANSLATE per Q17); they are routed through the catalogue so the translator's values drop in without a code change.
+
+**DERIVED, flagged for the linguist:** one new string — the stacked-table caption "Y 10 camp a ddewiswyd amlaf yn y golwg hwn —" (built from framework vocabulary, carried in the same flagged class as the D59 control strings).
+
+**Still open for V5.0:** the translator's 337 catalogue values (the release-mode gate holds the door); the linguist's ruling sheet v3; native sign-off. Sheet 39 to zero remains the readiness measure.
+
+---
+
+## Build V4.7 (2026-09-02) — the report around the sentences, against Framework v2.0
+
+**Version:** 2026-prototype-V4.7-bilingual · pipeline 0.19.0 · framework v2.0 (sha stamped) · QA PASS · pytest 76 passed · jsdom language-state regression 30/30 · **English byte-identical** — all 316,968 English surface records equal to shipped V4.6/V4.5 record-for-record; GOV-lock asserted against the supplied 02c_english_lock_V46.json, and the lock emitted from this build (02c_english_lock_V47.json) is byte-identical to that baseline · 179.4MB. No sentence rule was touched, as the covering note asked.
+
+**Acceptance (gate pack v5, run exactly as instructed):** `--selftest` 49/49. Baseline first reproduced to the digit (V4.6 scores 44/53 dev, 9/18 paths, identical per-gate counts). Then this build, both modes with `--framework --baseline --evidence --bundle`:
+- **dev: 53/53 blocking · renderer paths 18/18 complete** (manifest 318f15f5d8a202d9).
+- **release: 53/56** — the three failures are exactly the owner/translator lane the plan names: CAT-values (342), CAT-marker (50 labelCy/baseNoteCy markers), GOV-mode (this is a dev build, correctly). Runner (byte-identical to stock, sha 3d562f9d…b360b2), both JSONs, both evidence archives and both bundles ship with the file.
+
+**The fixes, in the plan's order:**
+1. **Stack rows carry a code** (D70, sheet 46): every one of the 311,854 rows now carries the stable option code of its sport; the renderer resolves the label through the same optsCy catalogue as every other chart (sportLabel), tooltips through ui.stack_tooltip with a count-NP, headings through ui.stack_th_sport / ui.stack_th_total. The English label stays in position 0 so review evidence reads. Derived rows (f2, e4, g4) carry the stable scope key (yk) and resolve through filterOptions labelCy; the sex row-labels compose from gender labelCy; SETTING_SEGS reads optsCy of participation_settings. STK-label → 0.
+2. **The caption states the count it renders** (D71/PR-17): ui.stack_table_caption takes k = rows.length through the numeral service as a DEFINITE count-NP — y ddwy gamp, y tair camp, y chwe champ, yr wyth camp, y deg camp, and "Y gamp a ddewiswyd amlaf" at one — realised by the service (article by numeral initial; only dwy lenites after y, per D26), never typed. The v1.9 fixed-count DERIVED string is withdrawn from the catalogue. English becomes "The 8 most selected sports…". STK-caption 8,712 → 0.
+3. **All 18 paths complete — the 33 children**: context suffixes (ui.ctx_*), the full bar-tooltip family (ui.bar_tooltip / _suppressed / bar_nonselectable), ghost and Other-sports notes, th_answer/th_responses, the two GDPR bodies as D73 catalogue records with exceptionId Q17 (Welsh value = approved English until legal translation), cosel tooltip, derived-table headings/cells (ui.of) and both f14 titles, all nine appendix group headings plus caption/column frames, labelOf/optLabel on every remaining direct field read (27 → 0). UI-path, UI-field → 0.
+4. **Frames consumed or retired**: msg.suppressed_* wired — a metric held back for disclosure control in an otherwise-visible view now names the reason (title, body and base through the frames) instead of rendering nothing; the deprecated msg.no_data_* and the three-column ui.table_headings are read as DEPRECATED from sheet 43 and never embedded. FRAME-dormant, FRAME-shape → 0.
+5. **The five base-note rows** exist in the handoff (342 keys, not 337) so the translator's return lands; baseNoteCy markers now reference real destinations. CAT-destination → 0.
+6. **The build carries its own evidence** (D68): buildMetadata.gateResults holds runnerSha256 (= the stock script's own hash), manifestHash, mode, blockingPass/Total (53/53), pathsComplete (18/18), evidenceSha256 of the archive written beside the build, and baselineSha256 of the V4.6 English lock. The stamp is pre-seeded and finalised from the in-build run itself, so it describes this exact corpus. PR-17 is stamped with the other 16 rulings.
+7. **Release configuration**: per the plan this remains a dev build (markers legitimate) until the 342 values and the owner's O09/O10 value exist; the release-mode JSON documents the three outstanding gates.
+
+**data-i18n-source (D72/D73):** every node the language layer writes is stamped in dev builds (frames, catalogue, labels, opts, narrative, handoff-pending); the page's static furniture — the translator's 446-key lane — is marked handoff:static-furniture as data.
+
+**Browser gate:** the stock playwright script cannot launch Chromium in this build environment (missing system libraries, no root). Its exact collection and classification logic was executed under jsdom over a 4-state reduced build: **0 English-looking strings without provenance, 0 Welsh without provenance**; 282 English-with-provenance, of which 269 are the static-furniture translator lane and the rest the marked pending/label classes. Results shipped (V4.7_browser_gate_jsdom.json); the stock script remains unmodified for the operations run on real hardware. NOTE for the pack owners: the script drives the hash router with `g=`/`c=` keys, but the report's URL contract (integration spec §5) uses `gender=`/`cohort=` — as written, the sampled states only vary by scope. Raised rather than worked around.
+
+**Cover corrected:** V4.6's cover embedded page screenshots — the build had been staged with word/media from a feedback document rather than the title-page file. The cover assets now come from "ILR - SSS2026_school report cover page.docx" (white Sport Wales logo 400×160; official 2026 lockup 1120×331), are vendored into config/cover_media with a README naming their source, and the shipped file verifiably embeds them.
+
+**Raised against the workbook/pack, not corrected in code:** (1) sheet 43 ui.row_sex_suffix's English cell is a description ("{year} — Boys / Girls"), not a renderable template — the row label is composed from filterOptions labelCy via the helpers (same effect); the frame is not embedded so it cannot sit dormant. (2) The browser gate's hash keys, above. (3) The g4 grid's four column headings (PE lessons etc.) have no catalogue row yet — English in both languages, flagged.
+
+**Still open for V5.0:** the translator's 342 values; the owner's D69 sensitiveFilters value and the PR-15/Q17 decisions; the linguist's ruling sheet v4 (325 decisions); the operations device/assistive runs and the browser gate on real hardware.
+
+---
+
+## Build V4.8 (2026-09-02) — the final string, against Framework v2.1
+
+**Version:** 2026-prototype-V4.8-bilingual · pipeline 0.20.0 · framework v2.1 (identity-stamped) · QA PASS · pytest 76 passed · jsdom language-state regression 36/36 · **corpus unchanged in both languages** — all 316,968 English AND Welsh surface records byte-identical to shipped V4.7 (and English to V4.5/V4.6); GOV-lock asserted against 02c_english_lock_V47.json; the lock emitted from this build is byte-identical to it · 179.4MB. No grammar rule was touched.
+
+**Acceptance (gate pack v6, run as instructed):** `--selftest` 56/56. Baseline first reproduced to the digit (V4.7 scores 51/60 dev, 13/18 paths on v6). Then this build, both modes with `--framework --baseline --evidence --bundle`:
+- **dev: 60/60 blocking · 18/18 paths** (manifest cf880c20dad3e18e) — GOV-rerun confirmed the embedded stamp against its own recomputation.
+- **release: 60/63** — CAT-values (342), CAT-marker (50) and GOV-mode: the translator's and the owner's lane, as the plan states. Runner (byte-identical to stock, sha 127c9ae6…), both JSONs, both evidence archives and both bundles ship with the file.
+
+**The six fixes:**
+1. **One clause joiner** (D74): joinClause() with separators read from the sheet-43 CONTRACT rows, delivered as data (welsh.separators) — a bare delimiter cannot be a clause frame, so the two CONTRACT rows are not embedded as frames. Every `+= t(…)` is gone; the corrected v2.1 frames carry no delimiters. Both join regressions ("disgybl· Yn dangos", "desc— Selected") fixed in both languages by the same change.
+2. **Sentence-initial casing** (D75/PR-17): the caption slot is {k:count camp, definite, initial}; the payload's definite table is capitalised AT REALISATION ("Y ddwy gamp", "Yr wyth camp", "Y chwe champ"; lexical sheets untouched), the client's initial role re-asserts it, and at one the NP is article + soft-mutated feminine singular ("Y gamp"), read from PR-17's own at-one wording on sheet 39. STK-caption-case 34,570 → 0.
+3. **Four g4 heading keys** consumed (ui.g4_th_pe / _school_clubs / _community / _other) — 33,320 instances off the literal path.
+4. **The no-report marker** (D76/PR-18, closes Q16): all six "n/r" literals replaced by the language-neutral "—" read from sheet 43 as catalogue data, with title and aria-label from ui.table_suppressed at every site.
+5. **The English singular contract** (D77, sheet 49 EN-01/EN-02): en_sg derived for every "{slot} pupils" frame with the controlling slot recorded (sg_slot), and t() tests exactly that slot (p.base === 1 for the bar tooltip, p.b === 1 for the appendix caption) — so "Based on: 1 pupil" without ever selecting a singular for the wrong slot. EN-03/EN-04 are the joiner fix. EN-05 ("21th" → "21st") is in the LOCKED narrative and remains with the report owner, untouched.
+6. **One identity** (D78): buildMetadata.identity {frameworkVersion v2.1, frameworkFile, frameworkSha256, runnerVersion 6.0.0, runnerSha256, manifestHash, mode} written once; every legacy field is derived from it; only canonical PR-01…PR-18 are stamped (the "PR-02 (status)" row is gone from sheet 39 and from the stamp). gateResults is pre-seeded with this run's identity, measured by the in-build vendored v6 run, and finalised with the evidence hash — the stock rerun's GOV-rerun gate confirms it.
+
+**Raised against the pack, not worked around:** GOV-rerun's verifier recomputes the pass count over the blocking set MINUS itself and fails any claim above that number — so the maximal verifiable stamp for a clean build is blockingPass 59 of 60, which the verifier then confirms as the 60/60 headline. The stamp carries a note field saying exactly this. An off-by-one in the comparison; flagged for the pack owners.
+
+**Browser gate v2:** Chromium still cannot launch in this environment (missing system libraries, no root); the gate's collection, classification AND v2 typography checks (delimiter-touching characters, "n/r", "1 pupils") were executed under jsdom over a 4-state reduced build: **0 English-without-provenance, 0 typography failures, 0 Welsh-without-provenance**. Results shipped; the stock script is unmodified and ready for the operations run with --states 60 on real hardware.
+
+**Still open for V5.0:** the translator's 342 values; the owner's D69 value, the Q17/PR-15 decisions and EN-05; the linguist's ruling sheet v5 (333 decisions incl. PR-18); the operations device/assistive runs and the Chromium browser-gate run.
+
+---
+
+## Build V4.9 (2026-09-10) — the release-candidate layer, against Framework v2.2
+
+**Version:** 2026-prototype-V4.9-bilingual · pipeline 0.21.0 · framework v2.2 (identity-stamped, sha a540189f…) · QA PASS · pytest 76 passed, 1 skipped · jsdom language-state regression 53/53 · **corpus unchanged in both languages** — all 316,968 English AND Welsh surface records and all 41,650 stack-row sets byte-identical to shipped V4.8 (English identical since locked V4.1); GOV-lock, GOV-lock-cy and FT11-keyset asserted against the pack's 02c_lock_V48_v7.json in-build and on the shipped file; the lock emitted from this build (02c_lock_V49_v7.json) is equal to it in all three parts (English, Welsh, 1,013 FT-11 keys) · 179,445,060 bytes, sha256 9eb4006a…a914 (rebuilt 15 Sep 2026, see the addendum). No grammar rule was touched; the source export is the same file (sha e457bc8e…).
+
+**Acceptance (gate pack v7, run as instructed):** `--selftest` 68/68. Baseline first reproduced to the digit on the V4.8 artefacts (61/69 dev, 61/72 release, 18/18 paths, identical per-gate counts, with Framework v2.1 as the pack's own run used it; the emitted lock equals the pack's). Then this build:
+- **in-build (vendored v7, phase 1):** stamp 69/72 with `pending: [GOV-rerun, GOV-bundle]` and `disputed: {STK-caption-case}` — no prose condition (D81).
+- **stock rerun on the shipped file with the bundle asserted (phase 2): dev 71/72 · release 71/75 · paths 17/18.** GOV-rerun, GOV-bundle, GOV-headline, GOV-lock-cy, FT11-keyset, CNP-lexical/-table/-role, CAT-static-manifest/-bound/-english/-swap and CAT-attr-literal all pass. The one dev failure is STK-caption-case (34,570), a v7 defect raised below; the release failures are that gate plus CAT-values (356), CAT-marker (50) and GOV-mode (dev build) — the translator's and the owner's lane. verify.json (bundle) states 71/75 · 17/18 (both figures unchanged by the 15 Sep rebuild). Runner byte-identical to stock (sha f036f5af…), both JSONs, both evidence archives, both bundles and the bundle directory ship with the file.
+
+**The five fixes, in the plan's order:**
+1. **The static lane is bound** (D79, sheet 52 line 1): every translator-owned text node in the static markup is stamped `data-i18n="ui###"` at build time by its English (a run that is an element's only child is stamped on the element; a run between inline markup is wrapped in a span), the payload carries `welsh.static = {key: {en, cy, consumer}}` (231 rows, 262 text nodes), `applyLanguageState()` calls `renderStatic()`, which walks `[data-i18n]` and writes textContent from the manifest for the active language — read at call time — stamping `static:ui###`; English is restored from the manifest. A page node with no row, a row with no node, or a node whose English differs from the manifest fails the build (pipeline/static_lane.py, welsh_payload.py, build_html.py). The existing numbering is kept: of the 217 rows, 194 keep their key (exact match, or the V4.2 listing's 60-character truncation as a unique prefix; the four identical "This bar chart shows…" truncations resolved in document order), 23 are new (ui231–ui253: the V4.1 sanctioned English edits, the FSM-quartile FAQ) and 23 are retired (17 strings the V4.1 edits removed or reworded, the three chapter-band Welsh subtitles, the school name, and two control texts already served by sheet-43 frames — ui.rail_toggle, ui.chip_none). The translation handoff workbook was not available to this session; it was regenerated losslessly from the V4.8 lexicon rows and the page (pipeline/make_translation_handoff.py → SSS2026_Welsh_Translation_Handoff_V4.9.xlsx, Strings + Retired sheets, full English), and the lexicon rebuilt from it. Fixture toggle under jsdom: 231 keys × 8 states, en → cy → en, 0 failures.
+2. **The sixteen attributes are keyed** (D80, sheet 28): `data-ct/nh/also-h/sh` → `-key` attributes holding ui217–ui230 (14 distinct strings, one key per string). Because v7's CAT-static-bound and browser gate v3 both require every manifest key to have a `[data-i18n]` element, the fourteen strings are static furniture in the markup — the chart-heading override sits above a `.chart-slot`, the "What is this … showing?" heading and the also-heading above `.rep-body` slots, the stacked-chart note inside a static card between `.stack-slot` and `.stack-table-slot` — bound by the same lane; the renderers resolve the same keys through `staticStr()` and render beneath. No renderer reads a text-bearing attribute outside the layer; no legacy attribute survives (build_html refuses one). Keyed consumers: 16.
+3. **The count tables are lexical and equal to sheet 50** (D75): the lexicon builder reads sheet 50; `welsh.countNP` is emitted verbatim, lower-case (`yr un gamp`, `y ddwy gamp`, … `y deg camp`), cross-checked against the numeral service at assembly (a disagreement fails the build); `countNP()` unchanged — casing only under the `initial` role. Captions k = 1–10 render "Y …/Yr …" (jsdom: every stack caption capitalised; browser-gate typography 0 lower-case-initial).
+4. **One plain headline** (D81): `gateResults` carries `blockingPass/blockingTotal`, `headline "n/N"`, `pending` naming GOV-rerun and GOV-bundle, and — new — `disputed` naming STK-caption-case with its reason; the `note` is gone. The pre-seeded stamp is a well-formed "0/0". The stock rerun confirms the claim (GOV-rerun PASS) and writes the final status into the bundle.
+5. **The bundle ships beside the report** (D81/D82): `SSS2026_V4.9_bundle/` with manifest.json (runner, framework, baseline lock_V48_v7.json, phase-1 evidence, browser harness, report — every sha256 equal to the stamp), RUN.md, results_dev/release.json, the rerun evidence, the emitted lock, verify.json and write_verify.py. GOV-bundle passes on the shipped file. PR-19 (retain) read from sheet 39 through a new PR_KEYS pattern and stamped with the other 18; D69 now read only as a SIGNED value (v7).
+
+**Raised against the pack, not worked around:**
+1. **v7 STK-caption-case contradicts v7 CNP-lexical.** The caption emulation substitutes the countNP entry raw and never applies the `initial` role the slot carries, so with the lexical table sheet 50 requires it fails on every k ≥ 2 caption (34,570) and marks UI-DYN-16 partial (17/18). The pack's "61 → 69 of 69" cannot be reached on v7 as shipped; the in-build wrapper honours the dispute only after verifying CNP-lexical/-table/-role pass and every hit is a k ≥ 2 caption whose entry capitalises under the role, and records it in the stamp. One-line fix for the pack: apply the role in the emulation.
+2. **Attribute keys vs CAT-static-bound / browser gate v3.** Spec §14.2 renders the keyed heading at run time with no `data-i18n`, yet CAT-static-bound (static head) and the v3 toggle (`before[k]`) require a `[data-i18n]` element for every manifest key. Resolved by making the sixteen strings static furniture beside render slots (fix 2); the pack should say which it means.
+3. **Denominators.** The pack's 69/72 were measured without the bundle, the Welsh lock and the FT-11 set asserted; with all three asserted the dev set is 72 and the release set 75.
+4. **The runner never writes verify.json** (spec §14.4, RUN.md, sheet 52 say the rerun writes it); write_verify.py states the rerun's result. And sheet 52's command writes the rerun evidence over the manifest-listed `evidence.ndjson.gz`, which would fail GOV-bundle on the next rerun — the bundle's RUN.md writes it to `evidence_rerun_*.ndjson.gz`.
+5. **Runner sha in the baseline bundle** (57064083…) differs from the shipped runner (f036f5af…); same manifest hash. The shipped runner no longer reads v2.1's D69 instruction text as a signature — the baseline's config line did.
+6. **Runs split by inline markup** ("A", "and", "Use the", ". This will clear all filters.") are context-free translator rows inherited from the V4.2 numbering; the spec's `html: true` paragraph rows would need the browser gate to strip tags before comparing.
+7. **Client-written static strings** (overview note, any-activity statement, meta-table labels, "← Back / Contents / Next →") remain English in both languages and are the 57 rows sharing the key `client.js`; they are outside D79 as written and flagged for the next round.
+8. Also for the owner: the chapter bands' fixed Welsh subtitles will sit beside a translated heading in Welsh mode; the review banner (ui001) is a translator row that a release build removes at run time; static `aria-label`s ("Explore results", "Report cover") are not text nodes and stay English.
+
+**Browser gate v3:** Chromium still cannot launch in this environment; its collection, classification, v2/v3 typography (incl. lower-case-initial) and the `--fixture auto` toggle were executed under jsdom over an 8-state reduced build (whole school, phase, both sexes, a year, a suppressed view, a cohort view): **0 English-without-provenance, 0 Welsh-without-provenance, 0 typography faults, toggle 0 failures** (V4.9_browser_gate_jsdom.json; the stock script is unmodified for the operations run with --states 60).
+
+**Still open for V5.0:** the translator's 356 values (342 + 14 attribute strings; 217 page-furniture rows now bound); the owner's D69 value, Q17/PR-15 and EN-05; the linguist's ruling sheet v6 (PR-19 / FT-11, the four fixtures, the 150-sentence proofreading sample, tab 9); the pack owners' rulings on the eight items above; the operations device/assistive runs and the Chromium browser-gate run.
+
+**Addendum (15 Sep 2026) — rebuild without the presentation regression.** The 10 Sep build followed spec §14.1 literally and rendered an untranslated static row as a bare `⟪missing:ui###⟫` in Welsh mode; with 262 bound nodes that turned the introduction, FAQs, rail labels and buttons into markers — a visible regression from V4.8, which left the same furniture in readable English. Rebuilt the same day the owner raised it: `staticStr()` now returns the manifest English for a pending row and `renderStatic()` marks the node with the review class the translator lane has carried since V4.2 (dotted red, title "Heb ei gyfieithu eto — dangosir y Saesneg") and provenance `handoff:pending:ui###`; a key with no manifest row still shows the marker, and release mode still fails on the empty value (CAT-values). Recorded as a deviation from §14.1 for the pack owners. Client change only: the payload is identical, every gate result is unchanged (in-build 69/72 pending 2 disputed 1; stock dev 71/72, release 71/75, paths 17/18; lock equal in all three parts; jsdom 53/53; browser-gate logic 0/0/0, toggle 1848/1848, 0 failures), and a whole-page text comparison against V4.8 in both languages differs only in the version, pipeline and build-date lines. File 179,445,060 bytes, sha256 9eb4006a38a8a77dc74b8b90bcecb5463d0ff98ca6a2f2b1372f69cb6d9fa914; bundle manifest and verify.json re-issued for it. The file was assembled whole in Downloads and copied to Data_Report_Outputs once the Windows Plan9 fix (KB5129195) restored the sandbox mounts.
+
+## Build V4.10 (2026-09-15) — the translator's static text, against Framework v2.2
+
+**Version:** 2026-prototype-V4.10-bilingual · pipeline 0.22.0 · framework v2.2 unchanged (sha a540189f…) · QA PASS · pytest 82 passed, 1 skipped (six new V4.10 tests) · jsdom language-state regression 59/59 · **corpus unchanged in both languages** — all 308,400 English AND Welsh narrative records (h1, h2, module, scope, m, rows) and every stack-row set byte-identical to shipped V4.9 (English identical since locked V4.1); GOV-lock, GOV-lock-cy and FT11-keyset asserted against 02c_lock_V48_v7.json in-build and on the shipped file; the lock emitted from this build (lock_V410_v7.json) is byte-equal to it · 179,501,919 bytes, sha256 5b4e1030f7dd8d1d46722027e8df9dbea532217cbd00603fed3af065264a7c29. No grammar rule, ruling, lexicon row or workbook cell was touched; the source export is the same file (sha e457bc8e…). Built fresh from the export in an empty working directory (no state chunk reused).
+
+**Input:** the translator's Word document `18117 Chwaraeon Cymru 2026 School Sport Survey - School Reports.docx` (sha256 15d726d0…8eeb; 350 English/Welsh rows in eight tables). Ingested by a new tool, `pipeline/ingest_translation_doc.py`, which matches each row to a handoff row **by its English** and carries the Welsh verbatim — it writes no Welsh word. Every row of the document is accounted for in `V4.10_translation_register.xlsx` / `.md` by tier: 216 values written to the handoff (171 of the 204 static page rows, 39 of 45 chart questions, 3 chart footnotes, 3 module headings); 169 rows where the document's Welsh differs from the Framework workbook's for a client-rendered string (118 answer labels, 45 filter-panel cohort labels, 4 stacked-chart legend entries, 2 filter labels) — **not applied**, the workbook is the source of truth and these are a change request to the framework owner (see item 1 below); 88 rows where the document and the workbook already agree; 92 instances of sheet-43 frames (banner, base line, captions); 24 generated narrative sentences (the document translates one instance; the report generates them from fact records — listed beside the generated Welsh for the linguist); 32 data rows (the 21 local authorities, the five RSPs, profile field labels); 76 translator rows the document does not cover (still pending, listed); 2 translator inconsistencies (the same question given as "tymor hir" and "hirdymor"; "fel arfer" with and without the comma — first occurrence kept, both listed); 2 frame instances with a figure ("Based on: 363 pupils – multiple answers permitted").
+
+**Acceptance (gate pack v7, vendored runner byte-identical, sha f036f5af…):** `--selftest` 68/68. In-build stamp 69/72, pending [GOV-rerun, GOV-bundle], disputed {STK-caption-case}, paths 17/18. **Stock rerun on the shipped file with the bundle asserted: dev 71/72 · release 71/75 · paths 17/18** — unchanged headlines; the release-only failures moved from CAT-values 356 → **118** and CAT-marker 50 → **11** (the 118 empty catalogue keys are the 76 translator rows the document does not carry — module headings d3…s1, the combined-group chart questions, four chart footnotes, the eight interface messages, the review banner, the intro/FAQ sentences with a count or school-name slot, the four "This bar chart shows…" sentences with the sport-count slot, five attribute strings ui225–ui228/ui230, ui247, ui032, ui183/185–189/195/200 — plus the generator-owned and framework-owner rows); STK-caption-case disputed as before; GOV-mode dev. verify.json states 71/75 · 17/18. Browser gate v3 logic under jsdom over the 8-state build: 0 English-without-provenance, 0 Welsh-without-provenance, 0 typography faults, fixture toggle 204 keys × 8 states en→cy→en 1,632/1,632, 0 failures. (The v3 word-list classifier now marks 28 translated static paragraphs and 129 frame instances as "mixed" because Welsh "a", "yn", "AG", "Actif" and "data" are on its English list — all carry provenance, so none is a finding; noted for the pack owners.)
+
+**What changed, and the one structural change:**
+1. **Static values land through the designed channel.** The regenerated handoff (`SSS2026_Welsh_Translation_Handoff_V4.10.xlsx`, kept in config/) carries the translator's Welsh in its Welsh column; the lexicon was rebuilt from it; nothing else in the lexicon changed (verified section by section).
+2. **Block rows (resolves V4.9 register item 6).** A paragraph whose only inline elements are emphasis (strong/em/b/i/br), with every emphasis boundary on whitespace and no slot, placeholder or link inside, is now **one** translator row: its English is the tag-stripped text (exactly what CAT-static-english compares), the emphasis travels as manifest `html`, and the Welsh value carries the translator's own bold/italic runs as `<strong>/<em>`. Thirteen paragraphs (the FAQ colour/grey/numbers/FSM paragraphs, the two "We captured…" contexts, the latent/unmet-demand definitions, the "Print or save" sentence, the Explore-results bullet) replace 38 context-free fragment rows, retired to the Retired sheet; keys ui254–ui264 are new, ui057 and ui110 kept theirs. The client renders such a row through an allow-list (strong, em, b, i, br; one guarded colour style; everything else escaped), and restores English from the manifest markup. Four paragraphs whose emphasis touches punctuation ("says <em>…</em>.", "clicking <strong>…</strong>.", the two club sentences) stay fragment chains — the tool splits the translator's paragraph on **their** emphasis runs, which mirror the English structure, and only when the run pattern is identical (four chains, all applied).
+3. **Contents rows** "A: B" / "A? B" split on the translator's bold prefix (7); numbered rail links keep the page numeral with the translator's text (8).
+4. **Handoff shape corrections, written back into the workbook and listed on the register's "Handoff English drift" sheet:** the seven chart-footnote rows that shared their metric's key now carry the `<mid>_base_note` key the build reads (in V4.9 the footnote row silently overwrote the chart question in the dict), and the English of `freq_estimate`, `club_freq_estimate` and five footnotes — truncated at 60 characters or stale against metrics.yml since the V4.2 listing — is refreshed from the report's metric definitions so a translator sees the sentence the page shows.
+5. **Language slider (UX request):** the V4.9 button is now a two-position switch in the same rail position — English left, Cymraeg right — implemented as `<button role="switch" aria-checked>` so keyboard, focus and the existing click handler are unchanged; both labels come from the catalogue (`language_label`, `language_label_en`) and the active one is highlighted.
+
+**Raised — where the document and the rulebook meet:**
+1. **Client-rendered strings are workbook rows, not handoff rows.** The document supplies Welsh for answer labels ("Very" → "Hyderus iawn" under confidence but "Iach iawn" under health; "Prefer not to say" → "Mae’n well gennyf…" against the workbook's "…gen i…"), the stacked-chart legend ("Unwaith yr wythnos" against "1 waith yr wythnos"; "Tair gwaith…" against "3 gwaith…"), the cohort labels of the filter panel and the "You are viewing" banner ("Rydych chi’n gweld" against the sheet-43 frame "Yn dangos:"). All 169 differences are listed with the workbook's current value. Adopting them means a Framework v2.3 from the framework owner (sheets 18–23, 28, 43); the context-specific "Very/Quite/Not very" labels would also need the answer-label table keyed by question, which it is not today. Ready to prepare the candidate workbook on instruction; not done unasked.
+2. **Slot-bearing sentences need sheet-43 frames (D63).** "This report presents the responses given by pupils at {school}: {n} pupil responses are included, across {years}", "Pupils in Years 3 to 11 at {school} who completed…: {n} pupil responses…", "…therefore reflect the {n} responses…", the four "There were a total of {n} sports to choose from" sentences and the example banner cannot take the translator's sentence as fragments (Welsh puts "Mae" before the number). The translator's sentences are quoted on the register's slot-bearing sheet as the proposed frames; until the framework owner adds them these rows show English under the review marker, as in V4.9.
+3. **Generated narrative:** 24 document rows translate one instance of a generated sentence (e.g. "Sport in PE or lesson time was the most frequently selected setting, chosen by 335 of the 363…"). Not applied — Welsh is generated from fact records (rule 2); the linguist can compare the translator's rendering with the generated one on the register's sheet and rule through the workbook's frames.
+4. **Data, not text:** the 21 local-authority and five RSP Welsh names and the profile field labels are the profile's data; the profile section is still client-rendered English in Welsh mode (V4.9 item 7). Recorded as the data set to load when the profile lane is designed.
+5. **Not in the document:** 76 translator rows (listed) — chiefly the module headings d3…s1, the combined-group chart questions, the interface messages (no data / not asked / suppressed), the review banner, the summary/next-steps furniture (ui186–ui189), five attribute strings and ui247 "Somewhere Else (such as the Park, Beach or Garden)". Also the two GDPR box frames (`ui.gdpr_body_full/_module`), whose sheet-43 Welsh column repeats the English.
+6. **Document English that differs from the page's:** "Interactive Report" (page: "Interactive Learning Report:"), "Less than once per week" (legend: "…once a week"), "Which sports are our pupils doing, and how often?" (page uses an em dash) — matched where only punctuation or case differs, listed where wording differs. The English narrative is locked; none of it changed.
+
+**Still open for V5.0:** the framework owner's decision on items 1–2 (Framework v2.3 with the translator's client-rendered strings and the slot frames); the remaining 76 translator rows; the owner's D69 value, Q17/PR-15 and EN-05; the linguist's ruling sheet v6; the pack owners' rulings on the V4.9 register; the operations device/assistive runs and the Chromium browser-gate run.
+
+
+## Build V4.11 (2026-09-15) — the assessment round, against Framework v2.3
+
+**Version:** 2026-prototype-V4.11-bilingual · pipeline 0.23.0 · **Framework v2.3** (sha 9356dee9…; produced from v2.2 by `pipeline/make_framework_v23.py`, sheet 55 is the change log) · QA PASS · pytest 82 passed, 1 skipped · jsdom language-state regression 75/75 · **corpus unchanged in both languages** — all 8,568 state records byte-identical to V4.10 (and so to V4.9/V4.8; English locked since V4.1); GOV-lock, GOV-lock-cy and FT11-keyset asserted against 02c_lock_V48_v7.json; the emitted lock (lock_V411_v7.json) byte-equal to it · 179,512,658 bytes, sha256 5e33b6fdeca94b8d46a058abd736aa033354f355a1149aa3bba4d670ffdf466f. Built fresh from the same export (sha e457bc8e…) in an empty working directory.
+
+**Input:** the independent assessment `SSS2026_Welsh_Interactive_Text_V4.10_Assessment.docx` and its evidence log (765 records) of 15 Sep 2026, plus the owner's report that the slider showed no language names on first load. The assessment's own regression (317,758 surfaces, 8,568 states, 0 differences from V4.9) agrees with this record; its findings were taken in its priority order.
+
+**Acceptance (gate pack v7, vendored runner byte-identical, sha f036f5af…):** `--selftest` 68/68. In-build stamp 69/72, pending [GOV-rerun, GOV-bundle], disputed {STK-caption-case}, paths 17/18. **Stock rerun on the shipped file with the bundle asserted: dev 71/72 · release 71/75 · paths 17/18** — unchanged headlines; the release-only gaps fell again: CAT-values 118 → **103**, CAT-marker 11 → **8** (six combined-group chart questions and two footnotes the translator has not covered). The in-build gates caught two of this round's own faults before the package was written — FRAME-dormant (frames consumed through markup attributes were invisible to the client's consumer set; now declared in `MARKUP_FRAMES`) and FRAME-delimiter (the FSM body frame ended with a colon; the value became a slot). Browser-gate v3 logic under jsdom over the 8-state build: 0 English-without-provenance, 0 Welsh-without-provenance, 0 typography faults, toggle 192 keys × 8 states 1,536/1,536, 0 failures.
+
+**What changed, in the assessment's order:**
+1. **P0 live destinations (§6).** The five chart footnotes the translator had returned in V4.10 were being discarded by a dict literal that set the `<mid>_base_note` keys to None after the handoff spread (V4.9 shape); fixed in both builders — three now land (take_part_method, welsh_when_playing_sport, unmet_demand), two remain empty. The three catalogue consumers with no row (appendix_total_responses, fsm_context_title, fsm_context_body) are sheet-43 frames in v2.3; the first carries the translator's Welsh. Twelve slot-bearing static fragments (ui017/018, ui036–038, ui040/041, ui116/117/119/127/129) are retired and replaced by sheet-43 frames with slots where the document's figures stood: ui.intro_sentence, ui.faq_included, ui.faq_missing (translator's sentences), ui.chart_sports_total_pe (translator's), and the three sibling chart notes (English only, pending). Static rows 204 → 192, 171 translated.
+2. **P0 clear corrections (§7.1).** Eighteen keys / nineteen minimal substitutions applied by `pipeline/apply_review_corrections.py`, each carrying the note "reviewer correction (assessment §7.1, 15 Sep 2026) — pending translator confirmation" in the handoff's new Note column: ui029, ui034 ("Yn ei dro"), ui057 ("mae barrau llwyd tywyll yn dynodi…"), ui064, ui087, ui095, ui104 ("archwiliwch"), ui143 ("i ddisgyblion"), ui154 ("AG a Gwersi Actif"), ui157, ui190, ui197 ("Rhestrau/restrau"), ui254 ("Defnyddiwch banel"), ui255 ("Mae hyn"), ui257, community_club_freq, other_setting_freq, sports_other_setting. Five §7.1 items that ask for a decision or an unspecified recast (ui023 voice, ui086 passive, ui143's parallel clause, ui250 plural, ui255's agreement) are NOT applied — queued.
+3. **P0 linguist decisions (§7.2, FT11).** Not applied (they are rulings); all 31 are on sheet B of `V4.11_translator_linguist_queue.xlsx` with the current Welsh beside each. Two of them the translator's own document already settles and v2.3 adopts: `ui.stack_caption_sex` now "rhywedd" (the document's term for Gender throughout) and the banner prefix "Rydych chi’n gweld:" (edits on sheet 43, logged).
+4. **P0 client English (§8).** Every route the assessment listed now goes through a sheet-43 frame: injectNav (Back/Contents/Next/aria — translator's "Yn ôl / Cynnwys / Nesaf"), renderProfile headings (six, all translator's), the technical record (nine, English pending), the ethnicity heading/columns/note (translator's), the FSM card, the profile base line with its suffix, the any-activity headline and note, the overview note, the document title, the three ARIA names and three alt texts, and the selected tick (a real element from `ui.selected_tick`, no longer CSS content). Profile data values pass through v2.3 sheet 53 (21 LAs, 5 RSPs, the fieldwork dates in the translator's Welsh). `pctTable` and `renderVariation` (dead, English) removed. The profile and navigation re-render on every language change.
+5. **P0 language persistence (§8.2).** Every in-page anchor now scrolls to its section and records it in the state hash (`…&lang=cy&s=m-contents`); a bare `#section` hash is folded into the state; a saved link restores language, filters and section. jsdom sequence: Welsh + girls → Contents → hash keeps `lang=cy`, `gender=girl`, `s=m-contents`.
+6. **P1 slider (§9.2 and the owner's report).** Both label states ≥ 4.5:1 (inactive #4A4A4A ≈ 8.9:1, active var(--blue) ≈ 9.6:1, underlined). The language names are now in the markup from first paint: the 179 MB payload is parsed before the script runs, so a script-written label appears late — the owner's observation.
+7. **§9.4 language of parts.** Every pending fallback node (static or frame) carries `lang="en"`, the review class and provenance `…:pending:key`; removed when the Welsh lands. `t()` now shows the English for a declared frame with no Welsh yet (the static-lane policy recorded in V4.9, made uniform) and the marker only for an undeclared key.
+8. **§9.5 review note.** Generated from live counts through `ui.review_note` ("171 of 192 page-text rows are in Welsh…"); its own Welsh is pending, so it shows English under the marker in Welsh mode — accurate, and only in review builds.
+
+**Framework v2.3 (the workbook edit):** 46 new sheet-43 frames (22 with the translator's Welsh, 1 derived, 23 English-only pending), 2 edits, sheet 53 Proper names (27 rows), sheet 54 Translator label overlay — **INACTIVE** (77 rows: the translator's answer labels, cohort labels, legend and filter labels where they differ from the live sheets; applying any of them changes the generated corpus and the lock, and "Very/Quite/Not very" need a per-question structure — each awaits the linguist), sheet 55 change log. No rule, ruling, lexicon or count table changed; the corpus proves it.
+
+**Raised:** the FSM card — the translator's document translates a different English ("Free School Meal Quartile: / Your School is in … Quartile 1 / See …") from the report's locked card; the owner decides the English (sheet 49) and the Welsh then lands. The overview note's "from Year 3 to Year 11" is fixed English that must become slots before other schools are built (sheet 49). "gan disgyblion" in the translator's intro sentence — for the linguist. Q17 GDPR frames unchanged (exception). The assessment's "Interactive Report" row is not the page's title string.
+
+**Still open for V5.0:** the translator's confirmation of the 18 corrections and the 5 recasts; the 54 still-empty rows (21 static, 23 frames, 6 chart questions, 2 footnotes, 2 generic prompts); the linguist's 31 decisions, the sheet-54 overlay and FT11; the owner's D69, Q17/PR-15, EN-05 and the two sheet-49 items above; the pack owners' rulings; the operations Chromium, device and assistive runs.
+
+
+## Build V4.12 (2026-09-16) — opens in Welsh
+
+**Version:** 2026-prototype-V4.12-bilingual · pipeline 0.24.0 · Framework v2.3 unchanged · 179,512,852 bytes, sha256 aa2592cd3f60b056e508768d11ce4befd85737d9e06682d99caf7db053ccc233. **One change, at the owner's request:** the report opens in Welsh; the switch (or a saved link carrying `lang=en`) selects English. Implemented as the client's default language state (`lang: "cy"`), the document's initial `lang="cy"`, and the switch's first-paint state (aria-checked="true", Cymraeg highlighted). Nothing else was touched: a line-level comparison of the shipped V4.11 and V4.12 files shows exactly those lines plus the version identity and one line the V4.11 file had missed — the `scrollIntoView` guard for non-browser runtimes added to the source while the V4.11 jsdom test was being finished, after that file had been built (a no-op in every browser, which always has the method), and all 8,568 state records are byte-identical to V4.11. Fresh build from the export in an empty directory; QA PASS; in-build 69/72 (pending 2, disputed 1), stock reruns dev 71/72 · release 71/75 · paths 17/18; emitted lock byte-equal to the V4.8 lock; pytest 82/1; jsdom 78/78 (three new assertions: a no-hash load opens in Welsh with the switch on, the Welsh banner renders first, a `lang=en` link still opens English); browser-gate port 0/0/0, toggle 0 failures. The get-ready checklist (queue sheet F) is unaffected.
+
+## Build V4.13 (2026-09-17) — the accessibility switch, against Framework v2.4
+
+**Version:** 2026-prototype-V4.13-bilingual · pipeline 0.25.0 · Framework v2.4 (sha256 b075f8e2…, three new sheet-43 frames, sheet 56 change log) · 179,527,771 bytes, sha256 08901ed6b53273dd9720195f2ef29a9a22859054341c72558ca7e15fafe8e835. **Source:** "School Reports Accessibility Feedback.docx" (sha256 71dffd0e…), ten items. **Owner's brief:** an accessibility switch on the filter panel that, in both languages, applies the document's presentation changes with the content unchanged; the default bilingual report exactly as it was; the report screen-reader friendly without changing it.
+
+**The switch.** `#btn-a11y` sits directly under the language slider, the same `<button role="switch">` pattern, off by default, label from the new frame `ui.a11y_switch` (English present from first paint and overwritten from the catalogue; in Welsh mode it shows the pending English under the review marker with `lang="en"`, as every V4.11 pending frame does). Its state is `html.a11y` and the hash flag `a11y=1` beside `lang`, so a saved or shared link keeps it; the default hash is unchanged. On, in either language: Aptos/Arial in place of Montserrat (item 1); body 18 px and nothing below 14 px (item 2); near-black text, the yellow fields (prompts, chips, the third card) become pale yellow with a dark border and the light-blue panels white with a dark border, the red used for small text darkened to 6.1:1 (item 3); a colour-blind-safe chart palette — vermillion/blue/grey bars, the selected value light yellow with a black outline and its existing tick, stacked segments recoloured by position through a `data-seg` attribute (items 3, 6); every chart's data table opened and focusable (items 6, 8); the cover's red field and the character images muted (item 9a); a visible caption under each character image, taken from its own alt frame (item 9b); a glossary panel at the top of the guide (frames `ui.a11y_glossary_heading`, `ui.a11y_glossary_intro`) whose entries are links to the guide's existing FAQ answers — base, numbers, percentages, colours, grey bars, greyed-out sections, hidden numbers, Free School Meal quartiles, the banner — so it adds no new definition (item 9c, glossary). Off restores everything, including the tables it opened. Content never changes; no Welsh word was composed.
+
+**Global, invisible (both modes, both languages):** every chart card is a `role="group"` named by its own heading (`aria-labelledby`), so assistive technology announces the chart title on entering it (item 5); the no-report marker "—" on chart values now carries the `ui.table_suppressed` frame as visually hidden text (PR-18/D76, previously tables only); stacked segments and legend swatches carry `data-seg`; the guide's FAQ entries carry ids. Item 4 (alt text): every `<img>` already had alt text (cover logo and lockup, three character images through frames); the one decorative SVG sits inside `aria-hidden`. Item 7 (screen reader reading only the first line of a paragraph): no HTML cause found — the paragraphs are single `<p>` elements without breaks; likely a property of the PDF the reviewer read, not the page. Item 10 (PDF cut off a third of the way down): not reproducible in headless Chromium — the print of the 8-state page runs to 61 pages (English) / 65 (Welsh), 108 / 96 with the switch on; defensive print rules added (no clipped or scrolling ancestors, no sticky positioning, no scroll margins while printing) as the only change to the default file's print styles; the reviewer's browser and print route are needed to go further. Not done, by rule: the plain-English rewrite of technical terminology (item 9c) is owner-owned English (locked narrative, sheet 49) — raised, not attempted.
+
+**Proof that the default is unchanged.** The 8-state page rendered in Chromium at 1280 px, full page, English and Welsh, V4.12 file against V4.13: zero differing pixels outside the filter rail (where the new switch is) and the technical-record row that names the version — the whole report column is pixel-identical in both languages (`tests/browser/render_probe.py`, results in the bundle). Line-level: template +146/−15 and client +80/−14, all V4.13; all 8,568 state records byte-identical to V4.12/V4.8; payload differs only in the three new frames and the build identity. The static lane extracts the same 216 nodes / 192 rows (the switch label, glossary heading and note are frame hosts, client-owned).
+
+**Gates.** Fresh staged build from the export in an empty directory: QA PASS; in-build 69/72 (pending 2, disputed 1); stock reruns dev 71/72 · release 71/75 · paths 17/18 — identical to V4.12; emitted lock byte-equal to the V4.8 lock; CAT-values 103 / CAT-marker 8 unchanged (the three new frames are pending, like the 23 V4.11 frames). One in-build gate fired during the first QA: UI-literal on the string `<div class="chart-card" role="group" aria-labelledby="` (its heuristic reads "chart" and "group" as English words); the group attributes are now set through the DOM after insertion, as the slot branch already does, and the second QA passed. pytest 82/1; jsdom 97/97 (19 new assertions: switch present and off, no `a11y` flag in the default hash, label from the frame, on → class/hash/tables/captions/glossary, glossary link opens its FAQ and records the section, state survives a language change, pending label marked in Welsh, off restores, chart groups, `a11y=1` link opens on); provenance port 0 / 0 / 0, toggle 0 failures.
+
+**Open, for the owner and translator:** Welsh for `ui.a11y_switch`, `ui.a11y_glossary_heading`, `ui.a11y_glossary_intro` (handoff); the plain-English pass on technical wording (sheet 49); the reviewer's PDF route for item 10; whether the switch should also be remembered per reader (it is currently carried by the link).
+
+## Build V4.14 (2026-09-17) — the translator's text verbatim, against Framework v2.5
+
+**Version:** 2026-prototype-V4.14-bilingual · pipeline 0.26.0 · Framework v2.5 (nine sheet-43 frame edits, sheet 57 change log) · sha256 a68ab9ddd07d200ca96eb4dc72b42537266676d873c4d6d2a692e0d0976e1cd3. **Owner's instruction (17 Sep 2026):** the translator's document of 15 Sep 2026 takes precedence and goes into the page text and labels word for word. **Audit first:** every row of that document was traced against V4.13 (`SSS2026_V4.14_Translator_fidelity_audit.xlsx`). Of the 216 page-text rows the V4.10 ingest wrote, 199 were still verbatim; the 17 that differed were all the V4.11 reviewer substitutions (rulebook item 11 at the time — scripted minimal substitutions with provenance, pending translator confirmation). No framework rule had altered a static row. Eighteen existing sheet-43 frames the document also covered had kept the workbook's earlier wording because the V4.10 ingest treated existing frames as framework-owned — an oversight, now corrected where no slot or term decision is involved. The chip prefixes were found to be Welsh written in code (`welsh_render.py` COHORT_FRAME_CY, D50 "derived — listed for the linguist"), never checked by a Welsh speaker; they are decided per row with their answers on the query sheet because prefix and answer interact. The translator's versions of 19 engine sentences were, correctly, never applied; each is now a rule question on the handover (sheets 4–5).
+
+**Changes.** (1) `pipeline/revert_review_corrections.py` — the exact inverse of `apply_review_corrections`: 18 keys / 19 substitutions reverted, producing `SSS2026_Welsh_Translation_Handoff_V4.14.xlsx`; every translated row proven equal to the verbatim V4.10 ingest (0 differences over 216 rows). The reviewer's findings remain questions on handover sheet 1, reworded so "Keep my wording" is the default. (2) Framework v2.5 (`make_framework_v25.py`): ui.chip_none, ui.table_summary, ui.stack_th_total, ui.stack_caption_year, ui.stack_caption_sex ("fesul"), ui.th_year_group, ui.th_base ("Sylfaen", matching the translator's FAQ), ui.f14_unmet ("heb ei fodloni", matching the engine's sentences), ui.ranking_note (translator's sentence with the figures returned to slots). No Welsh composed. (3) Version bump only in the pipeline; template and client byte-identical to V4.13 (0 changed lines).
+
+**Proof.** Payload diff V4.13→V4.14: exactly 15 static rows + 3 chart headings (the 18 reverted keys) and the 9 frames; all 8,568 state records byte-identical; emitted lock byte-equal to V4.8. Fresh staged build, QA PASS, in-build 69/72; stock reruns dev 71/72 · release 71/75 · paths 17/18; pytest 82/1; jsdom 97/97 (three assertions updated to the translator's wording; the "reviewer corrections applied" assertion inverted to "translator's text verbatim"); provenance port 0/0/0.
+
+**Not applied, by design, until the translator answers:** the answer-label overlay (survey wording vs document — query sheet, AW-1); chip prefixes (query sheet, prefix decision); frames that depend on a term (camp/chwaraeon, gwedd/golwg, gan ddisgyblion/disgybl) or a rule (mutation after 22, figure vs word 1–10); and the engine-pattern questions from the 19 generated sentences. Two label-table defects recorded for v2.6: sheet 23 keyed by English text maps "Not at all" generically (confidence questions show "Dim o gwbl" where the survey said "Ddim yn hyderus o gwbl"); yes/no echoes use the survey's first person where the translator uses the third.
+
+## Build V4.15 (2026-09-21) — the translator's completed handover applied, against Framework v2.7 — the final prototype
+
+**Version:** 2026-prototype-V4.15-bilingual · pipeline 0.27.0 · Framework v2.7 (sha256 972a3998e2a68cdbe7e701d75924901db6369967c0c2118c322c8aa466317792) · gate pack v8 (runner sha256 3057fef25b5d54bd564b0ee86affd3ef34048b4c1598c27eeb86ae3da2bde4fe, manifest c4221bba2cff4dcb — unchanged from v7) · shipped file SSS2026_ILR_Report_V4.15_Bilingual.html 179,534,432 bytes sha256 dd5d9959d40c2ed417cdc8eeb937171ff50d3240b690c99583f462ba45891bfd. **Owner's instruction (21 Sep 2026):** follow the translator's completed workbook (`SSS2026_Welsh_Translator_Handover_V4.14_1 COMPLETED.xlsx`, Aron Roberts, 21 Sep 05:15; sha256 fd715fe5…) — implement every correction, label and remaining item so the framework and the generation engine are fully built, then generate the final prototype.
+
+**How the workbook was applied.** By one script, `pipeline/apply_translator_handover.py`, from the completed workbook, Framework v2.6 (sheet 58 = the chip prefixes moved out of code, output byte-identical), Handoff V4.14 and the translator's 15 Sep document (for the one value the handover had quoted truncated). 174 changes with a per-cell change log (Framework sheet 60; Handoff sheet "V4.15 change log"; `SSS2026_V4.15_Translator_decisions_applied.xlsx`), 21 typographic normalisations (rule 41: straight → curly quotes, NBSP → space; wording untouched), 25 flags (Framework sheet 61; `SSS2026_V4.15_Translator_flags_for_confirmation.md`). Nothing typed by hand; no Welsh composed — every value is a cell of the handover, of the approved survey (sheet 30/23) or already in the workbook.
+
+**What the translator decided, and where it landed.** Sheet 1: 13 reviewer suggestions confirmed (applied as the exact V4.11 substitutions), 6 of the translator's own versions (whole cell; ui250 the bracketed sentence). Sheet 2: 24 suggested wordings (exact substitutions), ui009 the translator's version, 4 kept; AW-1/AW-2/AW-5 keep the survey's wording for every answer label; AW-3 "keep the named form" (PR-11 stands); AW-4 one term each — `cyflwr hirdymor` everywhere (sheets 17/22/31/44/58, the handoff, the e5 sentences via `welsh.term()`), `y golwg hwn` for "this view" (ui193, ui264). Sheet 2b: 72 label/prefix rows — answer labels stay the survey's; the profile table's long labels get their own sheet-23 rows (White from the document, the rest from the survey) and the client no longer falls back to English there (`buildMetadata.ethnicityProfileCy`); the confidence chips/charts quote the confidence question's own option `Ddim yn hyderus o gwbl` (D32 branch); the take-part chip's `Arall, rho fanylion`; chip prefixes from the translator's document for ep/eb/eo/li/mi/ov/dy (sheet 58), `Pob Ymatebwr` for the filter's "All Respondents" (the banner's "All pupils" stays `Pob disgybl`). Sheet 3: all 56 rows — 29 page-text rows and 2 new discussion-question rows (the static lane is 192/192 in Welsh, the two GDPR frames' Q17 exception closed, the technical record, the document title, the accessibility switch); one frame returned in English (`ui.a11y_glossary_heading`) is left pending and flagged. Sheet 4: 41 rules Correct; rule 15 WRONG → **D84** CONJ-06 `MODE=figure` on sheet 11 ("a" before every figure written in digits; decimal and vigesimal readings kept selectable); rule 16 WRONG → **D85** "ail" lenites its noun (`welsh_render.ail_np`, 2,353 sentences "Yr ail gamp"). Sheet 5: 35 sentences Correct, #12 (`a 11`) and #34 (`Yr ail gamp`) as ruled; all 19 comparisons: the engine's version. Twelve provisional rulings confirmed on sheet 39; decisions D84–D87 on sheet 02.
+
+**Held or flagged, never patched.** The cb chip prefix the translator chose is identical to the ov chip's, so two English filters would carry one Welsh label — the blocking gate DIS-scope rejected that build (504 view labels); today's prefix is kept for that chip only and the translator is asked for a distinct one (flag 21). AW-4's `Ddim yn siŵr` / `gennyf` / `Sefyll–Eistedd` contradict the per-row survey decisions and AW-1 — the per-row decisions stand, flagged (1–3). Row 4 (`Oes` for the ethnically-diverse chip) contradicts AW-3's comment and rows 47–48 — the named form stands, flagged (20). CONJ-06: the rule comment says decimal reading, the corrected sentence writes `a 11`; the figure rule is the one rule that yields both, flagged for confirmation (25). Typos applied word for word and flagged: ui086, ui189, ui230; ec/cn prefixes applied by extension of their siblings (23–24); the Black profile row by extension of rows 50–53 (18).
+
+**Engine and assurance.** Gate pack v8 (`vendor_welsh_gates_v8.py`): v7 with CONJ-06 read from sheet 11 — 62 changed lines, self-test 68/68 + one seeded case per mode; identity, QA, bundle and kit switched to v8. D82: the Welsh corpus lock was re-emitted from the build (`02c_lock_V415_v8.json`, sha256 d5db3fb3…) by `welsh_gates8.emit_lock`, which asserted first that the English projection (8,568 states) and the FT-11 key set equal the V4.8 lock's — they do; 4,201 states moved in Welsh, 0 in English. Fresh staged build (empty working directory), QA PASS, stamp 69/72 (pending GOV-rerun/GOV-bundle, disputed STK-caption-case), paths 17/18; stock reruns on the shipped file dev 71/72 · release 72/75 (STK-caption-case disputed; CAT-values 72 — the engine- and client-owned rows, down from 103, the translator's lane complete; GOV-mode — the owner's unsigned D69) · paths 17/18; emitted lock equal to the baseline in all three parts; ⟪missing⟫ markers 0 (from 8); pytest 86/1 (three CONJ-06 golden tests rewritten for the configured mode, four v2.7 tests added); jsdom 104/104 (assertions moved to the V4.15 state, seven added); provenance port 0 / 0 / 0, toggle 1,536/1,536/1,536; Chromium render probe 61 (EN) / 65 (CY) A4 pages, element renders checked by eye (rail, ethnicity table, confidence and take-part charts, glossary, cover).
+
+**Proof of the English lock.** Record comparison V4.14 → V4.15: 271,966 narrative paragraphs, 0 English differences; every one of the 12,454 Welsh paragraph differences classifies as D86 (8,733), D85 (2,353), D84 (1,139), a combination of the three (147) or the confidence label (77); h1/h2 changes are D86 only; the 2,016 banner changes are the sheet-58 prefixes. The template is byte-identical to V4.14; the client changed in one place (the ethnicity profile table takes its Welsh from `buildMetadata.ethnicityProfileCy` instead of matching long labels against the chart's short options and falling back to English); no English catalogue value changed.
+
+**Rebuild-kit reproduction.** `SSS2026_ILR_Rebuild_Kit_V4.15.zip` (124 files, MANIFEST.sha256 verified 124/124): from the kit's own `repo/` and `inputs/`, in an empty working directory, the v8 runner's self-test (68/68 + modes), the lexicon (byte-identical to the shipped `config/welsh_lexicon.json`), pytest 86/1 and the full staged build (states 0–12, assemble, QA PASS against the shipped V4.15 lock — no emission — stamp 69/72, paths 17/18, write) reproduce the shipped package: all 8,568 states byte-identical; `buildMetadata` differs only in `generatedAt` and the evidence file's hash (the evidence carries timestamps). Ships to Downloads (report as 10 parts joined on the PC, sha256 verified dd5d9959…; bundle; framework v2.6/v2.7; lock; handoff; register; flags; gate results; provenance port; render probe; key documents; kit) and to Data_Report_Outputs (the current-version set); the repo copy `Downloads\sss2026-ilr-prototype` synced from the kit.
