@@ -1,6 +1,26 @@
-# School Sport Survey 2026 — Interactive Learning Report (bilingual prototype)
+# School Sport Survey 2026 — Interactive Learning Report (bilingual)
 
-**Current build: V4.15 (21 Sep 2026) — the final prototype: the translator's completed handover applied, Framework v2.7, gate pack v8.**
+**Current build: V5.0 (21 Sep 2026) — the first three real-school reports from the cleansed 2026 dataset, against Framework v2.8; the V4.15 final prototype's pipeline unchanged.** Start with `docs/SSS2026_ILR_Key_Documents_V5.0.md`.
+
+The V4.15 final prototype's pipeline, Framework and gates run unchanged on any school in the
+cleansed dataset (Industryline cleansing handover v2.3): a per-school profile
+(`config/schools/<slug>.json`), a data adapter that writes one school's rows in the prototype's
+SmartSurvey layout (`pipeline/cleansed_to_export.py`, validated on the prototype school), a corpus
+lock per school, Framework v2.8 (twelve live-survey sport labels from S16; the year range of two
+frames as slots; on the prototype 0 of 8,568 states moved) and pipeline 0.28.0. Built: New Inn
+Primary School (Torfaen, Years 3–6), Castell Alun High School (Flintshire, Years 7–11), Ysgol Bro
+Pedr (Ceredigion, Years 3–11). What the real data exposed is held and flagged, never patched: four
+cohorts whose Welsh qualifier the Framework does not carry, three f10 sentences with no one-pupil
+form (EN-08), a singleton-agreement fault in nil-count Welsh sentences (fixed only where the V4.15
+corpus has no such sentence). `./build_school.sh <slug> <id> <parquet> …` builds one school end to
+end; `docs/SSS2026_ILR_Key_Documents_V5.0.md` is the key record; `sw-feedback-compliance-record.md`
+("Build V5.0") the audit trail; `generated/SSS2026_V5.0_Flags_for_confirmation.md` the open questions.
+The pupil-level exports are input data and never enter the repository.
+
+
+---
+
+**Previous build: V4.15 (21 Sep 2026) — the final prototype: the translator's completed handover applied, Framework v2.7, gate pack v8.**
 Start with `docs/SSS2026_ILR_Key_Documents_V4.15.md` — the rulebook, the build identity and figures, the exact rebuild commands, the full feedback and compliance record (every round from Build 010 to V4.15), the deployment plan and the kit inventory. The V4.15 entry of `sw-feedback-compliance-record.md` is the record of this build.
 
 What is here: `pipeline/` (data → fact records → English narrative locked to V4.1 → Welsh generated through the Framework workbook → single-file report), `web/` (template and client), `config/` (the Welsh Generation Framework v2.1–v2.7, the translation handoffs V4.10–V4.15, the translator's completed handover and document, corpus locks, metrics and narrative configuration), `tests/` (pytest, jsdom regression and provenance port, Chromium render probe), `generated/bundle/` (the V4.15 assurance bundle: vendored gate runner v8, framework, baseline lock, evidence, results, RUN.md), `tools/` (the translator-handover, label-query and fidelity-audit generators), `docs/` (key documents, deployment plan, accessibility register, render probe, earlier rounds' gate results), `inputs/` (fonts, character images, the translator's and the accessibility documents — the pupil-level export is deliberately excluded, see `inputs/README.md`).

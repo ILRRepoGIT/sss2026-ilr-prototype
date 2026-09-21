@@ -1,0 +1,24 @@
+{
+ "cmd": [
+  "/usr/bin/python3",
+  "welsh_acceptance_gates_v8.py",
+  "../SSS2026_ILR_Report_V5.0_ysgol-bro-pedr_Bilingual.html",
+  "--framework",
+  "01_Framework_v2.8.xlsx",
+  "--mode",
+  "dev",
+  "--baseline",
+  "lock_ysgol-bro-pedr_v8.json",
+  "--bundle-dir",
+  ".",
+  "--json",
+  "results_dev.json",
+  "--evidence",
+  "evidence_rerun_dev.ndjson.gz",
+  "--emit-lock",
+  "lock_ysgol-bro-pedr_v8_emitted.json"
+ ],
+ "rc": 1,
+ "stdout_tail": "CAT-marker         CAT   REPORT         0        0  \u27eamissing:key\u27eb marker anywhere in the payload (release fails;\nCAT-destination    CAT   PASS           0        0  Marker or consumer references a key that has no catalogue ro\nCAT-static-manifest CAT   PASS           0        0  welsh.static key\u2192{en, cy, consumer} manifest absent, or a ui\nCAT-static-bound   CAT   PASS           0        0  A static manifest key has no data-i18n element in the page, \nCAT-static-english CAT   PASS           0        0  English text of a data-i18n element differs from the manifes\nCAT-static-swap    CAT   PASS           0        0  Client has no language-driven substitution of [data-i18n] el\nCAT-attr-literal   CAT   PASS           0        0  Fixed attribute (data-ct / data-nh / data-also-h / data-sh) \nGOV-config         GOV   REPORT         1        1  Configuration source for this run (workbook or embedded defa\nGOV-stamp          GOV   PASS           0        0  Build metadata lacks framework hash, gate-manifest hash or s\nGOV-provisional    GOV   PASS           0        0  Active provisional ruling not stamped into build metadata\nGOV-lock           GOV   PASS           0        0  English projection differs from the locked baseline (needs -\nGOV-results        GOV   PASS           0        0  Build does not embed its own gate results (runner hash, mode\nGOV-mode           GOV   REPORT         0        0  Release configuration: buildMetadata.mode, CONFIG.reviewMode\nGOV-identity       GOV   PASS           0        0  Top-level stamp and embedded gateResults disagree on runner \nGOV-rerun          GOV   PASS           0        0  Embedded gateResults claim a different score than this runne\nGOV-headline       GOV   PASS           0        0  Embedded gateResults has no plain headline \"n/N\", carries co\nGOV-bundle         GOV   PASS           0        0  Assurance bundle not beside the report, or its manifest hash\nGOV-lock-cy        GOV   PASS           0        0  Welsh projection differs from the locked baseline (a change \nFT11-keyset        POL   PASS           0        0  FT-11 stacked-negative record key set differs from the basel\nPERF-device        PERF  MANUAL         0        0  Representative school-laptop load, toggle, filter, chart, ta\nA11Y-assist        A11Y  MANUAL         0        0  Keyboard, focus, live-region, caption, title/ARIA language a\nBROWSER-provenance UI    MANUAL         0        0  Every rendered visible/title/aria string in Welsh mode carri\nBROWSER-toggle     UI    MANUAL         0        0  Fixture toggle: every static key and keyed attribute shows e\n\n71/72 blocking gates pass; 9 report-only; 4 manual \u00b7 renderer paths complete 17/18\n  UI-DYN-16 partial  1/6 child strings English \u2014 renderStack legend, rows, table, tooltips\n\n[STK-caption-case] Realised stack caption begins with a lower-case letter (sentence-initial count-NP) (34,519 occ, 34,519 records) {'stk': 34519}\n  at whole|all|none|stk:pe_lessons[0]  \u00abk=10: \"y deg camp a ddewiswyd amlaf y\u2026\"\u00bb\n",
+ "stderr_tail": ""
+}

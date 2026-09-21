@@ -1,0 +1,22 @@
+{
+ "ov_none_reported": {
+  "reason": "The qualifier 'who reported no sport in any setting' (family ov, code none_reported) has no Welsh relative clause on Framework sheet 22 — the prototype school had fewer than five such pupils, so the cohort was never offered and the row was never written. Welsh is never composed in code (D44).",
+  "needs": "a sheet-22 row for family ov, English 'reported no sport in any setting' (the sibling cb row 'reported no club sport' is 'na nododd unrhyw chwaraeon clwb', PROPOSED) — translator, V5.0 flags sheet 63",
+  "since": "V5.0 (pipeline 0.28.0), 21 Sep 2026"
+ },
+ "et_other_grouped": {
+  "reason": "The qualifier 'who identified with other ethnic groups' (family et, code other_grouped — the Black and Other survey categories aggregated where either is below five) has no Welsh relative clause on Framework sheet 22: the prototype school had two such pupils, so the cohort was never offered. Welsh is never composed in code (D44).",
+  "needs": "a sheet-22 row for family et, English 'identified with other ethnic groups' (sibling: 'identified with mixed or multiple ethnic groups' → 'a ddewisodd ‘Grwpiau ethnig cymysg neu luosog’') — translator, V5.0 flags sheet 63",
+  "since": "V5.0 (pipeline 0.28.0), 21 Sep 2026 — first seen at Castell Alun High School"
+ },
+ "tp_prefer_not_to_say": {
+  "reason": "The qualifier 'who preferred not to say how they take part in sport' (family tp, code prefer_not_to_say) has no Welsh relative clause on Framework sheet 22: the prototype school had two such pupils, so the cohort was never offered. Welsh is never composed in code (D44).",
+  "needs": "a sheet-22 row for family tp, English 'preferred not to say how they take part in sport' (sibling et row: 'y byddai’n well ganddynt beidio â dweud eu hethnigrwydd') — translator, V5.0 flags sheet 63",
+  "since": "V5.0 (pipeline 0.28.0), 21 Sep 2026 — first seen at Castell Alun High School"
+ },
+ "tp_communication_aids": {
+  "reason": "The qualifier 'who said they usually take part in sport with communication aids' (family tp, code communication_aids) has no Welsh relative clause on Framework sheet 22: the prototype school had two such pupils, so the cohort was never offered. Held in advance — the same gap as tp_prefer_not_to_say.",
+  "needs": "a sheet-22 row for family tp, English 'said they usually take part in sport with communication aids' (siblings: '… yn eistedd', '… yn sefyll') — translator, V5.0 flags sheet 63",
+  "since": "V5.0 (pipeline 0.28.0), 21 Sep 2026"
+ }
+}

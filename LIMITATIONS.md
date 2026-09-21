@@ -174,3 +174,40 @@ changes are config/template edits followed by a rebuild; every sentence is
 regenerated deterministically and re-audited
 (`generated/ysgol-penrhyn-dewi.narrative-audit.csv`,
 `generated/narrative-templates.md`).
+
+## V5.0 real-school round (21 Sep 2026) — what the real data exposed, and what is held
+
+The first three school reports built from the cleansed 2026 dataset (Industryline cleansing
+handover v2.3, Stage 2 v2) run through the V4.15 prototype's pipeline unchanged except for the
+per-school parameters (`config/schools/<slug>.json`), Framework v2.8 and pipeline 0.28.0. Everything
+below is recorded on Framework sheet 63 (V5.0 flags) and in `config/held_cohorts.json`; nothing was
+patched to pass a gate, and no Welsh was composed.
+
+- **Held cohorts (four).** The Framework carries no Welsh relative clause for four qualifiers the
+  prototype school never needed: `ov_none_reported` ("reported no sport in any setting"),
+  `et_other_grouped` ("identified with other ethnic groups"), `tp_prefer_not_to_say` and
+  `tp_communication_aids`. Those chart bars keep their counts but cannot be selected as a filter
+  (the report's existing non-selectable-bar behaviour); the validation summary names each hold with
+  the number of pupils affected. Lifted by the translator's sheet-22 rows.
+- **Three f10 sentences held for one-pupil group views (EN-08).** The locked English templates
+  leader_multi_v2 (a unique leader on a base of one), group_codemand_top3_v12 and
+  wd_current_check_v3 have no one-pupil form and the build's own gate rejects "1 of the 1 pupil …".
+  A sentence they would produce that the gate rejects is held (logged); every sentence the gate
+  accepts — ties, definition sentences, and the forms the V4.15 corpus already contains ("1 of the 1
+  boy …", "the 1 Year 3 pupil …") — renders as in V4.15, until the report owner sanctions one-pupil
+  forms.
+- **Partial responses.** The dataset's analytical set admits partial responses that reached page 48+;
+  a school profile accepts them (`acceptedStatuses`) and the validation summary states the split.
+  The profile charts' base line still reads "(complete survey response)" — Sport Wales to confirm.
+- **Proper names.** `Carmarthenshire`, `Conwy`, `Rhondda Cynon Taf` and `The Vale of Glamorgan` have
+  no sheet-53 row under the dataset's spelling; the "School Stages Covered" values have no Welsh
+  form; the Regional Sport Partnership is derived from the local authority. None of the three V5.0
+  schools is affected by the first point.
+- **Sport labels.** Twelve live-survey sports absent from the prototype export are on sheet 23 with
+  the survey's own Welsh (S16) and provisional grammatical features (PR-20).
+- **Data adapter.** `pipeline/cleansed_to_export.py` writes one school's rows in the prototype's
+  SmartSurvey layout. On the prototype school its 366 records match the original export's through
+  the unchanged loader except for the cleansing team's documented corrections (R26-01 one setting
+  cell; R26-02 seven "None of these" co-selections) — see the compliance record.
+- **Review builds.** Like V4.15, the reports are dev-mode builds (review banner) until the translator's
+  values above and the owner's D69 are signed.

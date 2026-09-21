@@ -25,9 +25,10 @@ from .build_report_package import (
     MODULE_LABELS, PIPELINE_VERSION_V2, REPORT_VERSION_V2,
     SCHEMA_VERSION, SCHOOL_SLUG, TEMPLATES, _participation_variation,
     _stacked_sport_freq, run_qa_checks)
-from .common import GENERATED_DIR, load_config
+from .common import GENERATED_DIR, load_config, load_held_cohorts
 from .engine import (GENDERS, SCOPES, StateEngine, build_cohorts,
-                     build_metric_defs, filter_rows, state_key)
+                     build_metric_defs, filter_rows, restrict_year_options,
+                     state_key)
 from .load_normalise import load_and_normalise
 from .narrative2 import Scope
 from .narrative2_modules_b import FullNarrator
@@ -36,12 +37,17 @@ from .narrative2_modules_b import FullNarrator
 def prep(xlsx):
     profile, mapping, metrics_cfg, narratives_cfg = load_config()
     threshold = profile["suppressionThreshold"]
-    records, log, build_meta, discovered = load_and_normalise(xlsx)
+    # v6 (0.28.0): the profile's acceptance rule and year range (unset in
+    # the prototype profile: status "Complete", Years 3–11 — unchanged)
+    records, log, build_meta, discovered = load_and_normalise(
+        xlsx, accepted_statuses=profile.get("acceptedStatuses"),
+        available_years=profile.get("availableYears"))
     from . import welsh_render as _wr
     _wr.register_code_labels({**discovered["participated"],
                               **discovered["demand"]})
-    defs = build_metric_defs(metrics_cfg, discovered)
-    cohorts = build_cohorts(metrics_cfg, defs, records)
+    defs = restrict_year_options(build_metric_defs(metrics_cfg, discovered), profile)
+    cohorts = build_cohorts(metrics_cfg, defs, records,
+                            held=load_held_cohorts(), log=log)
     engine = StateEngine(records, defs, cohorts, profile, threshold).compute_all()
     narrator = FullNarrator(engine, defs, cohorts, profile, threshold)
     return dict(profile=profile, metrics_cfg=metrics_cfg,
@@ -87,21 +93,22 @@ def do_states(xlsx, wd, lo, hi):
     from .welsh import misses as _wmisses
     with open(Path(wd) / f"chunk_{lo}_{hi}.pkl", "wb") as f:
         pickle.dump({"states": states, "audit": narrator.audit,
-                     "misses": _wmisses()}, f, protocol=4)
+                     "misses": _wmisses(), "holds": narrator.holds}, f, protocol=4)
     print(f"chunk {lo}:{hi} states={len(states)} "
           f"paras={len(narrator.audit)} misses={len(_wmisses())} "
           f"({time.time()-t0:.0f}s)", flush=True)
 
 
 def merge_chunks(wd):
-    states, audit, misses = {}, [], set()
+    states, audit, misses, holds = {}, [], set(), []
     for p in sorted(Path(wd).glob("chunk_*.pkl")):
         with open(p, "rb") as f:
             c = pickle.load(f)
         states.update(c["states"])
         audit.extend(c["audit"])
         misses.update(tuple(m) for m in c["misses"])
-    return states, audit, misses
+        holds.extend(c.get("holds", []))
+    return states, audit, misses, holds
 
 
 def do_assemble(xlsx, wd):
@@ -110,9 +117,18 @@ def do_assemble(xlsx, wd):
     engine, cohorts, defs = P["engine"], P["cohorts"], P["defs"]
     profile, records = P["profile"], P["records"]
     metrics_cfg, narratives_cfg = P["metrics_cfg"], P["narratives_cfg"]
-    states, audit, misses = merge_chunks(wd)
+    states, audit, misses, holds = merge_chunks(wd)
     assert len(states) == len(SCOPES) * len(GENDERS) * len(engine.cohort_keys), \
         f"incomplete chunks: {len(states)} states"
+    if holds:
+        # v6: narrative holds are build warnings — named in the validation
+        # summary, never silent
+        by_mod = {}
+        for h in holds:
+            by_mod.setdefault((h["module"], h["reason"]), []).append(h["state"])
+        for (mod, why), keys in by_mod.items():
+            P["log"].warn(f"narrative module {mod} HELD in {len(keys)} view(s) — {why}: "
+                          + ", ".join(keys[:12]) + (" …" if len(keys) > 12 else ""))
 
     scope_opts = []
     from .welsh_render import SCOPE_CY as _SC_CY, SEX_CY as _SEX_CY
@@ -452,7 +468,10 @@ def do_write(xlsx, wd, outdir):
         f"source sha256:  {build_meta['sourceChecksum']}",
         "",
         f"source rows: {build_meta['sourceRows']}  accepted: {build_meta['acceptedRows']}"
-        f"  excluded: {build_meta['excludedRows']}",
+        f"  excluded: {build_meta['excludedRows']}"
+        + (("  (accepted by status: " + " · ".join(f"{k} {v}" for k, v in build_meta["acceptedByStatus"].items())
+            + " — the cleansed dataset's analytical inclusion rule, profile acceptedStatuses)")
+           if build_meta.get("acceptedByStatus") else ""),
         f"filter states: {len(states)} (visible "
         f"{sum(1 for s in states.values() if not s.get('sup'))}, suppressed "
         f"{sum(1 for s in states.values() if s.get('sup'))})",

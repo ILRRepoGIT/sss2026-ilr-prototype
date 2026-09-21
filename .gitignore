@@ -16,3 +16,7 @@ SSS2026_ILR_Rebuild_Kit_*.zip
 __pycache__/
 .pytest_cache/
 *.pyc
+# V5.0: the cleansed dataset and the per-school exports written from it are input data
+*.parquet
+*cleansed_export*.xlsx
+inputs/schools/

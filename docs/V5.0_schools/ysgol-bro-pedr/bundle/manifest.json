@@ -1,0 +1,38 @@
+{
+ "report": "../SSS2026_ILR_Report_V5.0_ysgol-bro-pedr_Bilingual.html",
+ "runner": "8.0.0",
+ "manifestHash": "c4221bba2cff4dcb",
+ "mode": "release",
+ "school": {
+  "slug": "ysgol-bro-pedr",
+  "id": "6675500",
+  "name": "Ysgol Bro Pedr"
+ },
+ "command": "python welsh_acceptance_gates_v8.py ../SSS2026_ILR_Report_V5.0_ysgol-bro-pedr_Bilingual.html --framework 01_Framework_v2.8.xlsx --mode release --baseline lock_ysgol-bro-pedr_v8.json --bundle-dir . --json results_release.json --evidence evidence_rerun_release.ndjson.gz",
+ "files": {
+  "runner": {
+   "path": "welsh_acceptance_gates_v8.py",
+   "sha256": "3057fef25b5d54bd564b0ee86affd3ef34048b4c1598c27eeb86ae3da2bde4fe"
+  },
+  "framework": {
+   "path": "01_Framework_v2.8.xlsx",
+   "sha256": "582e335936e91eaaa5e9147fcb8a3344acdd98ad3d4076b3f389951caf15e2ac"
+  },
+  "baseline": {
+   "path": "lock_ysgol-bro-pedr_v8.json",
+   "sha256": "5f291d803269704e14d3af373d21539767a4a9dee05de375a72d0077f4f190bc"
+  },
+  "evidence": {
+   "path": "evidence.ndjson.gz",
+   "sha256": "06ac9d692b64b5e7dab72505495c77f98c36099acee8d8242182e9d5f275f241"
+  },
+  "browserHarness": {
+   "path": "browser_gate_provenance.py",
+   "sha256": "1b053e89396e50979ab9414529a72b2e5802855685cef8e9be6ba4ea1b0120a3"
+  },
+  "report": {
+   "path": "../SSS2026_ILR_Report_V5.0_ysgol-bro-pedr_Bilingual.html",
+   "sha256": "005f276e9a8a77675d5cda70edea4005b85bf86d0f2a12de4366ab0ff8de1447"
+  }
+ }
+}

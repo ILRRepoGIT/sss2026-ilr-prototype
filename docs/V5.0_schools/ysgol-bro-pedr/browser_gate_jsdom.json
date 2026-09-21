@@ -1,0 +1,2731 @@
+{
+ "note": "browser gate v3 logic (COLLECT_JS + classify, v2/v3 typography incl. lower-case-initial, and the --fixture auto static-furniture toggle) executed under jsdom over an 8-state reduced build of the shipped head, payload and client; Chromium system libraries unavailable in the build environment; hash driven with gender=/cohort= per the URL contract",
+ "states": [
+  "whole|all|none",
+  "whole|girl|none",
+  "whole|boy|none",
+  "whole|all|sp_football",
+  "y3|girl|none",
+  "primary|all|none",
+  "secondary|all|none"
+ ],
+ "summary": {
+  "document_lang": "en",
+  "states_sampled": 7,
+  "distinct_strings_seen": 5164,
+  "english_without_provenance": 0,
+  "english_with_provenance": 336,
+  "english_with_provenance_by_family": {
+   "static": 30,
+   "handoff": 175,
+   "frame": 119,
+   "narrative": 9,
+   "label": 3
+  },
+  "welsh_without_provenance": 0,
+  "typography_faults": 0,
+  "typography_by_kind": {},
+  "toggle": {
+   "static_keys": 192,
+   "attr_consumers": 16,
+   "en_ok": 1344,
+   "cy_ok": 1344,
+   "restored_ok": 1344,
+   "failures": 0
+  }
+ },
+ "english_without_provenance": [],
+ "english_with_provenance": [
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Yr Arolwg Chwaraeon Ysgol yw un o’r cyfleoedd y pen mwyaf yn y byd i blant a phobl ifanc gael dweud eu dweud am chwaraeo",
+   "source": "static:ui009",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Gyda’i gilydd, mae eich ymatebion yn helpu Chwaraeon Cymru, ysgolion a phartneriaid ar draws Cymru i ddeall yn well beth",
+   "source": "static:ui016",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "span",
+   "text": "Brain Break character: a smiling brain wearing a Sport Wales headband, throwing a javelin from a wheelchair",
+   "source": "handoff:static-furniture",
+   "class": "english",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "span",
+   "text": "Tablau data llawn a manylion proffil y disgyblion ar gyfer y disgyblion rydych chi’n edrych arnynt.",
+   "source": "static:ui030",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "h3",
+   "text": "Glossary of terms used in this report",
+   "source": "frame:pending:ui.a11y_glossary_heading",
+   "class": "english",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Yn wahanol i adroddiad statig, gall yr adroddiad hwn gael ei archwilio’n fanylach trwy gymhwyso hidlyddion. Pan fydd un ",
+   "source": "static:ui034",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Mae barrau’n ymddangos am yn ail mewn coch a glas i helpu i wahaniaethu rhwng categorïau ateb gwahanol. Nid yw’r lliwiau",
+   "source": "static:ui057",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "em",
+   "text": "“Y campau a ddewiswyd amlaf oedd bocsio a phêl-droed yn gyfartal, gyda saith dewis yr un, ymhlith bechgyn Blwyddyn 5”",
+   "source": "static:ui256",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Mae canrannau’n cynrychioli’r gyfran o’r sylfaen. Hynny yw, mae canran yn dangos cyfran y ddisgyblion a ddewisodd yr ops",
+   "source": "static:ui082",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Mae rhai ymatebion yn cael eu cuddio os bydd perygl o allu adnabod disgybl unigol trwy’r wybodaeth sy’n cael ei chyflwyn",
+   "source": "static:ui088",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "yn cynrychioli data cuddiedig – gwerthoedd na ellir eu dangos gan fod y grŵp wrth wraidd y data yn rhy fach i adrodd arn",
+   "source": "static:ui257",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "yn opsiynau na allant gael eu dewis fel hidlyddion oherwydd gall y data gamarwain pan na fydd yn cael ei ystyried yng ng",
+   "source": "static:ui257",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Mae’r holl grwpiau blwyddyn rhwng Blwyddyn 3 a Blwyddyn 11 yn cael eu cynrychioli. Blwyddyn 9 gyfrannodd y nifer fwyaf o",
+   "source": "frame:ui.overview_note",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "span",
+   "text": "Brain Break character: a smiling brain in glasses kicking a football",
+   "source": "handoff:static-furniture",
+   "class": "english",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Yn ystod Addysg Gorfforol neu Amser Gwersi oedd y lleoliad a ddewiswyd amlaf, gan 394 o’r 436 disgybl yn yr ysgol gyfan ",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Mae’r siart isod yn rhoi amcangyfrif o sawl gwaith y mae disgyblion yn actif drwy chwaraeon mewn wythnos nodweddiadol, a",
+   "source": "static:ui106",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O’r 439 disgybl yn yr ysgol gyfan a ymatebodd, ‘5’ oedd yr ateb a ddewiswyd amlaf (90, neu 21%).",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Y campau a ddewiswyd amlaf gan ddisgyblion yn yr ysgol gyfan oedd pêl droed (285), rhedeg neu loncian (270) a rownderi (",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Mae’r siart bar wedi’i stacio isod yn dangos y 10 camp a ddewiswyd amlaf gan ddisgyblion ar draws pob lleoliad, a pha mo",
+   "source": "static:ui108",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Mae’r siart bar hwn yn dangos y 10 camp fwyaf cyffredin y dywedodd disgyblion eu bod yn eu gwneud mewn Addysg Gorfforol ",
+   "source": "frame:ui.chart_sports_total_pe",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Rownderi oedd y gamp y dywedodd disgyblion yn yr ysgol gyfan amlaf eu bod yn ei gwneud yn ystod Addysg Gorfforol neu Ams",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Mae’r siart bar hwn yn dangos y 10 camp fwyaf cyffredin y dywedodd disgyblion eu bod yn eu gwneud mewn clwb chwaraeon ys",
+   "source": "frame:ui.chart_sports_total_club",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "span",
+   "text": ". Yn benodol, pan ofynnom i ddisgyblion ddweud wrthym pa chwaraeon roeddent yn eu gwneud ‘Mewn clwb y tu allan i’r ysgol",
+   "source": "static:ui125",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Mae’r siart bar hwn yn dangos y 10 camp fwyaf cyffredin y dywedodd disgyblion eu bod yn eu gwneud mewn clwb y tu allan i",
+   "source": "frame:ui.chart_sports_total_community",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Pêl droed oedd y gamp y dywedodd disgyblion yn yr ysgol gyfan amlaf eu bod yn ei gwneud mewn clwb y tu allan i’r ysgol (",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Mae’r siart bar hwn yn dangos y 10 camp fwyaf cyffredin y dywedodd disgyblion eu bod yn eu gwneud ‘Rhywle Arall’, a pha ",
+   "source": "frame:ui.chart_sports_total_other",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Pŵl neu snwcer oedd y gamp y dywedodd disgyblion yn yr ysgol gyfan amlaf eu bod yn ei gwneud rhywle arall (146 disgybl a",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O’r 439 disgybl yn yr ysgol gyfan a ymatebodd, ‘Dim chwaraeon clwb wedi’u nodi’ oedd yr ateb a ddewiswyd amlaf (116, neu",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Cymerodd 278 o’r 439 disgybl yn yr ysgol gyfan a ymatebodd (63%) ran mewn chwaraeon clwb (mewn clwb ysgol neu glwb y tu ",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Gofynnwyd i ddisgyblion p’un a oes ganddynt anabledd neu gyflwr hirdymor sy’n aml yn gwneud pethau’n anodd – gan gynnwys",
+   "source": "static:ui139",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Yn ystod Addysg Gorfforol neu Amser Gwersi oedd y lleoliad a ddewiswyd amlaf, gan 87 o’r 99 disgybl a nododd anabledd ne",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Yn ystod Addysg Gorfforol neu Amser Gwersi oedd y lleoliad a ddewiswyd amlaf, gan 44 o’r 49 disgybl a nododd anhawster d",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Ar gyfartaledd, cymerodd disgyblion a nododd anabledd a/neu anhawster dysgu ymhlith disgyblion yn yr ysgol gyfan ran mew",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Er mwyn deall yn well y gwahanol ffyrdd y mae disgyblion yn profi chwaraeon ac yn cael mynediad at chwaraeon, gofynnwyd ",
+   "source": "static:ui143",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Yn ystod Addysg Gorfforol neu Amser Gwersi oedd y lleoliad a ddewiswyd amlaf, gan 32 o’r 37 disgybl sy’n dod o gefndir e",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Gofynnwyd i ddisgyblion am eu gallu i siarad Cymraeg. Mae disgyblion a ddywedodd eu bod yn siarad Cymraeg yn dda iawn, e",
+   "source": "static:ui249",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Yn ystod Addysg Gorfforol neu Amser Gwersi oedd y lleoliad a ddewiswyd amlaf, gan 353 o’r 383 disgybl sy’n siarad Cymrae",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Gweledigaeth oes yw hon, a dylai cynigion chwaraeon ddarparu ar gyfer anghenion gwahanol mewn camau bywyd gwahanol. Mae’",
+   "source": "static:ui149",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "span",
+   "text": "Brain Break character: a smiling brain in glasses dribbling a basketball",
+   "source": "handoff:static-furniture",
+   "class": "english",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Mae’r siart yn dangos nifer y merched a’r bechgyn ym mhob grŵp blwyddyn a ddywedodd eu bod yn cymryd rhan ym mhob lleoli",
+   "source": "static:ui250",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "h4",
+   "text": "Disgyblion a wnaeth o leiaf un gamp ym mhob lleoliad, fesul grŵp blwyddyn a rhywedd.",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "caption",
+   "text": "Disgyblion a wnaeth o leiaf un gamp ym mhob lleoliad, fesul grŵp blwyddyn a rhywedd.",
+   "source": "frame:ui.stack_caption_sex",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Adroddodd disgyblion p’un a oedd AG a Gwersi Actif yn gwneud iddynt deimlo’n iach, yn hyderus ac yn barod i ddysgu.",
+   "source": "static:ui155",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "h4",
+   "text": "A yw AG a Gwersi Actif yn gwneud i chi deimlo’n iach?",
+   "source": "static:ui217",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "caption",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Yr ysgol gyfan · Pob disgybl. Yn seiliedig ar 400 disgybl.",
+   "source": "frame:ui.table_caption",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "h4",
+   "text": "A yw AG a Gwersi Actif yn gwneud i chi deimlo’n hyderus?",
+   "source": "static:ui218",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "caption",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Yr ysgol gyfan · Pob disgybl. Yn seiliedig ar 400 disgybl.",
+   "source": "frame:ui.table_caption",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "h4",
+   "text": "A yw AG a Gwersi Actif yn gwneud i chi deimlo’n barod i ddysgu?",
+   "source": "static:ui219",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "caption",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Yr ysgol gyfan · Pob disgybl. Yn seiliedig ar 400 disgy",
+   "source": "frame:ui.table_caption",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Pan ofynnwyd iddynt a yw gwersi AG a Gwersi Actif yn gwneud iddynt deimlo’n iach, yn hyderus ac yn barod i ddysgu, ymate",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "‘Cael hwyl’ oedd yr opsiwn a ddewiswyd amlaf, gan 312 o’r 396 disgybl yn yr ysgol gyfan a atebodd y cwestiwn hwn.",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "‘Pe bai mwy o chwaraeon rydw i’n eu hoffi’ oedd yr ateb a ddewiswyd amlaf a fyddai’n helpu disgyblion yn yr ysgol gyfan ",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Ymhlith disgyblion yn yr ysgol gyfan a ddywedodd nad oeddent yn hyderus iawn i roi cynnig ar gamp newydd, ‘Pe bai mwy o ",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Dywedodd disgyblion faint roeddent yn mwynhau chwaraeon mewn gwersi AG, clybiau chwaraeon ysgol, clybiau y tu allan i’r ",
+   "source": "static:ui161",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Gall mwynhad amrywio rhwng grwpiau o ddisgyblion a newid wrth i ddisgyblion fynd yn hŷn. Mae’r tabl yn dangos faint o dd",
+   "source": "static:ui163",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O’r 400 disgybl yn yr ysgol gyfan a ymatebodd, ‘Weithiau’ oedd yr ateb a ddewiswyd amlaf (188, neu 47%).",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Gofynnwyd i ddisgyblion a oeddent yn teimlo’u bod yn gallu ymuno â chwaraeon a gemau yn hawdd.",
+   "source": "static:ui251",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O’r 400 disgybl yn yr ysgol gyfan a ymatebodd, ‘Ydw, weithiau’ oedd yr ateb a ddewiswyd amlaf (174, neu 44%).",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Ymhlith disgyblion yn yr ysgol gyfan a ddywedodd nad ydynt yn aml yn gallu ymuno â chwaraeon a gemau yn hawdd, ‘Pe bai m",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Mae’r bennod hon yn dwyn ynghyd cymryd rhan mewn chwaraeon a galw am chwaraeon: y chwaraeon a’r gweithgareddau y mae dis",
+   "source": "static:ui171",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Gallai disgyblion roi tic i bob camp a gweithgarwch maen nhw wedi’i wneud yn y flwyddyn ysgol hon, felly gall y cyfansym",
+   "source": "static:ui173",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Pêl droed oedd y gamp neu weithgaredd a ddewiswyd amlaf, gan 287 o’r 439 disgybl yn yr ysgol gyfan a ymatebodd. Yr ail g",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Pêl droed oedd y gamp a ddewiswyd amlaf, gan 178 o’r 439 disgybl yn yr ysgol gyfan a ymatebodd. Yr ail gamp mwyaf cyffre",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Pêl droed oedd y gamp gyntaf a ddewiswyd amlaf fel camp yr hoffent wneud mwy ohoni ymhlith bechgyn yn yr ysgol gyfan, a’",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Nofio oedd y gamp a ddewiswyd amlaf fel camp yr hoffent wneud mwy ohoni yn yr ysgol gynradd (56 o ddewisiadau). Pêl droe",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O edrych ar bob grŵp blwyddyn yn yr ysgol gyfan, nofio oedd ar y brig ym Mlwyddyn 3 a Mlwyddyn 4; pêl droed oedd ar y br",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Ym Mlwyddyn 5, roedd rhedeg neu loncian a nofio yn gyfartal (13 o ddewisiadau yr un); ym Mlwyddyn 6, roedd pêl droed a n",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "yn cyfeirio at chwaraeon y dywedodd disgyblion yr hoffent wneud mwy ohonynt, ond nad ydynt wedi cymryd rhan ynddynt ers ",
+   "source": "static:ui263",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Y gamp yr oedd y galw mwyaf heb ei fodloni amdani oedd trampolinio, a ddewiswyd gan 86 o’r 439 disgybl yn yr ysgol gyfan",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Rasio moduron oedd y gamp gyntaf a ddewiswyd amlaf fel camp yr oedd galw amdani heb ei fodloni ymhlith bechgyn yn yr ysg",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Yr amod a ddewiswyd amlaf fel un a fyddai’n helpu disgyblion yn yr ysgol gyfan i wneud mwy o chwaraeon oedd ‘Pe bai mwy ",
+   "source": "narrative:h1",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Diolch i’r holl ddisgyblion a rannodd eu barn, ac i’r staff a sicrhaodd bod yr arolwg yn cael ei gynnal. Y canfyddiadau ",
+   "source": "static:ui190",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Rhestrau cyflawn o atebion ar gyfer pob cwestiwn yr adroddwyd arnynt, gan barchu’r hidlyddion presennol. Yng ngwedd yr y",
+   "source": "static:ui197",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "h4",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach?",
+   "source": "label:pe_feel_healthy",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "h4",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus?",
+   "source": "label:pe_feel_confident",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "h4",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu?",
+   "source": "label:pe_feel_ready",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "td",
+   "text": "view-level rule of five (2026-07-20)",
+   "source": "handoff:static-furniture",
+   "class": "english",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "aria-label",
+   "tag": "div",
+   "text": "Ble mae ein disgyblion sydd ag anabledd a/neu anawsterau dysgu yn cymryd rhan mewn chwaraeon? — siart bar; ceir y ffigur",
+   "source": "frame:ui.chart_aria",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "aria-label",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — siart bar; ceir y ffigurau yn y tabl data isod.",
+   "source": "frame:ui.chart_aria",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Llawer: 221 disgybl — Yn seiliedig ar: 400 disgybl — Golwg: Yr ys",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Eithaf: 125 disgybl — Yn seiliedig ar: 400 disgybl — Golwg: Yr ys",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Dim llawer: 36 disgybl — Yn seiliedig ar: 400 disgybl — Golwg: Yr",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Dim o gwbl: 18 disgybl — Yn seiliedig ar: 400 disgybl — Golwg: Yr",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "aria-label",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — siart bar; ceir y ffigurau yn y tabl data isod.",
+   "source": "frame:ui.chart_aria",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Llawer: 174 disgybl — Yn seiliedig ar: 400 disgybl — Golwg: Yr",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Eithaf: 137 disgybl — Yn seiliedig ar: 400 disgybl — Golwg: Yr",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Dim llawer: 56 disgybl — Yn seiliedig ar: 400 disgybl — Golwg:",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Dim o gwbl: 33 disgybl — Yn seiliedig ar: 400 disgybl — Golwg:",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "aria-label",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — siart bar; ceir y ffigurau yn y tabl data isod.",
+   "source": "frame:ui.chart_aria",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Llawer: 156 disgybl — Yn seiliedig ar: 400 disgybl — Go",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Eithaf: 137 disgybl — Yn seiliedig ar: 400 disgybl — Go",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Dim llawer: 65 disgybl — Yn seiliedig ar: 400 disgybl —",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Dim o gwbl: 42 disgybl — Yn seiliedig ar: 400 disgybl —",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "aria-label",
+   "tag": "div",
+   "text": "Wyt ti’n teimlo dy fod ti’n gallu ymuno â chwaraeon a gemau yn hawdd? — siart bar; ceir y ffigurau yn y tabl data isod.",
+   "source": "frame:ui.chart_aria",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "aria-label",
+   "tag": "div",
+   "text": "Pa chwaraeon a gweithgareddau mae ein disgyblion wedi’u gwneud yn y flwyddyn ysgol hon? — siart bar; ceir y ffigurau yn ",
+   "source": "frame:ui.chart_aria",
+   "class": "mixed",
+   "state": "whole|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Yn ystod Addysg Gorfforol neu Amser Gwersi oedd y lleoliad a ddewiswyd amlaf, gan 167 o’r 189 merch yn yr ysgol gyfan a ",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O’r 190 merch yn yr ysgol gyfan a ymatebodd, ‘4’ oedd yr ateb a ddewiswyd amlaf (38, neu 20%).",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Y campau a ddewiswyd amlaf gan ferched yn yr ysgol gyfan oedd rhedeg neu loncian (116), rownderi (112) a chriced (101).",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Rownderi oedd y gamp y dywedodd merched yn yr ysgol gyfan amlaf eu bod yn ei gwneud yn ystod Addysg Gorfforol neu Amser ",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Pêl rwyd oedd y gamp y dywedodd merched yn yr ysgol gyfan amlaf eu bod yn ei gwneud mewn clwb y tu allan i’r ysgol (34 d",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Nofio oedd y gamp y dywedodd merched yn yr ysgol gyfan amlaf eu bod yn ei gwneud rhywle arall (64 disgybl a atebodd ar g",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O’r 190 merch yn yr ysgol gyfan a ymatebodd, ‘Dim chwaraeon clwb wedi’u nodi’ oedd yr ateb a ddewiswyd amlaf (57, neu 30",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Cymerodd 117 o’r 190 merch yn yr ysgol gyfan a ymatebodd (62%) ran mewn chwaraeon clwb (mewn clwb ysgol neu glwb y tu al",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Rhywle arall oedd y lleoliad a ddewiswyd amlaf, gan 48 o’r 54 disgybl a nododd anabledd neu gyflwr hirdymor ymhlith merc",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Rhywle arall oedd y lleoliad a ddewiswyd amlaf, gan 16 o’r 17 disgybl a nododd anhawster dysgu ymhlith merched yn yr ysg",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Ar gyfartaledd, cymerodd disgyblion a nododd anabledd a/neu anhawster dysgu ymhlith merched yn yr ysgol gyfan ran mewn 1",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Yn ystod Addysg Gorfforol neu Amser Gwersi oedd y lleoliad a ddewiswyd amlaf, gan wyth o’r wyth disgybl sy’n dod o gefnd",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Yn ystod Addysg Gorfforol neu Amser Gwersi oedd y lleoliad a ddewiswyd amlaf, gan 158 o’r 176 disgybl sy’n siarad Cymrae",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "caption",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Yr ysgol gyfan · Merched. Yn seiliedig ar 176 disgybl.",
+   "source": "frame:ui.table_caption",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "caption",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Yr ysgol gyfan · Merched. Yn seiliedig ar 176 disgybl.",
+   "source": "frame:ui.table_caption",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "caption",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Yr ysgol gyfan · Merched. Yn seiliedig ar 176 disgybl.",
+   "source": "frame:ui.table_caption",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Pan ofynnwyd iddynt a yw gwersi AG a Gwersi Actif yn gwneud iddynt deimlo’n iach, yn hyderus ac yn barod i ddysgu, ymate",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "‘Cael hwyl’ oedd yr opsiwn a ddewiswyd amlaf, gan 139 o’r 175 merch yn yr ysgol gyfan a atebodd y cwestiwn hwn.",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "‘Pe bai mwy o chwaraeon rydw i’n eu hoffi’ oedd yr ateb a ddewiswyd amlaf a fyddai’n helpu merched yn yr ysgol gyfan i w",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Ymhlith merched yn yr ysgol gyfan a ddywedodd nad oeddent yn hyderus iawn i roi cynnig ar gamp newydd, ‘Pe bawn i’n teim",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O’r 176 merch yn yr ysgol gyfan a ymatebodd, ‘Weithiau’ oedd yr ateb a ddewiswyd amlaf (90, neu 51%).",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O’r 176 merch yn yr ysgol gyfan a ymatebodd, ‘Ydw, weithiau’ oedd yr ateb a ddewiswyd amlaf (85, neu 48%).",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Ymhlith merched yn yr ysgol gyfan a ddywedodd nad ydynt yn aml yn gallu ymuno â chwaraeon a gemau yn hawdd, ‘Pe bai mwy ",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Rhedeg neu loncian oedd y gamp neu weithgaredd a ddewiswyd amlaf, gan 117 o’r 190 merch yn yr ysgol gyfan a ymatebodd. Y",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Nofio oedd y gamp a ddewiswyd amlaf, gan 83 o’r 190 merch yn yr ysgol gyfan a ymatebodd. Yr ail gamp mwyaf cyffredin oed",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Nofio oedd y gamp a ddewiswyd amlaf fel camp yr hoffent wneud mwy ohoni yn yr ysgol gynradd (36 o ddewisiadau). Tennis a",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O edrych ar bob grŵp blwyddyn ymhlith merched yn yr ysgol gyfan, nofio oedd ar y brig ym Mlwyddyn 4, Mlwyddyn 5 a Mlwydd",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Y gamp yr oedd y galw mwyaf heb ei fodloni amdani oedd sglefrio iâ, a ddewiswyd gan 44 o’r 190 merch yn yr ysgol gyfan a",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Yr amod a ddewiswyd amlaf fel un a fyddai’n helpu merched yn yr ysgol gyfan i wneud mwy o chwaraeon oedd ‘Pe bai mwy o c",
+   "source": "narrative:h1",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Llawer: 87 disgybl — Yn seiliedig ar: 176 disgybl — Golwg: Yr ysg",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Eithaf: 62 disgybl — Yn seiliedig ar: 176 disgybl — Golwg: Yr ysg",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Dim llawer: 20 disgybl — Yn seiliedig ar: 176 disgybl — Golwg: Yr",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Dim o gwbl: saith disgybl — Yn seiliedig ar: 176 disgybl — Golwg:",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Llawer: 61 disgybl — Yn seiliedig ar: 176 disgybl — Golwg: Yr ",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Eithaf: 65 disgybl — Yn seiliedig ar: 176 disgybl — Golwg: Yr ",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Dim llawer: 34 disgybl — Yn seiliedig ar: 176 disgybl — Golwg:",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Dim o gwbl: 16 disgybl — Yn seiliedig ar: 176 disgybl — Golwg:",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Llawer: 62 disgybl — Yn seiliedig ar: 176 disgybl — Gol",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Eithaf: 58 disgybl — Yn seiliedig ar: 176 disgybl — Gol",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Dim llawer: 36 disgybl — Yn seiliedig ar: 176 disgybl —",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Dim o gwbl: 20 disgybl — Yn seiliedig ar: 176 disgybl —",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Yn ystod Addysg Gorfforol neu Amser Gwersi oedd y lleoliad a ddewiswyd amlaf, gan 215 o’r 233 bachgen yn yr ysgol gyfan ",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O’r 233 bachgen yn yr ysgol gyfan a ymatebodd, ‘5’ oedd yr ateb a ddewiswyd amlaf (56, neu 24%).",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Y campau a ddewiswyd amlaf gan fechgyn yn yr ysgol gyfan oedd pêl droed (188), criced (146) a rhedeg neu loncian (145).",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Pêl droed oedd y gamp y dywedodd bechgyn yn yr ysgol gyfan amlaf eu bod yn ei gwneud yn ystod Addysg Gorfforol neu Amser",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Pêl droed oedd y gamp y dywedodd bechgyn yn yr ysgol gyfan amlaf eu bod yn ei gwneud mewn clwb ysgol (51 disgybl a atebo",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Pêl droed oedd y gamp y dywedodd bechgyn yn yr ysgol gyfan amlaf eu bod yn ei gwneud mewn clwb y tu allan i’r ysgol (91 ",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Beicio mynydd oedd y gamp y dywedodd bechgyn yn yr ysgol gyfan amlaf eu bod yn ei gwneud rhywle arall (105 disgybl a ate",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O’r 233 bachgen yn yr ysgol gyfan a ymatebodd, ‘Dim chwaraeon clwb wedi’u nodi’ oedd yr ateb a ddewiswyd amlaf (54, neu ",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Cymerodd 150 o’r 233 bachgen yn yr ysgol gyfan a ymatebodd (64%) ran mewn chwaraeon clwb (mewn clwb ysgol neu glwb y tu ",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Yn ystod Addysg Gorfforol neu Amser Gwersi oedd y lleoliad a ddewiswyd amlaf, gan 38 o’r 40 disgybl a nododd anabledd ne",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Yn ystod Addysg Gorfforol neu Amser Gwersi oedd y lleoliad a ddewiswyd amlaf, gan 30 o’r 31 disgybl a nododd anhawster d",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Ar gyfartaledd, cymerodd disgyblion a nododd anabledd a/neu anhawster dysgu ymhlith bechgyn yn yr ysgol gyfan ran mewn 1",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Rhywle arall oedd y lleoliad a ddewiswyd amlaf, gan 24 o’r 27 disgybl sy’n dod o gefndir ethnig amrywiol ymhlith bechgyn",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Yn ystod Addysg Gorfforol neu Amser Gwersi oedd y lleoliad a ddewiswyd amlaf, gan 186 o’r 196 disgybl sy’n siarad Cymrae",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "text",
+   "tag": "caption",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Yr ysgol gyfan · Bechgyn. Yn seiliedig ar 210 disgybl.",
+   "source": "frame:ui.table_caption",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "text",
+   "tag": "caption",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Yr ysgol gyfan · Bechgyn. Yn seiliedig ar 210 disgybl.",
+   "source": "frame:ui.table_caption",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "text",
+   "tag": "caption",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Yr ysgol gyfan · Bechgyn. Yn seiliedig ar 210 disgybl.",
+   "source": "frame:ui.table_caption",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Pan ofynnwyd iddynt a yw gwersi AG a Gwersi Actif yn gwneud iddynt deimlo’n iach, yn hyderus ac yn barod i ddysgu, ymate",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "‘Cael hwyl’ oedd yr opsiwn a ddewiswyd amlaf, gan 166 o’r 207 bachgen yn yr ysgol gyfan a atebodd y cwestiwn hwn.",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "‘Pe bai mwy o chwaraeon rydw i’n eu hoffi’ oedd yr ateb a ddewiswyd amlaf a fyddai’n helpu bechgyn yn yr ysgol gyfan i w",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Ymhlith bechgyn yn yr ysgol gyfan a ddywedodd nad oeddent yn hyderus iawn i roi cynnig ar gamp newydd, ‘Pe bai mwy o chw",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O’r 210 bachgen yn yr ysgol gyfan a ymatebodd, ‘Weithiau’ oedd yr ateb a ddewiswyd amlaf (94, neu 45%).",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O’r 210 bachgen yn yr ysgol gyfan a ymatebodd, ‘Ydw, bob amser’ oedd yr ateb a ddewiswyd amlaf (105, neu 50%).",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Ymhlith bechgyn yn yr ysgol gyfan a ddywedodd nad ydynt yn aml yn gallu ymuno â chwaraeon a gemau yn hawdd, ‘Pe bai mwy ",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Pêl droed oedd y gamp neu weithgaredd a ddewiswyd amlaf, gan 189 o’r 233 bachgen yn yr ysgol gyfan a ymatebodd. Roedd cr",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Pêl droed oedd y gamp a ddewiswyd amlaf, gan 127 o’r 233 bachgen yn yr ysgol gyfan a ymatebodd. Yr ail gamp mwyaf cyffre",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Pêl droed oedd y gamp a ddewiswyd amlaf fel camp yr hoffent wneud mwy ohoni yn yr ysgol gynradd (27 o ddewisiadau). Pêl ",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Ym Mlwyddyn 4, roedd criced a phêl droed yn gyfartal (chwech o ddewisiadau yr un); ym Mlwyddyn 7, roedd pêl droed a rown",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Y gamp yr oedd y galw mwyaf heb ei fodloni amdani oedd rasio moduron, a ddewiswyd gan 48 o’r 233 bachgen yn yr ysgol gyf",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Yr amod a ddewiswyd amlaf fel un a fyddai’n helpu bechgyn yn yr ysgol gyfan i wneud mwy o chwaraeon oedd ‘Pe bai mwy o c",
+   "source": "narrative:h1",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Llawer: 130 disgybl — Yn seiliedig ar: 210 disgybl — Golwg: Yr ys",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Eithaf: 59 disgybl — Yn seiliedig ar: 210 disgybl — Golwg: Yr ysg",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Dim llawer: 12 disgybl — Yn seiliedig ar: 210 disgybl — Golwg: Yr",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Dim o gwbl: naw disgybl — Yn seiliedig ar: 210 disgybl — Golwg: Y",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Llawer: 110 disgybl — Yn seiliedig ar: 210 disgybl — Golwg: Yr",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Eithaf: 70 disgybl — Yn seiliedig ar: 210 disgybl — Golwg: Yr ",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Dim llawer: 16 disgybl — Yn seiliedig ar: 210 disgybl — Golwg:",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Dim o gwbl: 14 disgybl — Yn seiliedig ar: 210 disgybl — Golwg:",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Llawer: 93 disgybl — Yn seiliedig ar: 210 disgybl — Gol",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Eithaf: 73 disgybl — Yn seiliedig ar: 210 disgybl — Gol",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Dim llawer: 25 disgybl — Yn seiliedig ar: 210 disgybl —",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Dim o gwbl: 19 disgybl — Yn seiliedig ar: 210 disgybl —",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|boy|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Yn ystod Addysg Gorfforol neu Amser Gwersi oedd y lleoliad a ddewiswyd amlaf, gan 278 o’r 287 disgybl yn yr ysgol gyfan ",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O’r 287 disgybl yn yr ysgol gyfan a ddewisodd bêl droed, ‘5’ oedd yr ateb a ddewiswyd amlaf (65).",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O’r 287 disgybl yn yr ysgol gyfan a ddewisodd bêl droed, ‘3’ oedd yr ateb a ddewiswyd amlaf (61).",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Cymerodd 204 o’r 287 disgybl yn yr ysgol gyfan a ddewisodd bêl droed ran mewn chwaraeon clwb (mewn clwb ysgol neu glwb y",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Yn ystod Addysg Gorfforol neu Amser Gwersi oedd y lleoliad a ddewiswyd amlaf, gan 55 o’r 57 disgybl a nododd anabledd ne",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Yn ystod Addysg Gorfforol neu Amser Gwersi oedd y lleoliad a ddewiswyd amlaf, gan 29 o’r 30 disgybl a nododd anhawster d",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Ar gyfartaledd, cymerodd disgyblion a nododd anabledd a/neu anhawster dysgu ymhlith disgyblion yn yr ysgol gyfan a ddewi",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Yn ystod Addysg Gorfforol neu Amser Gwersi oedd y lleoliad a ddewiswyd amlaf, gan 25 o’r 25 disgybl sy’n dod o gefndir e",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Yn ystod Addysg Gorfforol neu Amser Gwersi oedd y lleoliad a ddewiswyd amlaf, gan 249 o’r 256 disgybl sy’n siarad Cymrae",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O’r 279 disgybl yn yr ysgol gyfan a ddewisodd bêl droed y gofynnwyd iddynt a ydynt yn siarad Cymraeg wrth gymryd rhan me",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "text",
+   "tag": "caption",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Yr ysgol gyfan · Pob disgybl · Dewiswyd Pêl Droed. Yn seiliedig a",
+   "source": "frame:ui.table_caption",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "text",
+   "tag": "caption",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Yr ysgol gyfan · Pob disgybl · Dewiswyd Pêl Droed. Yn seiliedi",
+   "source": "frame:ui.table_caption",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "text",
+   "tag": "caption",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Yr ysgol gyfan · Pob disgybl · Dewiswyd Pêl Droed. Yn s",
+   "source": "frame:ui.table_caption",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Pan ofynnwyd iddynt a yw gwersi AG a Gwersi Actif yn gwneud iddynt deimlo’n iach, yn hyderus ac yn barod i ddysgu, ymate",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "‘Cael hwyl’ oedd yr opsiwn a ddewiswyd amlaf, gan 214 o’r 257 disgybl yn yr ysgol gyfan a ddewisodd bêl droed.",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "‘Pe bai mwy o chwaraeon rydw i’n eu hoffi’ oedd yr ateb a ddewiswyd amlaf a fyddai’n helpu disgyblion yn yr ysgol gyfan ",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Mewn Clybiau Chwaraeon y tu allan i’r ysgol yr oedd disgyblion yn yr ysgol gyfan a ddewisodd bêl droed fwyaf tebygol o d",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Ymhlith disgyblion yn yr ysgol gyfan a ddewisodd bêl droed, dywedodd 93 o’r 172 bachgen a 33 o’r 82 merch a ymatebodd eu",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O’r 258 disgybl yn yr ysgol gyfan a ddewisodd bêl droed, ‘Weithiau’ oedd yr ateb a ddewiswyd amlaf (128).",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Roedd disgyblion yn yr ysgol gyfan a ddewisodd bêl droed fwyaf tebygol o ddweud eu bod yn hyderus i ddysgu sgil newydd: ",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O’r 258 disgybl yn yr ysgol gyfan a ddewisodd bêl droed, ‘Ydw, bob amser’ oedd yr ateb a ddewiswyd amlaf (125).",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Mae’r grŵp a ddewiswyd yn cynnwys disgyblion yn yr ysgol gyfan a ddewisodd bêl droed. Mae’r siart uchod yn dangos y darl",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Ar wahân i bêl droed, sy’n diffinio’r grŵp a ddewiswyd, rownderi oedd y gamp a ddewiswyd amlaf, gan 210 o’r 287 disgybl ",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Pêl droed oedd y gamp a ddewiswyd amlaf, gan 159 o’r 287 disgybl yn yr ysgol gyfan a ddewisodd bêl droed. Yr ail gamp mw",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Pêl droed oedd y gamp gyntaf a ddewiswyd amlaf fel camp yr hoffent wneud mwy ohoni ymhlith bechgyn yn yr ysgol gyfan, a’",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Y gamp yr oedd y galw mwyaf heb ei fodloni amdani oedd trampolinio, a ddewiswyd gan 71 o’r 287 disgybl yn yr ysgol gyfan",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Ymhlith disgyblion yn yr ysgol gyfan a ddewisodd bêl droed, ar wahân i bêl droed, rownderi a ddewiswyd amlaf (210 o ddew",
+   "source": "narrative:h1",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Ymhlith disgyblion yn yr ysgol gyfan a ddewisodd bêl droed, roedd y galw cryfaf am bêl droed (159 o ddewisiadau), tra ma",
+   "source": "narrative:h1",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "text",
+   "tag": "li",
+   "text": "Dewisodd 71 o ddisgyblion drampolinio fel rhywbeth yr hoffent wneud mwy ohono ond nad ydynt yn ei wneud ar hyn o bryd, y",
+   "source": "narrative:h2",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Llawer: 158 disgybl — Yn seiliedig ar: 258 disgybl — Golwg: Yr ys",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Eithaf: 75 disgybl — Yn seiliedig ar: 258 disgybl — Golwg: Yr ysg",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Dim llawer: 16 disgybl — Yn seiliedig ar: 258 disgybl — Golwg: Yr",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Dim o gwbl: naw disgybl — Yn seiliedig ar: 258 disgybl — Golwg: Y",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Llawer: 122 disgybl — Yn seiliedig ar: 258 disgybl — Golwg: Yr",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Eithaf: 96 disgybl — Yn seiliedig ar: 258 disgybl — Golwg: Yr ",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Dim llawer: 27 disgybl — Yn seiliedig ar: 258 disgybl — Golwg:",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Dim o gwbl: 13 disgybl — Yn seiliedig ar: 258 disgybl — Golwg:",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Llawer: 111 disgybl — Yn seiliedig ar: 258 disgybl — Go",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Eithaf: 92 disgybl — Yn seiliedig ar: 258 disgybl — Gol",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Dim llawer: 32 disgybl — Yn seiliedig ar: 258 disgybl —",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Dim o gwbl: 23 disgybl — Yn seiliedig ar: 258 disgybl —",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "title",
+   "tag": "button",
+   "text": "Pa chwaraeon a gweithgareddau mae ein disgyblion wedi’u gwneud yn y flwyddyn ysgol hon? — Pêl Droed: 287 disgybl — Yn se",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "whole|all|sp_football"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Rhywle arall oedd y lleoliad a ddewiswyd amlaf, gan 16 o’r 17 merch ym Mlwyddyn 3 a ymatebodd, ac yna Yn ystod Addysg Go",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O’r 17 merch ym Mlwyddyn 3 a ymatebodd, ‘4’ oedd yr ateb a ddewiswyd amlaf (6).",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Y campau a ddewiswyd amlaf gan ferched ym Mlwyddyn 3 oedd nofio (11), beicio ffordd neu drac (10) a dosbarthiadau dawns ",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Nofio oedd y gamp y dywedodd merched ym Mlwyddyn 3 amlaf eu bod yn ei gwneud yn ystod Addysg Gorfforol neu Amser Gwersi ",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Pêl droed oedd y gamp y dywedodd merched ym Mlwyddyn 3 amlaf eu bod yn ei gwneud mewn clwb ysgol (un o’r disgyblion a at",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Gymnasteg oedd y gamp y dywedodd merched ym Mlwyddyn 3 amlaf eu bod yn ei gwneud mewn clwb y tu allan i’r ysgol (dau ddi",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Nofio oedd y gamp y dywedodd merched ym Mlwyddyn 3 amlaf eu bod yn ei gwneud rhywle arall (saith disgybl a atebodd ar gy",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O’r 17 merch ym Mlwyddyn 3 a ymatebodd, ‘Dim chwaraeon clwb wedi’u nodi’ oedd yr ateb a ddewiswyd amlaf (10).",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Cymerodd saith o’r 17 merch ym Mlwyddyn 3 a ymatebodd ran mewn chwaraeon clwb (mewn clwb ysgol neu glwb y tu allan i’r y",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Rhywle arall oedd y lleoliad a ddewiswyd amlaf, gan naw o’r naw disgybl a nododd anabledd a/neu anhawster dysgu ymhlith ",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Ar gyfartaledd, cymerodd disgyblion a nododd anabledd a/neu anhawster dysgu ymhlith merched ym Mlwyddyn 3 ran mewn chwec",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Rhywle arall oedd y lleoliad a ddewiswyd amlaf, gan 16 o’r 17 disgybl sy’n siarad Cymraeg ymhlith merched ym Mlwyddyn 3,",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "caption",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Blwyddyn 3 · Merched. Yn seiliedig ar 16 disgybl.",
+   "source": "frame:ui.table_caption",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "caption",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Blwyddyn 3 · Merched. Yn seiliedig ar 16 disgybl.",
+   "source": "frame:ui.table_caption",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "caption",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Blwyddyn 3 · Merched. Yn seiliedig ar 16 disgybl.",
+   "source": "frame:ui.table_caption",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Pan ofynnwyd iddynt a yw gwersi AG a Gwersi Actif yn gwneud iddynt deimlo’n iach, yn hyderus ac yn barod i ddysgu, ymate",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "‘Cael hwyl’ oedd yr opsiwn a ddewiswyd amlaf, gan 11 o’r 15 merch ym Mlwyddyn 3 a atebodd y cwestiwn hwn.",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "‘Pe bai’n haws cymryd rhan’ oedd yr ateb a ddewiswyd amlaf a fyddai’n helpu merched ym Mlwyddyn 3 i wneud mwy o chwaraeo",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O’r 16 merch ym Mlwyddyn 3 a ymatebodd, ‘Weithiau’ oedd yr ateb a ddewiswyd amlaf (9).",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Nofio oedd y gamp neu weithgaredd a ddewiswyd amlaf, gan 11 o’r 17 merch ym Mlwyddyn 3 a ymatebodd. Yr ail gamp neu weit",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Ymhlith merched ym Mlwyddyn 3, roedd dosbarthiadau dawns a nofio yn gyfartal fel y campau a ddewiswyd amlaf, gyda wyth d",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Ymhlith merched ym Mlwyddyn 3, roedd y galw cryfaf am ddosbarthiadau dawns a nofio (wyth o ddewisiadau), tra mai deg cam",
+   "source": "narrative:h1",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Llawer: naw disgybl — Yn seiliedig ar: 16 disgybl — Golwg: Blwydd",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Eithaf: tri disgybl — Yn seiliedig ar: 16 disgybl — Golwg: Blwydd",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Dim llawer: dau ddisgybl — Yn seiliedig ar: 16 disgybl — Golwg: B",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Dim o gwbl: dau ddisgybl — Yn seiliedig ar: 16 disgybl — Golwg: B",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Llawer: saith disgybl — Yn seiliedig ar: 16 disgybl — Golwg: B",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Eithaf: saith disgybl — Yn seiliedig ar: 16 disgybl — Golwg: B",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Dim llawer: un disgybl — Yn seiliedig ar: 16 disgybl — Golwg: ",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Dim o gwbl: un disgybl — Yn seiliedig ar: 16 disgybl — Golwg: ",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Llawer: wyth disgybl — Yn seiliedig ar: 16 disgybl — Go",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Eithaf: pum disgybl — Yn seiliedig ar: 16 disgybl — Gol",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Dim llawer: un disgybl — Yn seiliedig ar: 16 disgybl — ",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Dim o gwbl: dau ddisgybl — Yn seiliedig ar: 16 disgybl ",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "y3|girl|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Rhywle arall oedd y lleoliad a ddewiswyd amlaf, gan 99 o’r 108 disgybl yn yr ysgol gynradd a ymatebodd, ac yna Yn ystod ",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O’r 109 disgybl yn yr ysgol gynradd a ymatebodd, ‘3’ oedd yr ateb a ddewiswyd amlaf (19, neu 17%).",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Y campau a ddewiswyd amlaf gan ddisgyblion yn yr ysgol gynradd oedd nofio (88), criced (65) a rhedeg neu loncian (60).",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Nofio oedd y gamp y dywedodd disgyblion yn yr ysgol gynradd amlaf eu bod yn ei gwneud yn ystod Addysg Gorfforol neu Amse",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Pêl droed oedd y gamp y dywedodd disgyblion yn yr ysgol gynradd amlaf eu bod yn ei gwneud mewn clwb ysgol (22 disgybl a ",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Rygbi oedd y gamp y dywedodd disgyblion yn yr ysgol gynradd amlaf eu bod yn ei gwneud mewn clwb y tu allan i’r ysgol (19",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Nofio oedd y gamp y dywedodd disgyblion yn yr ysgol gynradd amlaf eu bod yn ei gwneud rhywle arall (38 disgybl a atebodd",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O’r 109 disgybl yn yr ysgol gynradd a ymatebodd, ‘Dim chwaraeon clwb wedi’u nodi’ oedd yr ateb a ddewiswyd amlaf (41, ne",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Cymerodd 54 o’r 109 disgybl yn yr ysgol gynradd a ymatebodd (50%) ran mewn chwaraeon clwb (mewn clwb ysgol neu glwb y tu",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Rhywle arall oedd y lleoliad a ddewiswyd amlaf, gan 30 o’r 31 disgybl a nododd anabledd neu gyflwr hirdymor ymhlith disg",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Rhywle arall oedd y lleoliad a ddewiswyd amlaf, gan wyth o’r naw disgybl a nododd anhawster dysgu ymhlith disgyblion yn ",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Ar gyfartaledd, cymerodd disgyblion a nododd anabledd a/neu anhawster dysgu ymhlith disgyblion yn yr ysgol gynradd ran m",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Yn ystod Addysg Gorfforol neu Amser Gwersi oedd y lleoliad a ddewiswyd amlaf, gan wyth o’r wyth disgybl sy’n dod o gefnd",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Rhywle arall oedd y lleoliad a ddewiswyd amlaf, gan 83 o’r 90 disgybl sy’n siarad Cymraeg ymhlith disgyblion yn yr ysgol",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "caption",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Y cyfnod cynradd · Pob disgybl. Yn seiliedig ar 98 disgybl.",
+   "source": "frame:ui.table_caption",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "caption",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Y cyfnod cynradd · Pob disgybl. Yn seiliedig ar 98 disgybl.",
+   "source": "frame:ui.table_caption",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "caption",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Y cyfnod cynradd · Pob disgybl. Yn seiliedig ar 98 disg",
+   "source": "frame:ui.table_caption",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Pan ofynnwyd iddynt a yw gwersi AG a Gwersi Actif yn gwneud iddynt deimlo’n iach, yn hyderus ac yn barod i ddysgu, ymate",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "‘Cael hwyl’ oedd yr opsiwn a ddewiswyd amlaf, gan 69 o’r 95 disgybl yn yr ysgol gynradd a atebodd y cwestiwn hwn.",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "‘Pe bai mwy o chwaraeon rydw i’n eu hoffi’ oedd yr ateb a ddewiswyd amlaf a fyddai’n helpu disgyblion yn yr ysgol gynrad",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Ymhlith disgyblion yn yr ysgol gynradd a ddywedodd nad oeddent yn hyderus iawn i roi cynnig ar gamp newydd, ‘Pe bai mwy ",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O’r 98 disgybl yn yr ysgol gynradd a ymatebodd, ‘Weithiau’ oedd yr ateb a ddewiswyd amlaf (48, neu 49%).",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O’r 98 disgybl yn yr ysgol gynradd a ymatebodd, ‘Ydw, weithiau’ oedd yr ateb a ddewiswyd amlaf (42, neu 43%).",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Ymhlith disgyblion yn yr ysgol gynradd a ddywedodd nad ydynt yn aml yn gallu ymuno â chwaraeon a gemau yn hawdd, ‘Pe bai",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Nofio oedd y gamp neu weithgaredd a ddewiswyd amlaf, gan 89 o’r 109 disgybl yn yr ysgol gynradd a ymatebodd. Yr ail gamp",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Nofio oedd y gamp a ddewiswyd amlaf, gan 56 o’r 109 disgybl yn yr ysgol gynradd a ymatebodd. Yr ail gamp mwyaf cyffredin",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Pêl droed oedd y gamp gyntaf a ddewiswyd amlaf fel camp yr hoffent wneud mwy ohoni ymhlith bechgyn yn yr ysgol gynradd, ",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O edrych ar bob grŵp blwyddyn ymhlith disgyblion yn yr ysgol gynradd, nofio oedd ar y brig ym Mlwyddyn 3 a Mlwyddyn 4; y",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Y gamp yr oedd y galw mwyaf heb ei fodloni amdani oedd sglefrio iâ, a ddewiswyd gan 20 o’r 109 disgybl yn yr ysgol gynra",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Pysgota oedd y gamp gyntaf a ddewiswyd amlaf fel camp yr oedd galw amdani heb ei fodloni ymhlith bechgyn yn yr ysgol gyn",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Yr amod a ddewiswyd amlaf fel un a fyddai’n helpu disgyblion yn yr ysgol gynradd i wneud mwy o chwaraeon oedd ‘Pe bai mw",
+   "source": "narrative:h1",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Llawer: 62 disgybl — Yn seiliedig ar: 98 disgybl — Golwg: Y cyfno",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Eithaf: 28 disgybl — Yn seiliedig ar: 98 disgybl — Golwg: Y cyfno",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Dim llawer: chwe disgybl — Yn seiliedig ar: 98 disgybl — Golwg: Y",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Dim o gwbl: dau ddisgybl — Yn seiliedig ar: 98 disgybl — Golwg: Y",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Llawer: 60 disgybl — Yn seiliedig ar: 98 disgybl — Golwg: Y cy",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Eithaf: 27 disgybl — Yn seiliedig ar: 98 disgybl — Golwg: Y cy",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Dim llawer: pum disgybl — Yn seiliedig ar: 98 disgybl — Golwg:",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Dim o gwbl: chwe disgybl — Yn seiliedig ar: 98 disgybl — Golwg",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Llawer: 49 disgybl — Yn seiliedig ar: 98 disgybl — Golw",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Eithaf: 31 disgybl — Yn seiliedig ar: 98 disgybl — Golw",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Dim llawer: 11 disgybl — Yn seiliedig ar: 98 disgybl — ",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Dim o gwbl: saith disgybl — Yn seiliedig ar: 98 disgybl",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "primary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Yn ystod Addysg Gorfforol neu Amser Gwersi oedd y lleoliad a ddewiswyd amlaf, gan 305 o’r 328 disgybl yn yr ysgol uwchra",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O’r 330 disgybl yn yr ysgol uwchradd a ymatebodd, ‘5’ oedd yr ateb a ddewiswyd amlaf (76, neu 23%).",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Y campau a ddewiswyd amlaf gan ddisgyblion yn yr ysgol uwchradd oedd pêl droed (227), rhedeg neu loncian (210) a rownder",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Pêl droed oedd y gamp y dywedodd disgyblion yn yr ysgol uwchradd amlaf eu bod yn ei gwneud mewn clwb y tu allan i’r ysgo",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Pŵl neu snwcer oedd y gamp y dywedodd disgyblion yn yr ysgol uwchradd amlaf eu bod yn ei gwneud rhywle arall (120 disgyb",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O’r 330 disgybl yn yr ysgol uwchradd a ymatebodd, ‘Dim chwaraeon clwb wedi’u nodi’ oedd yr ateb a ddewiswyd amlaf (75, n",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Cymerodd 224 o’r 330 disgybl yn yr ysgol uwchradd a ymatebodd (68%) ran mewn chwaraeon clwb (mewn clwb ysgol neu glwb y ",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Yn ystod Addysg Gorfforol neu Amser Gwersi oedd y lleoliad a ddewiswyd amlaf, gan 65 o’r 68 disgybl a nododd anabledd ne",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Yn ystod Addysg Gorfforol neu Amser Gwersi oedd y lleoliad a ddewiswyd amlaf, gan 37 o’r 40 disgybl a nododd anhawster d",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Ar gyfartaledd, cymerodd disgyblion a nododd anabledd a/neu anhawster dysgu ymhlith disgyblion yn yr ysgol uwchradd ran ",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Rhywle arall oedd y lleoliad a ddewiswyd amlaf, gan 25 o’r 29 disgybl sy’n dod o gefndir ethnig amrywiol ymhlith disgybl",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Yn ystod Addysg Gorfforol neu Amser Gwersi oedd y lleoliad a ddewiswyd amlaf, gan 278 o’r 293 disgybl sy’n siarad Cymrae",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "caption",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Y cyfnod uwchradd · Pob disgybl. Yn seiliedig ar 302 disgybl.",
+   "source": "frame:ui.table_caption",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "caption",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Y cyfnod uwchradd · Pob disgybl. Yn seiliedig ar 302 disgybl.",
+   "source": "frame:ui.table_caption",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "caption",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Y cyfnod uwchradd · Pob disgybl. Yn seiliedig ar 302 di",
+   "source": "frame:ui.table_caption",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Pan ofynnwyd iddynt a yw gwersi AG a Gwersi Actif yn gwneud iddynt deimlo’n iach, yn hyderus ac yn barod i ddysgu, ymate",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "‘Cael hwyl’ oedd yr opsiwn a ddewiswyd amlaf, gan 243 o’r 301 disgybl yn yr ysgol uwchradd a atebodd y cwestiwn hwn.",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "‘Pe bai mwy o chwaraeon rydw i’n eu hoffi’ oedd yr ateb a ddewiswyd amlaf a fyddai’n helpu disgyblion yn yr ysgol uwchra",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Ymhlith disgyblion yn yr ysgol uwchradd a ddywedodd nad oeddent yn hyderus iawn i roi cynnig ar gamp newydd, ‘Pe bai mwy",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O’r 302 disgybl yn yr ysgol uwchradd a ymatebodd, ‘Weithiau’ oedd yr ateb a ddewiswyd amlaf (140, neu 46%).",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O’r 302 disgybl yn yr ysgol uwchradd a ymatebodd, ‘Ydw, weithiau’ oedd yr ateb a ddewiswyd amlaf (132, neu 44%).",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Ymhlith disgyblion yn yr ysgol uwchradd a ddywedodd nad ydynt yn aml yn gallu ymuno â chwaraeon a gemau yn hawdd, ‘Pe ba",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Pêl droed oedd y gamp neu weithgaredd a ddewiswyd amlaf, gan 228 o’r 330 disgybl yn yr ysgol uwchradd a ymatebodd. Yr ai",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Pêl droed oedd y gamp a ddewiswyd amlaf, gan 132 o’r 330 disgybl yn yr ysgol uwchradd a ymatebodd. Roedd tennis a chodi ",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "O edrych ar bob grŵp blwyddyn ymhlith disgyblion yn yr ysgol uwchradd, pêl droed oedd ar y brig ym Mlwyddyn 9 a Mlwyddyn",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Y gamp yr oedd y galw mwyaf heb ei fodloni amdani oedd trampolinio, a ddewiswyd gan 74 o’r 330 disgybl yn yr ysgol uwchr",
+   "source": "handoff:static-furniture",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "text",
+   "tag": "p",
+   "text": "Yr amod a ddewiswyd amlaf fel un a fyddai’n helpu disgyblion yn yr ysgol uwchradd i wneud mwy o chwaraeon oedd ‘Pe bai m",
+   "source": "narrative:h1",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Llawer: 159 disgybl — Yn seiliedig ar: 302 disgybl — Golwg: Y cyf",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Eithaf: 97 disgybl — Yn seiliedig ar: 302 disgybl — Golwg: Y cyfn",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Dim llawer: 30 disgybl — Yn seiliedig ar: 302 disgybl — Golwg: Y ",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n iach? — Dim o gwbl: 16 disgybl — Yn seiliedig ar: 302 disgybl — Golwg: Y ",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Llawer: 114 disgybl — Yn seiliedig ar: 302 disgybl — Golwg: Y ",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Eithaf: 110 disgybl — Yn seiliedig ar: 302 disgybl — Golwg: Y ",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Dim llawer: 51 disgybl — Yn seiliedig ar: 302 disgybl — Golwg:",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n hyderus? — Dim o gwbl: 27 disgybl — Yn seiliedig ar: 302 disgybl — Golwg:",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Llawer: 107 disgybl — Yn seiliedig ar: 302 disgybl — Go",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Eithaf: 106 disgybl — Yn seiliedig ar: 302 disgybl — Go",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Dim llawer: 54 disgybl — Yn seiliedig ar: 302 disgybl —",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  },
+  {
+   "kind": "title",
+   "tag": "div",
+   "text": "A yw AG a Gwersi Actif yn gwneud i ti deimlo’n barod i ddysgu? — Dim o gwbl: 35 disgybl — Yn seiliedig ar: 302 disgybl —",
+   "source": "frame:ui.bar_tooltip",
+   "class": "mixed",
+   "state": "secondary|all|none"
+  }
+ ],
+ "welsh_without_provenance": [],
+ "typography": [],
+ "toggle_failures": []
+}

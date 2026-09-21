@@ -1,0 +1,37 @@
+{
+ "report": "SSS2026_ILR_Report_V5.0_ysgol-bro-pedr_Bilingual.html",
+ "reportSha256": "005f276e9a8a77675d5cda70edea4005b85bf86d0f2a12de4366ab0ff8de1447",
+ "headline": "72/75",
+ "mode": "release",
+ "runner": "8.0.0",
+ "manifestHash": "c4221bba2cff4dcb",
+ "paths": "17/18",
+ "failing": [
+  {
+   "gate": "STK-caption-case",
+   "occurrences": 34519
+  },
+  {
+   "gate": "CAT-values",
+   "occurrences": 72
+  },
+  {
+   "gate": "GOV-mode",
+   "occurrences": 2
+  }
+ ],
+ "notes": [
+  "sensitiveFilters = true in the client; no signed D69 value to assert against"
+ ],
+ "at": "2026-09-21T18:36:13+00:00",
+ "dev": {
+  "headline": "71/72",
+  "paths": "17/18",
+  "failing": [
+   {
+    "gate": "STK-caption-case",
+    "occurrences": 34519
+   }
+  ]
+ }
+}

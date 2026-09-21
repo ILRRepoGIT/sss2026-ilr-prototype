@@ -118,8 +118,19 @@ def map_single(raw, mapping: dict, log: ValidationLog, qname: str):
     return None
 
 
-def load_and_normalise(xlsx_path: str, sheet: str = "Responses wide"):
-    """Return (records, validation_log, build_meta, discovered_options)."""
+def load_and_normalise(xlsx_path: str, sheet: str = "Responses wide",
+                       accepted_statuses=None, available_years=None):
+    """Return (records, validation_log, build_meta, discovered_options).
+
+    v6 (0.28.0, V5.0 real-school round): a school profile may widen the
+    accepted completion statuses (the cleansed dataset's analytical set
+    carries partial responses that reached page 48+, the data owner's
+    inclusion rule) and restrict the year groups the school teaches; a
+    year outside the profile's range is EXCLUDED with a logged reason,
+    never silently dropped. Unset, the prototype's rules apply unchanged
+    (status "Complete", Years 3–11)."""
+    accepted = set(accepted_statuses or ["Complete"])
+    years_ok = set(available_years or range(3, 12))
     log = ValidationLog()
     df = pd.read_excel(xlsx_path, sheet_name=sheet)
     qidx = build_column_index(df)
@@ -137,14 +148,17 @@ def load_and_normalise(xlsx_path: str, sheet: str = "Responses wide"):
 
     salt = file_checksum(xlsx_path)[:16]
     records = []
+    status_counts: dict[str, int] = {}
     participated_labels: dict[str, str] = {}
     demand_labels: dict[str, str] = {}
 
     for _, row in df.iterrows():
         rid = row["Response_ID"]
         status = norm_text(row["Completion_Status"])
-        if status != "Complete":
-            log.exclude(rid, f"completion status '{status}' with no survey answers recorded")
+        if status not in accepted:
+            log.exclude(rid, f"completion status '{status}' with no survey answers recorded"
+                        if accepted == {"Complete"} else
+                        f"completion status '{status}' outside the profile's accepted statuses")
             continue
 
         year_raw = cell(row, qidx, 26871554)
@@ -159,6 +173,10 @@ def load_and_normalise(xlsx_path: str, sheet: str = "Responses wide"):
         if year is None or year not in range(3, 12):
             log.exclude(rid, f"missing or invalid year group ({year_raw!r})")
             continue
+        if year not in years_ok:
+            log.exclude(rid, f"year group {year_raw!r} is not one the school's profile covers "
+                             f"(Years {min(years_ok)}–{max(years_ok)})")
+            continue
 
         screen = cell(row, qidx, 26871527)
         if screen is not None and norm_text(screen) != "Yes":
@@ -166,6 +184,7 @@ def load_and_normalise(xlsx_path: str, sheet: str = "Responses wide"):
                      "school screening question but completed the survey. Accepted to match "
                      "the SmartSurvey completed-response count; flagged for a decision.")
 
+        status_counts[status] = status_counts.get(status, 0) + 1
         gender = map_single(cell(row, qidx, 26871497), RAW_TO_CODE["gender"], log, "gender")
         if gender is None:
             gender = "not_stated"
@@ -582,6 +601,10 @@ def load_and_normalise(xlsx_path: str, sheet: str = "Responses wide"):
         "generatedAt": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
         "weighting": "none",
     }
+    if accepted != {"Complete"}:
+        # v6: the data owner's inclusion rule admits partial responses —
+        # the split is recorded so the validation summary can state it
+        build_meta["acceptedByStatus"] = dict(sorted(status_counts.items()))
     discovered = {"participated": participated_labels, "demand": demand_labels}
     return records, log, build_meta, discovered
 

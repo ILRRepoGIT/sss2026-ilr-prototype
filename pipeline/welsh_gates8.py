@@ -77,7 +77,7 @@ def page_head(package):
     return SL.static_head(html)
 
 
-def emit_lock(package, S, old_baseline, path, ruling):
+def emit_lock(package, S, old_baseline, path, ruling, old_name="02c_lock_V48_v7.json"):
     """D82 (V4.15): re-emit the corpus lock from THIS build after a ruling
     changed the Welsh. The English projection and the FT-11 key set must
     equal the previous lock's — the English never moves — or this refuses;
@@ -95,11 +95,12 @@ def emit_lock(package, S, old_baseline, path, ruling):
                              f"{len(diff)} states (e.g. {diff[:3]}) — the English is locked (D01); refusing")
         if ft11 != old_baseline.get("ft11"):
             raise SystemExit("emit_lock: the FT-11 key set differs from the previous lock (PR-19); refusing")
-    moved = [k for k in set(cy) | set((old_baseline or {}).get("welsh", {}))
-             if cy.get(k) != (old_baseline or {}).get("welsh", {}).get(k)]
+    moved = ([k for k in set(cy) | set(old_baseline.get("welsh", {}))
+              if cy.get(k) != old_baseline.get("welsh", {}).get(k)]
+             if old_baseline is not None else list(cy))   # first emission: every state is new
     lock = {"runner": V7.VERSION, "english": eng, "welsh": cy, "ft11": ft11,
             "emitted": {"from": "build QA (pipeline/welsh_gates8.emit_lock)", "ruling": ruling,
-                        "supersedes": None if old_baseline is None else "02c_lock_V48_v7.json",
+                        "supersedes": None if old_baseline is None else old_name,
                         "welshStatesMoved": len(moved), "englishStatesMoved": 0}}
     Path(path).write_text(json.dumps(lock, ensure_ascii=False), encoding="utf-8")
     return len(moved)
@@ -117,8 +118,14 @@ def run(package, mode="dev", evidence_path=None, baseline_path=None,
         V7.load_framework(fw)
     S = V7.surfaces_from_states(package["states"], package.get("metricDefs"))
     js = (WEB_DIR / "app.js").read_text(encoding="utf-8")
-    baseline_path = baseline_path or (str(BASELINE_PATH) if BASELINE_PATH.exists() else None)
-    baseline = V7.load_baseline(baseline_path) if baseline_path else None
+    # v6 (0.28.0): "none" means NO baseline — a school's first build has
+    # nothing to assert against and emits its own lock (GOV-lock REPORT);
+    # None keeps the prototype's default baseline.
+    if baseline_path == "none":
+        baseline_path, baseline = None, None
+    else:
+        baseline_path = baseline_path or (str(BASELINE_PATH) if BASELINE_PATH.exists() else None)
+        baseline = V7.load_baseline(baseline_path) if baseline_path else None
     V7.EVIDENCE.clear()
     V7.HEAD["html"] = page_head(package)
     bundle_dir = str(BUNDLE_DIR) if bundle_dir is None else bundle_dir
@@ -129,10 +136,15 @@ def run(package, mode="dev", evidence_path=None, baseline_path=None,
         for gid in ("GOV-lock", "FT11-keyset"):
             if baseline is not None and by0[gid]["status"] != "PASS":
                 raise SystemExit(f"emit_lock: {gid} fails against the previous baseline — refusing to re-emit")
-        moved = emit_lock(package, S, baseline, emit_lock_path, emit_lock_ruling)
-        emitted_note = (f"GOV-lock-cy: the Welsh baseline was RE-EMITTED from this build to {Path(emit_lock_path).name} "
-                        f"({moved} of {len(package['states'])} states moved from the previous lock; ruling: {emit_lock_ruling}); "
-                        f"the English projection and the FT-11 key set are unchanged (asserted before emission)")
+        moved = emit_lock(package, S, baseline, emit_lock_path, emit_lock_ruling,
+                          old_name=Path(baseline_path).name if baseline_path else None)
+        emitted_note = ((f"GOV-lock-cy: the Welsh baseline was RE-EMITTED from this build to {Path(emit_lock_path).name} "
+                         f"({moved} of {len(package['states'])} states moved from the previous lock; ruling: {emit_lock_ruling}); "
+                         f"the English projection and the FT-11 key set are unchanged (asserted before emission)")
+                        if baseline is not None else
+                        (f"GOV-lock: this school's corpus lock was EMITTED from this build to {Path(emit_lock_path).name} "
+                         f"(first emission — no previous lock; {moved} states; ruling: {emit_lock_ruling}); "
+                         f"the stamp below is taken against it"))
         baseline_path = str(emit_lock_path)
         baseline = V7.load_baseline(baseline_path)
         V7.EVIDENCE.clear()

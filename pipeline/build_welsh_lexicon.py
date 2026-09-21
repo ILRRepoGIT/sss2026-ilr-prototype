@@ -197,6 +197,10 @@ def build(framework_path, handoff_path=None):
         (r"^\s*Rendered as the identificational cleft", "cleft"),
         (r"^\s*AMHARIAD", "amhariad"),
         (r"^\s*IN FORCE AND UNCHANGED: lower case in running prose", "prose_lowercase"),
+        # v2.8 PR-20 (V5.0 real-school round): the twelve S16 sport rows
+        # carry their features on sheet 23 itself; the ruling records by
+        # which confirmed rules they were assigned.
+        (r"^\s*FEATURES BY THE CONFIRMED RULES", "sheet23_features_by_rule"),
     ]
     rulings = []
     if "39 Provisional rulings" in wb.sheetnames:

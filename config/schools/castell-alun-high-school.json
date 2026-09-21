@@ -1,0 +1,102 @@
+{
+  "profileId": "standard-secondary-school",
+  "slug": "castell-alun-high-school",
+  "reportVersion": "2026-school-V5.0-bilingual",
+  "schoolType": "secondary",
+  "schoolId": "6644017",
+  "schoolName": "Castell Alun High School",
+  "localAuthority": "Flintshire",
+  "regionalSportPartnership": "Actif North Wales",
+  "schoolStages": "Secondary (Years 7–11)",
+  "teacherSurveyCompleted": "To be confirmed",
+  "fieldworkDates": "13th April – 17th July 2026",
+  "fsmBand": "To be confirmed by Sport Wales",
+  "surveyYear": 2026,
+  "availableYears": [
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "scopeGroups": [
+    {
+      "key": "whole",
+      "label": "Whole school",
+      "description": "Years 7–11",
+      "years": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "key": "y7",
+      "label": "Year 7",
+      "years": [
+        7
+      ]
+    },
+    {
+      "key": "y8",
+      "label": "Year 8",
+      "years": [
+        8
+      ]
+    },
+    {
+      "key": "y9",
+      "label": "Year 9",
+      "years": [
+        9
+      ]
+    },
+    {
+      "key": "y10",
+      "label": "Year 10",
+      "years": [
+        10
+      ]
+    },
+    {
+      "key": "y11",
+      "label": "Year 11",
+      "years": [
+        11
+      ]
+    }
+  ],
+  "genderOptions": [
+    {
+      "key": "all",
+      "label": "All respondents"
+    },
+    {
+      "key": "boy",
+      "label": "Boys"
+    },
+    {
+      "key": "girl",
+      "label": "Girls"
+    }
+  ],
+  "bandedSchool": false,
+  "suppressionThreshold": 5,
+  "maxAnswerDerivedCohorts": 1,
+  "weighting": "none",
+  "language": "en",
+  "translationReady": true,
+  "acceptedStatuses": [
+    "Complete",
+    "Partial"
+  ],
+  "dataSource": {
+    "file": "SSS2026_pupil_stage2_full_cleaned.parquet",
+    "sha256": "802eda98fdeef512cce11e11aa38a45df5b0f33beb81b505acfc4ce9bbe13625",
+    "handover": "SSS2026_pupil_cleansing_handover_v2.3_2026-09-09 (Industryline Research, 9 Sep 2026)",
+    "inclusionRule": "completed OR partial with current_page_position >= 48 (analytical_inclusion_flag)",
+    "export": "pipeline/cleansed_to_export.py — one school's rows in the prototype's SmartSurvey layout; free text withheld"
+  }
+}

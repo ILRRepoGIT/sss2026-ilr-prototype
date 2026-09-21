@@ -29,7 +29,8 @@ def page_html(wd: Path) -> str:
     html = tpl
     html = html.replace("__REPORT_JSON__", data.replace("</", "<\\/"))
     html = html.replace("/*__APP_JS__*/", app.replace("</", "<\\/"))
-    html = html.replace("__SCHOOL_NAME__", "Ysgol Penrhyn Dewi")
+    # v6: the school named in the payload (any build), never a fixed name
+    html = html.replace("__SCHOOL_NAME__", json.loads(data)["school"]["name"])
     return html
 
 

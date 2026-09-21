@@ -1,7 +1,7 @@
 {
- "version": "v2.7",
- "framework_sha256": "972a3998e2a68cdbe7e701d75924901db6369967c0c2118c322c8aa466317792",
- "framework_file": "01_Framework_v2.7.xlsx",
+ "version": "v2.8",
+ "framework_sha256": "582e335936e91eaaa5e9147fcb8a3344acdd98ad3d4076b3f389951caf15e2ac",
+ "framework_file": "01_Framework_v2.8.xlsx",
  "audiences": {
   "Generated from sheet 18 by rule. Note the two divergences from English that recur in every row: (1) after a numeral with the article Welsh uses the SINGULAR head (y 12 disgybl, not y 12 ddisgyblion); (2) the scope phrase is locative and triggers the nasal mutation (ym Mlwyddyn 8). The HOLL column is the parent-audience form ('all Year 8 pupils').": {
    "bare": "",
@@ -2566,6 +2566,114 @@
    "gender_raw": "g (m)",
    "initial": "g",
    "mutable": true
+  },
+  "Baton Twirling": {
+   "cy": "Troelli Batyn",
+   "prose": "troelli batyn",
+   "cat": "Sport",
+   "gender": "m",
+   "gender_raw": "g (m)",
+   "initial": "t",
+   "mutable": true
+  },
+  "Billiards": {
+   "cy": "Biliardiaid",
+   "prose": "biliardiaid",
+   "cat": "Sport",
+   "gender": "pl",
+   "gender_raw": "plural",
+   "initial": "b",
+   "mutable": true
+  },
+  "Floorball": {
+   "cy": "Pêl Lawr",
+   "prose": "pêl lawr",
+   "cat": "Sport",
+   "gender": "f",
+   "gender_raw": "b (f)",
+   "initial": "p",
+   "mutable": true
+  },
+  "Gaelic Games": {
+   "cy": "Gemau Gaileg",
+   "prose": "gemau gaileg",
+   "cat": "Sport",
+   "gender": "pl",
+   "gender_raw": "plural",
+   "initial": "g",
+   "mutable": true
+  },
+  "Gliding": {
+   "cy": "Gleidio",
+   "prose": "gleidio",
+   "cat": "Sport",
+   "gender": "m",
+   "gender_raw": "g (m)",
+   "initial": "g",
+   "mutable": true
+  },
+  "Handball": {
+   "cy": "Pêl-law",
+   "prose": "pêl-law",
+   "cat": "Sport",
+   "gender": "f",
+   "gender_raw": "b (f)",
+   "initial": "p",
+   "mutable": true
+  },
+  "Jet Skiing": {
+   "cy": "Sgio Jet",
+   "prose": "sgio jet",
+   "cat": "Sport",
+   "gender": "m",
+   "gender_raw": "g (m)",
+   "initial": "s",
+   "mutable": false
+  },
+  "Krav Maga": {
+   "cy": "Krav Maga",
+   "prose": "Krav Maga",
+   "cat": "Sport",
+   "gender": "m",
+   "gender_raw": "g (m)",
+   "initial": "k",
+   "mutable": false
+  },
+  "Majorettes": {
+   "cy": "Majorettes",
+   "prose": "Majorettes",
+   "cat": "Sport",
+   "gender": "pl",
+   "gender_raw": "plural",
+   "initial": "m",
+   "mutable": false
+  },
+  "Morris Dancing": {
+   "cy": "Dawnsio Morris",
+   "prose": "dawnsio morris",
+   "cat": "Sport",
+   "gender": "f",
+   "gender_raw": "b (f)",
+   "initial": "d",
+   "mutable": true
+  },
+  "Parachuting": {
+   "cy": "Parasiwt",
+   "prose": "parasiwt",
+   "cat": "Sport",
+   "gender": "m",
+   "gender_raw": "g (m)",
+   "initial": "p",
+   "mutable": true
+  },
+  "Softball": {
+   "cy": "Pêl Feddal",
+   "prose": "pêl feddal",
+   "cat": "Sport",
+   "gender": "f",
+   "gender_raw": "b (f)",
+   "initial": "p",
+   "mutable": true
   }
  },
  "core_nouns": {
@@ -3398,6 +3506,15 @@
    "alternative": "Recast now to an affirmative-zero or noun-phrase construction before the ruling (invents a form the linguist has not approved).",
    "volume": "571 records / 576 occurrences",
    "ruled_by": "Welsh linguist (wording); report owner (application)"
+  },
+  {
+   "id": "PR-20",
+   "question": "Sheet 23 — twelve sport labels the live survey offers (S16) that the prototype school's export did not contain: their gender, initial class and mutability.",
+   "value": "sheet23_features_by_rule",
+   "ruling": "FEATURES BY THE CONFIRMED RULES: verb-noun heads and unadapted loans masculine (PR-01), unadapted loans exempt from mutation (PR-05 / EX-04), pêl- compounds feminine and plural nouns ‘plural’ as the sheet's sibling rows; Street Dance's sibling Morris Dancing takes Street Dance's own features. The Welsh strings themselves are S16's, verbatim.",
+   "alternative": "Leave the rows out and fail any school build in which a pupil reported one of the twelve sports (D44 fail-loud); or assign features by guesswork.",
+   "volume": "12 labels; 1,868 pupil mentions Wales-wide in the cleansed dataset",
+   "ruled_by": "Industryline, by the translator-confirmed rules; the translator signs sheet 23"
   }
  ],
  "ac_fnwords": [
@@ -4074,15 +4191,15 @@
    "slots": "—"
   },
   "ui.overview_note": {
-   "en": "All year groups from Year 3 to Year 11 are represented. {hi} contributed the largest number of responses ({hin}) and {lo} the smallest ({lon}). Every response option is shown, including those selected by no pupils. Unequal group sizes should be kept in mind when comparing raw counts.",
-   "cy": "Mae’r holl grwpiau blwyddyn rhwng Blwyddyn 3 a Blwyddyn 11 yn cael eu cynrychioli. {hi} gyfrannodd y nifer fwyaf o ymatebion ({hin}) a {lo} y lleiaf ({lon}). Mae pob opsiwn ymateb yn cael ei ddangos, gan gynnwys yr opsiynau na wnaeth yr un disgybl eu dewis. Dylid cadw meintiau grwpiau anghyfartal mewn cof wrth gymharu niferoedd crai.",
-   "slots": "hi, hin, lo, lon"
+   "en": "All year groups from Year {first} to Year {last} are represented. {hi} contributed the largest number of responses ({hin}) and {lo} the smallest ({lon}). Every response option is shown, including those selected by no pupils. Unequal group sizes should be kept in mind when comparing raw counts.",
+   "cy": "Mae’r holl grwpiau blwyddyn rhwng Blwyddyn {first} a Blwyddyn {last} yn cael eu cynrychioli. {hi} gyfrannodd y nifer fwyaf o ymatebion ({hin}) a {lo} y lleiaf ({lon}). Mae pob opsiwn ymateb yn cael ei ddangos, gan gynnwys yr opsiynau na wnaeth yr un disgybl eu dewis. Dylid cadw meintiau grwpiau anghyfartal mewn cof wrth gymharu niferoedd crai.",
+   "slots": "hi, hin, lo, lon, first, last"
   },
   "ui.faq_included": {
-   "en": "Pupils in Years 3 to 11 at {school} who completed the 2026 School Sport Survey: {n} pupil responses are included. The page “Which pupils in our school took part in 2026?” shows exactly who they are.",
-   "cy": "Disgyblion ym Mlynyddoedd 3 i 11 yn {school} a atebodd Arolwg Chwaraeon Ysgol 2026: Mae {n} o ymatebion disgyblion wedi’u cynnwys. Mae’r dudalen “Pa ddisgyblion yn ein hysgol gymerodd ran yn 2026?” yn dangos pwy yn union ydyn nhw.",
-   "slots": "school, n",
-   "cy_sg": "Disgyblion ym Mlynyddoedd 3 i 11 yn {school} a atebodd Arolwg Chwaraeon Ysgol 2026: Mae {n} o ymatebion disgyblion wedi’i gynnwys. Mae’r dudalen “Pa ddisgyblion yn ein hysgol gymerodd ran yn 2026?” yn dangos pwy yn union ydyn nhw."
+   "en": "Pupils in Years {first} to {last} at {school} who completed the 2026 School Sport Survey: {n} pupil responses are included. The page “Which pupils in our school took part in 2026?” shows exactly who they are.",
+   "cy": "Disgyblion ym Mlynyddoedd {first} i {last} yn {school} a atebodd Arolwg Chwaraeon Ysgol 2026: Mae {n} o ymatebion disgyblion wedi’u cynnwys. Mae’r dudalen “Pa ddisgyblion yn ein hysgol gymerodd ran yn 2026?” yn dangos pwy yn union ydyn nhw.",
+   "slots": "school, n, first, last",
+   "cy_sg": "Disgyblion ym Mlynyddoedd {first} i {last} yn {school} a atebodd Arolwg Chwaraeon Ysgol 2026: Mae {n} o ymatebion disgyblion wedi’i gynnwys. Mae’r dudalen “Pa ddisgyblion yn ein hysgol gymerodd ran yn 2026?” yn dangos pwy yn union ydyn nhw."
   },
   "ui.faq_missing": {
    "en": "This report includes survey responses where pupils completed at least 80% of the survey. Responses with less information were not included, as there was not enough data to provide a meaningful picture of pupils’ views. As a result, more pupils from your school may have taken part in the survey than the total number shown here. The following sections therefore reflect the {n} responses that provided enough information to be included in the report.",

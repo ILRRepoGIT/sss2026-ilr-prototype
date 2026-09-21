@@ -1,0 +1,18 @@
+{
+ "purpose": "regression: the V4.15 prototype export rebuilt with Framework v2.8 + pipeline 0.28.0 (final)",
+ "frameworkSha256": "582e335936e91eaaa5e9147fcb8a3344acdd98ad3d4076b3f389951caf15e2ac",
+ "pipelineVersion": "0.28.0",
+ "statesEqualToShippedV415": true,
+ "cohortsEqual": true,
+ "metricDefsEqual": true,
+ "emittedLockEqualsV415Lock": {
+  "english": true,
+  "welsh": true,
+  "ft11": true
+ },
+ "welshStatesMoved": 0,
+ "englishStatesMoved": 0,
+ "qaStamp": "69/72",
+ "paths": "17/18",
+ "states": 8568
+}

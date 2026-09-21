@@ -1,0 +1,38 @@
+{
+ "report": "../SSS2026_ILR_Report_V5.0_castell-alun-high-school_Bilingual.html",
+ "runner": "8.0.0",
+ "manifestHash": "c4221bba2cff4dcb",
+ "mode": "release",
+ "school": {
+  "slug": "castell-alun-high-school",
+  "id": "6644017",
+  "name": "Castell Alun High School"
+ },
+ "command": "python welsh_acceptance_gates_v8.py ../SSS2026_ILR_Report_V5.0_castell-alun-high-school_Bilingual.html --framework 01_Framework_v2.8.xlsx --mode release --baseline lock_castell-alun-high-school_v8.json --bundle-dir . --json results_release.json --evidence evidence_rerun_release.ndjson.gz",
+ "files": {
+  "runner": {
+   "path": "welsh_acceptance_gates_v8.py",
+   "sha256": "3057fef25b5d54bd564b0ee86affd3ef34048b4c1598c27eeb86ae3da2bde4fe"
+  },
+  "framework": {
+   "path": "01_Framework_v2.8.xlsx",
+   "sha256": "582e335936e91eaaa5e9147fcb8a3344acdd98ad3d4076b3f389951caf15e2ac"
+  },
+  "baseline": {
+   "path": "lock_castell-alun-high-school_v8.json",
+   "sha256": "c784e8b29dd6b3ca47765b9feb681b22521454e33e799eae689e24d08000b800"
+  },
+  "evidence": {
+   "path": "evidence.ndjson.gz",
+   "sha256": "1b53b8401ba02f835d294e33d342ef83a876f6bbb456f8b5abab17bb57432f43"
+  },
+  "browserHarness": {
+   "path": "browser_gate_provenance.py",
+   "sha256": "1b053e89396e50979ab9414529a72b2e5802855685cef8e9be6ba4ea1b0120a3"
+  },
+  "report": {
+   "path": "../SSS2026_ILR_Report_V5.0_castell-alun-high-school_Bilingual.html",
+   "sha256": "9a5f52babd927046c37696260dddb2b2e2bc864524f57a65bee55178dc2ae5e2"
+  }
+ }
+}

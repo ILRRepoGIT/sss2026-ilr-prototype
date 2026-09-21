@@ -27,6 +27,24 @@ SCOPES = ["whole", "primary", "secondary"] + [f"y{n}" for n in range(3, 12)]
 GENDERS = ["all", "boy", "girl"]
 PHASE_FAMILIES = {"primary": [f"y{n}" for n in range(3, 7)],
                   "secondary": [f"y{n}" for n in range(7, 12)]}
+# v6 (0.28.0, V5.0 real-school round): the twelve internal scopes are always
+# computed. A profile that lists only the scopes its school teaches (a
+# primary school: whole + Years 3–6) gets the structural year sets for the
+# rest, so those states exist, hold no rows, are suppressed by the rule of
+# five and are never offered — the filter offers the profile's groups only.
+STRUCTURAL_SCOPE_YEARS = {"primary": set(range(3, 7)), "secondary": set(range(7, 12)),
+                          **{f"y{n}": {n} for n in range(3, 12)}}
+
+
+def restrict_year_options(defs, profile):
+    """v6: the profile chart 'responses by year group' shows the school's
+    years only (availableYears); unchanged for a 3–11 profile."""
+    years = profile.get("availableYears")
+    if years and "responses_by_year" in defs:
+        keep = {f"y{n}" for n in years}
+        d = defs["responses_by_year"]
+        d["options"] = [(c, l) for c, l in d["options"] if c in keep]
+    return defs
 
 # response targets per year group (SmartSurvey dashboard guidance)
 YEAR_TARGETS = {3: 15, 4: 15, 5: 15, 6: 15, 7: 22, 8: 22, 9: 22, 10: 22, 11: 22}
@@ -148,8 +166,12 @@ SENSITIVE_MIN5_PREFIXES = {"dy", "ly", "et", "wl", "tp", "ov", "dl", "ed", "ws",
                            "sp", "wd", "eb", "ec", "eo", "cs", "cg", "cn"}
 
 
-def build_cohorts(metrics_cfg, defs, records=None):
+def build_cohorts(metrics_cfg, defs, records=None, held=None, log=None):
+    """held (v6): {cohort key: {reason, needs}} — cohorts the Framework
+    cannot yet render in Welsh (see common.load_held_cohorts). A held key
+    is not offered; the hold is logged as a build warning when it bites."""
     cohorts = {}
+    held = held or {}
     for mid, src in metrics_cfg["cohort_sources"].items():
         d = defs[mid]
         label_lookup = dict(d["options"])
@@ -160,6 +182,18 @@ def build_cohorts(metrics_cfg, defs, records=None):
             if code not in label_lookup:
                 continue
             key = f"{src['prefix']}_{code}"
+            if key in held:
+                n = (sum(1 for r in records if cohort_member(
+                    r, {"metric": mid, "code": code}, defs))
+                     if records is not None else None)
+                # the hold is reported only where it bites: a group the
+                # rule-of-five cap would not offer anyway is not a hold
+                if log is not None and (n is None or n >= 5 or
+                                        src["prefix"] not in SENSITIVE_MIN5_PREFIXES):
+                    log.warn(f"cohort {key} HELD (not offered as a filter; its bar stays, "
+                             f"non-selectable){'' if n is None else f' — {n} pupils'}: "
+                             f"{held[key].get('reason', '')} Needs: {held[key].get('needs', '')}")
+                continue
             cdef = {
                 "label": src["label_template"].format(option=label_lookup[code]),
                 "metric": mid,
@@ -240,6 +274,8 @@ class StateEngine:
         self.cohorts = cohorts
         self.threshold = threshold
         self.scope_years = {g["key"]: set(g["years"]) for g in profile["scopeGroups"]}
+        for sc, ys in STRUCTURAL_SCOPE_YEARS.items():
+            self.scope_years.setdefault(sc, set(ys))
         self.cohort_keys = ["none"] + list(cohorts.keys())
         self.bases = {}
         self.suppressed = {}          # key -> "threshold"

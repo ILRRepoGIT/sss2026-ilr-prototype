@@ -1,0 +1,93 @@
+{
+  "profileId": "standard-primary-school",
+  "slug": "new-inn-primary-school",
+  "reportVersion": "2026-school-V5.0-bilingual",
+  "schoolType": "primary",
+  "schoolId": "6782320",
+  "schoolName": "New Inn Primary School",
+  "localAuthority": "Torfaen",
+  "regionalSportPartnership": "Gwent Sport Partnership [GSP]",
+  "schoolStages": "Primary (Years 3–6)",
+  "teacherSurveyCompleted": "To be confirmed",
+  "fieldworkDates": "13th April – 17th July 2026",
+  "fsmBand": "To be confirmed by Sport Wales",
+  "surveyYear": 2026,
+  "availableYears": [
+    3,
+    4,
+    5,
+    6
+  ],
+  "scopeGroups": [
+    {
+      "key": "whole",
+      "label": "Whole school",
+      "description": "Years 3–6",
+      "years": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "key": "y3",
+      "label": "Year 3",
+      "years": [
+        3
+      ]
+    },
+    {
+      "key": "y4",
+      "label": "Year 4",
+      "years": [
+        4
+      ]
+    },
+    {
+      "key": "y5",
+      "label": "Year 5",
+      "years": [
+        5
+      ]
+    },
+    {
+      "key": "y6",
+      "label": "Year 6",
+      "years": [
+        6
+      ]
+    }
+  ],
+  "genderOptions": [
+    {
+      "key": "all",
+      "label": "All respondents"
+    },
+    {
+      "key": "boy",
+      "label": "Boys"
+    },
+    {
+      "key": "girl",
+      "label": "Girls"
+    }
+  ],
+  "bandedSchool": false,
+  "suppressionThreshold": 5,
+  "maxAnswerDerivedCohorts": 1,
+  "weighting": "none",
+  "language": "en",
+  "translationReady": true,
+  "acceptedStatuses": [
+    "Complete",
+    "Partial"
+  ],
+  "dataSource": {
+    "file": "SSS2026_pupil_stage2_full_cleaned.parquet",
+    "sha256": "802eda98fdeef512cce11e11aa38a45df5b0f33beb81b505acfc4ce9bbe13625",
+    "handover": "SSS2026_pupil_cleansing_handover_v2.3_2026-09-09 (Industryline Research, 9 Sep 2026)",
+    "inclusionRule": "completed OR partial with current_page_position >= 48 (analytical_inclusion_flag)",
+    "export": "pipeline/cleansed_to_export.py — one school's rows in the prototype's SmartSurvey layout; free text withheld"
+  }
+}

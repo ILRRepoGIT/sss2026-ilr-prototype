@@ -35,6 +35,24 @@ _SINGULAR_FIXES = [
 _CAP_NONE = re.compile(r"(^|(?<=\. ))none")
 
 
+# v6 (0.28.0): the build's own English gates for a base of one (the same
+# expressions run_qa_checks applies to every audited sentence). A locked
+# template that can only produce a sentence these reject on a one-pupil
+# base has no one-pupil form; the sentence is HELD rather than shipped,
+# and the hold is logged (sheet 49, EN-08). Kept here so the hold and the
+# gate can never drift apart.
+BASE1_GATES = [re.compile(r"\bof the 1 (respondent|pupil)\b"),
+               re.compile(r"\b1 (selections|respondents|pupils|boys|girls)\b"),
+               re.compile(r"\b1 were\b")]
+
+
+def held_by_gate(text: str) -> bool:
+    """Would run_qa_checks reject this (grammar-fixed) sentence as a plural
+    template applied to a base of one?"""
+    t = fix_grammar(text)
+    return any(g.search(t) for g in BASE1_GATES)
+
+
 def fix_grammar(text: str) -> str:
     for pat, rep in _SINGULAR_FIXES:
         text = pat.sub(rep, text)
@@ -231,11 +249,29 @@ def selw(n):
     return "selection" if n == 1 else "selections"
 
 
+_STRUCTURAL_LABELS = None
+
+
+def _structural_scope_labels():
+    """sheet 58's English scope labels (Whole school, Primary phase, …,
+    Year 11) for the internal scopes a school profile does not list."""
+    global _STRUCTURAL_LABELS
+    if _STRUCTURAL_LABELS is None:
+        from .welsh import lexicon as _lex
+        _STRUCTURAL_LABELS = dict(_lex()["chip_prefixes_en"]["scope label"])
+    return _STRUCTURAL_LABELS
+
+
 class Scope:
     """Reader-facing scope wording for one filter state."""
 
     def __init__(self, scope, gender, cohort_key, cohorts, profile):
         labels = {g["key"]: g["label"] for g in profile["scopeGroups"]}
+        if scope not in labels:
+            # v6 (0.28.0): an internal scope the profile does not offer (a
+            # primary school's "secondary" / Years 7–11) — its English label
+            # is the workbook's (sheet 58), read once, never composed here
+            labels = {**_structural_scope_labels(), **labels}
         self.scope, self.gender, self.cohort = scope, gender, cohort_key
         self._cohorts = cohorts
         gword = {"all": None, "boy": "boys", "girl": "girls"}[gender]
@@ -368,6 +404,9 @@ class Narrator:
         self.profile = profile
         self.th = threshold
         self.audit = []
+        # v6 (0.28.0): narrative HOLDS — views whose locked English templates
+        # have no form for the case the data produced (recorded, never patched)
+        self.holds = []
 
     # ------------------------------------------------------------ utilities
     def log(self, key, module, kind, tid, facts, text):

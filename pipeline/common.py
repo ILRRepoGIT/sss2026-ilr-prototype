@@ -20,7 +20,17 @@ REPORT_VERSION = "2026-prototype-001"
 
 ROOT = Path(__file__).resolve().parent.parent
 CONFIG_DIR = ROOT / "config"
-GENERATED_DIR = ROOT / "generated"
+# v6 (pipeline 0.28.0, V5.0 real-school round): one build tree per school.
+# SSS_GENERATED_DIR names the output directory of THIS build (report
+# package, evidence, bundle); unset, it is the prototype's generated/.
+import os as _os
+GENERATED_DIR = Path(_os.environ["SSS_GENERATED_DIR"]).resolve() \
+    if _os.environ.get("SSS_GENERATED_DIR") else ROOT / "generated"
+# The school profile the build reads (SSS_SCHOOL_PROFILE); unset, the
+# prototype school (config/school_profile.json). Every per-school value —
+# name, authority, years, scope groups, accepted statuses — comes from it.
+SCHOOL_PROFILE_PATH = Path(_os.environ["SSS_SCHOOL_PROFILE"]).resolve() \
+    if _os.environ.get("SSS_SCHOOL_PROFILE") else CONFIG_DIR / "school_profile.json"
 
 RE_MATRIX_CELL = re.compile(r"\{[^{}]*\}")
 
@@ -296,11 +306,25 @@ def split_multi(cell_value) -> list[str]:
 
 
 def load_config():
-    profile = json.loads((CONFIG_DIR / "school_profile.json").read_text(encoding="utf-8"))
+    profile = json.loads(SCHOOL_PROFILE_PATH.read_text(encoding="utf-8"))
     mapping = yaml.safe_load((CONFIG_DIR / "column_mapping.yml").read_text(encoding="utf-8"))
     metrics = yaml.safe_load((CONFIG_DIR / "metrics.yml").read_text(encoding="utf-8"))
     narratives = yaml.safe_load((CONFIG_DIR / "narratives.yml").read_text(encoding="utf-8"))
     return profile, mapping, metrics, narratives
+
+
+def load_held_cohorts() -> dict:
+    """v6 (0.28.0): cohorts HELD from the filter offering because the
+    Framework carries no Welsh for the qualifier they need (D44: a missing
+    Welsh entry is never composed in code). config/held_cohorts.json maps
+    cohort key -> {reason, needs}. The chart bar stays, with its count,
+    as a non-selectable bar (the client's existing 'cannot be selected as
+    a filter' behaviour); the validation summary and the flags register
+    name the hold. Absent file: nothing held."""
+    p = CONFIG_DIR / "held_cohorts.json"
+    if not p.exists():
+        return {}
+    return json.loads(p.read_text(encoding="utf-8"))
 
 
 def file_checksum(path) -> str:

@@ -19,17 +19,21 @@ import sys
 from pathlib import Path
 
 from .common import (GENERATED_DIR, PIPELINE_VERSION, REPORT_VERSION,
-                     SCHEMA_VERSION, load_config)
+                     SCHEMA_VERSION, load_config, load_held_cohorts)
 from .engine import (GENDERS, SCOPES, StateEngine, build_cohorts,
-                     build_metric_defs, state_key)
+                     build_metric_defs, restrict_year_options, state_key)
 from .load_normalise import load_and_normalise
-from .narrative2 import T as TEMPLATES
+from .narrative2 import BASE1_GATES, T as TEMPLATES
 from .narrative2_modules import MODULE_LABELS
 from .narrative2_modules_b import FullNarrator
 
-SCHOOL_SLUG = "ysgol-penrhyn-dewi"
-PIPELINE_VERSION_V2 = "0.27.0"
-REPORT_VERSION_V2 = "2026-prototype-V4.15-bilingual"
+PIPELINE_VERSION_V2 = "0.28.0"
+# v6 (0.28.0, V5.0 real-school round): the school is the profile's, not the
+# module's. The prototype profile carries no slug or report version, so the
+# defaults keep every V4.15 name; a school profile names its own.
+_PROFILE0 = load_config()[0]
+SCHOOL_SLUG = _PROFILE0.get("slug", "ysgol-penrhyn-dewi")
+REPORT_VERSION_V2 = _PROFILE0.get("reportVersion", "2026-prototype-V4.15-bilingual")
 
 # v2.1: "most likely" removed from the banned list - the Sport Wales
 # page-by-page feedback mandates the sentence form "Pupils were most likely
@@ -73,6 +77,12 @@ def run_qa_checks(engine, package, records, narrator):
     check(errors, bases[state_key("primary", "all", "none")] +
           bases[state_key("secondary", "all", "none")] == whole,
           "primary + secondary != whole school")
+    # v6 (0.28.0, EN-06): ui.overview_note states that every year group from
+    # the school's first to its last is represented — a profile year with
+    # no accepted response would make that untrue, so the build refuses
+    for _y in package["school"]["years"]:
+        check(errors, bases[state_key(f"y{_y}", "all", "none")] >= 1,
+              f"profile year {_y} has no accepted responses (ui.overview_note claims every year is represented)")
 
     for key, st in states.items():
         scope, gender, ck = key.split("|")
@@ -132,13 +142,14 @@ def run_qa_checks(engine, package, records, narrator):
         for term in BANNED_READER_TERMS:
             check(errors, term not in txt.lower(),
                   f"{loc}: banned reader-facing term {term!r}")
-        # grammar gates (Revision Brief section 27)
-        check(errors, not re.search(r"\b1 (selections|respondents|pupils|boys|girls)\b", txt),
+        # grammar gates (Revision Brief section 27) — v6: the base-of-one
+        # expressions are narrative2.BASE1_GATES, shared with the f10 hold
+        check(errors, not BASE1_GATES[1].search(txt),
               f"{loc}: singular count with plural noun: {txt[:80]}")
         check(errors, "i’m" not in txt and "i'm" not in txt,
               f"{loc}: lower-case i'm: {txt[:80]}")
         # Prototype 4.1 §5 gates
-        check(errors, not re.search(r"\bof the 1 (respondent|pupil)\b", txt),
+        check(errors, not BASE1_GATES[0].search(txt),
               f"{loc}: plural template applied to a base of one: {txt[:80]}")
         check(errors, "respondents among respondents" not in txt and
               "pupils among pupils" not in txt,
@@ -149,7 +160,7 @@ def run_qa_checks(engine, package, records, narrator):
               f"{loc}: sentence block over 70 words: {txt[:80]}")
         check(errors, not re.search(r"\b(\w{3,}) \1\b", txt, re.I),
               f"{loc}: duplicated word: {txt[:80]}")
-        check(errors, not re.search(r"\b1 were\b", txt),
+        check(errors, not BASE1_GATES[2].search(txt),
               f"{loc}: '1 were': {txt[:80]}")
         # v4 (build 011) owner gate: never "Across boys across the whole
         # school" - gender-filtered views must read "Among boys ..."
@@ -237,14 +248,25 @@ def run_qa_checks(engine, package, records, narrator):
     # first (English and FT-11 must be unchanged), then the stamp is taken
     # against the new lock. SSS_EMIT_LOCK_RULING names the ruling.
     _emit = _os.environ.get("SSS_EMIT_LOCK")
-    if _emit:
+    # v6 (0.28.0): SSS_PREVIOUS_LOCK names the baseline THIS build is
+    # asserted against — a school's own lock on a rebuild, or "none" for a
+    # school's first build (there is nothing yet to assert; GOV-lock is
+    # REPORT and the emitted lock becomes that school's baseline). Unset,
+    # the prototype's behaviour is unchanged.
+    _prev = _os.environ.get("SSS_PREVIOUS_LOCK")
+    if _prev:
+        _bl = Path("/nonexistent") if _prev.lower() == "none" else Path(_prev)
+        if _prev.lower() != "none" and not _bl.exists():
+            raise SystemExit(f"SSS_PREVIOUS_LOCK names a lock that does not exist: {_prev}")
+    elif _emit:
         # the PREVIOUS lock is always the V4.8/V4.9 lock (the last one the
         # English was proven against); the emitted lock supersedes it
         from .common import CONFIG_DIR as _cfg
         _bl = _cfg / "02c_lock_V48_v7.json"
     _gf6, _gres6, _gn6, _stamp6 = _wg7.run(
         package, mode="dev", evidence_path=_ev_path,
-        baseline_path=str(_bl) if _bl.exists() else None,
+        baseline_path=("none" if (_prev and _prev.lower() == "none")
+                       else str(_bl) if _bl.exists() else None),
         emit_lock_path=_emit,
         emit_lock_ruling=_os.environ.get("SSS_EMIT_LOCK_RULING",
                                          "Framework v2.7 sheet 60 (D84–D87)") if _emit else None)
@@ -353,14 +375,17 @@ def main():
     profile, mapping, metrics_cfg, narratives_cfg = load_config()
     threshold = profile["suppressionThreshold"]
 
-    records, log, build_meta, discovered = load_and_normalise(xlsx)
+    records, log, build_meta, discovered = load_and_normalise(
+        xlsx, accepted_statuses=profile.get("acceptedStatuses"),
+        available_years=profile.get("availableYears"))
     sport_labels = discovered["participated"]
     # V4.2: Welsh renderer needs code -> English label for slot lookups
     from . import welsh_render as _wr
     _wr.register_code_labels({**discovered["participated"],
                               **discovered["demand"]})
-    defs = build_metric_defs(metrics_cfg, discovered)
-    cohorts = build_cohorts(metrics_cfg, defs, records)
+    defs = restrict_year_options(build_metric_defs(metrics_cfg, discovered), profile)
+    cohorts = build_cohorts(metrics_cfg, defs, records,
+                            held=load_held_cohorts(), log=log)
     engine = StateEngine(records, defs, cohorts, profile, threshold).compute_all()
     narrator = FullNarrator(engine, defs, cohorts, profile, threshold)
 

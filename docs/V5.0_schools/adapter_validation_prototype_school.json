@@ -1,0 +1,204 @@
+{
+ "purpose": "adapter validation: the prototype school's cleansed rows (pipeline/cleansed_to_export.py) vs its original SmartSurvey export, both through the unchanged V4.15 loader",
+ "original_export_sha256": "e457bc8eccbecad24c061db7fcad986ec3597ac116afa138b141a0ebc8a70552",
+ "cleansed_export_sha256": "e119179a91c37eee7fc9d53d00677dc16de174cea5b668425f4b1b7f7f079142",
+ "records": {
+  "original": 366,
+  "cleansed": 366
+ },
+ "fields": {
+  "year": {
+   "total_abs_diff": 0,
+   "differences": {}
+  },
+  "gender": {
+   "total_abs_diff": 0,
+   "differences": {}
+  },
+  "disability": {
+   "total_abs_diff": 0,
+   "differences": {}
+  },
+  "learning": {
+   "total_abs_diff": 0,
+   "differences": {}
+  },
+  "welsh": {
+   "total_abs_diff": 0,
+   "differences": {}
+  },
+  "welsh_sport": {
+   "total_abs_diff": 0,
+   "differences": {}
+  },
+  "take_part": {
+   "total_abs_diff": 0,
+   "differences": {}
+  },
+  "ethnicity": {
+   "total_abs_diff": 0,
+   "differences": {}
+  },
+  "join_in": {
+   "total_abs_diff": 0,
+   "differences": {}
+  },
+  "listened": {
+   "total_abs_diff": 0,
+   "differences": {}
+  },
+  "freq_estimate": {
+   "total_abs_diff": 0,
+   "differences": {}
+  },
+  "club_freq_estimate": {
+   "total_abs_diff": 0,
+   "differences": {}
+  },
+  "overall_freq": {
+   "total_abs_diff": 0,
+   "differences": {}
+  },
+  "organised_freq": {
+   "total_abs_diff": 0,
+   "differences": {}
+  },
+  "any_activity": {
+   "total_abs_diff": 0,
+   "differences": {}
+  },
+  "dl_any": {
+   "total_abs_diff": 0,
+   "differences": {}
+  },
+  "ed_any": {
+   "total_abs_diff": 0,
+   "differences": {}
+  },
+  "wl_any": {
+   "total_abs_diff": 0,
+   "differences": {}
+  },
+  "settings": {
+   "total_abs_diff": 0,
+   "differences": {}
+  },
+  "more_if": {
+   "total_abs_diff": 3,
+   "differences": {
+    "none_of_these": [
+     56,
+     53
+    ]
+   }
+  },
+  "important": {
+   "total_abs_diff": 4,
+   "differences": {
+    "none_of_these": [
+     14,
+     10
+    ]
+   }
+  },
+  "enjoy": {
+   "total_abs_diff": 0,
+   "differences": {}
+  },
+  "confidence": {
+   "total_abs_diff": 0,
+   "differences": {}
+  },
+  "pe_feel": {
+   "total_abs_diff": 0,
+   "differences": {}
+  },
+  "sports": {
+   "total_abs_diff": 1,
+   "differences": {
+    "other_sports": [
+     79,
+     78
+    ]
+   }
+  },
+  "demand": {
+   "total_abs_diff": 0,
+   "differences": {}
+  },
+  "unmet": {
+   "total_abs_diff": 0,
+   "differences": {}
+  },
+  "n_sports_all": {
+   "total_abs_diff": 2,
+   "differences": {
+    "16": [
+     12,
+     13
+    ],
+    "17": [
+     20,
+     19
+    ]
+   }
+  },
+  "pe_sports": {
+   "total_abs_diff": 2,
+   "differences": {
+    "obstacle_course_racing": [
+     7,
+     6
+    ],
+    "other_sports": [
+     32,
+     31
+    ]
+   }
+  },
+  "school_club_sports": {
+   "total_abs_diff": 0,
+   "differences": {}
+  },
+  "community_club_sports": {
+   "total_abs_diff": 0,
+   "differences": {}
+  },
+  "other_setting_sports": {
+   "total_abs_diff": 0,
+   "differences": {}
+  }
+ },
+ "explanation": {
+  "more_if.none_of_these / important.none_of_these": "R26-02: 'None of these' co-selected with a substantive option set to 0 by the cleansing (dq_none_conflict_*)",
+  "sports.other_sports / pe_sports / n_sports_all / per-sport frequency": "R26-01: one PE setting cell (obstacle course racing) recoded because the sport was not selected upstream (dq_c05_setting_without_selection)"
+ },
+ "build_meta": {
+  "original": {
+   "sourceRows": 484,
+   "acceptedRows": 366,
+   "excludedRows": 118,
+   "sportOptionCount": 93,
+   "completionDist": [
+    118,
+    0,
+    257,
+    109,
+    0
+   ]
+  },
+  "cleansed": {
+   "sourceRows": 391,
+   "acceptedRows": 366,
+   "excludedRows": 25,
+   "sportOptionCount": 93,
+   "completionDist": [
+    0,
+    4,
+    279,
+    108,
+    0
+   ]
+  }
+ }
+}

@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from .engine import state_key
 from .narrative2 import (HARD_JOIN, LOW_CONF, NO_FREQUENT, POS_CONF, POS_LISTEN,
-                         Scope, T, WEEKLY_PLUS, cap_first, join_and, ordinal, rw,
-                         selw, tie_txt)
+                         Scope, T, WEEKLY_PLUS, cap_first, held_by_gate, join_and,
+                         ordinal, rw, selw, tie_txt)
 from .narrative2_modules import (BROAD_SCOPES, MODULE_LABELS, ModuleNarrator,
                                  V_CONF, V_HARDJOIN, V_HEALTHY, V_LISTEN,
                                  V_PEALOT, V_WEEKLY, V_WEEKLY_ALL, WEEKLY_ACC,
@@ -271,6 +271,18 @@ class FullNarrator(ModuleNarrator):
     def m_f10(self, key, S, tier):
         out = []
         src = self.cohorts.get(S.cohort, {}).get("metric") if S.cohort != "none" else None
+        # v6 (0.28.0, V5.0 real-school round — first seen at Ysgol Bro Pedr):
+        # three f10 templates carry no one-pupil form — leader_multi_v2 (a
+        # UNIQUE leader on a base of one), group_codemand_top3_v12 and
+        # wd_current_check_v3 (a sports-wanted group of one pupil). The locked
+        # English cannot gain one without the owner's narrative-lock sign-off
+        # (sheet 49, EN-08), so a sentence that the build's own English gate
+        # would reject (narrative2.BASE1_GATES — "1 of the 1 pupil …") is
+        # HELD: not rendered, not audited, logged. Every sentence the gate
+        # accepts — including every one the V4.15 corpus contains ("1 of the
+        # 1 boy …", "… the 1 Year 3 pupil …") — is reproduced unchanged (D01).
+        def hold(reason):
+            self.holds.append({"module": "f10", "state": key, "reason": reason})
         if src == "sports_wanted":
             self.para(out, self.group_note(key, S, "f10"))
             code = self.cohorts[S.cohort]["code"]
@@ -287,19 +299,33 @@ class FullNarrator(ModuleNarrator):
                     t = (f"The pupils who selected {labels[code]} also most "
                          f"wanted {join_and(parts)}, out of the {wres['base']} "
                          f"{S.phrase}.")
-                    self.para(out, self.custom(key, "f10", "primary",
-                                               "group_codemand_top3_v12",
-                                               {"top3": ranked,
-                                                "base": wres["base"]}, t))
+                    if held_by_gate(t):
+                        hold("group_codemand_top3_v12 has no one-pupil form the gate accepts (EN-08 pending owner)")
+                    else:
+                        self.para(out, self.custom(key, "f10", "primary",
+                                                   "group_codemand_top3_v12",
+                                                   {"top3": ranked,
+                                                    "base": wres["base"]}, t))
             # do they already do the wanted sport? (spec 20.2)
             pres = self.res(key, "sports_participated")
             pn = self.count_of("sports_participated", pres, [code]) if pres else None
             if pn is not None:
                 t2 = (f"{pn} of the {pres['base']} {S.phrase} already reported doing "
                       f"{labels[code]} this school year.")
-                self.para(out, self.custom(key, "f10", "cross", "wd_current_check_v3",
-                                           {"count": pn, "base": pres["base"]}, t2))
+                if held_by_gate(t2):
+                    hold("wd_current_check_v3 has no one-pupil form the gate accepts (EN-08 pending owner)")
+                else:
+                    self.para(out, self.custom(key, "f10", "cross", "wd_current_check_v3",
+                                               {"count": pn, "base": pres["base"]}, t2))
             return ("ok", out)
+        lf = self.leader("sports_wanted", self.res(key, "sports_wanted"))
+        if lf and lf["kind"] == "unique":
+            probe = T["leader_multi_v2"].format(leader=lf["labels"][0], noun="sport",
+                                                count=lf["count"], base=lf["base"],
+                                                who=S.phrase, ans=S.ans)
+            if held_by_gate(probe):
+                hold("leader_multi_v2 has no one-pupil form the gate accepts (EN-08 pending owner)")
+                return ("na_view", [])
         self.para(out, self.s_leader_multi(key, S, "f10", "sports_wanted", "sport"))
         return ("ok", out) if out else ("nd", [])
 

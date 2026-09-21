@@ -12,10 +12,18 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 from pipeline import static_lane as SL
 wd = Path(sys.argv[1]); wd.mkdir(parents=True, exist_ok=True)
-D = json.load(io.open(ROOT / "generated" / "ysgol-penrhyn-dewi.report.json", encoding="utf-8"))
-keep = {k: D["states"][k] for k in ("whole|all|none", "primary|all|none", "whole|girl|none", "whole|boy|none")}
+# v6 (0.28.0): REPORT names another build's package (a real school); the
+# state set adapts to the scopes that package offers
+import os
+report = os.environ.get("REPORT") or str(ROOT / "generated" / "ysgol-penrhyn-dewi.report.json")
+D = json.load(io.open(report, encoding="utf-8"))
+offered = [o["key"] for o in D["filterOptions"]["scope"]]
+first_year = next(k for k in offered if k.startswith("y"))
+keep = {k: D["states"][k] for k in ("whole|all|none", "whole|girl|none", "whole|boy|none")}
 extra = ([k for k, v in D["states"].items() if v.get("sup")][:1]
-         + [k for k in D["states"] if k.endswith("|sp_football")][:1] + ["y5|girl|none", "secondary|all|none"])
+         + [k for k in D["states"] if k.endswith("|sp_football")][:1]
+         + [f"{first_year}|girl|none"]
+         + [f"{s}|all|none" for s in ("primary", "secondary") if s in offered])
 for k in extra:
     if k in D["states"]: keep[k] = D["states"][k]
 mini = {k: v for k, v in D.items() if k != "states"}; mini["states"] = keep

@@ -1,0 +1,502 @@
+{
+ "school": "Ysgol Bro Pedr",
+ "acceptedRows": {
+  "package": 439,
+  "recomputed": 439
+ },
+ "responses_by_year": {
+  "codes": [
+   "y3",
+   "y4",
+   "y5",
+   "y6",
+   "y7",
+   "y8",
+   "y9",
+   "y10",
+   "y11"
+  ],
+  "package": [
+   23,
+   23,
+   25,
+   38,
+   77,
+   43,
+   86,
+   75,
+   49
+  ],
+  "recomputed": [
+   23,
+   23,
+   25,
+   38,
+   77,
+   43,
+   86,
+   75,
+   49
+  ],
+  "match": true,
+  "base": {
+   "package": 439,
+   "recomputed": 439,
+   "match": true
+  }
+ },
+ "responses_by_gender": {
+  "codes": [
+   "boy",
+   "girl",
+   "nonbinary",
+   "not_stated"
+  ],
+  "package": [
+   233,
+   190,
+   3,
+   13
+  ],
+  "recomputed": [
+   233,
+   190,
+   3,
+   13
+  ],
+  "match": true,
+  "base": {
+   "package": 439,
+   "recomputed": 439,
+   "match": true
+  }
+ },
+ "disability_condition": {
+  "codes": [
+   "yes",
+   "no",
+   "not_sure",
+   "prefer_not_to_say"
+  ],
+  "package": [
+   99,
+   261,
+   69,
+   10
+  ],
+  "recomputed": [
+   99,
+   261,
+   69,
+   10
+  ],
+  "match": true,
+  "base": {
+   "package": 439,
+   "recomputed": 439,
+   "match": true
+  }
+ },
+ "learning_difficulty": {
+  "codes": [
+   "yes",
+   "no",
+   "not_sure",
+   "prefer_not_to_say"
+  ],
+  "package": [
+   49,
+   314,
+   68,
+   8
+  ],
+  "recomputed": [
+   49,
+   314,
+   68,
+   8
+  ],
+  "match": true,
+  "base": {
+   "package": 439,
+   "recomputed": 439,
+   "match": true
+  }
+ },
+ "welsh_speaking": {
+  "codes": [
+   "very_well",
+   "fair_amount",
+   "a_little",
+   "few_words",
+   "none"
+  ],
+  "package": [
+   201,
+   129,
+   55,
+   40,
+   14
+  ],
+  "recomputed": [
+   201,
+   129,
+   55,
+   40,
+   14
+  ],
+  "match": true,
+  "base": {
+   "package": 439,
+   "recomputed": 439,
+   "match": true
+  }
+ },
+ "join_in_easily": {
+  "codes": [
+   "always",
+   "sometimes",
+   "not_often",
+   "never"
+  ],
+  "package": [
+   155,
+   174,
+   56,
+   15
+  ],
+  "recomputed": [
+   155,
+   174,
+   56,
+   15
+  ],
+  "match": true,
+  "base": {
+   "package": 400,
+   "recomputed": 400,
+   "match": true
+  }
+ },
+ "ideas_listened": {
+  "codes": [
+   "always",
+   "sometimes",
+   "not_often",
+   "never"
+  ],
+  "package": [
+   81,
+   188,
+   85,
+   46
+  ],
+  "recomputed": [
+   81,
+   188,
+   85,
+   46
+  ],
+  "match": true,
+  "base": {
+   "package": 400,
+   "recomputed": 400,
+   "match": true
+  }
+ },
+ "enjoy_pe": {
+  "codes": [
+   "a_lot",
+   "a_little",
+   "not_much",
+   "not_at_all",
+   "not_sure"
+  ],
+  "package": [
+   179,
+   143,
+   33,
+   29,
+   17
+  ],
+  "recomputed": [
+   179,
+   143,
+   33,
+   29,
+   17
+  ],
+  "match": true,
+  "base": {
+   "package": 401,
+   "recomputed": 401,
+   "match": true
+  }
+ },
+ "enjoy_school_clubs": {
+  "codes": [
+   "a_lot",
+   "a_little",
+   "not_much",
+   "not_at_all",
+   "not_sure"
+  ],
+  "package": [
+   107,
+   115,
+   66,
+   53,
+   60
+  ],
+  "recomputed": [
+   107,
+   115,
+   66,
+   53,
+   60
+  ],
+  "match": true,
+  "base": {
+   "package": 401,
+   "recomputed": 401,
+   "match": true
+  }
+ },
+ "enjoy_community_clubs": {
+  "codes": [
+   "a_lot",
+   "a_little",
+   "not_much",
+   "not_at_all",
+   "not_sure"
+  ],
+  "package": [
+   220,
+   53,
+   32,
+   43,
+   53
+  ],
+  "recomputed": [
+   220,
+   53,
+   32,
+   43,
+   53
+  ],
+  "match": true,
+  "base": {
+   "package": 401,
+   "recomputed": 401,
+   "match": true
+  }
+ },
+ "enjoy_other_settings": {
+  "codes": [
+   "a_lot",
+   "a_little",
+   "not_much",
+   "not_at_all",
+   "not_sure"
+  ],
+  "package": [
+   209,
+   98,
+   36,
+   20,
+   38
+  ],
+  "recomputed": [
+   209,
+   98,
+   36,
+   20,
+   38
+  ],
+  "match": true,
+  "base": {
+   "package": 401,
+   "recomputed": 401,
+   "match": true
+  }
+ },
+ "confidence_try_new": {
+  "codes": [
+   "very",
+   "quite",
+   "not_very",
+   "not_at_all"
+  ],
+  "package": [
+   137,
+   163,
+   78,
+   22
+  ],
+  "recomputed": [
+   137,
+   163,
+   78,
+   22
+  ],
+  "match": true,
+  "base": {
+   "package": 400,
+   "recomputed": 400,
+   "match": true
+  }
+ },
+ "pe_feel_healthy": {
+  "codes": [
+   "very",
+   "quite",
+   "not_very",
+   "not_at_all"
+  ],
+  "package": [
+   221,
+   125,
+   36,
+   18
+  ],
+  "recomputed": [
+   221,
+   125,
+   36,
+   18
+  ],
+  "match": true,
+  "base": {
+   "package": 400,
+   "recomputed": 400,
+   "match": true
+  }
+ },
+ "ethnicityProfile": {
+  "package": [
+   372,
+   7,
+   3,
+   3,
+   3,
+   39,
+   12
+  ],
+  "recomputed": [
+   372,
+   7,
+   3,
+   3,
+   3,
+   39,
+   12
+  ],
+  "match": true
+ },
+ "anyActivity": {
+  "package": 436,
+  "recomputed": 436,
+  "match": true
+ },
+ "freq_estimate": {
+  "codes": [
+   "none_reported",
+   "dont_know_only",
+   "less_weekly_only",
+   "e1",
+   "e2",
+   "e3",
+   "e4",
+   "e5",
+   "e6",
+   "e7",
+   "e8",
+   "e9plus"
+  ],
+  "package": [
+   4,
+   17,
+   6,
+   37,
+   32,
+   74,
+   71,
+   90,
+   44,
+   32,
+   14,
+   18
+  ],
+  "recomputed": [
+   4,
+   17,
+   6,
+   37,
+   32,
+   74,
+   71,
+   90,
+   44,
+   32,
+   14,
+   18
+  ],
+  "match": true,
+  "base": {
+   "package": 439,
+   "recomputed": 439,
+   "match": true
+  }
+ },
+ "club_freq_estimate": {
+  "codes": [
+   "none_reported",
+   "dont_know_only",
+   "less_weekly_only",
+   "e1",
+   "e2",
+   "e3",
+   "e4",
+   "e5",
+   "e6",
+   "e7",
+   "e8",
+   "e9plus"
+  ],
+  "package": [
+   116,
+   21,
+   24,
+   56,
+   55,
+   81,
+   59,
+   11,
+   10,
+   6,
+   0,
+   0
+  ],
+  "recomputed": [
+   116,
+   21,
+   24,
+   56,
+   55,
+   81,
+   59,
+   11,
+   10,
+   6,
+   0,
+   0
+  ],
+  "match": true,
+  "base": {
+   "package": 439,
+   "recomputed": 439,
+   "match": true
+  }
+ },
+ "allMatch": true
+}

@@ -486,6 +486,18 @@ def r_combined(f, c):
         if (_neg_pred(f["metric"], f["codes"]) and f.get("code_labels")
                 and W.pr("PR-02") == "answer_selection_recast"):
             return _zero_recast(f, c, c.neg_subject(f["base"]))
+        if f["base"] == 1:
+            # v6 (0.28.0): a nil count on a ONE-pupil base is a singleton
+            # antecedent ('yr unig …'), so the complement takes the same
+            # singular the n = 1 branch uses — never the plural 'eu bod'
+            # (AGR-possessive, first seen at a real school); a sex-less
+            # view keeps PR-03's pronoun-free impersonal, negated.
+            if (c.gender not in ("boy", "girl") and _gendered_pred(f)
+                    and W.pr("PR-03") == "impersonal_recast"):
+                imp = pred_cy(f["metric"], f["codes"], "imp")
+                return f"Ni nodwyd {imp} gan {c.neg_subject(1)}."
+            pred = pred_cy(f["metric"], f["codes"], "sg", c.gender)
+            return f"Ni ddywedodd {c.neg_subject(1)} {pred}."
         pred = pred_cy(f["metric"], f["codes"], "pl")
         return f"Ni ddywedodd {c.neg_subject(f['base'])} {pred}."
     if n == 1:
@@ -891,6 +903,9 @@ def r_confidence_equal(f, c):
 def r_low_confidence(f, c):
     P = W.lexicon()["predicates"]
     if f["count"] == 0:
+        if f["base"] == 1:      # v6: singleton antecedent — the n = 1 singular
+            sg = P["P-05"]["cy"].replace("nad oeddent", "nad oedd")
+            return f"Ni ddywedodd {c.neg_subject(1)} {sg}."
         return f"Ni ddywedodd {c.neg_subject(f['base'])} {P['P-05']['cy']}."
     if f["count"] == 1:
         sg = P["P-05"]["cy"].replace("nad oeddent", "nad oedd")
@@ -1424,16 +1439,26 @@ def r_wd_current_check(f, c):
             f"hon.")
 
 
+# D48: the one-pupil form of P-15 — 'y gall' carries no pronoun, so it
+# serves a boy, a girl and a pupil whose sex the view does not carry alike
+_P15_SG = "y gall, o leiaf weithiau, ymuno’n hawdd â chwaraeon a gemau"
+
+
 def r_li_join_cross(f, c):
     P = W.lexicon()["predicates"]
     if f["count"] == 0:
+        # v6 (0.28.0, V5.0 real-school round — first seen at a real school,
+        # AGR-possessive): a nil count on a ONE-pupil base is a singleton
+        # antecedent ('yr unig ferch …'), so the complement takes the same
+        # pronoun-free D48 clause as the one-pupil count, never the plural
+        # 'eu bod' of P-15. Flagged for the translator (sheet 63).
+        pred = _P15_SG if f["base"] == 1 else P["P-15"]["cy"]
         return (f"Ni ddywedodd {c.neg_subject(f['base'], answered=False)} "
-                f"{P['P-15']['cy']}.")
+                f"{pred}.")
     if f["count"] == 1:
         # D48: gender-free singular — 'y gall' carries no pronoun
         return (f"Dywedodd {c.of_the(1, f['base'], answered=False)} "
-                f"y gall, o leiaf weithiau, ymuno’n hawdd â chwaraeon "
-                f"a gemau.")
+                f"{_P15_SG}.")
     return (f"Dywedodd {c.of_the(f['count'], f['base'], answered=False)} "
             f"{P['P-15']['cy']}.")
 
@@ -1615,6 +1640,9 @@ def r_other_sports_note(f, c):
 def r_listened_always(f, c):
     P = W.lexicon()["predicates"]
     if f["count"] == 0:
+        if f["base"] == 1:      # v6: singleton antecedent — the n = 1 singular
+            sg = P["P-03"]["cy"].replace("ar eu syniadau", "ar ei syniadau")
+            return f"Ni ddywedodd {c.neg_subject(1)} {sg}."
         return f"Ni ddywedodd {c.neg_subject(f['base'])} {P['P-03']['cy']}."
     if f["count"] == 1:
         # D48: singular possessive (same surface for either sex)
@@ -1768,20 +1796,32 @@ def r_h1_ev_join(f, c):
                          "answer_selection_recast_all_surfaces")):
             return _zero_recast(f, c, c.neg_subject(f["base"],
                                                     answered=False))
+        if f["base"] == 1:      # v6: singleton antecedent — the sg predicate
+            sg = pred_cy("join_in_easily", ("never", "not_often"), "sg")
+            return f"Ni ddywedodd {c.neg_subject(1, answered=False)} {sg}."
         return (f"Ni ddywedodd {c.neg_subject(f['base'], answered=False)} "
                 f"{P['P-01']['cy']}.")
+    if f["count"] == 1 and f["base"] == 1:
+        # v6 (AGR-verb at a real school): 'yr unig ferch …' is a singleton
+        # antecedent — the singular predicate the e2 module already uses.
+        # A one-of-N count ('un o’r 20 disgybl … nad ydynt') is left as the
+        # V4.15 corpus attests it and is listed for the translator (sheet 63).
+        sg = pred_cy("join_in_easily", ("never", "not_often"), "sg")
+        return f"Dywedodd {c.of_the(1, 1, answered=False)} {sg}."
     return (f"Dywedodd {c.of_the(f['count'], f['base'], answered=False)} "
             f"{P['P-01']['cy']}.")
 
 
 def r_h1_ev_listened(f, c):
     if f["count"] == 0:
+        poss = "ei" if f["base"] == 1 else "eu"   # v6: singleton antecedent
         return (f"Nid yw’r {c.neg_subject(f['base'], answered=False)[3:]} yn "
-                f"teimlo bod pobl yn gwrando ar eu syniadau am chwaraeon "
+                f"teimlo bod pobl yn gwrando ar {poss} syniadau am chwaraeon "
                 f"bob amser neu weithiau.")
+    poss = "ei" if (f["count"] == 1 and f["base"] == 1) else "eu"   # v6: singleton antecedent
     return (f"Mae {c.of_the(f['count'], f['base'], answered=False)} yn "
             f"teimlo bod pobl yn "
-            f"gwrando ar eu syniadau am chwaraeon bob amser neu weithiau.")
+            f"gwrando ar {poss} syniadau am chwaraeon bob amser neu weithiau.")
 
 
 def r_h1_ll_barrier(f, c):

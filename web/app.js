@@ -1181,7 +1181,10 @@ function renderProfile() {
   const b = DATA.buildMetadata, sc = DATA.school;
   setFrame($("#intro-sentence"), "ui.intro_sentence",
     { school: sc.name, n: b.acceptedRows, first: sc.years[0], last: sc.years[sc.years.length - 1] });
-  setFrame($("#faq-included"), "ui.faq_included", { school: sc.name, n: b.acceptedRows });
+  // v6 (Framework v2.8, EN-07): the year range is the school's — the
+  // {first}/{last} slots the intro sentence already carries
+  setFrame($("#faq-included"), "ui.faq_included",
+    { school: sc.name, n: b.acceptedRows, first: sc.years[0], last: sc.years[sc.years.length - 1] });
   setFrame($("#faq-missing"), "ui.faq_missing", { n: b.acceptedRows });
   $$(".dyn-count").forEach(el => { el.textContent = b.acceptedRows; });
   $$(".dyn-rows").forEach(el => { el.textContent = b.sourceRows; });
@@ -1228,7 +1231,8 @@ function renderProfile() {
   const lo = yPairs.reduce((a, b) => (b[1] || 0) < (a[1] || 0) ? b : a);
   const yLabel = en => { const o = DATA.filterOptions.scope.find(x => x.label === en); return (isCy() && o && o.labelCy) ? o.labelCy : en; };
   setFrame($("#overview-note"), "ui.overview_note",
-    { hi: yLabel(hi[0]), hin: hi[1], lo: yLabel(lo[0]), lon: lo[1] });
+    { hi: yLabel(hi[0]), hin: hi[1], lo: yLabel(lo[0]), lon: lo[1],
+      first: sc.years[0], last: sc.years[sc.years.length - 1] });   // v6 (EN-06)
   renderProfileExtra(w);
   const anyN = $("#any-activity-note");
   if (anyN) {
