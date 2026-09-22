@@ -32,9 +32,18 @@ BROWSER_HARNESS_PATH = (Path(__file__).resolve().parent
 # English part is byte-equal to the V4.8/V4.9 lock (the English never moved)
 # and its FT-11 key set is unchanged. Falls back to the V4.8 lock until the
 # V4.15 lock exists (first build of a rebuild kit).
-BASELINE_PATH = (CONFIG_DIR / "02c_lock_V415_v8.json"
-                 if (CONFIG_DIR / "02c_lock_V415_v8.json").exists()
-                 else CONFIG_DIR / "02c_lock_V48_v7.json")
+# V4.18 (EN-09): the lock was re-emitted again (02c_lock_V418_v8.json —
+# the Club Sports module and the cb_* states removed, the d0 definition
+# paragraph under a setting selection); the newest lock present is the
+# baseline, the older ones stay for the record.
+def _baseline_path():
+    for name in ("02c_lock_V418_v8.json", "02c_lock_V415_v8.json", "02c_lock_V48_v7.json"):
+        if (CONFIG_DIR / name).exists():
+            return CONFIG_DIR / name
+    return CONFIG_DIR / "02c_lock_V48_v7.json"
+
+
+BASELINE_PATH = _baseline_path()
 # D81: the assurance bundle ships in this directory beside the report. At
 # build time it does not exist yet — GOV-bundle is therefore PENDING in the
 # embedded stamp and asserted by the rerun on the shipped file.

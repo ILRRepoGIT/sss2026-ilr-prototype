@@ -39,7 +39,6 @@ V_CLUB_WEEKLY = ("did club sport (in a school club or a club outside of "
 
 MODULE_LABELS = {
     "d0": "How active are our pupils through sport?",
-    "d2": "Club Sports",
     "d3": "Where are our pupils taking part?",
     "d4": "What happens in our school clubs?",
     "d5": "What happens in clubs outside school?",
@@ -190,6 +189,14 @@ class ModuleNarrator(Narrator):
             # anti-tautology: the group is defined by this chart's answer
             self.para(out, self.group_note(key, S, "d0"))
         else:
+            if src_m == "participation_settings":
+                # V4.18 (EN-09, owner instruction 22 Sep 2026): under a
+                # SETTING selection the chart keeps the wider picture (the
+                # client shows the demographic view's bars, still selectable);
+                # the narrative leads with the selected-group definition, as
+                # the settings chart does under its own selection, and then
+                # describes the group as before.
+                self.para(out, self.group_note(key, S, "d0"))
             self.para(out, self.s_leader_single(key, S, "d0", "freq_estimate",
                                                 broad))
         avg, n = self.avg_sports(key)

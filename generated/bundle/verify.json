@@ -1,6 +1,6 @@
 {
- "report": "SSS2026_ILR_Report_V4.17_Bilingual.html",
- "reportSha256": "44fb1f6ebc0e59445430ddb2680d4622761f3300d8bd5a63bda5963299b712d1",
+ "report": "SSS2026_ILR_Report_V4.18_Bilingual.html",
+ "reportSha256": "c98de2619974354fe235c6ba658d7ac49f2cd752734bae2727824c805a4b3316",
  "headline": "72/75",
  "mode": "release",
  "runner": "8.0.0",
@@ -9,7 +9,7 @@
  "failing": [
   {
    "gate": "STK-caption-case",
-   "occurrences": 34570
+   "occurrences": 33587
   },
   {
    "gate": "CAT-values",
@@ -23,14 +23,14 @@
  "notes": [
   "sensitiveFilters = true in the client; no signed D69 value to assert against"
  ],
- "at": "2026-09-22T16:06:22+00:00",
+ "at": "2026-09-22T17:29:04+00:00",
  "dev": {
   "headline": "71/72",
   "paths": "17/18",
   "failing": [
    {
     "gate": "STK-caption-case",
-    "occurrences": 34570
+    "occurrences": 33587
    }
   ]
  }

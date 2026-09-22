@@ -1154,7 +1154,11 @@ class FullNarrator(ModuleNarrator):
     # modules removed - the right-hand filters cover that exploration.
     # e4 (year x gender) is retained and relocated to A Lifelong Enjoyment
     # of Sport. d0 (overall frequency across all settings) added.
-    MODULES = ["d0", "d2", "d3", "d4", "d5", "d6", "d7", "s1",
+    # V4.18 (owner instruction, 22 Sep 2026): the Club Sports module (d2,
+    # the club-sport square-root estimate) is no longer generated — the
+    # section was removed from the report; club_freq_estimate stays a
+    # computed metric for the summary rows that cite it.
+    MODULES = ["d0", "d3", "d4", "d5", "d6", "d7", "s1",
                "e2", "n_dl", "n_ed", "e4", "e7", "n_wl",
                "f2", "f3f5", "f6", "f7", "f10", "f11", "f12",
                "f13", "f14", "g2", "g3", "g4", "g5", "g8"]

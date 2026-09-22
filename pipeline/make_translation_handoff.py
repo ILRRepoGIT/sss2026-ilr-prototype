@@ -155,7 +155,10 @@ def main():
         n += 1
         ws.append([n, r["cat"], r["owner"], r["key"], r["en"], r["cy"]])
     wr = wb.create_sheet("Retired")
-    wr.append(["Key", "English (as listed in the previous handoff)", "Reason"])
+    # V4.18: the translator's Welsh for a retired row is carried on this sheet
+    # verbatim (it was returned; it is simply no longer consumed by the page)
+    wr.append(["Key", "English (as listed in the previous handoff)", "Reason",
+               "Welsh (as returned by the translator — kept for the record, no longer on the page)"])
     for r in retired:
         en = r["en"]
         if SL.PLACEHOLDER.match(en) or en == "Ysgol Penrhyn Dewi":
@@ -164,9 +167,12 @@ def main():
             why = "chapter-band Welsh subtitle — already Welsh; not a translator row (raised for the owner)"
         elif en in ("Explore results ▾", "None — select a highlighted chart value to add one"):
             why = "client-owned control text served by a sheet-43 frame (ui.rail_toggle / ui.chip_none)"
+        elif en in ("Club Sports", "This section brings together sport done in a", "school sports club",
+                    "(extracurricular) and/or a", "club outside of school"):
+            why = "Club Sports section removed from the report (EN-09, V4.18, owner instruction 22 Sep 2026) — the translator's Welsh kept here"
         else:
             why = "string no longer occurs on the page (V4.1 sanctioned English edits)"
-        wr.append([r["key"], en, why])
+        wr.append([r["key"], en, why, r.get("cy") or ""])
     rm = wb.create_sheet("Read me")
     for line in __doc__.strip().split("\n"):
         rm.append([line])

@@ -402,6 +402,16 @@ function metricFor(mid) {
     const s = sib();
     return { res: s && !s.sup ? s.m[mid] : null, context: true };
   }
+  /* V4.18 (owner instruction, 22 Sep 2026): the weekly-frequency chart
+     ("On average, how often are our pupils engaging in sport each week?")
+     keeps the wider picture under a SETTING selection ("Where are our
+     pupils taking part in Sport?"), exactly as a chart does under its own
+     selection — its bars stay selectable; the narrative carries the
+     selected-group definition (EN-09). */
+  if (c && mid === "freq_estimate" && c.metric === "participation_settings") {
+    const s = sib();
+    return { res: s && !s.sup ? s.m[mid] : null, context: true, wider: true };
+  }
   const s = st();
   return { res: s && !s.sup ? s.m[mid] : null, context: false };
 }
@@ -450,7 +460,7 @@ function viewDesc(contextOnly) {
 
 function renderChart(host, mid) {
   const def = DATA.metricDefs[mid];
-  const { res, context } = metricFor(mid);
+  const { res, context, wider } = metricFor(mid);
   /* D80: a chart-heading override is a static-manifest KEY (data-ct-key).
      Its heading is static furniture in the markup — bound by the static
      lane (data-i18n) and swapped by renderStatic() — and the chart renders
@@ -483,7 +493,12 @@ function renderChart(host, mid) {
   // sheet 43: the three context suffixes are typed frames (UI-DYN-06);
   // D74: frames are clauses, joined by the one clause joiner.
   const ctxClause =
-    context ? t("ui.ctx_shown_for", { desc: viewDesc(true) })
+    // V4.18: the wider picture kept under a setting selection is announced
+    // with the existing "Showing: {desc}" frame for the wider view — this
+    // chart does not define the selected group, so ui.ctx_shown_for's
+    // parenthesis would be untrue
+    wider ? t("ui.ctx_showing", { desc: viewDesc(true) })
+    : context ? t("ui.ctx_shown_for", { desc: viewDesc(true) })
     : (viewSup() || FORCE_WHOLE) ? t("ui.ctx_whole_school")
     : key() !== "whole|all|none" ? t("ui.ctx_showing", { desc: viewDesc(false) })
     : "";
@@ -529,7 +544,12 @@ function renderChart(host, mid) {
   // v2 (Sport Wales feedback): on filtered views, keep the whole-school
   // outline so the filtered results visibly "fill up" the bars.
   let ghost = null;
-  if (key() !== "whole|all|none" && !viewSup() && !FORCE_WHOLE) {
+  // V4.18: the frequency chart kept at the wider picture under a setting
+  // selection is compared with the whole school only when that wider
+  // picture is not the whole school itself (a source chart under its own
+  // selection keeps its V4.17 outline)
+  const wholeShown = wider && state.scope === "whole" && state.gender === "all";
+  if (key() !== "whole|all|none" && !viewSup() && !FORCE_WHOLE && !wholeShown) {
     const w = DATA.states["whole|all|none"];
     const wres = w && !w.sup ? w.m[mid] : null;
     if (wres && wres.s === "ok") {
@@ -1280,7 +1300,8 @@ function renderAppendices() {
     [t("ui.appx_inclusion"), ["responses_by_year", "responses_by_gender",
       "disability_condition", "learning_difficulty", "take_part_method",
       "welsh_speaking", "welsh_when_playing_sport"]],
-    [t("ui.appx_club"), ["club_freq_estimate"]],
+    // V4.18: the Club Sports section and its appendix table were removed
+    // (owner instruction, 22 Sep 2026); its appendix heading frame is DEPRECATED on sheet 43
   ];
   const withGender = state.gender === "all";
   const bs = DATA.states[state.scope + "|boy|" + state.cohort];

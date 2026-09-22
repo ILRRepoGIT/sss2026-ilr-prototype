@@ -251,3 +251,32 @@ patched to pass a gate, and no Welsh was composed.
   if Stage 2 blanks them at source the rule becomes a no-op and can be retired.
   Other routed questions are already charted on their routed bases; their
   off-route answers are not yet dropped (raised in the query).
+
+## V4.18 — the Club Sports section removed (EN-09)
+
+- **The club-sport estimate is still cited in one place.** The section, its
+  chart, its selected groups and its appendix table are gone, but the Summary
+  page's chapter-summary sentence "… took part in club sport at least once a
+  week" is computed from the same metric and was left exactly as it was: it
+  is locked narrative, and the instruction named the section. Whether it
+  follows the section is the owner's call (EN-10, flagged). (The "summary
+  cards" named on Framework v2.11 sheet 69 are unreferenced generator code
+  and have never rendered; the sentence is the only citation.)
+- **The appendix table went with the section.** "Club sport (school or
+  community)" was the section's table; its heading frame is DEPRECATED on
+  sheet 43, not deleted, so it can be restored by one status change if wanted.
+- **The corpus lock was re-based.** EN-09 is the first sanctioned change since
+  V4.1 that moves the locked English, so the V4.15 lock could not be asserted;
+  the V4.18 lock was emitted under the ruling and the exact difference proven
+  and recorded (288 `cb_*` states removed, d2 removed everywhere, one
+  definition paragraph added to d0 in 140 `st_*` states, nothing else). Every
+  later build asserts against the V4.18 lock; the V4.15 lock stays in the
+  repository as the record of the corpus before the ruling.
+- **Only the named pairing is affected.** The weekly-frequency chart keeps the
+  wider picture under a SETTING selection only; under every other selection
+  (a year, a gender, a frequency band, an enjoyment answer …) it behaves as
+  before, and no other chart changed.
+- **The translator's five retired rows** (the "Club Sports" heading and its
+  context paragraph) are kept verbatim on the V4.18 handoff's Retired sheet;
+  they are no longer translator rows and would need re-adding if the section
+  ever returned.

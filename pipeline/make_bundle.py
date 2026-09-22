@@ -42,7 +42,7 @@ def main():
     for old in list(b.glob("evidence_rerun_*")) + list(b.glob("runner_bundle_*")) + [b / "verify.json"]:
         if old.exists():
             old.unlink()
-    for old in list(b.glob("lock_V*_v7.json")) + list(b.glob("lock_V*_v8.json")) + list(b.glob("welsh_acceptance_gates_v*.py")):
+    for old in list(b.glob("lock_V*_v7.json")) + list(b.glob("lock_V*_v8.json")) + list(b.glob("lock_V*_v8_emitted.json")) + list(b.glob("welsh_acceptance_gates_v*.py")):
         old.unlink()
     # V4.15: gate pack v8 (CONJ-06 read from sheet 11, D84); the baseline is
     # the V4.15 lock once emitted (its English part equals the V4.8 lock's),
@@ -54,9 +54,8 @@ def main():
     for old in b.glob("01_Framework_v*.xlsx"):
         old.unlink()
     shutil.copyfile(fw, b / fw.name)
-    baseline_src = (CONFIG_DIR / "02c_lock_V415_v8.json"
-                    if (CONFIG_DIR / "02c_lock_V415_v8.json").exists() else CONFIG_DIR / "02c_lock_V48_v7.json")
-    baseline = "lock_V415_v8.json" if baseline_src.name.endswith("V415_v8.json") else "lock_V48_v7.json"
+    from .welsh_gates8 import BASELINE_PATH as baseline_src   # the newest lock present (V4.18: 02c_lock_V418_v8.json)
+    baseline = baseline_src.name.replace("02c_", "")
     shutil.copyfile(baseline_src, b / baseline)
     shutil.copyfile(GENERATED_DIR / "welsh_gate_evidence_build.ndjson.gz", b / "evidence.ndjson.gz")
     stamp = json.load(open(GENERATED_DIR / "ysgol-penrhyn-dewi.report.json", encoding="utf-8"))["buildMetadata"]["gateResults"]

@@ -31,7 +31,7 @@ ok(d.body.innerHTML.indexOf("3 or more times a week") > -1, "en legend");
 // V4.9 D79: every static key rendered, English from the manifest
 const els = () => Array.from(d.querySelectorAll("[data-i18n]"));
 const norm = s => (s || "").replace(/\s+/g, " ").trim();
-ok(els().length === 216, "216 data-i18n elements (V4.11: 12 slot-bearing fragments became sheet-43 frames)", els().length);
+ok(els().length === 211, "211 data-i18n elements (V4.18: the Club Sports rows retired; V4.11: 12 slot-bearing fragments became sheet-43 frames)", els().length);
 ok(Object.keys(STATIC).every(k => els().some(e => e.getAttribute("data-i18n") === k)), "every static key has an element");
 ok(els().every(e => norm(e.textContent) === norm(STATIC[e.getAttribute("data-i18n")].en)), "en static text equals manifest");
 ok(els().every(e => e.getAttribute("data-i18n-source") === "static:" + e.getAttribute("data-i18n")), "static provenance stamped");
@@ -70,7 +70,7 @@ ok(els().every(e => { const k = e.getAttribute("data-i18n"), r = STV[k]; if (!r)
   "cy static nodes: value when returned, English under the review marker when pending");
 ok(Object.values(STV).filter(r => r.inline).length === 13 && els().filter(e => STV[e.getAttribute("data-i18n")].inline && STV[e.getAttribute("data-i18n")].cy).every(e => e.querySelector("strong,em") || !/<(strong|em)/.test(STV[e.getAttribute("data-i18n")].cy)), "block rows render the translator's emphasis as markup");
 ok(!els().some(e => /<\/?(script|a|span|div|img)/i.test(e.innerHTML)), "no disallowed markup reaches a static node");
-ok(Object.values(STV).filter(r => r.cy).length === 192 && Object.keys(STV).length === 192, "192 of 192 static rows carry a translator value (V4.15)", Object.values(STV).filter(r => r.cy).length);
+ok(Object.values(STV).filter(r => r.cy).length === 187 && Object.keys(STV).length === 187, "187 of 187 static rows carry a translator value (V4.18: five Club Sports rows retired; V4.15: all translated)", Object.values(STV).filter(r => r.cy).length);
 ok(!els().some(e => e.classList.contains("cy-missing")), "no static node is pending in Welsh mode (V4.15)");
 ok(d.body.innerHTML.indexOf("⟪missing:ui") === -1, "no bare static markers in Welsh mode");
 ok(d.querySelector('[data-chart="pe_feel_healthy"] h4').textContent === STATIC.ui217.cy && !d.querySelector('[data-chart="pe_feel_healthy"] h4').classList.contains("cy-missing"), "cy keyed chart heading from the translator value", d.querySelector('[data-chart="pe_feel_healthy"] h4').textContent);
@@ -84,7 +84,7 @@ ok(!d.querySelector('[data-frame="ui.chart_sports_total_club"]').classList.conta
 ok(els().filter(e => e.classList.contains("cy-missing")).every(e => e.getAttribute("lang") === "en"), "every pending static node carries lang=en");
 ok(d.querySelector("aside.filter-rail").getAttribute("aria-label") === "Archwilio’r Canlyniadau", "cy aria-label from a frame");
 ok(txt("#any-activity-note").indexOf("Adroddodd 363 o’r 366") === 0, "cy any-activity headline frame", txt("#any-activity-note").slice(0,60));
-ok(txt("#review-note-cy").indexOf("mae 192 o 192") > -1 && !d.getElementById("review-note-cy").classList.contains("cy-missing"), "review note generated from live counts, in Welsh (V4.15)", txt("#review-note-cy").slice(0,80));
+ok(txt("#review-note-cy").indexOf("mae 187 o 187") > -1 && !d.getElementById("review-note-cy").classList.contains("cy-missing"), "review note generated from live counts, in Welsh (V4.15)", txt("#review-note-cy").slice(0,80));
 ok(txt("#h1-view").indexOf("Rydych chi’n gweld:") === 0, "cy banner prefix from Framework v2.3", txt("#h1-view").slice(0,40));
 ok(/rhywedd\./.test(d.body.innerHTML) && !/a rhyw\./.test(d.body.innerHTML), "stack caption uses rhywedd (v2.3)");
 // V4.15: the translator confirmed the reviewer's suggestions on the handover (sheet 1) — applied as the exact substitutions
@@ -184,7 +184,32 @@ ok(els().every(e => norm(e.textContent) === norm(STATIC[e.getAttribute("data-i18
   // screen-reader structure present in both modes, invisible
   ok(Array.from(d.querySelectorAll(".chart-card h4[id^='ch-']")).length > 10 && Array.from(d.querySelectorAll(".chart-card[role='group']")).every(c => d.getElementById(c.getAttribute("aria-labelledby"))), "chart cards are groups labelled by their own heading");
   ok(d.querySelectorAll(".stackseg[data-seg]").length > 0 && d.querySelectorAll(".stackseg:not([data-seg])").length === 0, "stack segments carry their position");
-  // a saved link with a11y=1 opens with the switch on
+  // V4.18 (EN-09): the Club Sports section is gone; under a setting selection the
+// weekly-frequency chart keeps the wider picture, stays selectable, and its
+// narrative leads with the selected-group definition
+{ const D = JSON.parse(data);
+  ok(!d.querySelector('[data-module="d2"]') && !d.querySelector('[data-chart="club_freq_estimate"]'), "V4.18: no Club Sports module or club chart on the page");
+  ok(!Object.keys(D.cohorts).some(k => k.startsWith("cb_")), "V4.18: no club-estimate (cb_*) selected groups in the payload");
+  ok(Object.values(D.states).every(s => !(s.mod && s.mod.d2)), "V4.18: no d2 narrative in any embedded state");
+  const stKey = Object.keys(D.states).find(k => k.startsWith("whole|all|st_"));
+  ok(!!stKey, "V4.18: a setting-selection state is embedded", stKey);
+  if (stKey) {
+    const dom5 = new JSDOM(html, { runScripts: "dangerously", url: "https://x.test/report.html#scope=whole&gender=all&cohort=" + stKey.split("|")[2] + "&lang=en" });
+    const d5 = dom5.window.document;
+    const host = d5.querySelector('[data-chart="freq_estimate"]');
+    const bars = host ? Array.from(host.querySelectorAll("button.vcolbtn, button.hrowbtn")) : [];
+    const whole = D.states["whole|all|none"].m.freq_estimate.v, own = D.states[stKey].m.freq_estimate.v;
+    const shown = bars.map(b => parseInt((b.querySelector(".vval, .hval") || b).textContent.replace(/[^0-9]/g, ""), 10));
+    const sel = shown.filter(n => !isNaN(n));   // the selectable (button) bars — the grey categorical columns are spans
+    ok(sel.length > 0 && JSON.stringify(sel) === JSON.stringify(whole.slice(-sel.length)) && JSON.stringify(whole.slice(-sel.length)) !== JSON.stringify(own.slice(-sel.length)), "V4.18: under a setting selection the frequency chart shows the whole-view bars (not the group's)", JSON.stringify(sel) + " vs whole " + JSON.stringify(whole) + " own " + JSON.stringify(own));
+    ok(bars.length > 0 && bars.every(b => !b.disabled), "V4.18: the frequency chart's bars stay selectable under a setting selection");
+    const base = host && host.querySelector(".chart-base");
+    ok(base && /Showing: Whole school · All pupils/.test(base.textContent) && !/defines the selected group/.test(base.textContent), "V4.18: the base line says the wider view is showing (not that this chart defines the group)", base && base.textContent.slice(0, 100));
+    const d0 = d5.querySelector('[data-module="d0"] .mod-narrative');
+    ok(d0 && /^This selected group contains .* The chart above keeps the wider picture for .* for context, with the selected answer highlighted\.$/.test((d0.querySelector("p") || {}).textContent || ""), "V4.18: d0 narrative leads with the selected-group definition sentence", d0 && (d0.querySelector("p") || {}).textContent);
+  }
+}
+// a saved link with a11y=1 opens with the switch on
   const dom4 = new JSDOM(html, { runScripts: "dangerously", url: "https://x.test/report.html#scope=whole&gender=girl&cohort=none&lang=cy&a11y=1" });
   ok(dom4.window.document.documentElement.classList.contains("a11y") && dom4.window.document.getElementById("btn-a11y").getAttribute("aria-checked") === "true", "a11y=1 link opens with the switch on"); }
 console.log(`jsdom regression: ${pass}/${pass+fail} PASS${fail?" ("+fail+" FAIL)":""}`);

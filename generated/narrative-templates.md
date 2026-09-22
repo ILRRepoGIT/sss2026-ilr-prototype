@@ -38,7 +38,6 @@ Composed module templates used in this build:
 - `barrier_leader_v41`
 - `barrier_none_v41`
 - `barrier_runner_v41`
-- `club_weekly_3plus_v13`
 - `combined_base1_v41`
 - `combined_nopct_v2`
 - `combined_v2`

@@ -1,7 +1,7 @@
 {
- "version": "v2.10",
- "framework_sha256": "2c3a6bbf535702d1495b1491b0bbc384ceb47e71492524acf25a3cccc89de0c5",
- "framework_file": "01_Framework_v2.10.xlsx",
+ "version": "v2.11",
+ "framework_sha256": "819901480b245dddba0cac8c9750a25d5d75cbda7ac8bfcb4208e750dc1101af",
+ "framework_file": "01_Framework_v2.11.xlsx",
  "audiences": {
   "Generated from sheet 18 by rule. Note the two divergences from English that recur in every row: (1) after a numeral with the article Welsh uses the SINGULAR head (y 12 disgybl, not y 12 ddisgyblion); (2) the scope phrase is locative and triggers the nasal mutation (ym Mlwyddyn 8). The HOLL column is the parent-audience form ('all Year 8 pupils').": {
    "bare": "",
@@ -3757,6 +3757,7 @@
   "ui.table_headings",
   "msg.no_data_title",
   "msg.no_data_body",
+  "ui.appx_club",
   "ui.alt_brain_javelin",
   "ui.alt_brain_football",
   "ui.alt_brain_basketball"
@@ -4068,11 +4069,6 @@
   "ui.appx_inclusion": {
    "en": "Inclusion and demographics",
    "cy": "Cynhwysiant a demograffeg",
-   "slots": "—"
-  },
-  "ui.appx_club": {
-   "en": "Club sport (school or community)",
-   "cy": "Chwaraeon clwb (ysgol neu gymunedol)",
    "slots": "—"
   },
   "ui.appx_caption_base": {
@@ -6140,6 +6136,20 @@
    "cy": null
   },
   {
+   "cat": "discussion question",
+   "owner": "Translator",
+   "key": "h2_generic_reflect",
+   "en": "Which findings match what you see day to day, and which are surprising?",
+   "cy": "Pa ganfyddiadau sy’n cyfateb i’r hyn a welwch o ddydd i ddydd, ac sy’n syndod?"
+  },
+  {
+   "cat": "discussion question",
+   "owner": "Translator",
+   "key": "h2_generic_discussion",
+   "en": "Could further pupil discussion help explain these findings before provision changes are planned?",
+   "cy": "A allai trafodaeth bellach â disgyblion helpu i egluro’r canfyddiadau hyn cyn cynllunio’r newidiadau i’r ddarpariaeth?"
+  },
+  {
    "cat": "page furniture",
    "owner": "Translator",
    "key": "ui000",
@@ -6758,34 +6768,6 @@
   {
    "cat": "page furniture",
    "owner": "Translator",
-   "key": "ui130",
-   "en": "Club Sports",
-   "cy": "Chwaraeon Clwb"
-  },
-  {
-   "cat": "page furniture",
-   "owner": "Translator",
-   "key": "ui131",
-   "en": "This section brings together sport done in a",
-   "cy": "Mae’r adran hon yn dwyn ynghyd chwaraeon sy’n cael eu gwneud mewn"
-  },
-  {
-   "cat": "page furniture",
-   "owner": "Translator",
-   "key": "ui132",
-   "en": "school sports club",
-   "cy": "clwb chwaraeon ysgol"
-  },
-  {
-   "cat": "page furniture",
-   "owner": "Translator",
-   "key": "ui134",
-   "en": "club outside of school",
-   "cy": "glwb y tu allan i’r ysgol"
-  },
-  {
-   "cat": "page furniture",
-   "owner": "Translator",
    "key": "ui136",
    "en": "How does participation differ between groups of pupils?",
    "cy": "Sut mae cymryd rhan yn amrywio rhwng grwpiau o ddisgyblion?"
@@ -7367,13 +7349,6 @@
   {
    "cat": "page furniture",
    "owner": "Translator",
-   "key": "ui248",
-   "en": "(extracurricular) and/or a",
-   "cy": "(allgyrsiol) a/neu"
-  },
-  {
-   "cat": "page furniture",
-   "owner": "Translator",
    "key": "ui249",
    "en": "Pupils were asked about their ability to speak Welsh. Pupils who said they speak Welsh very well, a fair amount or a little are shown here. These pupils are categorised as ‘Speaks Welsh’. These pupils were also asked whether they usually speak Welsh when they play sport.",
    "cy": "Gofynnwyd i ddisgyblion am eu gallu i siarad Cymraeg. Mae disgyblion a ddywedodd eu bod yn siarad Cymraeg yn dda iawn, eithaf tipyn neu ychydig yn cael eu dangos yma. Gosodwyd y disgyblion hyn yn y categori ‘Yn siarad Cymraeg’. Hefyd, gofynnwyd i’r disgyblion hyn a oeddent fel arfer yn siarad Cymraeg wrth wneud chwaraeon."
@@ -7482,20 +7457,6 @@
    "key": "ui264",
    "en": "To keep a record of any view, use Print or save this view in the Explore results panel.",
    "cy": "I gadw cofnod o unrhyw wedd, defnyddiwch <strong>Argraffu neu arbed y golwg hwn</strong> ym mhanel Archwilio’r canlyniadau."
-  },
-  {
-   "cat": "discussion question",
-   "owner": "Translator",
-   "key": "h2_generic_reflect",
-   "en": "Which findings match what you see day to day, and which are surprising?",
-   "cy": "Pa ganfyddiadau sy’n cyfateb i’r hyn a welwch o ddydd i ddydd, ac sy’n syndod?"
-  },
-  {
-   "cat": "discussion question",
-   "owner": "Translator",
-   "key": "h2_generic_discussion",
-   "en": "Could further pupil discussion help explain these findings before provision changes are planned?",
-   "cy": "A allai trafodaeth bellach â disgyblion helpu i egluro’r canfyddiadau hyn cyn cynllunio’r newidiadau i’r ddarpariaeth?"
   }
  ]
 }

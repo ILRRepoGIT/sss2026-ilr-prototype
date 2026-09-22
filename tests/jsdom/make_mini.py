@@ -22,6 +22,8 @@ first_year = next(k for k in offered if k.startswith("y"))
 keep = {k: D["states"][k] for k in ("whole|all|none", "whole|girl|none", "whole|boy|none")}
 extra = ([k for k, v in D["states"].items() if v.get("sup")][:1]
          + [k for k in D["states"] if k.endswith("|sp_football")][:1]
+         # V4.18: one setting-selection state (whole|all|st_*) for the frequency-chart rule
+         + [k for k in D["states"] if k.startswith("whole|all|st_")][:1]
          + [f"{first_year}|girl|none"]
          + [f"{s}|all|none" for s in ("primary", "secondary") if s in offered])
 for k in extra:

@@ -606,7 +606,7 @@ cohort_sources:
   ed_combined:         { prefix: ed, label_template: "Ethnically diverse background: {option}" }
   ws_combined:         { prefix: ws, label_template: "Speaks Welsh (very well, a fair amount or a little): {option}" }
   freq_estimate:       { prefix: ov, label_template: "Estimated times active through sport each week: {option}" }
-  club_freq_estimate:  { prefix: cb, label_template: "Estimated times active through club sport each week: {option}" }
+  # V4.18: club_freq_estimate is no longer a cohort source (the Club Sports section was removed)
   settings_dl:         { prefix: gd, label_template: "Disability and/or learning difficulty · sport {option}" }
   settings_dy:         { prefix: gy, label_template: "Disability or long-term condition · sport {option}" }
   settings_ly:         { prefix: gl, label_template: "Learning difficulty · sport {option}" }

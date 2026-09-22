@@ -27,13 +27,13 @@ from .narrative2 import BASE1_GATES, T as TEMPLATES
 from .narrative2_modules import MODULE_LABELS
 from .narrative2_modules_b import FullNarrator
 
-PIPELINE_VERSION_V2 = "0.29.1"
+PIPELINE_VERSION_V2 = "0.30.0"
 # v6 (0.28.0, V5.0 real-school round): the school is the profile's, not the
 # module's. The prototype profile carries no slug or report version, so the
 # defaults keep every V4.15 name; a school profile names its own.
 _PROFILE0 = load_config()[0]
 SCHOOL_SLUG = _PROFILE0.get("slug", "ysgol-penrhyn-dewi")
-REPORT_VERSION_V2 = _PROFILE0.get("reportVersion", "2026-prototype-V4.17-bilingual")
+REPORT_VERSION_V2 = _PROFILE0.get("reportVersion", "2026-prototype-V4.18-bilingual")
 
 # v2.1: "most likely" removed from the banned list - the Sport Wales
 # page-by-page feedback mandates the sentence form "Pupils were most likely
@@ -103,7 +103,6 @@ def run_qa_checks(engine, package, records, narrator):
                        "would_do_more_if": "f7", "sports_wanted": "f10",
                        "ideas_listened": "g5", "most_important": "f6",
                        "freq_estimate": "d0",
-                       "club_freq_estimate": "d2",
                        "settings_dl": "n_dl", "settings_dy": "n_dl",
                        "settings_ly": "n_dl", "settings_ed": "n_ed",
                        "settings_wl": "n_wl",
