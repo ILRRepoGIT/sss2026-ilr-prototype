@@ -11,9 +11,12 @@ Phase 8; review P0.8, P0.9, P0.10, G13, G14).
     python -m prod.publish rollback     --release <tag> --to <previous tag> --evidence <root> --account <web account> --profile <afd> --rg <rg> --endpoint <ep>
 
 All commands print what they do and take --dry-run. They use the Azure CLI
-and AzCopy under the VM's managed identity (or the publisher's identity —
-the runbook moves the $web role to a separate identity before the first
-publication, so that the machine that built cannot also publish).
+and AzCopy. --auth chooses whose identity AzCopy uses: `identity` (default —
+the VM's managed identity, for stage/verify-staging) or `azcli` (the account
+that ran `az login` on this machine — the named publisher, for promote /
+withdraw / rollback after the runbook has moved the $web and purge roles
+away from the VM, so that the machine that built cannot also publish).
+`az afd endpoint purge` always runs as the Azure CLI's signed-in account.
 
 The model (P0.8): the release tree — /r/<tag>/assets/… and /r/<tag>/<token>/…,
 every file content-hashed and immutable — is uploaded to the PRIVATE
@@ -54,6 +57,22 @@ def sh(cmd: list, dry: bool, check=True, capture=False):
     return r.stdout if capture else ""
 
 
+def azcopy_login(a):
+    """AzCopy authentication for this command. identity: `azcopy login --identity`
+    (the VM's system-assigned identity). azcli: AzCopy auto-login through the
+    Azure CLI's signed-in account (AZCOPY_AUTO_LOGIN_TYPE=AZCLI) — the publisher
+    ran `az login` as themselves on this machine; nothing is stored."""
+    import os
+    mode = getattr(a, "auth", "identity") or "identity"
+    if mode == "azcli":
+        os.environ["AZCOPY_AUTO_LOGIN_TYPE"] = "AZCLI"
+        os.environ.pop("AZCOPY_AUTO_LOGIN_TYPE_MSI", None)
+        who = sh(["az", "account", "show", "--query", "user.name", "-o", "tsv"], a.dry_run, check=False, capture=True).strip()
+        print(f"azcopy auth: Azure CLI account {who or '(dry run)'}", flush=True)
+    else:
+        azcopy_login(a)
+
+
 def blob_url(account: str, container: str, path: str = "") -> str:
     return f"https://{account}.blob.core.windows.net/{container}/{path}".rstrip("/")
 
@@ -61,7 +80,7 @@ def blob_url(account: str, container: str, path: str = "") -> str:
 # --------------------------------------------------------------------------- stage
 def stage(a):
     out = Path(a.out) / a.release
-    sh(["azcopy", "login", "--identity"], a.dry_run, check=False)
+    azcopy_login(a)
     # the release tree only — never the private index, the evidence or the entry pages
     sh(["azcopy", "sync", str(out / "r" / a.release), blob_url(a.account, "staging", f"{a.release}/r/{a.release}"),
         "--recursive", "--put-md5", "--exclude-pattern", "package_index.json"], a.dry_run)
@@ -147,9 +166,17 @@ def index(a):
 # --------------------------------------------------------------------------- promote (atomic activation)
 def promote(a):
     ev = Path(a.evidence) / a.release
-    idx = json.loads((ev / "publication_index.json").read_text(encoding="utf-8"))
+    idx_p = ev / "publication_index.json"
+    if idx_p.exists():
+        idx = json.loads(idx_p.read_text(encoding="utf-8"))
+    elif a.dry_run:
+        print(f"no publication index yet ({idx_p}) — dry run shows the release-tree copy only; "
+              "the entry pages are planned once `index` has run (Phase F2)", flush=True)
+        idx = {"reports": []}
+    else:
+        raise SystemExit(f"no publication index for {a.release}: run `prod.publish index` first (Phase F2)")
     L = Ledger(ev / "ledger.sqlite")
-    sh(["azcopy", "login", "--identity"], a.dry_run, check=False)
+    azcopy_login(a)
     # 1. the immutable release tree into $web (server-side copy; nothing reachable yet)
     sh(["azcopy", "copy", blob_url(a.account, "staging", f"{a.release}/r/{a.release}"), blob_url(a.account, "$web", "r"),
         "--recursive", "--overwrite=ifSourceNewer"], a.dry_run)
@@ -178,7 +205,7 @@ def withdraw(a):
     if not att:
         raise SystemExit("no attestation for that school")
     tok = att["token"]
-    sh(["azcopy", "login", "--identity"], a.dry_run, check=False)
+    azcopy_login(a)
     sh(["azcopy", "remove", blob_url(a.account, "$web", f"2026/{tok}/index.html")], a.dry_run)
     sh(["azcopy", "remove", blob_url(a.account, "$web", f"r/{a.release}/{tok}"), "--recursive"], a.dry_run)
     sh(["az", "afd", "endpoint", "purge", "--profile-name", a.profile, "--resource-group", a.rg, "--endpoint-name", a.endpoint,
@@ -198,7 +225,7 @@ def rollback(a):
     cur_p = Path(a.evidence) / a.release / "publication_index.json"
     cur = json.loads(cur_p.read_text(encoding="utf-8")) if cur_p.exists() else {"reports": []}
     prev_tokens = {r["token"] for r in idx["reports"]}
-    sh(["azcopy", "login", "--identity"], a.dry_run, check=False)
+    azcopy_login(a)
     # entry pages that exist only in the current release come down (no previous page to restore)
     L = Ledger(Path(a.evidence) / a.release / "ledger.sqlite")
     for r in cur["reports"]:
@@ -225,6 +252,8 @@ def main(argv=None):
     sub = ap.add_subparsers(dest="cmd", required=True)
     def common(p, *need):
         p.add_argument("--release", required=True); p.add_argument("--dry-run", action="store_true")
+        p.add_argument("--auth", choices=["identity", "azcli"], default="identity",
+                       help="AzCopy identity: the VM's managed identity (default) or the Azure CLI's signed-in account (the publisher)")
         for n in need:
             p.add_argument("--" + n, required=True)
     p = sub.add_parser("stage"); common(p, "out", "account"); p.add_argument("--evidence"); p.set_defaults(func=stage)

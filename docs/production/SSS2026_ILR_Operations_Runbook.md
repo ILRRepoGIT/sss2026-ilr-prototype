@@ -8,11 +8,13 @@ Throughout, `$ILR_REPO`, `$ILR_VENV` and the storage/vault names come from `/etc
 
 ```
 cd $ILR_REPO && source $ILR_VENV/bin/activate
-export RELEASE=v6.0-rc2                  # the tag the VM was bootstrapped at (v6.0-rc2 today — Framework v2.14; the owner cuts v6.0 with tools/cut_release.sh)
+export RELEASE=v6.0-rc3                  # the tag the VM was bootstrapped at (v6.0-rc3 today — Framework v2.14; the owner cuts v6.0 with tools/cut_release.sh)
 export EVID=/data/ilr/evidence            # private: attestations, bundles, locks, ledger
 export OUT=/data/ilr/out                  # the served trees (release + entry pages)
 export WORK=/data/ilr/work                # per-job scratch, deleted job by job
 export DATASET=/data/ilr/private/SSS2026_pupil_stage2_full_cleaned.parquet
+# $ILR_DATA_ACCOUNT, $ILR_WEB_ACCOUNT, $ILR_KEY_VAULT, $ILR_AFD_PROFILE, $ILR_AFD_ENDPOINT, $ILR_RG and $JSDOM come from
+# /etc/profile.d/ilr.sh, written by the bootstrap; `env | grep ILR_` shows them. The commands below use the default names.
 ```
 
 ---
@@ -29,7 +31,12 @@ az storage blob download --account-name $ILR_DATA_ACCOUNT --container-name datas
 sha256sum $DATASET     # must print 802eda98fdeef512cce11e11aa38a45df5b0f33beb81b505acfc4ce9bbe13625
 ```
 
-**A2. PLASC 2026.** The official school names come from the PLASC January 2026 workbook bundled with the cleansing handover (`06_pipeline/plasc2026.xlsx`). Copy it beside the dataset.
+**A2. PLASC 2026.** The official school names come from the PLASC January 2026 workbook bundled with the cleansing handover (`06_pipeline/plasc2026.xlsx`, uploaded to the `dataset` container in provisioning step 3.1). Copy it beside the dataset:
+
+```
+az storage blob download --account-name $ILR_DATA_ACCOUNT --container-name dataset --auth-mode login \
+   --name plasc2026.xlsx --file /data/ilr/private/plasc2026.xlsx
+```
 
 **A3. The recipient register** — the definitive report universe (review P0.2). Built from the dataset and PLASC; nothing is typed by hand.
 
@@ -127,7 +134,7 @@ python -m prod.runner rebuild --release $RELEASE --register /data/ilr/private/re
    --out $OUT --evidence $EVID --work $WORK --fraction 0.05 --seed 2026 --key-vault $ILR_KEY_VAULT --jsdom $JSDOM
 ```
 
-`rebuild` writes `$EVID_rebuild/$RELEASE/rebuild_report.json`; every sampled school must be `identical` (every served file byte for byte; the timestamps live in the attestation, not the served files). The plan asks for the second build on a separately provisioned machine: run the same command on a second VM created from `infra/build-vm.bicep` if Sport Wales requires that literal reading; on the same VM it still proves determinism across processes and runs.
+`rebuild` writes `/data/ilr/evidence_rebuild/$RELEASE/rebuild_report.json` (the evidence root with `_rebuild` appended); every sampled school must be `identical` (every served file byte for byte; the timestamps live in the attestation, not the served files). The plan asks for the second build on a separately provisioned machine: run the same command on a second VM created from `infra/build-vm.bicep` if Sport Wales requires that literal reading; on the same VM it still proves determinism across processes and runs.
 
 ---
 
@@ -145,7 +152,7 @@ python -m prod.publish promote --release $RELEASE --evidence $EVID --account sts
    --profile afd-sss2026-ilr --rg rg-sss2026-ilr --endpoint sss2026-reports --dry-run      # read the plan first
 ```
 
-(`promote` without `--dry-run` also writes the entry pages — do not run it yet.) The full served-package check over HTTP is run after activation in Phase F within minutes, on 100 % of routes; before activation the file-mode check over the staged bytes (`verify-staging`) is the guarantee that what will be served is what was attested.
+(Before F2 there is no publication index, so the dry run lists the release-tree copy only and says so; `promote` without `--dry-run` also writes the entry pages — do not run it yet.) The full served-package check over HTTP is run after activation in Phase F within minutes, on 100 % of routes; before activation the file-mode check over the staged bytes (`verify-staging`) is the guarantee that what will be served is what was attested.
 
 Evidence upload (private):
 
@@ -158,14 +165,19 @@ az storage blob upload-batch --account-name $ILR_DATA_ACCOUNT --destination evid
 
 ## Phase F — publication index, two-person approval, activation, live check
 
-**F1. Move the publisher role.** Before the first activation, the `$web` write role is taken away from the VM's identity and given to the publisher (a named person's account or a second managed identity), so that a build cannot publish itself:
+**F1. Move the publisher role.** Before the first activation, the `$web` write role and the Front Door purge role are taken away from the VM's identity and given to the publisher — a named person — so that a build cannot publish itself. From an administrator's own machine:
 
 ```
-az role assignment delete --assignee <vm principal id> --role "Storage Blob Data Contributor" --scope "<web account id>/blobServices/default/containers/\$web"
-az role assignment create --assignee <publisher> --role "Storage Blob Data Contributor" --scope "<web account id>/blobServices/default/containers/\$web"
+WEB=$(az storage account show -n stsss2026ilrweb -g rg-sss2026-ilr --query id -o tsv)
+AFD=$(az afd profile show -g rg-sss2026-ilr --profile-name afd-sss2026-ilr --query id -o tsv)
+az role assignment delete --assignee <vm principal id> --role "Storage Blob Data Contributor" --scope "$WEB/blobServices/default/containers/\$web"
+az role assignment delete --assignee <vm principal id> --role "CDN Profile Contributor" --scope $AFD
+az role assignment create --assignee <publisher upn> --role "Storage Blob Data Contributor" --scope "$WEB/blobServices/default/containers/\$web"
+az role assignment create --assignee <publisher upn> --role "Storage Blob Data Reader"      --scope "$WEB/blobServices/default/containers/staging"
+az role assignment create --assignee <publisher upn> --role "CDN Profile Contributor"       --scope $AFD
 ```
 
-The publisher then runs F2–F4 (`az login` as themselves, or on a machine with the second identity).
+The publisher then runs F2–F5 on the VM (the storage firewall admits only the VM's subnet), signed in as themselves rather than as the machine: `az login --use-device-code` (this replaces the VM's `az login --identity` session for the shell; `az account show` must print the publisher's name), and every `prod.publish` command in F4 and after carries `--auth azcli`, which makes AzCopy use that sign-in too. The ledger records the publisher's account name with the activation. Allow a few minutes for the role assignments to propagate before F4.
 
 **F2. The publication index.** Only reports whose ledger status is `verified` go in; a dev-mode report is refused unless a signed waiver from the report owner is supplied (rule 9 — until the translator's remaining values and the owner's D69 are in the framework, every build is a dev build, so this is the decision point):
 
@@ -188,7 +200,14 @@ The list contains every school in the register, including the below-threshold an
 
 ```
 python -m prod.publish promote --release $RELEASE --evidence $EVID --account stsss2026ilrweb \
-   --profile afd-sss2026-ilr --rg rg-sss2026-ilr --endpoint sss2026-reports
+   --profile afd-sss2026-ilr --rg rg-sss2026-ilr --endpoint sss2026-reports --auth azcli
+```
+
+Then re-upload the evidence so that the private record carries the publication index and the ledger's activation events (the Phase E upload predates them):
+
+```
+python -m prod.ledger export $EVID/$RELEASE/ledger.sqlite $EVID/$RELEASE/ledger_export
+az storage blob upload-batch --account-name $ILR_DATA_ACCOUNT --destination evidence/$RELEASE --source $EVID/$RELEASE --auth-mode login --overwrite
 ```
 
 **F5. The live check, immediately, on every route:**
@@ -197,7 +216,7 @@ python -m prod.publish promote --release $RELEASE --evidence $EVID --account sts
 python -m prod.checks served-gate --evidence $EVID --release $RELEASE --site https://reports.schoolsportsurvey2026.co.uk --sample 40
 ```
 
-This fetches every entry page (headers, bytes, identity) and every chunk of a stratified sample of 40 reports. Any problem: withdraw the affected report at once (`prod.publish withdraw …`), or roll the whole release back (`prod.publish rollback --to <previous>`), before any link is sent. Record the result in the compliance record with the tag, the dataset hash, the index sha256 and the date.
+This fetches every entry page (headers, bytes, identity) and every chunk of a stratified sample of 40 reports. Any problem: withdraw the affected report at once (`prod.publish withdraw … --auth azcli`), or roll the whole release back (`prod.publish rollback --to <previous> --auth azcli`), before any link is sent. Record the result in the compliance record with the tag, the dataset hash, the index sha256 and the date.
 
 Only after F5 passes are the links sent to schools.
 

@@ -32,9 +32,11 @@ School reports are the first family. Local-authority and regional reports follow
 
 **DNS.** The reports live at `reports.schoolsportsurvey2026.co.uk`, a subdomain of the School Sport Survey 2026 website (`schoolsportsurvey2026.co.uk`, owned by Industryline Research). You need access to that domain's DNS to add two records (one TXT for certificate validation, one CNAME to Front Door). Confirm who in Industryline administers the domain's DNS and that they are available on the day.
 
-**Tools on your own computer.** Install the Azure CLI (`az`), AzCopy, and an SSH client. Sign in with `az login` and select the subscription with `az account set --subscription <id>`. All commands below are Azure CLI and work in PowerShell, cmd or bash; long commands are shown with `\` line continuations, which PowerShell users should replace with a backtick or put on one line.
+**Tools on your own computer.** Install the Azure CLI (`az`), AzCopy, Git and an SSH client. Sign in with `az login` and select the subscription with `az account set --subscription <id>`. Clone the repository at the release tag and run every `bash infra/…` command below from inside that clone (`git clone https://github.com/ILRRepoGIT/sss2026-ilr-prototype.git && cd sss2026-ilr-prototype && git checkout v6.0-rc3` — the tag is named in `prod/release_manifest.json`; Alexander tells you if a later tag supersedes it). All commands below are Azure CLI and work in PowerShell, cmd or bash; long commands are shown with `\` line continuations, which PowerShell users should replace with a backtick or put on one line.
 
-**From Alexander.** You will receive (a) the dataset handover zip `SSS2026_pupil_cleansing_handover_v2.3_2026-09-09.zip` (53 MB) — the only file from it that the build reads is `01_cleaned_files/SSS2026_pupil_stage2_full_cleaned.parquet` together with `01_cleaned_files/CLEANED_FILES_SHA256SUMS.txt` — and (b) access to the GitHub repository (`ILRRepoGIT`) at the tagged release the run will use. Do not copy the dataset anywhere other than the private storage account described in step 3; it is pupil-level data.
+**Role assignments take a few minutes to propagate.** Every `az role assignment create` below is followed by a data-plane command that needs it (`--auth-mode login`, AzCopy). If such a command answers `403 AuthorizationPermissionMismatch`, wait two or three minutes and repeat it; nothing needs undoing.
+
+**From Alexander.** You will receive (a) the dataset handover zip `SSS2026_pupil_cleansing_handover_v2.3_2026-09-09.zip` (53 MB) — the build reads three files from it: `01_cleaned_files/SSS2026_pupil_stage2_full_cleaned.parquet` (the pupil dataset), `01_cleaned_files/CLEANED_FILES_SHA256SUMS.txt` (its checksums) and `06_pipeline/plasc2026.xlsx` (the PLASC 2026 school list the recipient register takes school names and phases from) — and (b) access to the GitHub repository (`ILRRepoGIT`) at the tagged release the run will use. Do not copy the dataset anywhere other than the private storage account described in step 3; it is pupil-level data.
 
 ---
 
@@ -54,7 +56,7 @@ Use these names unless your organisation's naming standard requires otherwise; i
 | Front Door endpoint | `sss2026-reports` | Gives `sss2026-reports-<hash>.z01.azurefd.net` until the custom domain is bound |
 | VM | `vm-sss2026-build` | Standard_D64as_v5 (64 vCPU, 256 GiB), Ubuntu 24.04 LTS |
 | Managed identity (VM) | system-assigned | Granted read on the data account, write on the web staging container and the evidence container |
-| Budget | `budget-sss2026-ilr` | Alert at 50 / 80 / 100 % of the agreed monthly amount |
+| Budget | `budget-sss2026-ilr` | Alert at 50 / 80 / 100 % of the agreed monthly amount (recipients added in the portal, step 7) |
 
 Create the two resource groups:
 
@@ -79,12 +81,17 @@ az storage account blob-service-properties update --account-name stsss2026ilrdat
   --enable-versioning true --enable-delete-retention true --delete-retention-days 30 \
   --enable-container-delete-retention true --container-delete-retention-days 30
 
+# containers through the management plane (works with the firewall closed and before any data role exists)
 for c in dataset register evidence ledger; do
-  az storage container create --name $c --account-name stsss2026ilrdata --auth-mode login
+  az storage container-rm create --name $c --storage-account stsss2026ilrdata --resource-group rg-sss2026-ilr
 done
+
+# your own account gets the data role now, so that the upload in 3.1 and the checks below can use --auth-mode login
+az role assignment create --assignee <your user principal name> --role "Storage Blob Data Contributor" \
+  --scope $(az storage account show -n stsss2026ilrdata -g rg-sss2026-ilr --query id -o tsv)
 ```
 
-`--default-action Deny` closes the account to all networks; you will add your own IP for the upload in step 3.1 and the VM's virtual network in step 6. `--allow-shared-key-access false` means nothing can use the account key: every access is by Entra identity, which is what makes the audit trail meaningful.
+Being Owner or Contributor of the subscription does not include reading or writing blobs — those are data actions, which only the `Storage Blob Data …` roles grant — which is why the role is assigned explicitly here and again for the web account in step 5.1. `--default-action Deny` closes the account to all networks; you will add your own IP for the upload in step 3.1 and the VM's virtual network in step 6. `--allow-shared-key-access false` means nothing can use the account key: every access is by Entra identity, which is what makes the audit trail meaningful.
 
 ### 3.1 Upload the dataset
 
@@ -93,13 +100,12 @@ Allow your own public IP temporarily, upload, then remove the rule:
 ```
 MYIP=$(curl -s https://api.ipify.org)
 az storage account network-rule add --account-name stsss2026ilrdata --resource-group rg-sss2026-ilr --ip-address $MYIP
-az role assignment create --assignee <your user principal name> --role "Storage Blob Data Contributor" \
-  --scope $(az storage account show -n stsss2026ilrdata -g rg-sss2026-ilr --query id -o tsv)
 
-# unzip the handover on your machine first; upload only the two files the build reads
+# unzip the handover on your machine first; upload only the three files the build reads
 azcopy login
 azcopy copy "01_cleaned_files/SSS2026_pupil_stage2_full_cleaned.parquet" "https://stsss2026ilrdata.blob.core.windows.net/dataset/"
 azcopy copy "01_cleaned_files/CLEANED_FILES_SHA256SUMS.txt"              "https://stsss2026ilrdata.blob.core.windows.net/dataset/"
+azcopy copy "06_pipeline/plasc2026.xlsx"                                  "https://stsss2026ilrdata.blob.core.windows.net/dataset/"
 
 az storage account network-rule remove --account-name stsss2026ilrdata --resource-group rg-sss2026-ilr --ip-address $MYIP
 ```
@@ -143,6 +149,10 @@ Custody: the report owner (Sport Wales, or Industryline on its behalf) is the cu
 az storage account create --name stsss2026ilrweb --resource-group rg-sss2026-ilr --location uksouth \
   --sku Standard_ZRS --kind StorageV2 --access-tier Hot \
   --min-tls-version TLS1_2 --allow-blob-public-access false --allow-shared-key-access false --https-only true
+
+# your own account's data role on this account too (needed by every --auth-mode login command that follows)
+az role assignment create --assignee <your user principal name> --role "Storage Blob Data Contributor" \
+  --scope $(az storage account show -n stsss2026ilrweb -g rg-sss2026-ilr --query id -o tsv)
 
 az storage blob service-properties update --account-name stsss2026ilrweb --auth-mode login \
   --static-website --index-document index.html --404-document 404.html
@@ -199,17 +209,9 @@ Rule `entry-pages-revalidate` (path begins with `/2026/`): add `Cache-Control: n
 bash infra/afd-ruleset.sh afd-sss2026-ilr rg-sss2026-ilr route-reports sss2026-reports
 ```
 
-### 5.3 Lock the origin to Front Door
+### 5.3 Seed the origin, then lock it to Front Door
 
-With the Private Link connection approved, close the origin's public endpoint to everything except the build VM's subnet (added in step 6):
-
-```
-az storage account update --name stsss2026ilrweb --resource-group rg-sss2026-ilr --default-action Deny
-```
-
-After this, a request straight to the `web.core.windows.net` endpoint from the public internet is refused (403); Front Door reaches the origin privately, and the VM reaches it through its virtual-network rule for uploads. Nothing else can. (Under the Standard-tier variant this step is replaced by `bash infra/afd-origin-ip-rules.sh stsss2026ilrweb rg-sss2026-ilr`, which loads the current Front Door backend ranges into the firewall and should be re-run monthly; another organisation's Front Door could then still reach the origin, though only with a school's unguessable link and without any ability to list what exists — a residual to be risk-accepted in writing if that tier is chosen.)
-
-Upload the two small files the origin needs before Front Door's health probe is switched on:
+First, while the account is still open to your own IP, upload the three small files the origin needs so that Front Door's health probe goes green and a wrong link answers properly from the first minute:
 
 ```
 printf 'ok\n' > health.txt
@@ -218,7 +220,16 @@ az storage blob upload --account-name stsss2026ilrweb --container-name '$web' --
 az storage blob upload --account-name stsss2026ilrweb --container-name '$web' --name robots.txt --file infra/robots.txt --auth-mode login --content-type text/plain
 ```
 
-(`infra/404.html` is a bilingual "report not found" page with no information about what exists; `infra/robots.txt` disallows everything.)
+(`infra/404.html` is a bilingual "report not found" page with no information about what exists; `infra/robots.txt` disallows everything. The publication step re-copies all three from the release, so they never go stale.)
+
+Then, with the Private Link connection approved, close the origin's public endpoint to everything except the build VM's subnet (added in step 6):
+
+```
+az storage account update --name stsss2026ilrweb --resource-group rg-sss2026-ilr --default-action Deny
+```
+
+After this, a request straight to the `web.core.windows.net` endpoint from the public internet is refused (403); Front Door reaches the origin privately, and the VM reaches it through its virtual-network rule for uploads. Nothing else can. (Under the Standard-tier variant this step is replaced by `bash infra/afd-origin-ip-rules.sh stsss2026ilrweb rg-sss2026-ilr`, which loads the current Front Door backend ranges into the firewall and should be re-run monthly; another organisation's Front Door could then still reach the origin, though only with a school's unguessable link and without any ability to list what exists — a residual to be risk-accepted in writing if that tier is chosen.)
+
 
 ### 5.4 Custom domain
 
@@ -290,16 +301,19 @@ az storage account network-rule add --account-name stsss2026ilrweb  --resource-g
 az keyvault network-rule add --name kv-sss2026-ilr --subnet $SUBNET
 ```
 
-The separation of duties the review asks for is expressed here as scopes: the VM can read the dataset but not change it, can write evidence and staging but cannot touch `dataset`, and can write `$web` and purge Front Door only because it is also the publisher in this first release. Before the first publication, the runbook moves the `$web` and purge roles from the VM to a separate publisher identity (a second managed identity or a named person who signs in on the VM, because the storage firewall admits only the VM's subnet), so that a build cannot publish itself; that change is one `az role assignment` per identity and role.
+The separation of duties the review asks for is expressed here as scopes: the VM can read the dataset but not change it, can write evidence and staging but cannot touch `dataset`, and can write `$web` and purge Front Door only because it is also the publisher in this first release. Before the first publication, the runbook (Phase F1) moves the `$web` and purge roles from the VM to a named publisher — a person who runs `az login` as themselves on the VM (the storage firewall admits only the VM's subnet, so the publication commands run there, with `--auth azcli` so that AzCopy uses that person's sign-in rather than the machine's identity); a build then cannot publish itself. The publisher needs three assignments, listed in F1: Storage Blob Data Contributor on `$web`, Storage Blob Data Reader on `staging` (the activation is a server-side copy from `staging`) and CDN Profile Contributor on the Front Door profile (the purge).
 
 ### 6.1 Prepare the VM
 
-SSH in (`ssh ilrbuild@<public ip>`), then run the bootstrap script from the repository, which installs Python 3.11, Node 22, Git, AzCopy, the Azure CLI, Chromium's dependencies for the browser gate, mounts and formats the 1 TB data disk at `/data`, and clones the tagged release:
+SSH in (`ssh ilrbuild@<public ip>`), then run the bootstrap script from the repository, which installs Python 3.11 (the interpreter every prototype lock was produced with; Ubuntu 24.04's own is 3.12, so it comes from the deadsnakes archive), Node 22, Git, AzCopy, the Azure CLI, Playwright's Chromium for the browser gate, mounts and formats the 1 TB data disk at `/data`, and clones the tagged release. The repository is private, so the VM needs a read-only credential to clone it: a GitHub fine-grained token with *Contents: read* on this one repository (created by whoever administers `ILRRepoGIT`; it is used once and can be revoked after the bootstrap), passed in the clone URL and never written to disk or logged:
 
 ```
-curl -fsSL https://raw.githubusercontent.com/<org>/<repo>/<tag>/infra/vm-bootstrap.sh -o vm-bootstrap.sh
-sudo bash vm-bootstrap.sh <tag>
+# copy the script to the VM from your own clone (scp), or paste it — the repository is private, so raw.githubusercontent.com will not serve it
+scp infra/vm-bootstrap.sh ilrbuild@<public ip>:
+sudo ILR_GIT_URL="https://<read-only token>@github.com/ILRRepoGIT/sss2026-ilr-prototype.git" bash vm-bootstrap.sh v6.0-rc3
 ```
+
+`v6.0-rc3` is the release tag this guide was written for (the value in `prod/release_manifest.json`); if Alexander names a later tag, use that. The script accepts the storage, vault and Front Door names as environment variables (`ILR_DATA_ACCOUNT`, `ILR_WEB_ACCOUNT`, `ILR_KEY_VAULT`, `ILR_AFD_PROFILE`, `ILR_AFD_ENDPOINT`, `ILR_RG`) if you changed any of them from section 2, and writes them all to `/etc/profile.d/ilr.sh` so the runbook's commands can use them.
 
 The script ends by printing the sha256 of every file that takes part in a build and comparing them with the release manifest; it stops if any differ. It also runs `az login --identity` and checks that the identity can list the `dataset` container and read the link secret's metadata (not its value). If both checks pass, the machine is ready for the runbook (`docs/production/SSS2026_ILR_Operations_Runbook.md`).
 
@@ -317,6 +331,8 @@ az monitor diagnostic-settings create --name afd-logs --resource $AFD --workspac
 az consumption budget create --budget-name budget-sss2026-ilr --resource-group rg-sss2026-ilr --amount 400 --time-grain Monthly \
   --start-date $(date +%Y-%m-01) --end-date 2027-09-01 --category Cost
 ```
+
+The CLI creates the budget without alert recipients; add the 50 / 80 / 100 % e-mail alerts in the portal (Cost Management → Budgets → `budget-sss2026-ilr` → Edit → Alert conditions) and record the recipient on the hand-back sheet.
 
 Front Door access logs contain the request path, which for a school report is its unguessable link. Treat the Log Analytics workspace as confidential: restrict Reader access to the operations team, keep the 90-day retention, and never paste a logged URL into email or a ticket. Alerts on the budget should go to the service owner named on the hand-back sheet.
 
