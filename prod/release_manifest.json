@@ -1,6 +1,6 @@
 {
- "tag": "v6.0-rc4",
- "releasedAt": "2026-09-22T23:29:10+01:00",
+ "tag": "v6.0-rc5",
+ "releasedAt": "2026-09-22T23:58:46+01:00",
  "pipelineVersion": "0.31.0",
  "prodVersion": "1.0.0",
  "servedSchema": "1",
@@ -9,7 +9,7 @@
  "gateRunner": "pipeline/vendor_welsh_gates_v8.py",
  "gateRunnerSha256": "3057fef25b5d54bd564b0ee86affd3ef34048b4c1598c27eeb86ae3da2bde4fe",
  "fileCount": 138,
- "manifestSha256": "7f1f447d089c669249afd7dd83416cea70e57b0e365d3b9ea767bb92a3ed9b5f",
+ "manifestSha256": "a49bd40043baf64e449a0f3e11e3f99d35d4bbc4bf0f93d140d093d3bd462bfe",
  "files": {
   "pipeline/__init__.py": {
    "sha256": "314698d0f536391fc213f8571e555bc9a7e245d222c454d271133de21f0fc465",
@@ -184,8 +184,8 @@
    "bytes": 101982
   },
   "pipeline/verify_school.py": {
-   "sha256": "e890193921f70aa1babe5fc08027031a0401fa2b983af2322fb1ca9bc86adc3b",
-   "bytes": 7632
+   "sha256": "81acbbb573e89ced868ddabbc51e93ebb2595fd6564c7f5bd43c80954f49c146",
+   "bytes": 8930
   },
   "pipeline/welsh.py": {
    "sha256": "adb6ceb9be7aa6735d714b97f6eecf5fb3a5dbc1c0706e64ee8f63484f791ede",
@@ -236,8 +236,8 @@
    "bytes": 11905
   },
   "web/app.js": {
-   "sha256": "8df73b9b1183dec049aa110e7c18344e8d7b2465a4163707e8c994e8ed88eb07",
-   "bytes": 86171
+   "sha256": "86747187220e72cf513c3f9405f3afc77679b957cf371cf1592472ed5136bc71",
+   "bytes": 88399
   },
   "web/template.html": {
    "sha256": "719b685251d88712168ed2d577071dacb3cb8b48a5e49773435ff22a6c156172",
@@ -248,8 +248,8 @@
    "bytes": 1311
   },
   "prod/checks.py": {
-   "sha256": "b632b028664e805f29f9eed05858e7f5f733cde49a78d1d9746adb471306e54c",
-   "bytes": 20778
+   "sha256": "dc99514852f234f2f8e25fd7b10d87b9cdd308cb57e2f8ee7ff7a86a803be82c",
+   "bytes": 26847
   },
   "prod/chunker.py": {
    "sha256": "19fc2a1b7dc87df948954a37e1c4a564870ec8291e36f6896b50e62cd58db4cd",
@@ -268,8 +268,8 @@
    "bytes": 15821
   },
   "prod/register.py": {
-   "sha256": "7ddd3e52b395b789322f5ce6b04a5951c53fea07ef5d421420c382bdb78c4f08",
-   "bytes": 14401
+   "sha256": "340b2699ba800d4e340f5855730469b5e882bac879134bac9c7d1eacca8c324d",
+   "bytes": 14816
   },
   "prod/release.py": {
    "sha256": "4b0277e2d24adb20462ce52bc1f88991b5d6f7096739062a8d57a832ebf17e9c",
@@ -532,8 +532,8 @@
    "bytes": 9855
   },
   "tests/jsdom/jsdom_school.js": {
-   "sha256": "bfb688ae8011a087d78820270fc53dbc3f9dd1a6ecd93b503574fd01653e8135",
-   "bytes": 10101
+   "sha256": "821dea4a15529bf9ebc3cf8238c0bad7f7b171f8a179dc3bbce7b0918547af15",
+   "bytes": 11322
   },
   "tests/jsdom/jsdom_test.js": {
    "sha256": "4ffec8569610aa7367d8d64d4d96f7c74c8bbcdab8cd25ef0aa00872d345ca35",
