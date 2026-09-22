@@ -1,7 +1,7 @@
 {
- "version": "v2.13",
- "framework_sha256": "f0deba39abd824877529f7ad66a57f844be94f0a47837a618b1982593d199ebc",
- "framework_file": "01_Framework_v2.13.xlsx",
+ "version": "v2.14",
+ "framework_sha256": "7def40bcffe9b0609d7afdc3866854eaa12e48f57fe08353d8c5fefa753e0232",
+ "framework_file": "01_Framework_v2.14.xlsx",
  "audiences": {
   "Generated from sheet 18 by rule. Note the two divergences from English that recur in every row: (1) after a numeral with the article Welsh uses the SINGULAR head (y 12 disgybl, not y 12 ddisgyblion); (2) the scope phrase is locative and triggers the nasal mutation (ym Mlwyddyn 8). The HOLL column is the parent-audience form ('all Year 8 pupils').": {
    "bare": "",
@@ -4439,6 +4439,11 @@
    "en": "Try again",
    "cy": "",
    "slots": "—"
+  },
+  "ui.overview_note_gap": {
+   "en": "Year groups from Year {first} to Year {last} are represented. {hi} contributed the largest number of responses ({hin}) and {lo} the smallest ({lon}). Every response option is shown, including those selected by no pupils. Unequal group sizes should be kept in mind when comparing raw counts.",
+   "cy": "",
+   "slots": "hi, hin, lo, lon, first, last"
   }
  },
  "separators": {

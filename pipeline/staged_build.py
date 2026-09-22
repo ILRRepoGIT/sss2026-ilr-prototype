@@ -360,6 +360,8 @@ def do_assemble(xlsx, wd):
             "id": profile["schoolId"], "name": profile["schoolName"],
             "localAuthority": profile["localAuthority"],
             "profile": profile["profileId"], "years": profile["availableYears"],
+            # V6.0 (EN-11): true when a year inside the profile's range is not taught/answered
+            "yearsGap": profile["availableYears"] != list(range(profile["availableYears"][0], profile["availableYears"][-1] + 1)),
             "surveyYear": profile["surveyYear"], "type": profile["schoolType"],
             "regionalSportPartnership": profile.get(
                 "regionalSportPartnership", "To be confirmed"),

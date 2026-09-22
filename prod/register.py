@@ -5,7 +5,7 @@ deployment plan §4.2). One row per school in the dataset; the build starts
 from this register and must finish with exactly the eligible rows built.
 
     python -m prod.register build <stage2.parquet> <out_dir> [--plasc <plasc2026.xlsx>] \\
-                                  [--min-responses 5] [--framework config/01_Framework_v2.13.xlsx]
+                                  [--min-responses 5] [--framework config/01_Framework_v2.14.xlsx]
     python -m prod.register profile <register.json> <school_id> <out.json> --release <tag>
 
 `build` writes register.json and register.csv (the same rows), a summary
@@ -22,16 +22,17 @@ the dataset / PLASC or derived by a stated rule:
                 map one-to-one onto the five Regional Sport Partnerships
                 named on sheet 53 (validated against the V5.1 profiles)
   years         the year groups with at least one accepted response, sorted;
-                a gap inside the range is a HOLD (the ui.overview_note frame
-                states every year from first to last is represented)
+                a gap inside the range is recorded (years_gap) and the report
+                takes the EN-11 overview sentence (Framework v2.14)
   phase         primary if every year <= 6, secondary if every year >= 7,
                 combined otherwise (the profile family of the prototype)
   eligible      n >= min_responses (the view-level rule of five: a whole-
                 school view under five is suppressed, so there is no report)
                 and no hold; the status column names the reason otherwise
 
-Statuses: eligible · no_report_below_threshold · held_profile_gap ·
-held_la_name_cy (only when --hold-missing-la-cy). Special schools are built
+Statuses: eligible · no_report_below_threshold · held_no_year ·
+held_la_name_cy (the default for the four authorities without a sheet-53
+row — owner decision 22 Sep 2026, option A; --allow-missing-la-cy overrides). Special schools are built
 under the profile family their years imply and flagged (special=true) for
 Sport Wales's profile-matrix decision.
 """
@@ -166,10 +167,6 @@ def build(parquet: Path, out_dir: Path, plasc: Path | None, framework: Path, min
             status, reason = "no_report_below_threshold", f"{n} accepted responses; a whole-school view under {min_responses} is suppressed"
         elif not years:
             status, reason = "held_no_year", "no accepted response carries a year group"
-        elif gap:
-            missing = [y for y in range(years[0], years[-1] + 1) if y not in years]
-            status, reason = "held_profile_gap", (f"no accepted response in Year {', '.join(map(str, missing))} inside the range "
-                                                  f"{years[0]}–{years[-1]}; ui.overview_note/ui.faq_included state every year from first to last is represented")
         elif hold_missing_la_cy and not la_cy:
             status, reason = "held_la_name_cy", f"Framework sheet 53 has no Welsh row for the local authority spelling '{la}'"
         fam, groups, stages = scope_groups(years) if years else ("primary", [], "")
@@ -254,15 +251,16 @@ def main(argv=None):
     sub = ap.add_subparsers(dest="cmd", required=True)
     b = sub.add_parser("build"); b.add_argument("parquet"); b.add_argument("out_dir")
     b.add_argument("--plasc"); b.add_argument("--min-responses", type=int, default=5)
-    b.add_argument("--framework", default="config/01_Framework_v2.13.xlsx")
-    b.add_argument("--hold-missing-la-cy", action="store_true")
+    b.add_argument("--framework", default="config/01_Framework_v2.14.xlsx")
+    b.add_argument("--allow-missing-la-cy", action="store_true",
+                   help="build schools whose authority has no Welsh row on sheet 53 (default: HELD — owner decision 22 Sep 2026, option A)")
     p = sub.add_parser("profile"); p.add_argument("register"); p.add_argument("school_id"); p.add_argument("out")
     p.add_argument("--release", required=True); p.add_argument("--dataset-sha256", required=True)
     p.add_argument("--dataset-file", default="SSS2026_pupil_stage2_full_cleaned.parquet")
     a = ap.parse_args(argv)
     if a.cmd == "build":
         s = build(Path(a.parquet), Path(a.out_dir), Path(a.plasc) if a.plasc else None, Path(a.framework),
-                  a.min_responses, a.hold_missing_la_cy)
+                  a.min_responses, not a.allow_missing_la_cy)
         print(json.dumps(s, ensure_ascii=False, indent=1))
     else:
         reg = json.loads(Path(a.register).read_text(encoding="utf-8"))

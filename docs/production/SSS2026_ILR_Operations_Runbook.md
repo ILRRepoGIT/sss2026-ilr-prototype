@@ -38,7 +38,7 @@ python -m prod.register build $DATASET /data/ilr/private/register --plasc /data/
 cat /data/ilr/private/register/register_summary.json
 ```
 
-On the 22 September dataset this gives 1,016 schools: 935 eligible, 23 below the rule-of-five threshold (no report), 58 held for a year-group gap (see "What stays with humans"). Upload the three register files to the `register` container so the universe is on record before anything is built:
+On the 22 September dataset this gives 1,016 schools: 786 eligible, 23 below the rule-of-five threshold (no report), 207 held until the translator's four sheet-53 local-authority rows exist (`held_la_name_cy`; re-run `register build` after the rows are in the framework and the runner picks them up under the same tag). Upload the three register files to the `register` container so the universe is on record before anything is built:
 
 ```
 az storage blob upload-batch --account-name $ILR_DATA_ACCOUNT --destination register/$RELEASE --source /data/ilr/private/register --auth-mode login
@@ -62,7 +62,7 @@ python -m prod.runner run --release $RELEASE --register /data/ilr/private/regist
    --out $OUT --evidence $EVID --work $WORK --concurrency 3 --schools 6782320,6644017,6675500 \
    --key-vault $ILR_KEY_VAULT --jsdom $JSDOM \
    --previous-locks /data/ilr/private/v53_locks \
-   --lock-ruling "production release $RELEASE asserted against the V5.3 lock: client, template and Framework v2.13 changes only; corpus unchanged"
+   --lock-ruling "production release $RELEASE asserted against the V5.3 lock: client, template and Framework v2.14 changes only; corpus unchanged"
 ```
 
 Expected: three lines `built … (69/72, mode dev)` and, in each job's evidence (`$EVID/$RELEASE/<slug>/validation-summary.txt` and `job.log`), the note "0 of N states moved from the previous lock". If a state moved, stop: the machine does not reproduce V5.1 and the difference must be explained before anything else is built (Python or Node version, a dependency, the dataset).
@@ -213,4 +213,4 @@ Token compromise: create `sss2026-link-key-v2` in Key Vault, run the full run un
 
 ## What stays with humans (and blocks a release-mode publication)
 
-The translator: the sixteen frames pending since V4.16/V4.17 (fourteen artwork alt texts, the accessibility switch description, the glossary heading), the three loading-mask frames added in V6.0, the four sheet-22 qualifier rows from V5.0, and — new with the full register — the four local-authority spellings the dataset uses that have no row on sheet 53 (Carmarthenshire, Conwy, Rhondda Cynon Taf, The Vale of Glamorgan: 211 schools would otherwise show the English authority name in Welsh mode). The report owner: the signed D69; EN-08 (one-pupil forms); a wording for schools whose responded year groups have a gap (58 schools are held under `held_profile_gap` because the locked overview frame says every year from the first to the last is represented); confirmation of the three English loading-mask strings; the profile-matrix decision on the 16 special schools (built under the family their years imply, flagged `special`). Decided on 22 Sep 2026: schools with 5–13 responses receive a report. Sport Wales: the partial-response base-line wording, the artwork credit line, the regional sport partnership names (derived from the survey region), the FSM band and teacher-survey fields (still "To be confirmed"), and the O09/O10 disclosure sign-off the reports have carried since Prototype 3.
+The translator: the sixteen frames pending since V4.16/V4.17 (fourteen artwork alt texts, the accessibility switch description, the glossary heading), the three loading-mask frames added in V6.0, the four sheet-22 qualifier rows from V5.0, the Welsh of the gap-year variant (`ui.overview_note_gap`), and — option A, decided 22 Sep 2026 — the four local-authority rows on sheet 53 in the dataset's spelling (Carmarthenshire, Conwy, Rhondda Cynon Taf, The Vale of Glamorgan): 207 eligible schools stay held until they exist. The report owner: the signed D69; EN-08 (one-pupil forms); a wording for schools whose responded year groups have a gap (the gap-year schools take EN-11 — decided 22 Sep 2026); confirmation of the three English loading-mask strings; the profile-matrix decision on the 16 special schools (built under the family their years imply, flagged `special`). Decided on 22 Sep 2026: schools with 5–13 responses receive a report. Sport Wales: the partial-response base-line wording, the artwork credit line, the regional sport partnership names (derived from the survey region), the FSM band and teacher-survey fields (still "To be confirmed"), and the O09/O10 disclosure sign-off the reports have carried since Prototype 3.

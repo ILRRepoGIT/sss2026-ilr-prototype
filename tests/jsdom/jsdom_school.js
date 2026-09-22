@@ -31,7 +31,11 @@ ok(d.title.indexOf(SCHOOL) > -1 && txt("#cover-school") === SCHOOL, "school name
 ok(txt("#h1-view").startsWith("You are viewing:") && new RegExp("\\b" + N + "\\b").test(txt("#h1-view")), "en banner with the accepted count", txt("#h1-view").slice(0, 80));
 ok(txt("#intro-sentence").indexOf(SCHOOL) > -1 && txt("#intro-sentence").indexOf("Years " + FIRST + " to " + LAST) > -1, "intro sentence: school, year range", txt("#intro-sentence"));
 ok(txt("#faq-included").indexOf("Pupils in Years " + FIRST + " to " + LAST + " at " + SCHOOL) === 0, "FAQ 'who is included' carries the school's year range (EN-07)", txt("#faq-included").slice(0, 90));
-ok(txt("#overview-note").indexOf("All year groups from Year " + FIRST + " to Year " + LAST + " are represented.") === 0, "overview note carries the school's year range (EN-06)", txt("#overview-note").slice(0, 90));
+// V6.0 (EN-11): a school with a year group inside its range that has no accepted
+// response takes the variant without "All" (Framework v2.14, ui.overview_note_gap)
+const GAP = !!D.school.yearsGap;
+const OVERVIEW_EN = (GAP ? "Year groups from Year " : "All year groups from Year ") + FIRST + " to Year " + LAST + " are represented.";
+ok(txt("#overview-note").indexOf(OVERVIEW_EN) === 0, "overview note carries the school's year range (EN-06" + (GAP ? "/EN-11 gap variant" : "") + ")", txt("#overview-note").slice(0, 90));
 ok(!/\{(first|last|school|n|hi|lo|hin|lon)\}/.test(visible()), "no unresolved frame slot in the page");
 ok(txt("#overview-table").indexOf(D.school.localAuthority) > -1 && txt("#overview-table").indexOf(D.school.regionalSportPartnership) > -1 && txt("#overview-table").indexOf(D.school.schoolStages) > -1, "profile table: authority, partnership, stages", txt("#overview-table").slice(0, 200));
 const scopeOpts = Array.from(d.querySelectorAll("#f-scope option")).map(o => o.value);
@@ -59,7 +63,16 @@ ok(d.documentElement.lang === "cy", "html lang cy");
 ok(txt("#h1-view").startsWith("Rydych chi’n gweld:") && /ymateb disgybl wedi’u cynnwys/.test(txt("#h1-view")), "cy banner frame", txt("#h1-view").slice(0, 80));
 ok(txt("#intro-sentence").indexOf("Mae’r adroddiad hwn yn cyflwyno") === 0 && txt("#intro-sentence").indexOf(String(N)) > -1 && txt("#intro-sentence").indexOf("Flynyddoedd " + FIRST + " i " + LAST) > -1, "cy intro sentence with the school's slots", txt("#intro-sentence"));
 ok(txt("#faq-included").indexOf("Disgyblion ym Mlynyddoedd " + FIRST + " i " + LAST + " yn " + SCHOOL) === 0, "cy FAQ sentence with the school's year range (EN-07)", txt("#faq-included").slice(0, 90));
-ok(txt("#overview-note").indexOf("Mae’r holl grwpiau blwyddyn rhwng Blwyddyn " + FIRST + " a Blwyddyn " + LAST + " yn cael eu cynrychioli.") === 0, "cy overview note with the school's year range (EN-06)", txt("#overview-note").slice(0, 100));
+if (!GAP) {
+  ok(txt("#overview-note").indexOf("Mae’r holl grwpiau blwyddyn rhwng Blwyddyn " + FIRST + " a Blwyddyn " + LAST + " yn cael eu cynrychioli.") === 0, "cy overview note with the school's year range (EN-06)", txt("#overview-note").slice(0, 100));
+} else {
+  // the variant's Welsh is the translator's: until returned the English shows under the pending marking
+  const gapCy = (D.welsh.frames["ui.overview_note_gap"] || {}).cy;
+  const t = txt("#overview-note");
+  ok(gapCy ? (t.indexOf("Blwyddyn " + FIRST) > -1 && t.indexOf("Blwyddyn " + LAST) > -1)
+           : (t.indexOf(OVERVIEW_EN) === 0 && d.getElementById("overview-note").classList.contains("cy-missing")),
+     "cy overview note: gap variant (translator's Welsh, or marked-English pending)", t.slice(0, 100));
+}
 ok(!/\{(first|last|school|n|hi|lo|hin|lon)\}/.test(visible()), "cy: no unresolved frame slot");
 const NAMES = D.welsh.names || {};
 ok(txt("#overview-table").indexOf("Enw’r Ysgol") > -1 && txt("#overview-table").indexOf(NAMES[D.school.localAuthority] || D.school.localAuthority) > -1 && txt("#overview-table").indexOf(NAMES[D.school.regionalSportPartnership] || D.school.regionalSportPartnership) > -1, "cy profile headings and proper names (sheet 53)", txt("#overview-table").slice(0, 200));

@@ -1345,7 +1345,10 @@ function renderProfile() {
   const hi = yPairs.reduce((a, b) => (b[1] || 0) > (a[1] || 0) ? b : a);
   const lo = yPairs.reduce((a, b) => (b[1] || 0) < (a[1] || 0) ? b : a);
   const yLabel = en => { const o = DATA.filterOptions.scope.find(x => x.label === en); return (isCy() && o && o.labelCy) ? o.labelCy : en; };
-  setFrame($("#overview-note"), "ui.overview_note",
+  // V6.0 (EN-11, owner decision 22 Sep 2026): a school with a year group inside
+  // its range that has no accepted response takes the variant frame (the same
+  // sentence without "All"); the pipeline sets school.yearsGap from the profile
+  setFrame($("#overview-note"), sc.yearsGap ? "ui.overview_note_gap" : "ui.overview_note",
     { hi: yLabel(hi[0]), hin: hi[1], lo: yLabel(lo[0]), lon: lo[1],
       first: sc.years[0], last: sc.years[sc.years.length - 1] });   // v6 (EN-06)
   renderProfileExtra(w);

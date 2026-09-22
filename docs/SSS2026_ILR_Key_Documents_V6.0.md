@@ -27,10 +27,13 @@ PLASC January 2026 — 1,016 schools with a matched school id (121,881 accepted 
 no reference school and get no report). Official names from PLASC for 1,013 schools; local-authority
 Welsh names from Framework sheet 53; the Regional Sport Partnership from the survey region (the five
 regions map one-to-one onto the five partnerships on sheet 53; the three V5.3 profiles are
-reproduced exactly). Status on the 22 September data: **935 eligible**, 23 below the rule-of-five
-threshold (`no_report_below_threshold`), **58 held** (`held_profile_gap`: a year group with no
-accepted response inside the school's range — the locked frame `ui.overview_note` says "All year
-groups from Year {first} to Year {last} are represented", which would be untrue). Sixteen special
+reproduced exactly). Status on the 22 September data after the owner's decisions: **786 eligible**, 23 below the rule-of-five
+threshold (`no_report_below_threshold`), **207 held** (`held_la_name_cy`: the four authorities whose dataset
+spelling has no Welsh row on Framework sheet 53 — option A, the translator's rows, then built under the same
+tag). The 58 schools with a year group inside their range that has no accepted response are eligible: EN-11
+(owner, 22 Sep 2026) gives them the overview sentence without "All" (`ui.overview_note_gap`, Framework v2.14),
+and Crickhowell High School (Years 7, 8, 10, 11; 244 responses) was built through the runner as the test —
+8,064 states, every check clean. Sixteen special
 schools are built under the family their years imply and flagged. The per-school profile the pipeline
 reads is generated from the register row (`profile_for`); for the three real schools it is identical
 to the hand-written V5.3 profile, field for field (the report-version field aside).
@@ -50,7 +53,8 @@ late response from an earlier selection is discarded; nothing — no label, no f
 every needed chunk has verified; on failure a bilingual, retryable message is shown over a masked
 page and printing is disabled. On the monolithic assurance copy (no chunk map) the client behaves
 exactly as before. Three sheet-43 frames were added for the mask (`ui.loading_view`, `ui.load_error`,
-`ui.retry`; Framework v2.13 from v2.12, English by Industryline, Welsh pending the translator). The chunk
+`ui.retry`; Framework v2.13 from v2.12) and one for the gap-year overview sentence (`ui.overview_note_gap`,
+Framework v2.14, EN-11) — English by Industryline under the owner's instruction, Welsh pending the translator. The chunk
 verifier proves, for every school, that the chunks reconstruct the monolith's states key by key and
 byte by byte (canonical JSON); the real-Chromium probe (`tests/browser/chunked_probe.py`) proves the
 client's behaviour under the production Content-Security-Policy, with a failed request, a truncated
@@ -128,13 +132,12 @@ probe 11/11 in real Chromium under the production CSP.
 
 ## 5. What stays with humans
 
-The translator: the sixteen frames pending since V4.16/V4.17, the three loading-mask frames, the four
-sheet-22 qualifier rows from V5.0, and **four local-authority rows on sheet 53 in the dataset's
-spelling** (Carmarthenshire, Conwy, Rhondda Cynon Taf, The Vale of Glamorgan — 211 schools; the
-client shows the English authority name silently in Welsh mode without them). The owner: the signed
-D69; EN-08; **a wording for the 58 schools with a year-group gap** (a sheet-43 frame variant, or a
-rule that such schools state their year groups as a list); confirmation of the three English mask
-strings; the profile matrix for special schools; (schools with 5–13 responses receive a report — owner decision, 22 Sep 2026). Sport Wales: partial-response wording, the artwork credit, the
+The translator: the two frames pending since V4.17 (`ui.a11y_switch_desc`, `ui.a11y_glossary_heading`), the three
+loading-mask frames and the gap-year variant (`ui.overview_note_gap`), the four sheet-22 qualifier rows from V5.0, and
+**four local-authority rows on sheet 53 in the dataset's spelling** (Carmarthenshire, Conwy, Rhondda Cynon Taf, The
+Vale of Glamorgan — option A, owner 22 Sep 2026; 207 eligible schools are held until the rows exist). The owner: the
+signed D69; EN-08; the profile matrix for special schools. Decided 22 Sep 2026: schools with 5–13 responses receive
+a report; gap-year schools take EN-11. Sport Wales: partial-response wording, the artwork credit, the
 partnership names, the FSM and teacher-survey fields, the O09/O10 sign-off. Operations: the Azure
 subscription, quota, DNS and the custodian of the link key; the pilot's linguist sample and print
 checks; the two approvers of the publication index.
