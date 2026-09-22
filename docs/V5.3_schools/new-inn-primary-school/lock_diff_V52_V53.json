@@ -1,0 +1,128 @@
+{
+ "from": "V5.2 (Framework v2.11)",
+ "to": "V5.3 (Framework v2.12 — Welsh alt frames)",
+ "ruling": "V5.3 re-emission for new-inn-primary-school: Framework v2.12 (Welsh for the fourteen Young Artists Competition alt frames, supplied by the owner 22 Sep 2026), pipeline 0.30.0, the V4.18 template — no state moved (asserted against the V5.2 lock)",
+ "oldIdentity": {
+  "reportVersion": "2026-school-V5.2-bilingual"
+ },
+ "newIdentity": {
+  "reportVersion": "2026-school-V5.3-bilingual"
+ },
+ "states": {
+  "oldStates": 7884,
+  "newStates": 7884,
+  "removedStates": 0,
+  "removedStateKeys": [],
+  "removedCohorts": [],
+  "addedStates": 0,
+  "addedStateKeys": [],
+  "commonStatesIdentical": 7884,
+  "moduleChanges": {},
+  "moduleChangesByCohort": {},
+  "changedModuleExamples": {},
+  "otherFieldDiffs": []
+ },
+ "parts": {
+  "anyActivity": "equal",
+  "buildMetadata": {
+   "gateResults": {
+    "removed": [],
+    "added": [],
+    "changed": [
+     "baselineSha256",
+     "evidenceSha256"
+    ]
+   },
+   "generatedAt": {
+    "old": "2026-09-22T17:34:46+00:00",
+    "new": "2026-09-22T18:27:45+00:00"
+   },
+   "identity": {
+    "removed": [],
+    "added": [],
+    "changed": [
+     "frameworkFile",
+     "frameworkSha256",
+     "frameworkVersion"
+    ]
+   },
+   "welshFramework": {
+    "old": "v2.11",
+    "new": "v2.12"
+   },
+   "welshFrameworkFile": {
+    "old": "01_Framework_v2.11.xlsx",
+    "new": "01_Framework_v2.12.xlsx"
+   },
+   "welshFrameworkSha256": {
+    "old": "819901480b245dddba0cac8c9750a25d5d75cbda7ac8bfcb4208e750dc1101af",
+    "new": "19655542a70a59ae04c324d5da87be11d2e4dc31df1d2a1a2c5e2a69c019a7a0"
+   }
+  },
+  "cohorts": "equal",
+  "filterOptions": "equal",
+  "messages": "equal",
+  "metricDefs": "equal",
+  "moduleLabels": "equal",
+  "participationVariation": "equal",
+  "reportVersion": "changed",
+  "schemaVersion": "equal",
+  "school": "equal",
+  "tier2Codes": "equal",
+  "welsh": {
+   "frames": {
+    "removed": [],
+    "added": [],
+    "changed": [
+     "ui.alt_yac_balls",
+     "ui.alt_yac_basketball",
+     "ui.alt_yac_cricket",
+     "ui.alt_yac_cyclist",
+     "ui.alt_yac_dragon_football",
+     "ui.alt_yac_dragon_kit",
+     "ui.alt_yac_dragon_wales",
+     "ui.alt_yac_football_splash",
+     "ui.alt_yac_footballer",
+     "ui.alt_yac_gymnastics",
+     "ui.alt_yac_heart",
+     "ui.alt_yac_horse",
+     "ui.alt_yac_tennis_football",
+     "ui.alt_yac_welsh_symbols"
+    ]
+   }
+  }
+ },
+ "locks": {
+  "english": {
+   "oldStates": 7884,
+   "newStates": 7884,
+   "removed": [],
+   "added": [],
+   "moved": 0,
+   "movedByCohortPrefix": {},
+   "movedKeys": []
+  },
+  "welsh": {
+   "oldStates": 7885,
+   "newStates": 7885,
+   "removed": [],
+   "added": [],
+   "moved": 0,
+   "movedByCohortPrefix": {},
+   "movedKeys": []
+  },
+  "ft11": {
+   "old": 483,
+   "new": 483,
+   "removed": [],
+   "added": []
+  },
+  "newLockEmitted": {
+   "from": "build QA (pipeline/welsh_gates8.emit_lock)",
+   "ruling": "V5.3 re-emission for new-inn-primary-school: Framework v2.12 (Welsh for the fourteen Young Artists Competition alt frames, supplied by the owner 22 Sep 2026), pipeline 0.30.0, the V4.18 template — no state moved (asserted against the V5.2 lock)",
+   "supersedes": "lock_new-inn-primary-school_v8.json",
+   "welshStatesMoved": 0,
+   "englishStatesMoved": 0
+  }
+ }
+}

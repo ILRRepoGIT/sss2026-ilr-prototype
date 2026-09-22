@@ -1,0 +1,5 @@
+| School | Type / years | Responses (accepted) | States (visible) | Paragraphs | QA stamp | Reruns dev · release · paths | Lock = baseline | Figures verified | jsdom | Provenance EN/CY/typo | A4 pages EN/CY | Report (bytes, sha256) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| New Inn Primary School (Torfaen) | primary, Years 3–6 | 272 of 272 (251 complete, 21 partial) | 7884 (3942) | 135,400 | 69/72, paths 17/18 | 71/72 · 72/75 · 17/18 | yes | yes | 40/40 | 0 / 0 / 0 | 59 / 62 | 93,271,247 · b2527698cbcaa612… |
+| Castell Alun High School (Flintshire) | secondary, Years 7–11 | 771 of 771 (747 complete, 24 partial) | 8244 (4809) | 181,343 | 69/72, paths 17/18 | 71/72 · 72/75 · 17/18 | yes | yes | 40/40 | 0 / 0 / 0 | 62 / 65 | 123,204,742 · 5ad34559f6b2e604… |
+| Ysgol Bro Pedr (Ceredigion) | combined, Years 3–11 | 439 of 439 (396 complete, 43 partial) | 8208 (8208) | 255,872 | 69/72, paths 17/18 | 71/72 · 72/75 · 17/18 | yes | yes | 40/40 | 0 / 0 / 0 | 62 / 64 | 172,004,615 · c234413fe2c7c359… |

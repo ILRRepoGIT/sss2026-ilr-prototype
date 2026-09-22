@@ -31,6 +31,14 @@ def page_html(wd: Path) -> str:
     html = html.replace("/*__APP_JS__*/", app.replace("</", "<\\/"))
     # v6: the school named in the payload (any build), never a fixed name
     html = html.replace("__SCHOOL_NAME__", json.loads(data)["school"]["name"])
+    # V5.3: with SSS_YAC_DIR set, the artwork is embedded exactly as build_html does
+    # it, so the probe page renders the pictures (not their alt text in their
+    # place) and its page counts are comparable with the shipped report's
+    import os
+    yac = os.environ.get("SSS_YAC_DIR")
+    if yac:
+        from pipeline.yac_assets import embed_all
+        html, _sizes = embed_all(html, Path(yac))
     return html
 
 
@@ -61,6 +69,10 @@ def main():
                        bodyFont: getComputedStyle(document.body).fontFamily,
                        bodySize: getComputedStyle(document.body).fontSize,
                        meta: b ? [b.left + scrollX, b.top + scrollY, b.right + scrollX, b.bottom + scrollY] : null } }""")
+            # V5.3: the pictures — loaded or not, and the alt each carries in this language
+            meta["images"] = pg.evaluate("""() => Array.from(document.querySelectorAll('img[data-frame-attr]')).map(i => ({
+              key: i.getAttribute('data-frame-attr').split(':')[1].trim(), alt: i.getAttribute('alt'),
+              loaded: i.complete && i.naturalWidth > 0 }))""")
             pdf = out / f"{lang}.pdf"
             pg.emulate_media(media="print")
             pg.pdf(path=str(pdf), format="A4", print_background=True, prefer_css_page_size=True)

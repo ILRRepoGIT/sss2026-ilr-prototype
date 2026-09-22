@@ -1,0 +1,174 @@
+{
+ "en": {
+  "h": 33271,
+  "cls": "",
+  "bodyFont": "Montserrat, Arial, sans-serif",
+  "bodySize": "16px",
+  "meta": [
+   49,
+   33030.171875,
+   913,
+   33249.15625
+  ],
+  "images": [
+   {
+    "key": "ui.alt_yac_dragon_kit",
+    "alt": "Young Artists Competition drawing: a red dragon in a white Wales shirt numbered 11, holding a rugby ball, with one foot on a football and a leek in its tail",
+    "loaded": true
+   },
+   {
+    "key": "ui.alt_yac_welsh_symbols",
+    "alt": "Young Artists Competition drawing: symbols of Wales and sport together \u2014 a daffodil, a football, a cricket bat and ball, a red dragon, a rugby ball and a leek",
+    "loaded": true
+   },
+   {
+    "key": "ui.alt_yac_balls",
+    "alt": "Young Artists Competition drawing: a row of four balls \u2014 a red cricket ball, a black ball with white spots, an orange basketball and a black eight-ball",
+    "loaded": true
+   },
+   {
+    "key": "ui.alt_yac_dragon_wales",
+    "alt": "Young Artists Competition drawing: a red Welsh dragon with the word WALES in green letters across it",
+    "loaded": true
+   },
+   {
+    "key": "ui.alt_yac_gymnastics",
+    "alt": "Young Artists Competition drawing: a gymnastics club \u2014 one gymnast leaping above a balance beam, another hanging from a high bar, beside a stack of coloured rings",
+    "loaded": true
+   },
+   {
+    "key": "ui.alt_yac_football_splash",
+    "alt": "Young Artists Competition drawing: a football with red and green panels bursting out of a splash of red and green paint",
+    "loaded": true
+   },
+   {
+    "key": "ui.alt_yac_basketball",
+    "alt": "Young Artists Competition drawing: a basketball player with a ponytail, in a red vest and black shorts, leaping to shoot a basketball framed by a red starburst",
+    "loaded": true
+   },
+   {
+    "key": "ui.alt_yac_cyclist",
+    "alt": "Young Artists Competition drawing: a mountain biker in a helmet leaning low over a pink bike as it goes over a jump, against a blue watercolour splash",
+    "loaded": true
+   },
+   {
+    "key": "ui.alt_yac_heart",
+    "alt": "Young Artists Competition drawing: a red heart holding four scenes of a red dragon playing football, rugby, gymnastics and cricket",
+    "loaded": true
+   },
+   {
+    "key": "ui.alt_yac_horse",
+    "alt": "Young Artists Competition drawing: a rider in a red jacket and black helmet jumping a brown horse",
+    "loaded": true
+   },
+   {
+    "key": "ui.alt_yac_cricket",
+    "alt": "Young Artists Competition drawing: a cricketer in a helmet, gloves and pads, swinging a bat at a red ball",
+    "loaded": true
+   },
+   {
+    "key": "ui.alt_yac_dragon_football",
+    "alt": "Young Artists Competition drawing: a smiling red dragon with cream wings, standing beside a football",
+    "loaded": true
+   },
+   {
+    "key": "ui.alt_yac_tennis_football",
+    "alt": "Young Artists Competition drawing: a football above a bright green tennis ball",
+    "loaded": true
+   },
+   {
+    "key": "ui.alt_yac_footballer",
+    "alt": "Young Artists Competition drawing: a footballer with long fair hair, in a blue number 7 shirt, white shorts and pink boots, kicking a football",
+    "loaded": true
+   }
+  ],
+  "pdfPages": 62,
+  "pdfBytes": 6267274
+ },
+ "cy": {
+  "h": 34381,
+  "cls": "",
+  "bodyFont": "Montserrat, Arial, sans-serif",
+  "bodySize": "16px",
+  "meta": [
+   49,
+   34140.578125,
+   913,
+   34359.5625
+  ],
+  "images": [
+   {
+    "key": "ui.alt_yac_dragon_kit",
+    "alt": "Darlun o\u2019r Gystadleuaeth Artistiaid Ifanc: draig goch yn gwisgo crys gwyn Cymru \u00e2\u2019r rhif 11 arno, yn dal p\u00eal rygbi, gydag un droed ar b\u00eal droed a chenhinen yn ei chynffon",
+    "loaded": true
+   },
+   {
+    "key": "ui.alt_yac_welsh_symbols",
+    "alt": "Darlun o\u2019r Gystadleuaeth Artistiaid Ifanc: symbolau Cymru a chwaraeon gyda\u2019i gilydd \u2014 cenhinen Bedr, p\u00eal droed, bat a ph\u00eal griced, draig goch, p\u00eal rygbi a chenhinen",
+    "loaded": true
+   },
+   {
+    "key": "ui.alt_yac_balls",
+    "alt": "Darlun o\u2019r Gystadleuaeth Artistiaid Ifanc: rhes o bedair p\u00eal \u2014 p\u00eal griced goch, p\u00eal ddu \u00e2 smotiau gwyn, p\u00eal fasged oren a ph\u00eal ddu \u00e2\u2019r rhif wyth arni",
+    "loaded": true
+   },
+   {
+    "key": "ui.alt_yac_dragon_wales",
+    "alt": "Darlun o\u2019r Gystadleuaeth Artistiaid Ifanc: draig goch Gymreig gyda\u2019r gair WALES mewn llythrennau gwyrdd ar ei thraws",
+    "loaded": true
+   },
+   {
+    "key": "ui.alt_yac_gymnastics",
+    "alt": "Darlun o\u2019r Gystadleuaeth Artistiaid Ifanc: clwb gymnasteg \u2014 un gymnastwr yn neidio uwchben trawst cydbwysedd, un arall yn hongian o far uchel, wrth ymyl pentwr o gylchoedd lliwgar",
+    "loaded": true
+   },
+   {
+    "key": "ui.alt_yac_football_splash",
+    "alt": "Darlun o\u2019r Gystadleuaeth Artistiaid Ifanc: p\u00eal droed \u00e2 phaneli coch a gwyrdd yn ffrwydro allan o dasgiad o baent coch a gwyrdd",
+    "loaded": true
+   },
+   {
+    "key": "ui.alt_yac_basketball",
+    "alt": "Darlun o\u2019r Gystadleuaeth Artistiaid Ifanc: chwaraewr p\u00eal fasged \u00e2 chynffon ferlen, mewn fest goch a siorts du, yn neidio i daflu p\u00eal fasged wedi\u2019i fframio gan ffrwydrad coch si\u00e2p seren",
+    "loaded": true
+   },
+   {
+    "key": "ui.alt_yac_cyclist",
+    "alt": "Darlun o\u2019r Gystadleuaeth Artistiaid Ifanc: beiciwr mynydd mewn helmed, yn plygu\u2019n isel dros feic pinc wrth fynd dros naid, yn erbyn tasgiad glas o ddyfrlliw",
+    "loaded": true
+   },
+   {
+    "key": "ui.alt_yac_heart",
+    "alt": "Darlun o\u2019r Gystadleuaeth Artistiaid Ifanc: calon goch sy\u2019n cynnwys pedair golygfa o ddraig goch yn cymryd rhan mewn p\u00eal droed, rygbi, gymnasteg a chriced",
+    "loaded": true
+   },
+   {
+    "key": "ui.alt_yac_horse",
+    "alt": "Darlun o\u2019r Gystadleuaeth Artistiaid Ifanc: marchog mewn siaced goch a helmed ddu ar gefn ceffyl brown sy\u2019n neidio",
+    "loaded": true
+   },
+   {
+    "key": "ui.alt_yac_cricket",
+    "alt": "Darlun o\u2019r Gystadleuaeth Artistiaid Ifanc: chwaraewr criced mewn helmed, menig a phadiau, yn siglo bat tuag at b\u00eal goch",
+    "loaded": true
+   },
+   {
+    "key": "ui.alt_yac_dragon_football",
+    "alt": "Darlun o\u2019r Gystadleuaeth Artistiaid Ifanc: draig goch sy\u2019n gwenu, gydag adenydd lliw hufen, yn sefyll wrth ymyl p\u00eal droed",
+    "loaded": true
+   },
+   {
+    "key": "ui.alt_yac_tennis_football",
+    "alt": "Darlun o\u2019r Gystadleuaeth Artistiaid Ifanc: p\u00eal droed uwchben p\u00eal denis werdd lachar",
+    "loaded": true
+   },
+   {
+    "key": "ui.alt_yac_footballer",
+    "alt": "Darlun o\u2019r Gystadleuaeth Artistiaid Ifanc: chwaraewr p\u00eal droed \u00e2 gwallt hir golau, mewn crys glas \u00e2\u2019r rhif 7 arno, siorts gwyn ac esgidiau pinc, yn cicio p\u00eal droed",
+    "loaded": true
+   }
+  ],
+  "pdfPages": 64,
+  "pdfBytes": 6276267
+ }
+}

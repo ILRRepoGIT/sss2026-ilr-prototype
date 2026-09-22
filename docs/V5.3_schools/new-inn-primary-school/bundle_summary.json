@@ -1,0 +1,41 @@
+{
+ "dev": {
+  "headline": "71/72",
+  "paths": "17/18",
+  "failing": [
+   [
+    "STK-caption-case",
+    17321
+   ]
+  ]
+ },
+ "release": {
+  "headline": "72/75",
+  "paths": "17/18",
+  "failing": [
+   [
+    "STK-caption-case",
+    17321
+   ],
+   [
+    "CAT-values",
+    72
+   ],
+   [
+    "GOV-mode",
+    2
+   ]
+  ]
+ },
+ "report": "SSS2026_ILR_Report_V5.3_new-inn-primary-school_Bilingual.html",
+ "reportSha256": "b2527698cbcaa6122e97366e31b8e890905cb0efff0eee5ec8bd1dd127f997a7",
+ "reportBytes": 93271247,
+ "baseline": "lock_new-inn-primary-school_v8.json",
+ "baselineSha256": "c008e5892073f9a22a663302e84e60d8055ef42df8da5c7e8fb9c7d8e053ff28",
+ "emittedEqualsBaseline": {
+  "english": true,
+  "welsh": true,
+  "ft11": true
+ },
+ "states": 7884
+}

@@ -1,0 +1,30 @@
+School Sport Survey 2026 - ILR prototype build (v2)
+report version: 2026-school-V5.3-bilingual   pipeline: 0.30.0
+generated at:   2026-09-22T18:37:38+00:00
+source sha256:  a65bfd50216fdf798ee97508125525ec55e2e807439ea2734f9e3d2a6e3380ff
+
+source rows: 439  accepted: 439  excluded: 0  (accepted by status: Complete 396 · Partial 43 — the cleansed dataset's analytical inclusion rule, profile acceptedStatuses)
+filter states: 8208 (visible 8208, suppressed 0)
+narrative paragraphs: 293171
+
+warnings:
+  - Response a09df966d9cd answered 'No' to the school screening question but completed the survey. Accepted to match the SmartSurvey completed-response count; flagged for a decision.
+  - 1 accepted response(s) carried a take-part answer without being routed to the question (disability answer not Yes / Not sure / Prefer not to say); the off-route answer is not carried (0.29.1 loader rule) — chart, selected group and narrative agree; raised with the cleansing team
+  - cohort et_other_grouped HELD (not offered as a filter; its bar stays, non-selectable) — 6 pupils: The qualifier 'who identified with other ethnic groups' (family et, code other_grouped — the Black and Other survey categories aggregated where either is below five) has no Welsh relative clause on Framework sheet 22: the prototype school had two such pupils, so the cohort was never offered. Welsh is never composed in code (D44). Needs: a sheet-22 row for family et, English 'identified with other ethnic groups' (sibling: 'identified with mixed or multiple ethnic groups' → 'a ddewisodd ‘Grwpiau ethnig cymysg neu luosog’') — translator, V5.0 flags sheet 63
+  - cohort tp_prefer_not_to_say HELD (not offered as a filter; its bar stays, non-selectable) — 8 pupils: The qualifier 'who preferred not to say how they take part in sport' (family tp, code prefer_not_to_say) has no Welsh relative clause on Framework sheet 22: the prototype school had two such pupils, so the cohort was never offered. Welsh is never composed in code (D44). Needs: a sheet-22 row for family tp, English 'preferred not to say how they take part in sport' (sibling et row: 'y byddai’n well ganddynt beidio â dweud eu hethnigrwydd') — translator, V5.0 flags sheet 63
+  - narrative module f10 HELD in 1 view(s) — leader_multi_v2 has no one-pupil form the gate accepts (EN-08 pending owner): primary|all|dy_prefer_not_to_say
+  - narrative module f10 HELD in 2 view(s) — group_codemand_top3_v12 has no one-pupil form the gate accepts (EN-08 pending owner): primary|all|wd_boccia, primary|all|wd_goalball
+  - narrative module f10 HELD in 2 view(s) — wd_current_check_v3 has no one-pupil form the gate accepts (EN-08 pending owner): primary|all|wd_boccia, primary|all|wd_goalball
+
+automated QA checks:
+  PASS  reconciliation, scope, tautology, placeholder and wording checks
+  NOTE  welsh gate v8 ROLE-excepted (report-only): 66 occurrences — Welsh carries a role the locked English omits — signed parity exception in force
+  NOTE  welsh gate v8 NUM-opts-register (report-only): 28 occurrences — Figure-led option labels reproduced verbatim from the approved survey (SURVEY register — expected)
+  NOTE  welsh gate v8 POL-review (report-only): 947 occurrences — Nil count whose defining cohort is itself negative — linguist review class (FT11-Q1…Q8)
+  NOTE  welsh gate v8 STK-code-map (report-only): 1 occurrences — Stack labels with an optsCy mapping available (coverage, for the record)
+  NOTE  welsh gate v8 STK-caption-case DISPUTED (pack defect, 33512 occurrences): gate substitutes the lexical countNP entry without applying the slot's initial casing role; v7 CNP-lexical requires the table to be lower-case — raised with the pack owners (V4.9 register)
+  NOTE  welsh gate v8 CAT-values (report-only): 72 occurrences — Catalogue key with an empty value (release mode fails; dev mode reports)
+  NOTE  welsh gate v8 GOV-config (report-only): 1 occurrences — Configuration source for this run (workbook or embedded defaults)
+  NOTE  welsh gates v8: 69/72 blocking pass (pending GOV-rerun, GOV-bundle; disputed STK-caption-case) · renderer paths complete 17/18 (manifest c4221bba2cff4dcb, mode dev, config 01_Framework_v2.12.xlsx — read: CONJ-03, CONJ-06 MODE=figure, sheet 23 copy list, sheet 42 exceptions, sheet 23 labels, sheet 43 deprecations, sheet 50 count-NP tables, sheet 39 rulings)
+  NOTE  welsh gates v8 D82: GOV-lock-cy: the Welsh baseline was RE-EMITTED from this build to lock_ysgol-bro-pedr_v8.json (0 of 8208 states moved from the previous lock; ruling: V5.3 re-emission for ysgol-bro-pedr: Framework v2.12 (Welsh for the fourteen Young Artists Competition alt frames, supplied by the owner 22 Sep 2026), pipeline 0.30.0, the V4.18 template — no state moved (asserted against the V5.2 lock)); the English projection and the FT-11 key set are unchanged (asserted before emission)
+  NOTE  View-level rule of five only (agreed 2026-07-20): suppressed view bases may be derivable by subtraction from visible parent totals. Documented for disclosure sign-off in Appendix I11 / LIMITATIONS.md.

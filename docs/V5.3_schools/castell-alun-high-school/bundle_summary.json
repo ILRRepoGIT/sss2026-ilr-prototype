@@ -1,0 +1,41 @@
+{
+ "dev": {
+  "headline": "71/72",
+  "paths": "17/18",
+  "failing": [
+   [
+    "STK-caption-case",
+    22236
+   ]
+  ]
+ },
+ "release": {
+  "headline": "72/75",
+  "paths": "17/18",
+  "failing": [
+   [
+    "STK-caption-case",
+    22236
+   ],
+   [
+    "CAT-values",
+    72
+   ],
+   [
+    "GOV-mode",
+    2
+   ]
+  ]
+ },
+ "report": "SSS2026_ILR_Report_V5.3_castell-alun-high-school_Bilingual.html",
+ "reportSha256": "5ad34559f6b2e604e271f66fadda7ca5faba67d2d3b7d1fbd13e902ad8912d93",
+ "reportBytes": 123204742,
+ "baseline": "lock_castell-alun-high-school_v8.json",
+ "baselineSha256": "7fbca3919920a5f39a26ca3193a210906e8d7db0098f7ba1204d899bfa17686f",
+ "emittedEqualsBaseline": {
+  "english": true,
+  "welsh": true,
+  "ft11": true
+ },
+ "states": 8244
+}

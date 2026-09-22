@@ -1,0 +1,41 @@
+{
+ "dev": {
+  "headline": "71/72",
+  "paths": "17/18",
+  "failing": [
+   [
+    "STK-caption-case",
+    33512
+   ]
+  ]
+ },
+ "release": {
+  "headline": "72/75",
+  "paths": "17/18",
+  "failing": [
+   [
+    "STK-caption-case",
+    33512
+   ],
+   [
+    "CAT-values",
+    72
+   ],
+   [
+    "GOV-mode",
+    2
+   ]
+  ]
+ },
+ "report": "SSS2026_ILR_Report_V5.3_ysgol-bro-pedr_Bilingual.html",
+ "reportSha256": "c234413fe2c7c3598b200eb76c6c79c8975b4ff0872351915c4b69e335bd8409",
+ "reportBytes": 172004615,
+ "baseline": "lock_ysgol-bro-pedr_v8.json",
+ "baselineSha256": "8cfb0f75cf4498b9f7b15709cce8223ad3049e4c95a51bf62f8ed62fa5d7dbbc",
+ "emittedEqualsBaseline": {
+  "english": true,
+  "welsh": true,
+  "ft11": true
+ },
+ "states": 8208
+}
