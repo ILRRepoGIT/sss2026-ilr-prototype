@@ -10,8 +10,13 @@ targetScope = 'resourceGroup'
 
 param location string = 'uksouth'
 param vmName string = 'vm-sss2026-build'
-@allowed(['Standard_D64as_v5', 'Standard_D32as_v5', 'Standard_D16as_v5', 'Standard_D16s_v5', 'Standard_D8as_v5'])
-param vmSize string = 'Standard_D64as_v5'
+@description('''VM size. The default is the Intel Dsv6 family, which is the family of the 64-vCPU quota approved
+for the subscription in UK South (checked 23 Sep 2026: Standard Dsv6 Family = 64, Standard DASv5 Family = 0).
+D64s_v6 has 64 vCPU and 256 GiB like the D64as_v5 the guide was first written for; either builds the reports the
+same way. The v6 sizes support only the NVMe disk controller, so it is set from the size below.''')
+@allowed(['Standard_D64s_v6', 'Standard_D32s_v6', 'Standard_D16s_v6', 'Standard_D64as_v5', 'Standard_D32as_v5', 'Standard_D16as_v5', 'Standard_D16s_v5', 'Standard_D8as_v5'])
+param vmSize string = 'Standard_D64s_v6'
+var nvme = endsWith(vmSize, '_v6')
 param adminUsername string = 'ilrbuild'
 @description('OpenSSH public key for the admin user.')
 param adminPublicKey string
@@ -93,6 +98,7 @@ resource vm 'Microsoft.Compute/virtualMachines@2024-03-01' = {
       }
     }
     storageProfile: {
+      diskControllerType: nvme ? 'NVMe' : 'SCSI'
       imageReference: { publisher: 'Canonical', offer: 'ubuntu-24_04-lts', sku: 'server', version: 'latest' }
       osDisk: { createOption: 'FromImage', diskSizeGB: 128, managedDisk: { storageAccountType: 'Premium_LRS' }, deleteOption: 'Delete' }
       dataDisks: [

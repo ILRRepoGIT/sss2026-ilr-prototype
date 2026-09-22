@@ -16,7 +16,7 @@ The reports are pre-generated, one complete package per school, from the finalis
 
 Hosting is static: Azure Blob Storage (static website) as a private origin behind Azure Front Door (Premium with a Private Link origin is provisioned here; Standard is the lower-cost alternative, section 5.2), on a subdomain of the SSS2026 website (for example `reports.schoolsportsurvey2026.co.uk`). Access is by unique, unguessable link per school (HMAC-SHA256 of the school identifier under a secret held in Key Vault); search engines are told not to index; directory listing is impossible; an unknown link returns 404.
 
-The build farm is one virtual machine in **UK South** with a 1 TB premium data disk: with the 64-vCPU quota Industryline has had approved, a Standard_D64as_v5 (64 vCPU, 256 GiB) — the runner scales to the cores it finds; a D32as_v5 or D16as_v5 works the same way, more slowly. It reads the dataset from the private storage account, runs several school builds at once, writes every report and its evidence, and uploads finished packages to storage. A run of all ~990 schools is expected to take well under one working day on this machine (the measured cost on a two-core sandbox is about three CPU-minutes for a 272-pupil school before its assurance reruns; section 8 gives the estimate).
+The build farm is one virtual machine in **UK South** with a 1 TB premium data disk: with the 64-vCPU quota Industryline has had approved, a Standard_D64s_v6 (64 vCPU, 256 GiB; the family of the approved quota) — the runner scales to the cores it finds; a D64as_v5 is the equivalent in the AMD family if that quota is granted instead, and a D32s_v6 or D16s_v6 works the same way, more slowly. It reads the dataset from the private storage account, runs several school builds at once, writes every report and its evidence, and uploads finished packages to storage. A run of all ~990 schools is expected to take well under one working day on this machine (the measured cost on a two-core sandbox is about three CPU-minutes for a 272-pupil school before its assurance reruns; section 8 gives the estimate).
 
 Records of the run (the ledger of what was built, from what, with which results) are kept in SQLite on the VM by a single coordinator process and exported to the evidence container after the run. A managed PostgreSQL server is **not** required; the ledger code is written so that a Postgres connection string can be substituted later if Sport Wales wants a queryable register.
 
@@ -28,11 +28,11 @@ School reports are the first family. Local-authority and regional reports follow
 
 **Subscription.** Industryline's Azure subscription, in which the resource group already exists; you need Owner (or Contributor plus User Access Administrator, because role assignments are part of the setup). Record the subscription id and tenant id for the hand-back sheet (section 9). If the existing resource group has a different name from `SSS2026_Interactive_Learning_reports`, use yours consistently in every command below.
 
-**Quota.** The build VM draws on the `Standard DASv5 Family vCPUs` quota in UK South; an increase to 64 vCPUs has already been approved for Industryline's subscription, which is what the D64as_v5 size below needs. Check it shows in Portal → Quotas → Compute (region UK South, provider Microsoft.Compute, "DASv5") before creating the VM.
+**Quota.** The 64-vCPU increase approved for Industryline's subscription in UK South is in the **`Standard Dsv6 Family vCPUs`** quota (checked 23 Sep 2026: Dsv6 = 64, DASv5 = 0, Total Regional vCPUs = 64), so the VM below is a **Standard_D64s_v6** — the Intel equivalent of the D64as_v5 this guide was first written for: the same 64 vCPU and 256 GiB, a newer processor, and the same build. Check the figure shows in Portal → Quotas → Compute (region UK South, provider Microsoft.Compute, "Dsv6") before creating the VM. If the family were ever changed, three things change with it: the `--size`, the disk controller (`--disk-controller-type NVMe` for a v6 size, `SCSI` for a v5 size — the v6 sizes support only NVMe), and nothing else; the bootstrap script finds the data disk under either controller.
 
 **DNS.** The reports live at `reports.schoolsportsurvey2026.co.uk`, a subdomain of the School Sport Survey 2026 website (`schoolsportsurvey2026.co.uk`, owned by Industryline Research). You need access to that domain's DNS to add two records (one TXT for certificate validation, one CNAME to Front Door). Confirm who in Industryline administers the domain's DNS and that they are available on the day.
 
-**Tools on your own computer.** Install the Azure CLI (`az`), AzCopy, Git and an SSH client. Sign in with `az login` and select the subscription with `az account set --subscription <id>`. Clone the repository at the release tag and run every `bash infra/…` command below from inside that clone (`git clone https://github.com/ILRRepoGIT/sss2026-ilr-prototype.git && cd sss2026-ilr-prototype && git checkout v6.0-rc5` — the tag is named in `prod/release_manifest.json`; Alexander tells you if a later tag supersedes it). All commands below are Azure CLI and work in PowerShell, cmd or bash; long commands are shown with `\` line continuations, which PowerShell users should replace with a backtick or put on one line.
+**Tools on your own computer.** Install the Azure CLI (`az`), AzCopy, Git and an SSH client. Sign in with `az login` and select the subscription with `az account set --subscription <id>`. Clone the repository at the release tag and run every `bash infra/…` command below from inside that clone (`git clone https://github.com/ILRRepoGIT/sss2026-ilr-prototype.git && cd sss2026-ilr-prototype && git checkout v6.0-rc6` — the tag is named in `prod/release_manifest.json`; Alexander tells you if a later tag supersedes it). All commands below are Azure CLI and work in PowerShell, cmd or bash; long commands are shown with `\` line continuations, which PowerShell users should replace with a backtick or put on one line.
 
 **Role assignments take a few minutes to propagate.** Every `az role assignment create` below is followed by a data-plane command that needs it (`--auth-mode login`, AzCopy). If such a command answers `403 AuthorizationPermissionMismatch`, wait two or three minutes and repeat it; nothing needs undoing.
 
@@ -53,7 +53,7 @@ Use these names unless your organisation's naming standard requires otherwise; i
 | Key Vault | `kv-sss2026-ilr` | Holds the link-token secret; nothing else |
 | Front Door profile | `afd-sss2026-ilr` | Premium tier (Private Link origin); Standard is the documented alternative |
 | Front Door endpoint | `sss2026-reports` | Gives `sss2026-reports-<hash>.z01.azurefd.net` until the custom domain is bound |
-| VM | `vm-sss2026-build` | Standard_D64as_v5 (64 vCPU, 256 GiB), Ubuntu 24.04 LTS |
+| VM | `vm-sss2026-build` | Standard_D64s_v6 (64 vCPU, 256 GiB; NVMe disk controller), Ubuntu 24.04 LTS — the family of the approved quota |
 | Managed identity (VM) | system-assigned | Granted read on the data account, write on the web staging container and the evidence container |
 | Budget | `budget-sss2026-ilr` | Alert at 50 / 80 / 100 % of the agreed monthly amount (recipients added in the portal, step 7) |
 
@@ -271,11 +271,12 @@ az network nsg rule create --resource-group SSS2026_Interactive_Learning_reports
   --priority 100 --direction Inbound --access Allow --protocol Tcp --source-address-prefixes $MYIP --destination-port-ranges 22
 
 az vm create --resource-group SSS2026_Interactive_Learning_reports --name vm-sss2026-build --location uksouth \
-  --image Canonical:ubuntu-24_04-lts:server:latest --size Standard_D64as_v5 \
+  --image Canonical:ubuntu-24_04-lts:server:latest --size Standard_D64s_v6 --disk-controller-type NVMe \
   --admin-username ilrbuild --generate-ssh-keys --authentication-type ssh \
   --vnet-name vnet-sss2026-build --subnet snet-build --nsg nsg-sss2026-build --public-ip-sku Standard \
   --os-disk-size-gb 128 --storage-sku Premium_LRS \
   --data-disk-sizes-gb 1024 --data-disk-caching ReadWrite \
+  --os-disk-delete-option Delete --data-disk-delete-option Delete --nic-delete-option Delete \
   --assign-identity [system] --tags project=SSS2026-ILR lifetime=temporary
 ```
 
@@ -311,10 +312,10 @@ SSH in (`ssh ilrbuild@<public ip>`), then run the bootstrap script from the repo
 ```
 # copy the script to the VM from your own clone (scp), or paste it — the repository is private, so raw.githubusercontent.com will not serve it
 scp infra/vm-bootstrap.sh ilrbuild@<public ip>:
-sudo ILR_GIT_URL="https://<read-only token>@github.com/ILRRepoGIT/sss2026-ilr-prototype.git" bash vm-bootstrap.sh v6.0-rc5
+sudo ILR_GIT_URL="https://<read-only token>@github.com/ILRRepoGIT/sss2026-ilr-prototype.git" bash vm-bootstrap.sh v6.0-rc6
 ```
 
-`v6.0-rc5` is the release tag this guide was written for (the value in `prod/release_manifest.json`); if Alexander names a later tag, use that. The script accepts the storage, vault and Front Door names as environment variables (`ILR_DATA_ACCOUNT`, `ILR_WEB_ACCOUNT`, `ILR_KEY_VAULT`, `ILR_AFD_PROFILE`, `ILR_AFD_ENDPOINT`, `ILR_RG`) if you changed any of them from section 2, and writes them all to `/etc/profile.d/ilr.sh` so the runbook's commands can use them.
+`v6.0-rc6` is the release tag this guide was written for (the value in `prod/release_manifest.json`); if Alexander names a later tag, use that. The script accepts the storage, vault and Front Door names as environment variables (`ILR_DATA_ACCOUNT`, `ILR_WEB_ACCOUNT`, `ILR_KEY_VAULT`, `ILR_AFD_PROFILE`, `ILR_AFD_ENDPOINT`, `ILR_RG`) if you changed any of them from section 2, and writes them all to `/etc/profile.d/ilr.sh` so the runbook's commands can use them.
 
 The script ends by printing the sha256 of every file that takes part in a build and comparing them with the release manifest; it stops if any differ. It also runs `az login --identity` and checks that the identity can list the `dataset` container and read the link secret's metadata (not its value). If both checks pass, the machine is ready for the runbook (`docs/production/SSS2026_ILR_Operations_Runbook.md`).
 
@@ -345,7 +346,7 @@ Indicative list prices, pay-as-you-go, September 2026, before any organisational
 
 | Item | Basis | Indicative cost |
 |---|---|---|
-| VM Standard_D64as_v5 (64 vCPU, 256 GiB) | about four times the D16as_v5's $0.69/hour ([Vantage](https://instances.vantage.sh/azure/vm/d16as-v5)), so roughly $2.75/hour; 3 days of provisioning, pilot, full run and verification = 72 hours | about $200 |
+| VM Standard_D64s_v6 (64 vCPU, 256 GiB) | of the order of $3 per hour pay-as-you-go (the D64as_v5 it replaces is about $2.75/hour — four times the D16as_v5's $0.69/hour on [Vantage](https://instances.vantage.sh/azure/vm/d16as-v5); confirm the v6 figure in the calculator); 3 days of provisioning, pilot, full run and verification = 72 hours | about $200–$250 |
 | 1 TB Premium SSD data disk (P30) + 128 GB OS disk | per month while the VM exists | about $150 per month, pro-rated |
 | Front Door Premium (Private Link origin) | about $330 base per month + egress (around $0.08/GB in Europe) + requests ([Microsoft](https://learn.microsoft.com/en-us/azure/frontdoor/understanding-pricing)); 1,000 schools each opening their report a handful of times a month is under 100 GB | $340–$360 per month |
 | Front Door Standard (alternative, IP-range firewall) | $35 base per month + egress + $0.009 per 10,000 requests | $40–$60 per month |
@@ -354,7 +355,23 @@ Indicative list prices, pay-as-you-go, September 2026, before any organisational
 
 Run time. On a two-core sandbox one 272-pupil primary school builds in 3½ minutes including its full assurance pass (peak memory 1.5 GiB); the two larger schools in the same round took 6½–7 minutes (peak 2.2 GiB). Allowing about five CPU-minutes per school all in, the 935 eligible schools are roughly 80 CPU-hours: on 64 vCPUs running about 50 builds at once that is roughly 1½–2 hours; on 16 vCPUs about 6–7 hours. The pilot in the runbook measures the real figures on the VM before the full run, and the runner adapts its concurrency to the memory it sees (about 3 GiB per job is enough).
 
-Teardown. When the publication is verified and the evidence is in the `evidence` container: `az group delete --name SSS2026_Interactive_Learning_reports --yes`. That removes the VM, both disks, the network and the NSG in one action. The persistent group stays for the life of the publication.
+Teardown — **the VM and its network only, never the resource group.** Everything lives in the one resource group `SSS2026_Interactive_Learning_reports`: the storage accounts holding the reports and the evidence, the Key Vault and the Front Door serve the publication for its whole life and must stay. When the publication is verified and the evidence is in the `evidence` container, remove the build resources one by one (the VM was created with its disks and NIC set to delete with it):
+
+```
+RG=SSS2026_Interactive_Learning_reports
+az vm delete -g $RG -n vm-sss2026-build --yes                      # the VM; its OS disk, data disk and NIC are deleted with it (deleteOption Delete)
+az disk list -g $RG --query "[?contains(name,'vm-sss2026-build')].name" -o tsv | xargs -r -n1 az disk delete -g $RG --yes -n   # any disk left behind
+az network nic list -g $RG --query "[?contains(name,'vm-sss2026-build')].name" -o tsv | xargs -r -n1 az network nic delete -g $RG -n   # any NIC left behind
+az network public-ip delete -g $RG -n vm-sss2026-buildPublicIP 2>/dev/null || az network public-ip list -g $RG -o table   # the public IP (name as `az network public-ip list` shows it)
+az storage account network-rule remove --account-name stsss2026ilrdata -g $RG --subnet $(az network vnet subnet show -g $RG --vnet-name vnet-sss2026-build -n snet-build --query id -o tsv)
+az storage account network-rule remove --account-name stsss2026ilrweb  -g $RG --subnet $(az network vnet subnet show -g $RG --vnet-name vnet-sss2026-build -n snet-build --query id -o tsv)
+az keyvault network-rule remove --name kv-sss2026-ilr --subnet $(az network vnet subnet show -g $RG --vnet-name vnet-sss2026-build -n snet-build --query id -o tsv)
+az network vnet delete -g $RG -n vnet-sss2026-build
+az network nsg delete -g $RG -n nsg-sss2026-build
+az resource list -g $RG -o table                                    # what remains must be: the two storage accounts, the Key Vault, the Front Door profile, Log Analytics
+```
+
+Never run `az group delete` on this group while the publication is live: it would delete the reports, the evidence and the serving infrastructure together. The VM's role assignments on the storage accounts and the vault disappear with its identity.
 
 ---
 
@@ -375,7 +392,7 @@ VM:                           vm-sss2026-build   (public IP or Bastion; admin us
 VM managed identity id:       <principalId>
 Log Analytics workspace:      law-sss2026-ilr
 Budget:                       budget-sss2026-ilr, £/$ <amount>, alerts to <email>
-Quota:                        DASv5 vCPUs in UK South = <number>
+Quota:                        Dsv6 vCPUs in UK South = <number>   (DASv5 = <number>, if requested)
 DNS administrator:            <name / contact>
 Publisher identity (later):   <name / object id>
 ```

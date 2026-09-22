@@ -6,7 +6,8 @@
 #                        [--custodian <object id>] [--admin-ip <your public ip>] [--budget 400]
 #
 # Prerequisites: az login; az account set --subscription <id>; an SSH key at
-# ~/.ssh/id_ed25519.pub (or set SSH_PUBKEY_FILE); the DASv5 quota (guide §1).
+# ~/.ssh/id_ed25519.pub (or set SSH_PUBKEY_FILE); a 64-vCPU quota in the VM's family (guide §1) —
+# VM_SIZE=Standard_D64s_v6 by default (the Dsv6 quota the subscription holds); VM_SIZE=Standard_D64as_v5 if DASv5 is granted.
 # Re-runnable: every step is idempotent.
 set -euo pipefail
 LOC=uksouth; RG=SSS2026_Interactive_Learning_reports; RGB=$RG   # one existing resource group for everything (hosting note, 22 Sep 2026)
@@ -53,7 +54,7 @@ fi
 
 echo "== build VM (build-vm.bicep)"
 az deployment group create -g $RGB -f "$HERE/build-vm.bicep" -n ilr-vm \
-  -p adminPublicKey="$(cat "$SSH_PUBKEY_FILE")" adminSourceIp=$ADMIN_IP --query properties.outputs -o json > /tmp/ilr-vm.json
+  -p adminPublicKey="$(cat "$SSH_PUBKEY_FILE")" adminSourceIp=$ADMIN_IP vmSize=${VM_SIZE:-Standard_D64s_v6} --query properties.outputs -o json > /tmp/ilr-vm.json
 PRINCIPAL=$(jq -r .principalId.value /tmp/ilr-vm.json); SUBNET=$(jq -r .subnetId.value /tmp/ilr-vm.json); VMIP=$(jq -r .publicIp.value /tmp/ilr-vm.json)
 
 echo "== roles for the VM identity and network rules for its subnet"

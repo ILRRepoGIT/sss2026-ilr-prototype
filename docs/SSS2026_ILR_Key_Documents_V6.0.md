@@ -15,10 +15,10 @@ with **0 states moved**. This document is the key record of the round; the opera
 | Decision | Implementation |
 |---|---|
 | Dataset: the finalised Stage 2 v2 file (121,937 × 1,624, sha256 `802eda98…`) from cleansing handover v2.3 | The runner refuses any other dataset hash; the loose 8 Sep copy in "Pupil responses" (sha256 `1f970703…`, 1,598 columns, 382 columns with different values) is the superseded Stage 2 v1 and should be removed or marked |
-| 8 or 16 cores, then a 64-vCPU quota approved; cut the build time | One Standard_D64as_v5 (64 vCPU / 256 GiB, UK South, 1 TB SSD); the runner builds about 50 schools at once (its default is cores − 2, with a memory guard); measured per-school cost on a two-core sandbox 209–424 s including all assurance → the ≈935 eligible schools in roughly 1½–2 hours |
+| 8 or 16 cores, then a 64-vCPU quota approved; cut the build time | One Standard_D64s_v6 (the family of the approved quota; D64as_v5 the AMD equivalent) (64 vCPU / 256 GiB, UK South, 1 TB SSD); the runner builds about 50 schools at once (its default is cores − 2, with a memory guard); measured per-school cost on a two-core sandbox 209–424 s including all assurance → the ≈935 eligible schools in roughly 1½–2 hours |
 | Unique URL per school, hosted on Industryline's SSS2026 website (agreed with Welsh Government) | HMAC-SHA256 link tokens (key in Key Vault, 130 bits), static hosting on a subdomain of `schoolsportsurvey2026.co.uk` through Front Door, `noindex`, no listing, 404 for an unknown link |
 | Schools first; LA and regional reports to follow | The link scheme reserves `/2026/la/` and `/2026/region/`; the register and runner take a `family` field |
-| Colleague sets up the estate from written instructions (subscription, resource group and quota already in place); GitHub carries the build | The provisioning guide (CLI steps and Bicep), the VM bootstrap script, the runbook; the repository at `ILRRepoGIT/sss2026-ilr-prototype`, branch `production/v6.0` (tag `v6.0-rc5`; rc2 is the commit the owner's agent pushed, rc3 the handover-review corrections, rc4 Framework v2.15 — the four local-authority rows, rc5 every school including the under-fives, the website publication register and the existing resource group), delivered as a gitbundle in the deployment folder |
+| Colleague sets up the estate from written instructions (subscription, resource group and quota already in place); GitHub carries the build | The provisioning guide (CLI steps and Bicep), the VM bootstrap script, the runbook; the repository at `ILRRepoGIT/sss2026-ilr-prototype`, branch `production/v6.0` (tag `v6.0-rc6`; rc2 is the commit the owner's agent pushed, rc3 the handover-review corrections, rc4 Framework v2.15 — the four local-authority rows, rc5 every school including the under-fives, the website publication register and the existing resource group, rc6 the colleague's first-check findings: the Dsv6 quota family, the empty resource group, the teardown that must never delete the group), delivered as a gitbundle in the deployment folder |
 
 ## 2. What was built
 
@@ -118,7 +118,7 @@ network and disks; the role assignments (dataset read; register, evidence, ledge
 The HTML step's 60 s at the two larger schools was the artwork preparation repeated per build; pipeline
 0.31.0 caches the prepared WebP bytes per release (`SSS_ASSET_CACHE`, byte-identical output), which
 is why New Inn's HTML step is 11 s. With the median school at 75 responses, the expectation for the
-VM is 2–4 CPU-minutes per school all in; on the approved 64-vCPU quota (one Standard_D64as_v5, about 50 concurrent jobs) the eligible set is roughly one and a half to two hours.
+VM is 2–4 CPU-minutes per school all in; on the approved 64-vCPU quota (one Standard_D64s_v6, about 50 concurrent jobs) the eligible set is roughly one and a half to two hours.
 
 ## 4. What the rebuild through the runner proved
 

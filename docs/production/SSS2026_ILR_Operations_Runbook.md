@@ -8,7 +8,7 @@ Throughout, `$ILR_REPO`, `$ILR_VENV` and the storage/vault names come from `/etc
 
 ```
 cd $ILR_REPO && source $ILR_VENV/bin/activate
-export RELEASE=v6.0-rc5                  # the tag the VM was bootstrapped at (v6.0-rc5 today — Framework v2.15; the owner cuts v6.0 with tools/cut_release.sh)
+export RELEASE=v6.0-rc6                  # the tag the VM was bootstrapped at (v6.0-rc6 today — Framework v2.15; the owner cuts v6.0 with tools/cut_release.sh)
 export EVID=/data/ilr/evidence            # private: attestations, bundles, locks, ledger
 export OUT=/data/ilr/out                  # the served trees (release + entry pages)
 export WORK=/data/ilr/work                # per-job scratch, deleted job by job
@@ -102,7 +102,7 @@ python -m prod.checks rollup --evidence $EVID --release $RELEASE
 python -m prod.runner status --evidence $EVID --release $RELEASE
 ```
 
-Read the mean and maximum `seconds` from the rollup and the peak memory from `/data/ilr/evidence/$RELEASE/<slug>/job.log` (`Maximum resident set size` is not recorded by the runner; `free -g` while the run is on, or `ps -o rss` on the workers, is enough). Set the full-run concurrency so that concurrency × peak-per-job stays under 75 % of the VM's memory and about one job per vCPU less a little headroom: on the D64as_v5 (64 vCPU, 256 GiB) with 2.5 GiB peaks that is about 48–56; the runner's default is cores − 2 and it also pauses new jobs when free memory drops under 3 GiB.
+Read the mean and maximum `seconds` from the rollup and the peak memory from `/data/ilr/evidence/$RELEASE/<slug>/job.log` (`Maximum resident set size` is not recorded by the runner; `free -g` while the run is on, or `ps -o rss` on the workers, is enough). Set the full-run concurrency so that concurrency × peak-per-job stays under 75 % of the VM's memory and about one job per vCPU less a little headroom: on the D64s_v6 (64 vCPU, 256 GiB — or the D64as_v5, the same figures) with 2.5 GiB peaks that is about 48–56; the runner's default is cores − 2 and it also pauses new jobs when free memory drops under 3 GiB.
 
 Stage the pilot into private storage and run the served gate against it over HTTP through Front Door — this exercises the real serving path with nothing yet reachable by a school (the entry pages are not in `$web` until Phase F):
 

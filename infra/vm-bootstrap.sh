@@ -44,8 +44,24 @@ apt-get install -y -qq git curl ca-certificates gnupg lsb-release jq unzip time 
 
 echo "== 2/8 data disk at /data"
 if ! mountpoint -q /data; then
-  DEV=$(readlink -f /dev/disk/azure/scsi1/lun0 2>/dev/null || true)
-  if [ -z "$DEV" ]; then echo "no data disk at lun0 — attach the 1 TB disk and re-run"; exit 1; fi
+  # The data disk is LUN 0. Under the NVMe disk controller (the v6 sizes, e.g. D64s_v6) Ubuntu 24.04's
+  # azure-vm-utils names it /dev/disk/azure/data/by-lun/0; under SCSI (the v5 sizes) the agent names it
+  # /dev/disk/azure/scsi1/lun0. If neither link exists, the one unformatted, unpartitioned block device
+  # of the data disk's size that is not the OS disk is taken; anything else stops here.
+  DEV=$(readlink -f /dev/disk/azure/data/by-lun/0 2>/dev/null || readlink -f /dev/disk/azure/scsi1/lun0 2>/dev/null || true)
+  if [ -z "$DEV" ]; then
+    OSDEV=$(lsblk -no PKNAME "$(findmnt -no SOURCE /)" 2>/dev/null | head -1)
+    CANDS=$(lsblk -dnbo NAME,SIZE,TYPE | awk -v os="$OSDEV" '$3=="disk" && $1!=os && $2>=500000000000 {print "/dev/"$1}')
+    FREE=""
+    for c in $CANDS; do
+      if [ -z "$(lsblk -no FSTYPE "$c" | tr -d '[:space:]')" ] && [ "$(lsblk -no NAME "$c" | wc -l)" -eq 1 ]; then FREE="$FREE $c"; fi
+    done
+    set -- $FREE
+    if [ "$#" -eq 1 ]; then DEV="$1"; else
+      echo "cannot identify the data disk (candidates:${FREE:- none}) — attach the 1 TB disk at LUN 0 and re-run"; lsblk -o NAME,SIZE,TYPE,FSTYPE,MOUNTPOINT; exit 1
+    fi
+  fi
+  echo "data disk: $DEV"
   if ! blkid "$DEV" >/dev/null 2>&1; then mkfs.ext4 -q -L ilrdata "$DEV"; fi
   mkdir -p /data
   UUID=$(blkid -s UUID -o value "$DEV")
