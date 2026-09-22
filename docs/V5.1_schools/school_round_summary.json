@@ -1,0 +1,281 @@
+[
+ {
+  "slug": "new-inn-primary-school",
+  "school": {
+   "id": "6782320",
+   "name": "New Inn Primary School",
+   "localAuthority": "Torfaen",
+   "profile": "standard-primary-school",
+   "years": [
+    3,
+    4,
+    5,
+    6
+   ],
+   "surveyYear": 2026,
+   "type": "primary",
+   "regionalSportPartnership": "Gwent Sport Partnership [GSP]",
+   "schoolStages": "Primary (Years 3–6)",
+   "fieldworkDates": "13th April – 17th July 2026",
+   "fsmBand": "To be confirmed by Sport Wales"
+  },
+  "reportVersion": "2026-school-V5.1-bilingual",
+  "pipeline": "0.29.1",
+  "identity": {
+   "frameworkVersion": "v2.10",
+   "frameworkFile": "01_Framework_v2.10.xlsx",
+   "frameworkSha256": "2c3a6bbf535702d1495b1491b0bbc384ceb47e71492524acf25a3cccc89de0c5",
+   "runnerVersion": "8.0.0",
+   "runnerSha256": "3057fef25b5d54bd564b0ee86affd3ef34048b4c1598c27eeb86ae3da2bde4fe",
+   "manifestHash": "c4221bba2cff4dcb",
+   "mode": "dev"
+  },
+  "sourceRows": 272,
+  "acceptedRows": 272,
+  "excludedRows": 0,
+  "acceptedByStatus": {
+   "Complete": 251,
+   "Partial": 21
+  },
+  "sourceChecksum": "1883c154bfcb3d6b0052ece034384d3deca0c683f5da7064949ff003b62440e2",
+  "anyActivity": 267,
+  "sportOptionCount": 75,
+  "states": 8100,
+  "visible": 4050,
+  "paragraphs": 146589,
+  "cohorts": 224,
+  "stamp": "69/72",
+  "paths": "17/18",
+  "disputed": [
+   "STK-caption-case"
+  ],
+  "rerun_dev": "71/72",
+  "rerun_release": "72/75",
+  "rerun_paths": "17/18",
+  "rerun_failing_release": [
+   [
+    "STK-caption-case",
+    17781
+   ],
+   [
+    "CAT-values",
+    72
+   ],
+   [
+    "GOV-mode",
+    2
+   ]
+  ],
+  "emittedEqualsBaseline": {
+   "english": true,
+   "welsh": true,
+   "ft11": true
+  },
+  "report": "SSS2026_ILR_Report_V5.1_new-inn-primary-school_Bilingual.html",
+  "reportSha256": "808d990190a23aea8839f692ff773fccbdaced032d512c52df9ce9de259a3527",
+  "reportBytes": 99101095,
+  "lock": "lock_new-inn-primary-school_v8.json",
+  "lockSha256": "93fc4b6246a332a1e9a03bd26c521b33a00be977e7045fc6f29b386268c7e57b",
+  "figuresVerified": true,
+  "jsdom": "40/40",
+  "provenance": "0 / 0 / 0",
+  "toggle": "0 failures over 1152",
+  "pdfPages": {
+   "en": 60,
+   "cy": 65
+  },
+  "holds": [
+   "cohort ov_none_reported HELD (not offered as a filter; its bar stays, non-selectable) — 5 pupils: The qualifier 'who reported no sport in any setting' (family ov, code none_reported) has no Welsh relative clause on Framework sheet 22 — the prototype school had fewer than five such pupils, so the cohort was never offered and the row was never written. Welsh is never composed in code (D44). Needs: a sheet-22 row for family ov, English 'reported no sport in any setting' (the sibling cb row 'reported no club sport' is 'na nododd unrhyw chwaraeon clwb', PROPOSED) — translator, V5.0 flags sheet 63"
+  ]
+ },
+ {
+  "slug": "castell-alun-high-school",
+  "school": {
+   "id": "6644017",
+   "name": "Castell Alun High School",
+   "localAuthority": "Flintshire",
+   "profile": "standard-secondary-school",
+   "years": [
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "surveyYear": 2026,
+   "type": "secondary",
+   "regionalSportPartnership": "Actif North Wales",
+   "schoolStages": "Secondary (Years 7–11)",
+   "fieldworkDates": "13th April – 17th July 2026",
+   "fsmBand": "To be confirmed by Sport Wales"
+  },
+  "reportVersion": "2026-school-V5.1-bilingual",
+  "pipeline": "0.29.1",
+  "identity": {
+   "frameworkVersion": "v2.10",
+   "frameworkFile": "01_Framework_v2.10.xlsx",
+   "frameworkSha256": "2c3a6bbf535702d1495b1491b0bbc384ceb47e71492524acf25a3cccc89de0c5",
+   "runnerVersion": "8.0.0",
+   "runnerSha256": "3057fef25b5d54bd564b0ee86affd3ef34048b4c1598c27eeb86ae3da2bde4fe",
+   "manifestHash": "c4221bba2cff4dcb",
+   "mode": "dev"
+  },
+  "sourceRows": 771,
+  "acceptedRows": 771,
+  "excludedRows": 0,
+  "acceptedByStatus": {
+   "Complete": 747,
+   "Partial": 24
+  },
+  "sourceChecksum": "7f47d2a1414d06d8e94d19038fa6b97b1ccee8880f7522c1873f273761947fb2",
+  "anyActivity": 765,
+  "sportOptionCount": 98,
+  "states": 8496,
+  "visible": 4956,
+  "paragraphs": 196239,
+  "cohorts": 235,
+  "stamp": "69/72",
+  "paths": "17/18",
+  "disputed": [
+   "STK-caption-case"
+  ],
+  "rerun_dev": "71/72",
+  "rerun_release": "72/75",
+  "rerun_paths": "17/18",
+  "rerun_failing_release": [
+   [
+    "STK-caption-case",
+    22893
+   ],
+   [
+    "CAT-values",
+    72
+   ],
+   [
+    "GOV-mode",
+    2
+   ]
+  ],
+  "emittedEqualsBaseline": {
+   "english": true,
+   "welsh": true,
+   "ft11": true
+  },
+  "report": "SSS2026_ILR_Report_V5.1_castell-alun-high-school_Bilingual.html",
+  "reportSha256": "9c6e85867348fd18bb979566c0d32400d7b8b200831f988dbf2766176aff3b3d",
+  "reportBytes": 131082323,
+  "lock": "lock_castell-alun-high-school_v8.json",
+  "lockSha256": "caabb9640f5333c9e41e6dced26bf3ad2b70fcb96d388431ec3e2b1705e02fd0",
+  "figuresVerified": true,
+  "jsdom": "40/40",
+  "provenance": "0 / 0 / 0",
+  "toggle": "0 failures over 1152",
+  "pdfPages": {
+   "en": 64,
+   "cy": 67
+  },
+  "holds": [
+   "cohort et_other_grouped HELD (not offered as a filter; its bar stays, non-selectable) — 13 pupils: The qualifier 'who identified with other ethnic groups' (family et, code other_grouped — the Black and Other survey categories aggregated where either is below five) has no Welsh relative clause on Framework sheet 22: the prototype school had two such pupils, so the cohort was never offered. Welsh is never composed in code (D44). Needs: a sheet-22 row for family et, English 'identified with other ethnic groups' (sibling: 'identified with mixed or multiple ethnic groups' → 'a ddewisodd ‘Grwpiau ethnig cymysg neu luosog’') — translator, V5.0 flags sheet 63",
+   "cohort tp_prefer_not_to_say HELD (not offered as a filter; its bar stays, non-selectable) — 5 pupils: The qualifier 'who preferred not to say how they take part in sport' (family tp, code prefer_not_to_say) has no Welsh relative clause on Framework sheet 22: the prototype school had two such pupils, so the cohort was never offered. Welsh is never composed in code (D44). Needs: a sheet-22 row for family tp, English 'preferred not to say how they take part in sport' (sibling et row: 'y byddai’n well ganddynt beidio â dweud eu hethnigrwydd') — translator, V5.0 flags sheet 63",
+   "cohort ov_none_reported HELD (not offered as a filter; its bar stays, non-selectable) — 6 pupils: The qualifier 'who reported no sport in any setting' (family ov, code none_reported) has no Welsh relative clause on Framework sheet 22 — the prototype school had fewer than five such pupils, so the cohort was never offered and the row was never written. Welsh is never composed in code (D44). Needs: a sheet-22 row for family ov, English 'reported no sport in any setting' (the sibling cb row 'reported no club sport' is 'na nododd unrhyw chwaraeon clwb', PROPOSED) — translator, V5.0 flags sheet 63"
+  ]
+ },
+ {
+  "slug": "ysgol-bro-pedr",
+  "school": {
+   "id": "6675500",
+   "name": "Ysgol Bro Pedr",
+   "localAuthority": "Ceredigion",
+   "profile": "standard-combined-school",
+   "years": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "surveyYear": 2026,
+   "type": "combined",
+   "regionalSportPartnership": "Mid Wales Sport Partnership [MWSP]",
+   "schoolStages": "Primary and secondary (Years 3–11)",
+   "fieldworkDates": "13th April – 17th July 2026",
+   "fsmBand": "To be confirmed by Sport Wales"
+  },
+  "reportVersion": "2026-school-V5.1-bilingual",
+  "pipeline": "0.29.1",
+  "identity": {
+   "frameworkVersion": "v2.10",
+   "frameworkFile": "01_Framework_v2.10.xlsx",
+   "frameworkSha256": "2c3a6bbf535702d1495b1491b0bbc384ceb47e71492524acf25a3cccc89de0c5",
+   "runnerVersion": "8.0.0",
+   "runnerSha256": "3057fef25b5d54bd564b0ee86affd3ef34048b4c1598c27eeb86ae3da2bde4fe",
+   "manifestHash": "c4221bba2cff4dcb",
+   "mode": "dev"
+  },
+  "sourceRows": 439,
+  "acceptedRows": 439,
+  "excludedRows": 0,
+  "acceptedByStatus": {
+   "Complete": 396,
+   "Partial": 43
+  },
+  "sourceChecksum": "a65bfd50216fdf798ee97508125525ec55e2e807439ea2734f9e3d2a6e3380ff",
+  "anyActivity": 436,
+  "sportOptionCount": 83,
+  "states": 8496,
+  "visible": 8496,
+  "paragraphs": 278138,
+  "cohorts": 235,
+  "stamp": "69/72",
+  "paths": "17/18",
+  "disputed": [
+   "STK-caption-case"
+  ],
+  "rerun_dev": "71/72",
+  "rerun_release": "72/75",
+  "rerun_paths": "17/18",
+  "rerun_failing_release": [
+   [
+    "STK-caption-case",
+    34519
+   ],
+   [
+    "CAT-values",
+    72
+   ],
+   [
+    "GOV-mode",
+    2
+   ]
+  ],
+  "emittedEqualsBaseline": {
+   "english": true,
+   "welsh": true,
+   "ft11": true
+  },
+  "report": "SSS2026_ILR_Report_V5.1_ysgol-bro-pedr_Bilingual.html",
+  "reportSha256": "655c329637ef3beac809124b53e8f56063ba0babc86f7b8464f1743c4ecea69a",
+  "reportBytes": 183493193,
+  "lock": "lock_ysgol-bro-pedr_v8.json",
+  "lockSha256": "352c31bdf8e9c049c0f10df442bfa44f0bd4bde3b1dc7fd45948805f3f61d5ec",
+  "figuresVerified": true,
+  "jsdom": "40/40",
+  "provenance": "0 / 0 / 0",
+  "toggle": "0 failures over 1344",
+  "pdfPages": {
+   "en": 63,
+   "cy": 66
+  },
+  "holds": [
+   "cohort et_other_grouped HELD (not offered as a filter; its bar stays, non-selectable) — 6 pupils: The qualifier 'who identified with other ethnic groups' (family et, code other_grouped — the Black and Other survey categories aggregated where either is below five) has no Welsh relative clause on Framework sheet 22: the prototype school had two such pupils, so the cohort was never offered. Welsh is never composed in code (D44). Needs: a sheet-22 row for family et, English 'identified with other ethnic groups' (sibling: 'identified with mixed or multiple ethnic groups' → 'a ddewisodd ‘Grwpiau ethnig cymysg neu luosog’') — translator, V5.0 flags sheet 63",
+   "cohort tp_prefer_not_to_say HELD (not offered as a filter; its bar stays, non-selectable) — 8 pupils: The qualifier 'who preferred not to say how they take part in sport' (family tp, code prefer_not_to_say) has no Welsh relative clause on Framework sheet 22: the prototype school had two such pupils, so the cohort was never offered. Welsh is never composed in code (D44). Needs: a sheet-22 row for family tp, English 'preferred not to say how they take part in sport' (sibling et row: 'y byddai’n well ganddynt beidio â dweud eu hethnigrwydd') — translator, V5.0 flags sheet 63",
+   "narrative module f10 HELD in 1 view(s) — leader_multi_v2 has no one-pupil form the gate accepts (EN-08 pending owner): primary|all|dy_prefer_not_to_say",
+   "narrative module f10 HELD in 2 view(s) — group_codemand_top3_v12 has no one-pupil form the gate accepts (EN-08 pending owner): primary|all|wd_boccia, primary|all|wd_goalball",
+   "narrative module f10 HELD in 2 view(s) — wd_current_check_v3 has no one-pupil form the gate accepts (EN-08 pending owner): primary|all|wd_boccia, primary|all|wd_goalball"
+  ]
+ }
+]

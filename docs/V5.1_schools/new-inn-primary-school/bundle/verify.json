@@ -1,0 +1,37 @@
+{
+ "report": "SSS2026_ILR_Report_V5.1_new-inn-primary-school_Bilingual.html",
+ "reportSha256": "808d990190a23aea8839f692ff773fccbdaced032d512c52df9ce9de259a3527",
+ "headline": "72/75",
+ "mode": "release",
+ "runner": "8.0.0",
+ "manifestHash": "c4221bba2cff4dcb",
+ "paths": "17/18",
+ "failing": [
+  {
+   "gate": "STK-caption-case",
+   "occurrences": 17781
+  },
+  {
+   "gate": "CAT-values",
+   "occurrences": 72
+  },
+  {
+   "gate": "GOV-mode",
+   "occurrences": 2
+  }
+ ],
+ "notes": [
+  "sensitiveFilters = true in the client; no signed D69 value to assert against"
+ ],
+ "at": "2026-09-22T16:12:55+00:00",
+ "dev": {
+  "headline": "71/72",
+  "paths": "17/18",
+  "failing": [
+   {
+    "gate": "STK-caption-case",
+    "occurrences": 17781
+   }
+  ]
+ }
+}

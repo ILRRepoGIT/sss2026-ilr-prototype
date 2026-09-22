@@ -1,0 +1,30 @@
+{
+ "en": {
+  "h": 32680,
+  "cls": "",
+  "bodyFont": "Montserrat, Arial, sans-serif",
+  "bodySize": "16px",
+  "meta": [
+   49,
+   32439.171875,
+   913,
+   32658.15625
+  ],
+  "pdfPages": 64,
+  "pdfBytes": 483503
+ },
+ "cy": {
+  "h": 33877,
+  "cls": "",
+  "bodyFont": "Montserrat, Arial, sans-serif",
+  "bodySize": "16px",
+  "meta": [
+   49,
+   33637.015625,
+   913,
+   33856
+  ],
+  "pdfPages": 67,
+  "pdfBytes": 495923
+ }
+}

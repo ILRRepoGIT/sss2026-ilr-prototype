@@ -1,0 +1,24 @@
+{
+ "school": "ysgol-bro-pedr",
+ "from": "V5.0 lock (pipeline 0.28.0, Framework v2.8)",
+ "to": "V5.1 lock (pipeline 0.29.1, Framework v2.10)",
+ "ruling": "V5.1 re-emission for ysgol-bro-pedr: pipeline 0.29.1 loader rule \u2014 an off-route take-part answer is not carried (one partial response, disability 'No'); supersedes the V5.0 lock; the states that moved are listed in lock_diff_V50_V51.json",
+ "englishStatesMoved": [
+  "secondary|all|tp_other",
+  "secondary|boy|tp_other",
+  "whole|all|tp_other",
+  "whole|boy|tp_other",
+  "y8|all|tp_other",
+  "y8|boy|tp_other"
+ ],
+ "welshStatesMoved": [
+  "secondary|all|tp_other",
+  "secondary|boy|tp_other",
+  "whole|all|tp_other",
+  "whole|boy|tp_other",
+  "y8|all|tp_other",
+  "y8|boy|tp_other"
+ ],
+ "ft11KeysRemoved": [],
+ "ft11KeysAdded": []
+}

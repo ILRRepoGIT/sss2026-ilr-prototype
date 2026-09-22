@@ -1,0 +1,22 @@
+{
+ "cmd": [
+  "/usr/bin/python3",
+  "welsh_acceptance_gates_v8.py",
+  "../SSS2026_ILR_Report_V5.1_ysgol-bro-pedr_Bilingual.html",
+  "--framework",
+  "01_Framework_v2.10.xlsx",
+  "--mode",
+  "release",
+  "--baseline",
+  "lock_ysgol-bro-pedr_v8.json",
+  "--bundle-dir",
+  ".",
+  "--json",
+  "results_release.json",
+  "--evidence",
+  "evidence_rerun_release.ndjson.gz"
+ ],
+ "rc": 1,
+ "stdout_tail": "      0  English text of a data-i18n element differs from the manifes\nCAT-static-swap    CAT   PASS           0        0  Client has no language-driven substitution of [data-i18n] el\nCAT-attr-literal   CAT   PASS           0        0  Fixed attribute (data-ct / data-nh / data-also-h / data-sh) \nGOV-config         GOV   REPORT         1        1  Configuration source for this run (workbook or embedded defa\nGOV-stamp          GOV   PASS           0        0  Build metadata lacks framework hash, gate-manifest hash or s\nGOV-provisional    GOV   PASS           0        0  Active provisional ruling not stamped into build metadata\nGOV-lock           GOV   PASS           0        0  English projection differs from the locked baseline (needs -\nGOV-results        GOV   PASS           0        0  Build does not embed its own gate results (runner hash, mode\nGOV-mode           GOV   FAIL           2        1  Release configuration: buildMetadata.mode, CONFIG.reviewMode\nGOV-identity       GOV   PASS           0        0  Top-level stamp and embedded gateResults disagree on runner \nGOV-rerun          GOV   PASS           0        0  Embedded gateResults claim a different score than this runne\nGOV-headline       GOV   PASS           0        0  Embedded gateResults has no plain headline \"n/N\", carries co\nGOV-bundle         GOV   PASS           0        0  Assurance bundle not beside the report, or its manifest hash\nGOV-lock-cy        GOV   PASS           0        0  Welsh projection differs from the locked baseline (a change \nFT11-keyset        POL   PASS           0        0  FT-11 stacked-negative record key set differs from the basel\nPERF-device        PERF  MANUAL         0        0  Representative school-laptop load, toggle, filter, chart, ta\nA11Y-assist        A11Y  MANUAL         0        0  Keyboard, focus, live-region, caption, title/ARIA language a\nBROWSER-provenance UI    MANUAL         0        0  Every rendered visible/title/aria string in Welsh mode carri\nBROWSER-toggle     UI    MANUAL         0        0  Fixture toggle: every static key and keyed attribute shows e\n\n72/75 blocking gates pass; 6 report-only; 4 manual \u00b7 renderer paths complete 17/18\n  UI-DYN-16 partial  1/6 child strings English \u2014 renderStack legend, rows, table, tooltips\n  note: sensitiveFilters = true in the client; no signed D69 value to assert against\n\n[STK-caption-case] Realised stack caption begins with a lower-case letter (sentence-initial count-NP) (34,519 occ, 34,519 records) {'stk': 34519}\n  at whole|all|none|stk:pe_lessons[0]  \u00abk=10: \"y deg camp a ddewiswyd amlaf y\u2026\"\u00bb\n\n[CAT-values] Catalogue key with an empty value (release mode fails; dev mode reports) (72 occ, 1 records) {'client': 72}\n  at *|client[0]  \u00abd3\u00bb\n  EN: empty value: d3\n  CY: \n\n[GOV-mode] Release configuration: buildMetadata.mode, CONFIG.reviewMode, CONFIG.sensitiveFilters against the signed value (2 occ, 1 records) {'client': 2}\n  at *|client[0]  \u00ab\u00bb\n  EN: buildMetadata.mode = 'dev', expected \"release\"\n  CY: \n",
+ "stderr_tail": ""
+}

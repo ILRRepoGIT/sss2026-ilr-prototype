@@ -1,0 +1,38 @@
+{
+ "report": "../SSS2026_ILR_Report_V5.1_new-inn-primary-school_Bilingual.html",
+ "runner": "8.0.0",
+ "manifestHash": "c4221bba2cff4dcb",
+ "mode": "release",
+ "school": {
+  "slug": "new-inn-primary-school",
+  "id": "6782320",
+  "name": "New Inn Primary School"
+ },
+ "command": "python welsh_acceptance_gates_v8.py ../SSS2026_ILR_Report_V5.1_new-inn-primary-school_Bilingual.html --framework 01_Framework_v2.10.xlsx --mode release --baseline lock_new-inn-primary-school_v8.json --bundle-dir . --json results_release.json --evidence evidence_rerun_release.ndjson.gz",
+ "files": {
+  "runner": {
+   "path": "welsh_acceptance_gates_v8.py",
+   "sha256": "3057fef25b5d54bd564b0ee86affd3ef34048b4c1598c27eeb86ae3da2bde4fe"
+  },
+  "framework": {
+   "path": "01_Framework_v2.10.xlsx",
+   "sha256": "2c3a6bbf535702d1495b1491b0bbc384ceb47e71492524acf25a3cccc89de0c5"
+  },
+  "baseline": {
+   "path": "lock_new-inn-primary-school_v8.json",
+   "sha256": "93fc4b6246a332a1e9a03bd26c521b33a00be977e7045fc6f29b386268c7e57b"
+  },
+  "evidence": {
+   "path": "evidence.ndjson.gz",
+   "sha256": "547f1eb59490afd81bcd3d84681cc3cf1e4a91caf34798961c8501336703d7cb"
+  },
+  "browserHarness": {
+   "path": "browser_gate_provenance.py",
+   "sha256": "1b053e89396e50979ab9414529a72b2e5802855685cef8e9be6ba4ea1b0120a3"
+  },
+  "report": {
+   "path": "../SSS2026_ILR_Report_V5.1_new-inn-primary-school_Bilingual.html",
+   "sha256": "808d990190a23aea8839f692ff773fccbdaced032d512c52df9ce9de259a3527"
+  }
+ }
+}
