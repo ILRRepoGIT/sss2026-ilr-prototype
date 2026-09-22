@@ -2,9 +2,9 @@
  "cmd": [
   "/usr/bin/python3",
   "welsh_acceptance_gates_v8.py",
-  "../SSS2026_ILR_Report_V4.18_Bilingual.html",
+  "../SSS2026_ILR_Report_V4.19_Bilingual.html",
   "--framework",
-  "01_Framework_v2.11.xlsx",
+  "01_Framework_v2.12.xlsx",
   "--mode",
   "release",
   "--baseline",

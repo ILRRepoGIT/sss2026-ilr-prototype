@@ -33,7 +33,7 @@ PIPELINE_VERSION_V2 = "0.30.0"
 # defaults keep every V4.15 name; a school profile names its own.
 _PROFILE0 = load_config()[0]
 SCHOOL_SLUG = _PROFILE0.get("slug", "ysgol-penrhyn-dewi")
-REPORT_VERSION_V2 = _PROFILE0.get("reportVersion", "2026-prototype-V4.18-bilingual")
+REPORT_VERSION_V2 = _PROFILE0.get("reportVersion", "2026-prototype-V4.19-bilingual")
 
 # v2.1: "most likely" removed from the banned list - the Sport Wales
 # page-by-page feedback mandates the sentence form "Pupils were most likely

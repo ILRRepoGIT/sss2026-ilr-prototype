@@ -48,7 +48,7 @@ def test_appendix_club_frame_is_deprecated_not_deleted():
     assert "ui.appx_club" in LEX["deprecated_frames"]
     assert "ui.appx_club" not in LEX["interface_frames"]
     fw = latest_framework(CONFIG_DIR)
-    assert fw.name == "01_Framework_v2.11.xlsx"
+    assert fw.name >= "01_Framework_v2.11.xlsx"   # v2.11 introduced EN-09; later versions carry it forward
     wb = openpyxl.load_workbook(fw, read_only=True, data_only=True)
     rows = {str(r[0]): r for r in wb["43 Interface frames"].iter_rows(min_row=4, values_only=True) if r and r[0]}
     assert str(rows["ui.appx_club"][7]) == "DEPRECATED"

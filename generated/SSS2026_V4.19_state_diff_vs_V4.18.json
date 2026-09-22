@@ -1,0 +1,121 @@
+{
+ "from": "V4.18 (Framework v2.11)",
+ "to": "V4.19 (Framework v2.12 — Welsh alt frames)",
+ "ruling": "none — no English changed; GOV-lock asserted against 02c_lock_V418_v8.json",
+ "oldIdentity": {
+  "reportVersion": "2026-prototype-V4.18-bilingual"
+ },
+ "newIdentity": {
+  "reportVersion": "2026-prototype-V4.19-bilingual"
+ },
+ "states": {
+  "oldStates": 8280,
+  "newStates": 8280,
+  "removedStates": 0,
+  "removedStateKeys": [],
+  "removedCohorts": [],
+  "addedStates": 0,
+  "addedStateKeys": [],
+  "commonStatesIdentical": 8280,
+  "moduleChanges": {},
+  "moduleChangesByCohort": {},
+  "changedModuleExamples": {},
+  "otherFieldDiffs": []
+ },
+ "parts": {
+  "anyActivity": "equal",
+  "buildMetadata": {
+   "gateResults": {
+    "removed": [],
+    "added": [],
+    "changed": [
+     "evidenceSha256"
+    ]
+   },
+   "generatedAt": {
+    "old": "2026-09-22T17:16:23+00:00",
+    "new": "2026-09-22T18:19:21+00:00"
+   },
+   "identity": {
+    "removed": [],
+    "added": [],
+    "changed": [
+     "frameworkFile",
+     "frameworkSha256",
+     "frameworkVersion"
+    ]
+   },
+   "welshFramework": {
+    "old": "v2.11",
+    "new": "v2.12"
+   },
+   "welshFrameworkFile": {
+    "old": "01_Framework_v2.11.xlsx",
+    "new": "01_Framework_v2.12.xlsx"
+   },
+   "welshFrameworkSha256": {
+    "old": "819901480b245dddba0cac8c9750a25d5d75cbda7ac8bfcb4208e750dc1101af",
+    "new": "19655542a70a59ae04c324d5da87be11d2e4dc31df1d2a1a2c5e2a69c019a7a0"
+   }
+  },
+  "cohorts": "equal",
+  "filterOptions": "equal",
+  "messages": "equal",
+  "metricDefs": "equal",
+  "moduleLabels": "equal",
+  "participationVariation": "equal",
+  "reportVersion": "changed",
+  "schemaVersion": "equal",
+  "school": "equal",
+  "tier2Codes": "equal",
+  "welsh": {
+   "frames": {
+    "removed": [],
+    "added": [],
+    "changed": [
+     "ui.alt_yac_balls",
+     "ui.alt_yac_basketball",
+     "ui.alt_yac_cricket",
+     "ui.alt_yac_cyclist",
+     "ui.alt_yac_dragon_football",
+     "ui.alt_yac_dragon_kit",
+     "ui.alt_yac_dragon_wales",
+     "ui.alt_yac_football_splash",
+     "ui.alt_yac_footballer",
+     "ui.alt_yac_gymnastics",
+     "ui.alt_yac_heart",
+     "ui.alt_yac_horse",
+     "ui.alt_yac_tennis_football",
+     "ui.alt_yac_welsh_symbols"
+    ]
+   }
+  }
+ },
+ "locks": {
+  "english": {
+   "oldStates": 8280,
+   "newStates": 8280,
+   "removed": [],
+   "added": [],
+   "moved": 0,
+   "movedByCohortPrefix": {},
+   "movedKeys": []
+  },
+  "welsh": {
+   "oldStates": 8281,
+   "newStates": 8281,
+   "removed": [],
+   "added": [],
+   "moved": 0,
+   "movedByCohortPrefix": {},
+   "movedKeys": []
+  },
+  "ft11": {
+   "old": 837,
+   "new": 837,
+   "removed": [],
+   "added": []
+  },
+  "newLockEmitted": null
+ }
+}

@@ -31,9 +31,23 @@ def test_every_alt_literal_equals_its_sheet43_frame_english():
         assert alt == ALT_EN[key] == LEX["interface_frames"][key]["en"]
 
 
-def test_frames_are_pending_welsh_not_invented():
+def test_frames_welsh_is_the_workbooks_verbatim_never_invented():
+    # V4.16–V4.18: the fourteen frames were PENDING (empty Welsh). V4.19: Framework
+    # v2.12 carries the Welsh the owner supplied on 22 Sep 2026; the lexicon must
+    # equal the workbook cell character for character, and the workbook cell must
+    # equal the recorded source text (pipeline/make_framework_v212.WELSH_ALT).
+    import openpyxl
+    from pipeline.common import latest_framework, CONFIG_DIR
+    from pipeline.make_framework_v212 import WELSH_ALT
+    fw = latest_framework(CONFIG_DIR)
+    wb = openpyxl.load_workbook(fw, read_only=True, data_only=True)
+    rows = {str(r[0]): r for r in wb["43 Interface frames"].iter_rows(min_row=4, values_only=True) if r and r[0]}
     for key, *_ in YAC:
-        assert LEX["interface_frames"][key]["cy"] == ""
+        cy = LEX["interface_frames"][key]["cy"]
+        assert cy and cy == rows[key][4] == WELSH_ALT[key], key
+        assert cy.startswith("Darlun o’r Gystadleuaeth Artistiaid Ifanc: "), key
+        assert "'" not in cy and '"' not in cy, key          # typographic apostrophes only
+        assert "supplied by the owner" in str(rows[key][7]), key   # the status records the source
 
 
 def test_no_pupil_name_in_any_alt_text():
@@ -41,6 +55,8 @@ def test_no_pupil_name_in_any_alt_text():
     names = ("Isla", "Sofia", "Simay", "Chloe", "Zoe", "Ada", "Isla-Boe")
     for key, alt in ALT_EN.items():
         assert not any(re.search(r"\b" + n + r"\b", alt) for n in names), key
+        cy = LEX["interface_frames"][key]["cy"]                    # V4.19: the Welsh too
+        assert not any(re.search(r"\b" + n + r"\b", cy) for n in names), key
 
 
 def test_client_consumes_every_frame_and_none_of_the_retired():

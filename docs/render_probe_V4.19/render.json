@@ -1,0 +1,703 @@
+{
+ "embedded": {
+  "ui.alt_yac_dragon_kit": 99959,
+  "ui.alt_yac_welsh_symbols": 207287,
+  "ui.alt_yac_balls": 97015,
+  "ui.alt_yac_footballer": 185431,
+  "ui.alt_yac_football_splash": 256015,
+  "ui.alt_yac_cyclist": 98791,
+  "ui.alt_yac_dragon_football": 47087,
+  "ui.alt_yac_heart": 92143,
+  "ui.alt_yac_horse": 58647,
+  "ui.alt_yac_tennis_football": 71223,
+  "ui.alt_yac_gymnastics": 76187,
+  "ui.alt_yac_cricket": 71463,
+  "ui.alt_yac_basketball": 86547,
+  "ui.alt_yac_dragon_wales": 96999
+ },
+ "en": [
+  {
+   "key": "alt:ui.alt_yac_dragon_kit",
+   "alt": "Young Artists Competition drawing: a red dragon in a white Wales shirt numbered 11, holding a rugby ball, with one foot on a football and a leek in its tail",
+   "w": 480,
+   "h": 360,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a red dragon in a white Wales shirt numbered 11, holding a rugby ball, with one foot on a football and a leek in its tail",
+   "section": "m-intro"
+  },
+  {
+   "key": "alt:ui.alt_yac_welsh_symbols",
+   "alt": "Young Artists Competition drawing: symbols of Wales and sport together — a daffodil, a football, a cricket bat and ball, a red dragon, a rugby ball and a leek",
+   "w": 250,
+   "h": 152,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: symbols of Wales and sport together — a daffodil, a football, a cricket bat and ball, a red dragon, a rugby ball and a leek",
+   "section": "m-contents"
+  },
+  {
+   "key": "alt:ui.alt_yac_balls",
+   "alt": "Young Artists Competition drawing: a row of four balls — a red cricket ball, a black ball with white spots, an orange basketball and a black eight-ball",
+   "w": 560,
+   "h": 193,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a row of four balls — a red cricket ball, a black ball with white spots, an orange basketball and a black eight-ball",
+   "section": "m-contents"
+  },
+  {
+   "key": "alt:ui.alt_yac_dragon_wales",
+   "alt": "Young Artists Competition drawing: a red Welsh dragon with the word WALES in green letters across it",
+   "w": 160,
+   "h": 110,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a red Welsh dragon with the word WALES in green letters across it",
+   "section": "m-guide"
+  },
+  {
+   "key": "alt:ui.alt_yac_gymnastics",
+   "alt": "Young Artists Competition drawing: a gymnastics club — one gymnast leaping above a balance beam, another hanging from a high bar, beside a stack of coloured rings",
+   "w": 190,
+   "h": 153,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a gymnastics club — one gymnast leaping above a balance beam, another hanging from a high bar, beside a stack of coloured rings",
+   "section": "m-overview"
+  },
+  {
+   "key": "alt:ui.alt_yac_football_splash",
+   "alt": "Young Artists Competition drawing: a football with red and green panels bursting out of a splash of red and green paint",
+   "w": 220,
+   "h": 218,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a football with red and green panels bursting out of a splash of red and green paint",
+   "section": "ch-anfe"
+  },
+  {
+   "key": "alt:ui.alt_yac_basketball",
+   "alt": "Young Artists Competition drawing: a basketball player with a ponytail, in a red vest and black shorts, leaping to shoot a basketball framed by a red starburst",
+   "w": 150,
+   "h": 202,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a basketball player with a ponytail, in a red vest and black shorts, leaping to shoot a basketball framed by a red starburst",
+   "section": "m-inschool"
+  },
+  {
+   "key": "alt:ui.alt_yac_cyclist",
+   "alt": "Young Artists Competition drawing: a mountain biker in a helmet leaning low over a pink bike as it goes over a jump, against a blue watercolour splash",
+   "w": 190,
+   "h": 124,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a mountain biker in a helmet leaning low over a pink bike as it goes over a jump, against a blue watercolour splash",
+   "section": "m-outschool"
+  },
+  {
+   "key": "alt:ui.alt_yac_heart",
+   "alt": "Young Artists Competition drawing: a red heart holding four scenes of a red dragon playing football, rugby, gymnastics and cricket",
+   "w": 170,
+   "h": 157,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a red heart holding four scenes of a red dragon playing football, rugby, gymnastics and cricket",
+   "section": "m-everyone-sub"
+  },
+  {
+   "key": "alt:ui.alt_yac_horse",
+   "alt": "Young Artists Competition drawing: a rider in a red jacket and black helmet jumping a brown horse",
+   "w": 220,
+   "h": 175,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a rider in a red jacket and black helmet jumping a brown horse",
+   "section": "ch-lifelong"
+  },
+  {
+   "key": "alt:ui.alt_yac_cricket",
+   "alt": "Young Artists Competition drawing: a cricketer in a helmet, gloves and pads, swinging a bat at a red ball",
+   "w": 220,
+   "h": 205,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a cricketer in a helmet, gloves and pads, swinging a bat at a red ball",
+   "section": "ch-sport"
+  },
+  {
+   "key": "alt:ui.alt_yac_dragon_football",
+   "alt": "Young Artists Competition drawing: a smiling red dragon with cream wings, standing beside a football",
+   "w": 140,
+   "h": 121,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a smiling red dragon with cream wings, standing beside a football",
+   "section": "m-explore"
+  },
+  {
+   "key": "alt:ui.alt_yac_tennis_football",
+   "alt": "Young Artists Competition drawing: a football above a bright green tennis ball",
+   "w": 140,
+   "h": 286,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a football above a bright green tennis ball",
+   "section": "m-thanks"
+  },
+  {
+   "key": "alt:ui.alt_yac_footballer",
+   "alt": "Young Artists Competition drawing: a footballer with long fair hair, in a blue number 7 shirt, white shorts and pink boots, kicking a football",
+   "w": 170,
+   "h": 180,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a footballer with long fair hair, in a blue number 7 shirt, white shorts and pink boots, kicking a football",
+   "section": "m-appendices"
+  }
+ ],
+ "en_pdfPages": 62,
+ "cy": [
+  {
+   "key": "alt:ui.alt_yac_dragon_kit",
+   "alt": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: draig goch yn gwisgo crys gwyn Cymru â’r rhif 11 arno, yn dal pêl rygbi, gydag un droed ar bêl droed a chenhinen yn ei chynffon",
+   "w": 480,
+   "h": 360,
+   "ok": true,
+   "lang": null,
+   "cap": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: draig goch yn gwisgo crys gwyn Cymru â’r rhif 11 arno, yn dal pêl rygbi, gydag un droed ar bêl droed a chenhinen yn ei chynffon",
+   "section": "m-intro"
+  },
+  {
+   "key": "alt:ui.alt_yac_welsh_symbols",
+   "alt": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: symbolau Cymru a chwaraeon gyda’i gilydd — cenhinen Bedr, pêl droed, bat a phêl griced, draig goch, pêl rygbi a chenhinen",
+   "w": 250,
+   "h": 152,
+   "ok": true,
+   "lang": null,
+   "cap": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: symbolau Cymru a chwaraeon gyda’i gilydd — cenhinen Bedr, pêl droed, bat a phêl griced, draig goch, pêl rygbi a chenhinen",
+   "section": "m-contents"
+  },
+  {
+   "key": "alt:ui.alt_yac_balls",
+   "alt": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: rhes o bedair pêl — pêl griced goch, pêl ddu â smotiau gwyn, pêl fasged oren a phêl ddu â’r rhif wyth arni",
+   "w": 560,
+   "h": 193,
+   "ok": true,
+   "lang": null,
+   "cap": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: rhes o bedair pêl — pêl griced goch, pêl ddu â smotiau gwyn, pêl fasged oren a phêl ddu â’r rhif wyth arni",
+   "section": "m-contents"
+  },
+  {
+   "key": "alt:ui.alt_yac_dragon_wales",
+   "alt": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: draig goch Gymreig gyda’r gair WALES mewn llythrennau gwyrdd ar ei thraws",
+   "w": 160,
+   "h": 110,
+   "ok": true,
+   "lang": null,
+   "cap": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: draig goch Gymreig gyda’r gair WALES mewn llythrennau gwyrdd ar ei thraws",
+   "section": "m-guide"
+  },
+  {
+   "key": "alt:ui.alt_yac_gymnastics",
+   "alt": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: clwb gymnasteg — un gymnastwr yn neidio uwchben trawst cydbwysedd, un arall yn hongian o far uchel, wrth ymyl pentwr o gylchoedd lliwgar",
+   "w": 190,
+   "h": 153,
+   "ok": true,
+   "lang": null,
+   "cap": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: clwb gymnasteg — un gymnastwr yn neidio uwchben trawst cydbwysedd, un arall yn hongian o far uchel, wrth ymyl pentwr o gylchoedd lliwgar",
+   "section": "m-overview"
+  },
+  {
+   "key": "alt:ui.alt_yac_football_splash",
+   "alt": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: pêl droed â phaneli coch a gwyrdd yn ffrwydro allan o dasgiad o baent coch a gwyrdd",
+   "w": 220,
+   "h": 218,
+   "ok": true,
+   "lang": null,
+   "cap": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: pêl droed â phaneli coch a gwyrdd yn ffrwydro allan o dasgiad o baent coch a gwyrdd",
+   "section": "ch-anfe"
+  },
+  {
+   "key": "alt:ui.alt_yac_basketball",
+   "alt": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: chwaraewr pêl fasged â chynffon ferlen, mewn fest goch a siorts du, yn neidio i daflu pêl fasged wedi’i fframio gan ffrwydrad coch siâp seren",
+   "w": 150,
+   "h": 202,
+   "ok": true,
+   "lang": null,
+   "cap": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: chwaraewr pêl fasged â chynffon ferlen, mewn fest goch a siorts du, yn neidio i daflu pêl fasged wedi’i fframio gan ffrwydrad coch siâp seren",
+   "section": "m-inschool"
+  },
+  {
+   "key": "alt:ui.alt_yac_cyclist",
+   "alt": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: beiciwr mynydd mewn helmed, yn plygu’n isel dros feic pinc wrth fynd dros naid, yn erbyn tasgiad glas o ddyfrlliw",
+   "w": 190,
+   "h": 124,
+   "ok": true,
+   "lang": null,
+   "cap": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: beiciwr mynydd mewn helmed, yn plygu’n isel dros feic pinc wrth fynd dros naid, yn erbyn tasgiad glas o ddyfrlliw",
+   "section": "m-outschool"
+  },
+  {
+   "key": "alt:ui.alt_yac_heart",
+   "alt": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: calon goch sy’n cynnwys pedair golygfa o ddraig goch yn cymryd rhan mewn pêl droed, rygbi, gymnasteg a chriced",
+   "w": 170,
+   "h": 157,
+   "ok": true,
+   "lang": null,
+   "cap": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: calon goch sy’n cynnwys pedair golygfa o ddraig goch yn cymryd rhan mewn pêl droed, rygbi, gymnasteg a chriced",
+   "section": "m-everyone-sub"
+  },
+  {
+   "key": "alt:ui.alt_yac_horse",
+   "alt": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: marchog mewn siaced goch a helmed ddu ar gefn ceffyl brown sy’n neidio",
+   "w": 220,
+   "h": 175,
+   "ok": true,
+   "lang": null,
+   "cap": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: marchog mewn siaced goch a helmed ddu ar gefn ceffyl brown sy’n neidio",
+   "section": "ch-lifelong"
+  },
+  {
+   "key": "alt:ui.alt_yac_cricket",
+   "alt": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: chwaraewr criced mewn helmed, menig a phadiau, yn siglo bat tuag at bêl goch",
+   "w": 220,
+   "h": 205,
+   "ok": true,
+   "lang": null,
+   "cap": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: chwaraewr criced mewn helmed, menig a phadiau, yn siglo bat tuag at bêl goch",
+   "section": "ch-sport"
+  },
+  {
+   "key": "alt:ui.alt_yac_dragon_football",
+   "alt": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: draig goch sy’n gwenu, gydag adenydd lliw hufen, yn sefyll wrth ymyl pêl droed",
+   "w": 140,
+   "h": 121,
+   "ok": true,
+   "lang": null,
+   "cap": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: draig goch sy’n gwenu, gydag adenydd lliw hufen, yn sefyll wrth ymyl pêl droed",
+   "section": "m-explore"
+  },
+  {
+   "key": "alt:ui.alt_yac_tennis_football",
+   "alt": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: pêl droed uwchben pêl denis werdd lachar",
+   "w": 140,
+   "h": 286,
+   "ok": true,
+   "lang": null,
+   "cap": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: pêl droed uwchben pêl denis werdd lachar",
+   "section": "m-thanks"
+  },
+  {
+   "key": "alt:ui.alt_yac_footballer",
+   "alt": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: chwaraewr pêl droed â gwallt hir golau, mewn crys glas â’r rhif 7 arno, siorts gwyn ac esgidiau pinc, yn cicio pêl droed",
+   "w": 170,
+   "h": 180,
+   "ok": true,
+   "lang": null,
+   "cap": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: chwaraewr pêl droed â gwallt hir golau, mewn crys glas â’r rhif 7 arno, siorts gwyn ac esgidiau pinc, yn cicio pêl droed",
+   "section": "m-appendices"
+  }
+ ],
+ "cy_pdfPages": 65,
+ "cy_a11y": [
+  {
+   "key": "alt:ui.alt_yac_dragon_kit",
+   "alt": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: draig goch yn gwisgo crys gwyn Cymru â’r rhif 11 arno, yn dal pêl rygbi, gydag un droed ar bêl droed a chenhinen yn ei chynffon",
+   "w": 480,
+   "h": 360,
+   "ok": true,
+   "lang": null,
+   "cap": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: draig goch yn gwisgo crys gwyn Cymru â’r rhif 11 arno, yn dal pêl rygbi, gydag un droed ar bêl droed a chenhinen yn ei chynffon",
+   "section": "m-intro"
+  },
+  {
+   "key": "alt:ui.alt_yac_welsh_symbols",
+   "alt": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: symbolau Cymru a chwaraeon gyda’i gilydd — cenhinen Bedr, pêl droed, bat a phêl griced, draig goch, pêl rygbi a chenhinen",
+   "w": 250,
+   "h": 152,
+   "ok": true,
+   "lang": null,
+   "cap": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: symbolau Cymru a chwaraeon gyda’i gilydd — cenhinen Bedr, pêl droed, bat a phêl griced, draig goch, pêl rygbi a chenhinen",
+   "section": "m-contents"
+  },
+  {
+   "key": "alt:ui.alt_yac_balls",
+   "alt": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: rhes o bedair pêl — pêl griced goch, pêl ddu â smotiau gwyn, pêl fasged oren a phêl ddu â’r rhif wyth arni",
+   "w": 560,
+   "h": 193,
+   "ok": true,
+   "lang": null,
+   "cap": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: rhes o bedair pêl — pêl griced goch, pêl ddu â smotiau gwyn, pêl fasged oren a phêl ddu â’r rhif wyth arni",
+   "section": "m-contents"
+  },
+  {
+   "key": "alt:ui.alt_yac_dragon_wales",
+   "alt": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: draig goch Gymreig gyda’r gair WALES mewn llythrennau gwyrdd ar ei thraws",
+   "w": 160,
+   "h": 110,
+   "ok": true,
+   "lang": null,
+   "cap": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: draig goch Gymreig gyda’r gair WALES mewn llythrennau gwyrdd ar ei thraws",
+   "section": "m-guide"
+  },
+  {
+   "key": "alt:ui.alt_yac_gymnastics",
+   "alt": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: clwb gymnasteg — un gymnastwr yn neidio uwchben trawst cydbwysedd, un arall yn hongian o far uchel, wrth ymyl pentwr o gylchoedd lliwgar",
+   "w": 190,
+   "h": 153,
+   "ok": true,
+   "lang": null,
+   "cap": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: clwb gymnasteg — un gymnastwr yn neidio uwchben trawst cydbwysedd, un arall yn hongian o far uchel, wrth ymyl pentwr o gylchoedd lliwgar",
+   "section": "m-overview"
+  },
+  {
+   "key": "alt:ui.alt_yac_football_splash",
+   "alt": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: pêl droed â phaneli coch a gwyrdd yn ffrwydro allan o dasgiad o baent coch a gwyrdd",
+   "w": 220,
+   "h": 218,
+   "ok": true,
+   "lang": null,
+   "cap": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: pêl droed â phaneli coch a gwyrdd yn ffrwydro allan o dasgiad o baent coch a gwyrdd",
+   "section": "ch-anfe"
+  },
+  {
+   "key": "alt:ui.alt_yac_basketball",
+   "alt": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: chwaraewr pêl fasged â chynffon ferlen, mewn fest goch a siorts du, yn neidio i daflu pêl fasged wedi’i fframio gan ffrwydrad coch siâp seren",
+   "w": 150,
+   "h": 202,
+   "ok": true,
+   "lang": null,
+   "cap": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: chwaraewr pêl fasged â chynffon ferlen, mewn fest goch a siorts du, yn neidio i daflu pêl fasged wedi’i fframio gan ffrwydrad coch siâp seren",
+   "section": "m-inschool"
+  },
+  {
+   "key": "alt:ui.alt_yac_cyclist",
+   "alt": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: beiciwr mynydd mewn helmed, yn plygu’n isel dros feic pinc wrth fynd dros naid, yn erbyn tasgiad glas o ddyfrlliw",
+   "w": 190,
+   "h": 124,
+   "ok": true,
+   "lang": null,
+   "cap": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: beiciwr mynydd mewn helmed, yn plygu’n isel dros feic pinc wrth fynd dros naid, yn erbyn tasgiad glas o ddyfrlliw",
+   "section": "m-outschool"
+  },
+  {
+   "key": "alt:ui.alt_yac_heart",
+   "alt": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: calon goch sy’n cynnwys pedair golygfa o ddraig goch yn cymryd rhan mewn pêl droed, rygbi, gymnasteg a chriced",
+   "w": 170,
+   "h": 157,
+   "ok": true,
+   "lang": null,
+   "cap": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: calon goch sy’n cynnwys pedair golygfa o ddraig goch yn cymryd rhan mewn pêl droed, rygbi, gymnasteg a chriced",
+   "section": "m-everyone-sub"
+  },
+  {
+   "key": "alt:ui.alt_yac_horse",
+   "alt": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: marchog mewn siaced goch a helmed ddu ar gefn ceffyl brown sy’n neidio",
+   "w": 220,
+   "h": 175,
+   "ok": true,
+   "lang": null,
+   "cap": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: marchog mewn siaced goch a helmed ddu ar gefn ceffyl brown sy’n neidio",
+   "section": "ch-lifelong"
+  },
+  {
+   "key": "alt:ui.alt_yac_cricket",
+   "alt": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: chwaraewr criced mewn helmed, menig a phadiau, yn siglo bat tuag at bêl goch",
+   "w": 220,
+   "h": 205,
+   "ok": true,
+   "lang": null,
+   "cap": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: chwaraewr criced mewn helmed, menig a phadiau, yn siglo bat tuag at bêl goch",
+   "section": "ch-sport"
+  },
+  {
+   "key": "alt:ui.alt_yac_dragon_football",
+   "alt": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: draig goch sy’n gwenu, gydag adenydd lliw hufen, yn sefyll wrth ymyl pêl droed",
+   "w": 140,
+   "h": 121,
+   "ok": true,
+   "lang": null,
+   "cap": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: draig goch sy’n gwenu, gydag adenydd lliw hufen, yn sefyll wrth ymyl pêl droed",
+   "section": "m-explore"
+  },
+  {
+   "key": "alt:ui.alt_yac_tennis_football",
+   "alt": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: pêl droed uwchben pêl denis werdd lachar",
+   "w": 140,
+   "h": 286,
+   "ok": true,
+   "lang": null,
+   "cap": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: pêl droed uwchben pêl denis werdd lachar",
+   "section": "m-thanks"
+  },
+  {
+   "key": "alt:ui.alt_yac_footballer",
+   "alt": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: chwaraewr pêl droed â gwallt hir golau, mewn crys glas â’r rhif 7 arno, siorts gwyn ac esgidiau pinc, yn cicio pêl droed",
+   "w": 170,
+   "h": 180,
+   "ok": true,
+   "lang": null,
+   "cap": "Darlun o’r Gystadleuaeth Artistiaid Ifanc: chwaraewr pêl droed â gwallt hir golau, mewn crys glas â’r rhif 7 arno, siorts gwyn ac esgidiau pinc, yn cicio pêl droed",
+   "section": "m-appendices"
+  }
+ ],
+ "cy_a11y_pdfPages": 99,
+ "page_starts_en": [
+  [
+   1,
+   "YOU ARE VIEWING Whole school · All pupils 366 pupil responses included"
+  ],
+  [
+   2,
+   "INTRODUCTION Welcome to your school’s results The School Sport Survey is one"
+  ],
+  [
+   3,
+   "CONTENTS Contents Use the links below, or the navigation panel on the"
+  ],
+  [
+   4,
+   "GUIDE How to use this report Everything you need to read this"
+  ],
+  [
+   5,
+   "YOUR SCHOOL Which pupils in our school took part in 2026? This"
+  ],
+  [
+   6,
+   "How many pupils responded? 174 Boys 186 Girls 0 Non-binary 6 Prefer"
+  ],
+  [
+   7,
+   "What is the ethnicity of your pupils who took part? High level"
+  ],
+  [
+   8,
+   "An Active Nation for Everyone Cenedl Actif i Bawb The vision for"
+  ],
+  [
+   9,
+   "Where are our pupils taking part in Sport? Click a bar to"
+  ],
+  [
+   10,
+   "WHAT IS THIS CHART SHOWING? Of the 366 pupils across the whole"
+  ],
+  [
+   11,
+   "AN ACTIVE NATION FOR EVERYONE How are our pupils active through sport"
+  ],
+  [
+   12,
+   "On average, pupils across the whole school participated in five sports in"
+  ],
+  [
+   13,
+   "AN ACTIVE NATION FOR EVERYONE How are our pupils active through sport"
+  ],
+  [
+   14,
+   "On average, pupils across the whole school participated in two sports in"
+  ],
+  [
+   15,
+   "AN ACTIVE NATION FOR EVERYONE How does participation differ between groups of"
+  ],
+  [
+   16,
+   "Pupils with a learning difficulty Click a bar to filter the report"
+  ],
+  [
+   17,
+   "How do our pupils usually take part in sport? Click a bar"
+  ],
+  [
+   18,
+   "Sport in PE or lesson time was the most frequently selected setting,"
+  ],
+  [
+   19,
+   "followed by Somewhere else (248), In a club outside of school (214)"
+  ],
+  [
+   20,
+   "A Lifelong Enjoyment of Sport Mwynhad Gydol Oes o Chwaraeon The vision"
+  ],
+  [
+   21,
+   "Year 3: sport in PE or lesson time was the most common"
+  ],
+  [
+   22,
+   "Pupils who did at least one sport in each setting, by year"
+  ],
+  [
+   23,
+   "Do PE and Active Lessons make you feel: Healthy? 162 Very 150"
+  ],
+  [
+   24,
+   "Asked whether PE and Active Lessons make them feel healthy, confident and"
+  ],
+  [
+   25,
+   "‘Having fun’ was the most common option chosen by girls across the"
+  ],
+  [
+   26,
+   "the four charts can be selected to filter the wider report by"
+  ],
+  [
+   27,
+   "How much do pupils enjoy sport: in Clubs Outside of School? Click"
+  ],
+  [
+   28,
+   "WHAT IS THIS TABLE SHOWING? Among boys across the whole school, 93"
+  ],
+  [
+   29,
+   "WHAT IS THIS CHART SHOWING? 70 of the 366 pupils across the"
+  ],
+  [
+   30,
+   "How confident are you to learn a new skill? Click a bar"
+  ],
+  [
+   31,
+   "WHAT ARE THESE CHARTS SHOWING? Pupils across the whole school were most"
+  ],
+  [
+   32,
+   "Sport Specific Data Chwaraeon This chapter brings together overall sport participation and"
+  ],
+  [
+   33,
+   "Tennis was the most frequently selected sport or activity, selected by 273"
+  ],
+  [
+   34,
+   "WHAT IS THIS SECTION SHOWING? Tennis led among boys (91 selections), while"
+  ],
+  [
+   35,
+   "Which sports would our pupils like to do more of but are"
+  ],
+  [
+   36,
+   "WHAT IS THIS TABLE SHOWING? Dodgeball had the largest unmet-demand count (81"
+  ],
+  [
+   37,
+   "SUMMARY Summary of the pupils you are viewing AN ACTIVE NATION FOR"
+  ],
+  [
+   38,
+   "NEXT STEPS What your findings may help you explore Dodgeball was selected"
+  ],
+  [
+   39,
+   "THANK YOU Thank you and next steps Thank you to every pupil"
+  ],
+  [
+   40,
+   "APPENDICES Appendix — full results for the pupils you are viewing Complete"
+  ],
+  [
+   41,
+   "Answer All Boys Girls Golf 120 75 45 Gymnastics 53 12 40"
+  ],
+  [
+   42,
+   "Answer All Boys Girls Target Shooting 58 37 19 Tennis 273 143"
+  ],
+  [
+   43,
+   "Answer All Boys Girls Circus Skills 1 0 1 Cricket 147 79"
+  ],
+  [
+   44,
+   "Answer All Boys Girls Scootering 1 1 0 Skiing 2 2 0"
+  ],
+  [
+   45,
+   "Answer All Boys Girls Badminton 5 1 4 Baseball 2 1 1"
+  ],
+  [
+   46,
+   "Answer All Boys Girls Rock Climbing or Bouldering 1 1 0 Roller"
+  ],
+  [
+   47,
+   "Which sports do pupils say they do in a Club Outside of"
+  ],
+  [
+   48,
+   "Answer All Boys Girls Judo 2 1 1 Karate 4 2 2"
+  ],
+  [
+   49,
+   "Answer All Boys Girls Trampolining 11 7 4 Triathlon 12 7 5"
+  ],
+  [
+   50,
+   "Answer All Boys Girls Basketball 30 21 8 Boccia 2 2 0"
+  ],
+  [
+   51,
+   "Answer All Boys Girls Kickboxing 2 2 0 Lacrosse 1 1 0"
+  ],
+  [
+   52,
+   "Answer All Boys Girls Street Dance 1 0 1 Surf lifesaving 18"
+  ],
+  [
+   53,
+   "Which sports would our pupils like to do more of? Answer All"
+  ],
+  [
+   54,
+   "Answer All Boys Girls Motor Racing 92 66 26 Mountain Biking 94"
+  ],
+  [
+   55,
+   "Full unmet demand Which sports would our pupils like to do more"
+  ],
+  [
+   56,
+   "Answer All Boys Girls Karate 42 18 24 Motor Racing 53 38"
+  ],
+  [
+   57,
+   "Answer All Boys Girls Wrestling 31 14 17 “I would do more"
+  ],
+  [
+   58,
+   "Answer All Boys Girls Yes, always 125 79 46 Yes, sometimes 186"
+  ],
+  [
+   59,
+   "Answer All Boys Girls A lot 197 94 102 A little 100"
+  ],
+  [
+   60,
+   "Answer All Boys Girls Not very 60 24 35 Not at all"
+  ],
+  [
+   61,
+   "How many pupil responses came from each year group? Answer All Boys"
+  ],
+  [
+   62,
+   "How do our pupils usually take part in sport? Answer All Boys"
+  ]
+ ],
+ "v419_alt_check": {
+  "cy_alt_equals_frame_cy": true,
+  "cy_a11y_caption_equals_frame_cy": true,
+  "en_alt_equals_frame_en": true,
+  "count": 14
+ }
+}

@@ -177,9 +177,19 @@ ok(els().every(e => norm(e.textContent) === norm(STATIC[e.getAttribute("data-i18
   ok(d.getElementById("a11y-desc").classList.contains("cy-missing") && d.getElementById("a11y-desc").getAttribute("lang") === "en" && /larger text/.test(txt("#a11y-desc")), "V4.17 Welsh mode: the description stays marked pending English until the translator returns it");
   ok(d.getElementById("h-a11y-glossary").classList.contains("cy-missing") && d.getElementById("h-a11y-glossary").getAttribute("lang") === "en" && txt("#h-a11y-glossary") === "Glossary of terms used in this report", "Welsh mode: the glossary heading the translator returned in English stays marked pending (flag 15)", txt("#h-a11y-glossary"));
   ok(d.querySelector("#a11y-glossary-list a").textContent === d.querySelector("#faqd-base summary").textContent, "glossary follows the language");
+  // V4.19 (Framework v2.12): the fourteen alt frames carry their Welsh — in Welsh mode every picture's alt IS
+  // the sheet-43 Welsh (not the English fallback), and the accessibility caption under it is that Welsh
+  { const FR = JSON.parse(data).welsh.frames; const imgs = Array.from(d.querySelectorAll("img[data-frame-attr]"));
+    const key = i => i.getAttribute("data-frame-attr").split(":")[1].trim();
+    ok(imgs.length === 14 && imgs.every(i => key(i).startsWith("ui.alt_yac_") && FR[key(i)] && FR[key(i)].cy && FR[key(i)].cy.length > 0), "V4.19: all fourteen alt frames carry a Welsh value in the payload", imgs.length);
+    ok(imgs.every(i => i.getAttribute("alt") === FR[key(i)].cy && /^Darlun o’r Gystadleuaeth Artistiaid Ifanc: /.test(i.getAttribute("alt"))), "V4.19 Welsh mode: every picture's alt is the frame's Welsh", imgs[0] && imgs[0].getAttribute("alt").slice(0, 60));
+    ok(imgs.every(i => i.getAttribute("alt") !== FR[key(i)].en), "V4.19 Welsh mode: no picture falls back to the English alt");
+    ok(imgs.every(i => i.nextElementSibling && i.nextElementSibling.classList.contains("a11y-cap") && i.nextElementSibling.textContent === FR[key(i)].cy), "V4.19 Welsh mode, switch on: the caption under each picture is the Welsh alt");
+    ok(Object.keys(FR).filter(k => !FR[k].cy).sort().join(",") === "ui.a11y_glossary_heading,ui.a11y_switch_desc", "V4.19: exactly two frames remain pending (switch description, glossary heading)", Object.keys(FR).filter(k => !FR[k].cy).join(",")); }
   btn.click();
   A.click();
   ok(!d.documentElement.classList.contains("a11y") && A.getAttribute("aria-checked") === "false" && !/a11y=/.test(w.location.hash), "switch off: class and hash flag removed");
+  ok(Array.from(d.querySelectorAll("img[data-frame-attr]")).every(i => i.getAttribute("alt") === JSON.parse(data).welsh.frames[i.getAttribute("data-frame-attr").split(":")[1].trim()].en), "V4.19 English mode: every picture's alt is the frame's English again");
   ok(d.querySelectorAll("details.dtable[open]").length === dtBefore && !d.querySelector("details.dtable table[tabindex]"), "off: data tables restored to their earlier state", d.querySelectorAll("details.dtable[open]").length);
   // screen-reader structure present in both modes, invisible
   ok(Array.from(d.querySelectorAll(".chart-card h4[id^='ch-']")).length > 10 && Array.from(d.querySelectorAll(".chart-card[role='group']")).every(c => d.getElementById(c.getAttribute("aria-labelledby"))), "chart cards are groups labelled by their own heading");

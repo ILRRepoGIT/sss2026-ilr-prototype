@@ -1,17 +1,17 @@
 {
- "report": "../SSS2026_ILR_Report_V4.18_Bilingual.html",
+ "report": "../SSS2026_ILR_Report_V4.19_Bilingual.html",
  "runner": "8.0.0",
  "manifestHash": "c4221bba2cff4dcb",
  "mode": "release",
- "command": "python welsh_acceptance_gates_v8.py ../SSS2026_ILR_Report_V4.18_Bilingual.html --framework 01_Framework_v2.11.xlsx --mode release --baseline lock_V418_v8.json --bundle-dir . --json results_release.json --evidence evidence_rerun_release.ndjson.gz",
+ "command": "python welsh_acceptance_gates_v8.py ../SSS2026_ILR_Report_V4.19_Bilingual.html --framework 01_Framework_v2.12.xlsx --mode release --baseline lock_V418_v8.json --bundle-dir . --json results_release.json --evidence evidence_rerun_release.ndjson.gz",
  "files": {
   "runner": {
    "path": "welsh_acceptance_gates_v8.py",
    "sha256": "3057fef25b5d54bd564b0ee86affd3ef34048b4c1598c27eeb86ae3da2bde4fe"
   },
   "framework": {
-   "path": "01_Framework_v2.11.xlsx",
-   "sha256": "819901480b245dddba0cac8c9750a25d5d75cbda7ac8bfcb4208e750dc1101af"
+   "path": "01_Framework_v2.12.xlsx",
+   "sha256": "19655542a70a59ae04c324d5da87be11d2e4dc31df1d2a1a2c5e2a69c019a7a0"
   },
   "baseline": {
    "path": "lock_V418_v8.json",
@@ -19,15 +19,15 @@
   },
   "evidence": {
    "path": "evidence.ndjson.gz",
-   "sha256": "f9dd114d48ac8f8f8de7927ee77ebfab19c61260703b3fab796f1510743f72aa"
+   "sha256": "94bbf8a3fa35a10d39302371cb261acedcee167b60e5cee0b418de9a9287c0c3"
   },
   "browserHarness": {
    "path": "browser_gate_provenance.py",
    "sha256": "1b053e89396e50979ab9414529a72b2e5802855685cef8e9be6ba4ea1b0120a3"
   },
   "report": {
-   "path": "../SSS2026_ILR_Report_V4.18_Bilingual.html",
-   "sha256": "c98de2619974354fe235c6ba658d7ac49f2cd752734bae2727824c805a4b3316"
+   "path": "../SSS2026_ILR_Report_V4.19_Bilingual.html",
+   "sha256": "923debbd97a99ccebb3cf72ccbecf361eca55302c10f2e34b93dbc712afa8e51"
   }
  }
 }

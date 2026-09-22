@@ -280,3 +280,13 @@ patched to pass a gate, and no Welsh was composed.
   context paragraph) are kept verbatim on the V4.18 handoff's Retired sheet;
   they are no longer translator rows and would need re-adding if the section
   ever returned.
+
+## V4.19 — the fourteen Welsh alt texts (Framework v2.12)
+
+- **Provenance.** The Welsh for the Young Artists Competition alt frames was
+  supplied by the owner in the session on 22 Sep 2026 and entered verbatim;
+  the workbook status says so. Whether the translator produced it is not
+  recorded — the owner is asked (sheet 71). Nothing about the strings was
+  checked beyond the mechanical (prefix, apostrophes, no pupil's name).
+- **Two frames still pending.** `ui.a11y_switch_desc` and
+  `ui.a11y_glossary_heading` still render as marked English in Welsh mode.
