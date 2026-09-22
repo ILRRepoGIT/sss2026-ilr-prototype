@@ -5,7 +5,7 @@ deployment plan §4.2). One row per school in the dataset; the build starts
 from this register and must finish with exactly the eligible rows built.
 
     python -m prod.register build <stage2.parquet> <out_dir> [--plasc <plasc2026.xlsx>] \\
-                                  [--min-responses 5] [--framework config/01_Framework_v2.14.xlsx]
+                                  [--min-responses 5] [--framework config/01_Framework_v2.15.xlsx]
     python -m prod.register profile <register.json> <school_id> <out.json> --release <tag>
 
 `build` writes register.json and register.csv (the same rows), a summary
@@ -31,8 +31,9 @@ the dataset / PLASC or derived by a stated rule:
                 and no hold; the status column names the reason otherwise
 
 Statuses: eligible · no_report_below_threshold · held_no_year ·
-held_la_name_cy (the default for the four authorities without a sheet-53
-row — owner decision 22 Sep 2026, option A; --allow-missing-la-cy overrides). Special schools are built
+held_la_name_cy (any authority spelling without a sheet-53 row; since Framework
+v2.15 carries the four dataset spellings — owner instruction 22 Sep 2026 — no
+school is held on the 22 Sep dataset; --allow-missing-la-cy overrides). Special schools are built
 under the profile family their years imply and flagged (special=true) for
 Sport Wales's profile-matrix decision.
 """
@@ -251,7 +252,7 @@ def main(argv=None):
     sub = ap.add_subparsers(dest="cmd", required=True)
     b = sub.add_parser("build"); b.add_argument("parquet"); b.add_argument("out_dir")
     b.add_argument("--plasc"); b.add_argument("--min-responses", type=int, default=5)
-    b.add_argument("--framework", default="config/01_Framework_v2.14.xlsx")
+    b.add_argument("--framework", default="config/01_Framework_v2.15.xlsx")
     b.add_argument("--allow-missing-la-cy", action="store_true",
                    help="build schools whose authority has no Welsh row on sheet 53 (default: HELD — owner decision 22 Sep 2026, option A)")
     p = sub.add_parser("profile"); p.add_argument("register"); p.add_argument("school_id"); p.add_argument("out")

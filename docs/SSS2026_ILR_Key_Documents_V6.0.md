@@ -18,7 +18,7 @@ with **0 states moved**. This document is the key record of the round; the opera
 | 8 or 16 cores, then a 64-vCPU quota approved; cut the build time | One Standard_D64as_v5 (64 vCPU / 256 GiB, UK South, 1 TB SSD); the runner builds about 50 schools at once (its default is cores − 2, with a memory guard); measured per-school cost on a two-core sandbox 209–424 s including all assurance → the ≈935 eligible schools in roughly 1½–2 hours |
 | Unique URL per school, hosted on Industryline's SSS2026 website (agreed with Welsh Government) | HMAC-SHA256 link tokens (key in Key Vault, 130 bits), static hosting on a subdomain of `schoolsportsurvey2026.co.uk` through Front Door, `noindex`, no listing, 404 for an unknown link |
 | Schools first; LA and regional reports to follow | The link scheme reserves `/2026/la/` and `/2026/region/`; the register and runner take a `family` field |
-| Colleague sets up the estate from written instructions (subscription, resource group and quota already in place); GitHub carries the build | The provisioning guide (CLI steps and Bicep), the VM bootstrap script, the runbook; the repository at `ILRRepoGIT/sss2026-ilr-prototype`, branch `production/v6.0` (tag `v6.0-rc3`; rc2 is the commit the owner's agent pushed, rc3 the handover-review corrections to the operator documents, bootstrap and publication commands), delivered as a gitbundle in the deployment folder |
+| Colleague sets up the estate from written instructions (subscription, resource group and quota already in place); GitHub carries the build | The provisioning guide (CLI steps and Bicep), the VM bootstrap script, the runbook; the repository at `ILRRepoGIT/sss2026-ilr-prototype`, branch `production/v6.0` (tag `v6.0-rc4`; rc2 is the commit the owner's agent pushed, rc3 the handover-review corrections to the operator documents, bootstrap and publication commands, rc4 Framework v2.15 — the four local-authority rows, every school in the full run), delivered as a gitbundle in the deployment folder |
 
 ## 2. What was built
 
@@ -27,10 +27,12 @@ PLASC January 2026 — 1,016 schools with a matched school id (121,881 accepted 
 no reference school and get no report). Official names from PLASC for 1,013 schools; local-authority
 Welsh names from Framework sheet 53; the Regional Sport Partnership from the survey region (the five
 regions map one-to-one onto the five partnerships on sheet 53; the three V5.3 profiles are
-reproduced exactly). Status on the 22 September data after the owner's decisions: **786 eligible**, 23 below the rule-of-five
-threshold (`no_report_below_threshold`), **207 held** (`held_la_name_cy`: the four authorities whose dataset
-spelling has no Welsh row on Framework sheet 53 — option A, the translator's rows, then built under the same
-tag). The 58 schools with a year group inside their range that has no accepted response are eligible: EN-11
+reproduced exactly). Status on the 22 September data after the owner's decisions: **993 eligible**, 23 below the rule-of-five
+threshold (`no_report_below_threshold`), **none held** — Framework v2.15 carries the four local-authority rows
+in the dataset's spelling (owner instruction of 22 Sep 2026, superseding the earlier hold: Carmarthenshire / Sir
+Gaerfyrddin, Conwy, Rhondda Cynon Taf, The Vale of Glamorgan / Bro Morgannwg — the authorities' own Welsh names,
+the translator asked to confirm on sheet 77). The hold (`held_la_name_cy`) stays in the register as the safety
+net for any future dataset spelling without a row. The 58 schools with a year group inside their range that has no accepted response are eligible: EN-11
 (owner, 22 Sep 2026) gives them the overview sentence without "All" (`ui.overview_note_gap`, Framework v2.14),
 and Crickhowell High School (Years 7, 8, 10, 11; 244 responses) was built through the runner as the test —
 8,064 states, every check clean. Sixteen special
@@ -134,8 +136,7 @@ probe 11/11 in real Chromium under the production CSP.
 
 The translator: the two frames pending since V4.17 (`ui.a11y_switch_desc`, `ui.a11y_glossary_heading`), the three
 loading-mask frames and the gap-year variant (`ui.overview_note_gap`), the four sheet-22 qualifier rows from V5.0, and
-**four local-authority rows on sheet 53 in the dataset's spelling** (Carmarthenshire, Conwy, Rhondda Cynon Taf, The
-Vale of Glamorgan — option A, owner 22 Sep 2026; 207 eligible schools are held until the rows exist). The owner: the
+confirmation of the **four local-authority rows on sheet 53** entered on the owner's instruction (Framework v2.15). The owner: the
 signed D69; EN-08; the profile matrix for special schools. Decided 22 Sep 2026: schools with 5–13 responses receive
 a report; gap-year schools take EN-11. Sport Wales: partial-response wording, the artwork credit, the
 partnership names, the FSM and teacher-survey fields, the O09/O10 sign-off. Operations: the Azure

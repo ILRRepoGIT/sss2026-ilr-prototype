@@ -1,7 +1,7 @@
 {
- "version": "v2.14",
- "framework_sha256": "7def40bcffe9b0609d7afdc3866854eaa12e48f57fe08353d8c5fefa753e0232",
- "framework_file": "01_Framework_v2.14.xlsx",
+ "version": "v2.15",
+ "framework_sha256": "5bec4bda7a3f838e40774efba786c0e92bbc7339f0a50ed0b2d3772adffa6c32",
+ "framework_file": "01_Framework_v2.15.xlsx",
  "audiences": {
   "Generated from sheet 18 by rule. Note the two divergences from English that recur in every row: (1) after a numeral with the article Welsh uses the SINGULAR head (y 12 disgybl, not y 12 ddisgyblion); (2) the scope phrase is locative and triggers the nasal mutation (ym Mlwyddyn 8). The HOLL column is the parent-audience form ('all Year 8 pupils').": {
    "bare": "",
@@ -4549,7 +4549,11 @@
   "Mid Wales Sport Partnership [MWSP]": "Partneriaeth Chwaraeon Canolbarth Cymru [MWSP]",
   "Central South Active Partnership [CSAP]": "Partneriaeth Actif Canolbarth y De [CSAP]",
   "Gwent Sport Partnership [GSP]": "Partneriaeth Chwaraeon Gwent [GSP]",
-  "13th April – 17th July 2026": "13 Ebrill – 17 Gorffennaf 2026"
+  "13th April – 17th July 2026": "13 Ebrill – 17 Gorffennaf 2026",
+  "Carmarthenshire": "Sir Gaerfyrddin",
+  "Conwy": "Conwy",
+  "Rhondda Cynon Taf": "Rhondda Cynon Taf",
+  "The Vale of Glamorgan": "Bro Morgannwg"
  },
  "handoff": [
   {
