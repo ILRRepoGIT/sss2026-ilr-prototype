@@ -1,0 +1,37 @@
+{
+ "report": "SSS2026_ILR_Report_V5.2_castell-alun-high-school_Bilingual.html",
+ "reportSha256": "1dcc0098741cc89f36a91a12056e96ac8b8e305a314d00374b96298cfd66a584",
+ "headline": "72/75",
+ "mode": "release",
+ "runner": "8.0.0",
+ "manifestHash": "c4221bba2cff4dcb",
+ "paths": "17/18",
+ "failing": [
+  {
+   "gate": "STK-caption-case",
+   "occurrences": 22236
+  },
+  {
+   "gate": "CAT-values",
+   "occurrences": 72
+  },
+  {
+   "gate": "GOV-mode",
+   "occurrences": 2
+  }
+ ],
+ "notes": [
+  "sensitiveFilters = true in the client; no signed D69 value to assert against"
+ ],
+ "at": "2026-09-22T17:42:26+00:00",
+ "dev": {
+  "headline": "71/72",
+  "paths": "17/18",
+  "failing": [
+   {
+    "gate": "STK-caption-case",
+    "occurrences": 22236
+   }
+  ]
+ }
+}

@@ -1,0 +1,125 @@
+# Narrative template catalogue
+
+Named core templates (pipeline/narrative2.py):
+
+- `leader_multi_v2`: {leader} was the most frequently selected {noun}, selected by {count} of the {base} {who}{ans}.
+- `tie2_multi_v2`: {l1} and {l2} were tied as the most frequently selected {noun_pl}, with {count} {selw} each, {qual}.
+- `tie3_multi_v2`: {l1}, {l2} and {l3} were jointly the most frequently selected {noun_pl}, with {count} {selw} each, {qual}.
+- `tie4plus_multi_v2`: {n} {noun_pl} were tied for the highest number of selections, with {count} {selw} each, {qual}. The full list is shown in the chart.
+- `runner_v2`: Next came {runner}, with {count} {selw}, {qual}.
+- `runner_joint_v2`: Next came {runners} jointly, with {count} {selw} each, {qual}.
+- `runner_many_v2`: {n} answers were jointly next, with {count} {selw} each, {qual}; the chart shows them all.
+- `leader_single_v2`: Of the {base} {who}{ans}, the largest group ({count}{pct}) said ‘{leader}’.
+- `tie_single_v2`: Answers were tied {qual}: ‘{l1}’ and ‘{l2}’ were each chosen by {count} {rword}.
+- `combined_v2`: {count} of the {base} {who}{ans} ({pct}%) {verb}.
+- `combined_nopct_v2`: {count} of the {base} {who}{ans} {verb}.
+- `gender_pct_compare_v2`: Among boys {place}, {b_n} of {b_base} ({b_pct}%) {verb}, compared with {g_n} of {g_base} ({g_pct}%) of girls.
+- `gender_count_compare_v2`: Among {who}, {b_n} of the {b_base} {bw} and {g_n} of the {g_base} {gw} who answered {verb}.
+- `phase_pct_compare_v2`: {p_n} of {p_base} {p_rw} in the primary phase ({p_pct}%) {verb}, compared with {s_n} of {s_base} ({s_pct}%) in the secondary phase{grp}.
+- `parent_compare_v2`: For comparison, among {parent_phrase} the figure was {p_n} of {p_base}.
+- `rank_diff_v2`: {item} was the {r1} most frequently selected {noun} among {g1} and the {r2} among {g2}.
+- `shared_top_v2`: {items} featured among the leading selections for both boys and girls {place}.
+- `gender_leader_pair_v2`: {b_leader} led among boys ({b_n}), while {g_leader} led among girls ({g_n}), {place2}.
+- `year_leaders_v2`: {sentences}
+- `cross_insight_v2`: Among {group_phrase}, {finding}.
+- `not_enough_group_v2`: Your school’s data do not provide enough reportable information about {topic} {qual}: fewer than five pupils are included in that group.
+- `no_responses_v2`: No pupils in the selected view answered this question.
+- `not_asked_v2`: This question was not asked of pupils in the selected view.
+- `group_defined_v2`: This selected group contains {phrase}. The chart above keeps the wider picture for {demo} for context, with the selected answer highlighted.
+- `rank_same_v2`: {item} ranks first {qual}, as it does across the whole school.
+- `rank_changed_v2`: {item} leads {qual}, whereas {other} leads across the whole school.
+
+Composed module templates used in this build:
+
+- `age_setting_extremes_v10`
+- `avg_sports_setting_v11`
+- `avg_sports_v11`
+- `barrier_base1_v5`
+- `barrier_leader_v41`
+- `barrier_none_v41`
+- `barrier_runner_v41`
+- `combined_base1_v41`
+- `combined_nopct_v2`
+- `combined_v2`
+- `conf_base1_v41`
+- `confidence_dims_low_v5`
+- `confidence_dims_v5`
+- `confidence_equal_v3`
+- `confidence_joint_hi_v3`
+- `cross_insight_v2`
+- `current_vs_demand_v41`
+- `dl_combined_note_v11`
+- `enjoy_group_next_v41`
+- `enjoy_low_setting_v2`
+- `enjoy_settings_v2`
+- `enjoy_year_extremes_v2`
+- `f2_year_line_v12`
+- `gender_count_compare_v2`
+- `gender_leader_pair_v2`
+- `gender_pct_compare_v2`
+- `gender_phase_demand_v2`
+- `gender_phase_enjoy_v2`
+- `group_avg_sports_v11`
+- `group_codemand_top3_v12`
+- `group_defined_v2`
+- `group_excl_leader_v2`
+- `group_settings_rank_v10`
+- `group_sibling_conf_v2`
+- `group_sibling_skill_v2`
+- `group_sibling_trynew_v12`
+- `h1_an_freq_v3`
+- `h1_an_gender_leaders_v3`
+- `h1_an_leader_tie_v41`
+- `h1_an_leader_v3`
+- `h1_en_enjoy_conf_v3`
+- `h1_en_listened_v3`
+- `h1_ev_disability_v3`
+- `h1_ev_join_v3`
+- `h1_ev_listened_v3`
+- `h1_ll_barrier_v3`
+- `h1_ll_demand_v41`
+- `h2_join_prompt_v44`
+- `h2_unmet_prompt_v44`
+- `important_base1_v5`
+- `important_gender_leader_v5`
+- `important_leader_v5`
+- `important_runner_v5`
+- `leader_multi_v2`
+- `leader_multi_v2+runner_joint_v2`
+- `leader_multi_v2+runner_many_v2`
+- `leader_multi_v2+runner_v2`
+- `leader_single_v2`
+- `li_join_cross_v3`
+- `listened_always_v11`
+- `low_confidence_v2`
+- `no_additional_conf_v2`
+- `no_responses_v2`
+- `other_sports_note_v13`
+- `overall_top3_v13`
+- `parent_compare_v2`
+- `pe_feelings_composite_v2`
+- `phase_leaders_v2`
+- `rank_diff_v2`
+- `rank_parent_diff_v41`
+- `rank_parent_joint_v41`
+- `rank_parent_same_v41`
+- `runner_joint_v2`
+- `runner_many_v2`
+- `runner_v2`
+- `setting_participation_v2`
+- `setting_top3_v13`
+- `settings_group_next_v41`
+- `settings_rank_v2`
+- `take_part_prose_v3`
+- `tie2_multi_v2`
+- `tie3_multi_v2`
+- `tie4plus_multi_v2`
+- `tie_single_v2`
+- `unmet_base1_v12`
+- `unmet_leader_v11`
+- `unmet_runner_v11`
+- `wd_current_check_v3`
+- `welsh_when_playing_v10`
+- `year_leaders_v2`
+- `year_ties_v13`
+- `yg_setting_best_v11`

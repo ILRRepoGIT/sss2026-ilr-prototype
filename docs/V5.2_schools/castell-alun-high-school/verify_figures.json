@@ -1,0 +1,490 @@
+{
+ "school": "Castell Alun High School",
+ "acceptedRows": {
+  "package": 771,
+  "recomputed": 771
+ },
+ "responses_by_year": {
+  "codes": [
+   "y7",
+   "y8",
+   "y9",
+   "y10",
+   "y11"
+  ],
+  "package": [
+   182,
+   188,
+   112,
+   188,
+   101
+  ],
+  "recomputed": [
+   182,
+   188,
+   112,
+   188,
+   101
+  ],
+  "match": true,
+  "base": {
+   "package": 771,
+   "recomputed": 771,
+   "match": true
+  }
+ },
+ "responses_by_gender": {
+  "codes": [
+   "boy",
+   "girl",
+   "nonbinary",
+   "not_stated"
+  ],
+  "package": [
+   360,
+   398,
+   8,
+   5
+  ],
+  "recomputed": [
+   360,
+   398,
+   8,
+   5
+  ],
+  "match": true,
+  "base": {
+   "package": 771,
+   "recomputed": 771,
+   "match": true
+  }
+ },
+ "disability_condition": {
+  "codes": [
+   "yes",
+   "no",
+   "not_sure",
+   "prefer_not_to_say"
+  ],
+  "package": [
+   170,
+   465,
+   125,
+   11
+  ],
+  "recomputed": [
+   170,
+   465,
+   125,
+   11
+  ],
+  "match": true,
+  "base": {
+   "package": 771,
+   "recomputed": 771,
+   "match": true
+  }
+ },
+ "learning_difficulty": {
+  "codes": [
+   "yes",
+   "no",
+   "not_sure",
+   "prefer_not_to_say"
+  ],
+  "package": [
+   59,
+   607,
+   96,
+   9
+  ],
+  "recomputed": [
+   59,
+   607,
+   96,
+   9
+  ],
+  "match": true,
+  "base": {
+   "package": 771,
+   "recomputed": 771,
+   "match": true
+  }
+ },
+ "welsh_speaking": {
+  "codes": [
+   "very_well",
+   "fair_amount",
+   "a_little",
+   "few_words",
+   "none"
+  ],
+  "package": [
+   29,
+   209,
+   384,
+   117,
+   32
+  ],
+  "recomputed": [
+   29,
+   209,
+   384,
+   117,
+   32
+  ],
+  "match": true,
+  "base": {
+   "package": 771,
+   "recomputed": 771,
+   "match": true
+  }
+ },
+ "join_in_easily": {
+  "codes": [
+   "always",
+   "sometimes",
+   "not_often",
+   "never"
+  ],
+  "package": [
+   308,
+   349,
+   75,
+   16
+  ],
+  "recomputed": [
+   308,
+   349,
+   75,
+   16
+  ],
+  "match": true,
+  "base": {
+   "package": 748,
+   "recomputed": 748,
+   "match": true
+  }
+ },
+ "ideas_listened": {
+  "codes": [
+   "always",
+   "sometimes",
+   "not_often",
+   "never"
+  ],
+  "package": [
+   217,
+   384,
+   108,
+   39
+  ],
+  "recomputed": [
+   217,
+   384,
+   108,
+   39
+  ],
+  "match": true,
+  "base": {
+   "package": 748,
+   "recomputed": 748,
+   "match": true
+  }
+ },
+ "enjoy_pe": {
+  "codes": [
+   "a_lot",
+   "a_little",
+   "not_much",
+   "not_at_all",
+   "not_sure"
+  ],
+  "package": [
+   391,
+   257,
+   72,
+   24,
+   6
+  ],
+  "recomputed": [
+   391,
+   257,
+   72,
+   24,
+   6
+  ],
+  "match": true,
+  "base": {
+   "package": 750,
+   "recomputed": 750,
+   "match": true
+  }
+ },
+ "enjoy_school_clubs": {
+  "codes": [
+   "a_lot",
+   "a_little",
+   "not_much",
+   "not_at_all",
+   "not_sure"
+  ],
+  "package": [
+   231,
+   212,
+   104,
+   94,
+   109
+  ],
+  "recomputed": [
+   231,
+   212,
+   104,
+   94,
+   109
+  ],
+  "match": true,
+  "base": {
+   "package": 750,
+   "recomputed": 750,
+   "match": true
+  }
+ },
+ "enjoy_community_clubs": {
+  "codes": [
+   "a_lot",
+   "a_little",
+   "not_much",
+   "not_at_all",
+   "not_sure"
+  ],
+  "package": [
+   457,
+   114,
+   46,
+   64,
+   69
+  ],
+  "recomputed": [
+   457,
+   114,
+   46,
+   64,
+   69
+  ],
+  "match": true,
+  "base": {
+   "package": 750,
+   "recomputed": 750,
+   "match": true
+  }
+ },
+ "enjoy_other_settings": {
+  "codes": [
+   "a_lot",
+   "a_little",
+   "not_much",
+   "not_at_all",
+   "not_sure"
+  ],
+  "package": [
+   433,
+   217,
+   51,
+   19,
+   30
+  ],
+  "recomputed": [
+   433,
+   217,
+   51,
+   19,
+   30
+  ],
+  "match": true,
+  "base": {
+   "package": 750,
+   "recomputed": 750,
+   "match": true
+  }
+ },
+ "confidence_try_new": {
+  "codes": [
+   "very",
+   "quite",
+   "not_very",
+   "not_at_all"
+  ],
+  "package": [
+   257,
+   327,
+   133,
+   31
+  ],
+  "recomputed": [
+   257,
+   327,
+   133,
+   31
+  ],
+  "match": true,
+  "base": {
+   "package": 748,
+   "recomputed": 748,
+   "match": true
+  }
+ },
+ "pe_feel_healthy": {
+  "codes": [
+   "very",
+   "quite",
+   "not_very",
+   "not_at_all"
+  ],
+  "package": [
+   369,
+   296,
+   65,
+   18
+  ],
+  "recomputed": [
+   369,
+   296,
+   65,
+   18
+  ],
+  "match": true,
+  "base": {
+   "package": 748,
+   "recomputed": 748,
+   "match": true
+  }
+ },
+ "ethnicityProfile": {
+  "package": [
+   709,
+   21,
+   11,
+   7,
+   6,
+   14,
+   3
+  ],
+  "recomputed": [
+   709,
+   21,
+   11,
+   7,
+   6,
+   14,
+   3
+  ],
+  "match": true
+ },
+ "anyActivity": {
+  "package": 765,
+  "recomputed": 765,
+  "match": true
+ },
+ "freq_estimate": {
+  "codes": [
+   "none_reported",
+   "dont_know_only",
+   "less_weekly_only",
+   "e1",
+   "e2",
+   "e3",
+   "e4",
+   "e5",
+   "e6",
+   "e7",
+   "e8",
+   "e9plus"
+  ],
+  "package": [
+   6,
+   18,
+   29,
+   41,
+   87,
+   153,
+   158,
+   130,
+   68,
+   40,
+   29,
+   12
+  ],
+  "recomputed": [
+   6,
+   18,
+   29,
+   41,
+   87,
+   153,
+   158,
+   130,
+   68,
+   40,
+   29,
+   12
+  ],
+  "match": true,
+  "base": {
+   "package": 771,
+   "recomputed": 771,
+   "match": true
+  }
+ },
+ "club_freq_estimate": {
+  "codes": [
+   "none_reported",
+   "dont_know_only",
+   "less_weekly_only",
+   "e1",
+   "e2",
+   "e3",
+   "e4",
+   "e5",
+   "e6",
+   "e7",
+   "e8",
+   "e9plus"
+  ],
+  "package": [
+   210,
+   18,
+   28,
+   73,
+   123,
+   162,
+   101,
+   40,
+   10,
+   2,
+   1,
+   3
+  ],
+  "recomputed": [
+   210,
+   18,
+   28,
+   73,
+   123,
+   162,
+   101,
+   40,
+   10,
+   2,
+   1,
+   3
+  ],
+  "match": true,
+  "base": {
+   "package": 771,
+   "recomputed": 771,
+   "match": true
+  }
+ },
+ "allMatch": true
+}

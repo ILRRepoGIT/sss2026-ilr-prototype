@@ -55,14 +55,13 @@ the values stamped in the report's `buildMetadata.gateResults` / `identity`. Pre
     python browser_gate_provenance.py ../{rep} --states 60 --fixture auto --json browser_gate.json
 
 Gate pack v8 (unchanged since V4.15, sha256 in the manifest): CONJ-06 asserted against the reading the
-Framework names on sheet 11 (`MODE=figure`, D84). Framework v2.8 adds twelve sheet-23 sport rows from the
-live survey (S16, features PROVISIONAL PR-20) and the {{first}}/{{last}} slots of two sheet-43 frames
-(EN-06/EN-07); on the V4.15 prototype it reproduces the V4.15 corpus with 0 states moved.
+Framework names on sheet 11 (`MODE=figure`, D84). The Framework this build read is `{fw}` (sha256
+{fw_sha}); its own README row (sheet 00) states what changed in it and the round's entry in
+`sw-feedback-compliance-record.md` names the ruling, if any, under which the corpus moved.
 
-Baseline (D82): `{baseline}` is this school's OWN corpus lock, EMITTED by the build's QA stage — a
-real school's first build has no earlier lock to assert against (SSS_PREVIOUS_LOCK=none; GOV-lock is
-REPORT for that run, GOV-lock-cy and FT11-keyset are then asserted against the emitted lock by the reruns
-here). A rebuild of this school asserts against this lock; a change must cite a ruling.
+Baseline (D82): `{baseline}` is this school's OWN corpus lock, EMITTED by the build's QA stage
+({lock_para}). The reruns here assert GOV-lock-cy and FT11-keyset against it. A rebuild of this school
+asserts against this lock; a change must cite a ruling.
 
 Two-phase stamp (D81): the build ran the vendored, byte-identical v8 runner on the unstamped package,
 stamped `gateResults {{blockingPass, blockingTotal, headline, pending, disputed}}`, and the runs above re-run
@@ -77,10 +76,46 @@ its sha256 and the inclusion rule.
 """
 
 
+def lock_paragraph(lock: dict) -> str:
+    """One sentence from the lock's own `emitted` part: first emission, or a
+    re-emission under a recorded ruling, or asserted against a previous lock."""
+    e = lock.get("emitted") or {}
+    ruling = (e.get("ruling") or "").strip()
+    sup = e.get("supersedes")
+    if sup:
+        return (f"asserted against the previous lock `{sup}` during the build — "
+                f"{e.get('englishStatesMoved', 0)} English and {e.get('welshStatesMoved', 0)} Welsh states moved; "
+                f"ruling recorded: {ruling}" if ruling else
+                f"asserted against the previous lock `{sup}` during the build — "
+                f"{e.get('englishStatesMoved', 0)} English and {e.get('welshStatesMoved', 0)} Welsh states moved")
+    if ruling:
+        return ("a re-emission with no previous lock asserted (SSS_PREVIOUS_LOCK=none; GOV-lock is REPORT for that run) "
+                f"under the recorded ruling: {ruling}")
+    return ("a real school's first build has no earlier lock to assert against (SSS_PREVIOUS_LOCK=none; "
+            "GOV-lock is REPORT for that run)")
+
+
+def write_run_md(b: Path, v: str, pkg: dict, rep: Path, fw: Path, baseline: str, emitted: str, slug: str) -> None:
+    lock = json.load(open(b / baseline, encoding="utf-8"))
+    (b / "RUN.md").write_text(RUN_MD.format(v=v, school=pkg["school"]["name"], rep=rep.name, fw=fw.name,
+                                            fw_sha=sha(b / fw.name), lock_para=lock_paragraph(lock),
+                                            baseline=baseline, emitted=emitted, slug=slug), encoding="utf-8")
+
+
 def main():
-    slug, v = sys.argv[1], sys.argv[2]
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    slug, v = args[0], args[1]
     tree = GENERATED_DIR
     rep = tree / f"SSS2026_ILR_Report_{v}_{slug}_Bilingual.html"
+    if "--run-md-only" in sys.argv:
+        # rewrite RUN.md of an existing bundle from the files it already holds (RUN.md is not in the manifest)
+        from .common import latest_framework
+        b = tree / "bundle"
+        pkg = json.load(open(tree / f"{slug}.report.json", encoding="utf-8"))
+        write_run_md(b, v, pkg, rep, latest_framework(CONFIG_DIR), f"lock_{slug}_v8.json",
+                     f"lock_{slug}_v8_emitted.json", slug)
+        print("RUN.md rewritten:", b / "RUN.md")
+        return
     shutil.copyfile(tree / "report.html", rep)
     b = tree / "bundle"
     if b.exists():
@@ -112,8 +147,7 @@ def main():
            "files": {k: {"path": p, "sha256": sha(b / p)} for k, p in files.items()}}
     man["files"]["report"] = {"path": f"../{rep.name}", "sha256": sha(rep)}
     (b / "manifest.json").write_text(json.dumps(man, indent=1), encoding="utf-8")
-    (b / "RUN.md").write_text(RUN_MD.format(v=v, school=pkg["school"]["name"], rep=rep.name, fw=fw.name,
-                                            baseline=baseline, emitted=emitted, slug=slug), encoding="utf-8")
+    write_run_md(b, v, pkg, rep, fw, baseline, emitted, slug)
     out = {}
     for mode in ("dev", "release"):
         cmd = [sys.executable, "welsh_acceptance_gates_v8.py", f"../{rep.name}", "--framework", fw.name,

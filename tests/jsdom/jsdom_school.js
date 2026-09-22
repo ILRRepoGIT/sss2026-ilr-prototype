@@ -39,7 +39,7 @@ ok(scopeOpts.join(",") === offered.join(","), "scope select offers exactly the p
 ok(!scopeOpts.some(k => !offered.includes(k)), "no scope outside the profile (a primary school lists no secondary phase)");
 const yearOpts = D.metricDefs.responses_by_year.opts.map(o => o[0]);
 ok(yearOpts.join(",") === D.school.years.map(y => "y" + y).join(","), "responses-by-year chart shows the school's years only", yearOpts.join(","));
-ok(els().length === 216, "216 data-i18n elements", els().length);
+ok(els().length === 211, "211 data-i18n elements (V4.18: the five Club Sports rows retired — 216 before)", els().length);
 ok(els().every(e => norm(e.textContent) === norm(STATIC[e.getAttribute("data-i18n")].en)), "en static text equals manifest");
 ok(!/⟪missing:(?!key⟫)/.test(visible()) && data.indexOf("⟪missing:") === -1, "no ⟪missing⟫ markers in the page or the payload");
 // held cohorts: the bar stays, non-selectable (no cohort key exists for it)
