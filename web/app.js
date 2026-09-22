@@ -6,6 +6,93 @@
    decisions, no suppression decisions, and no network or AI calls.
 --------------------------------------------------------------------------*/
 const DATA = JSON.parse(document.getElementById("report-data").textContent);
+/* V6.0 (production, chunked delivery — deployment plan §2, review P0.7).
+   The SERVED package carries only the first state ("whole|all|none") inline;
+   every other state lives in a content-hashed chunk file per scope|gender
+   group under the release tree, fetched on demand, verified and cached.
+   DATA.chunked is the map of those files with each file's sha256, the
+   identity envelope every chunk must carry, and the base URL. The
+   monolithic assurance copy embeds every state and has no DATA.chunked, so
+   on that file this block is inert and the report behaves exactly as before.
+   Fail-closed: a view is never rendered from a chunk that failed to arrive,
+   failed its sha256, or carries another report's identity; a late response
+   from an earlier selection is discarded; while a view is loading the
+   report content is masked and printing is unavailable. */
+const CHUNKED = DATA.chunked || null;
+const _chunkLoaded = new Set();
+const _chunkPending = new Map();
+let _viewSeq = 0;
+const groupLoaded = g => !CHUNKED || _chunkLoaded.has(g) || !CHUNKED.map[g];
+function _hex(buf) {
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
+}
+async function fetchChunk(g, f) {
+  const r = await fetch(CHUNKED.base + f.path, { credentials: "same-origin" });
+  if (!r.ok) throw new Error("HTTP " + r.status + " " + f.path);
+  const buf = await r.arrayBuffer();
+  // fail closed: without SubtleCrypto (an insecure context) the file cannot be
+  // verified, so it is not used — the reports are served over HTTPS only
+  if (!(window.crypto && crypto.subtle)) throw new Error("integrity check unavailable (insecure context)");
+  const d = await crypto.subtle.digest("SHA-256", buf);
+  if (_hex(d) !== f.sha256) throw new Error("integrity " + f.path);
+  const body = JSON.parse(new TextDecoder("utf-8").decode(buf));
+  const env = body.env || {}, want = CHUNKED.envelope || {};
+  for (const k of ["family", "recipient", "release", "schema", "binding"])
+    if (env[k] !== want[k]) throw new Error("identity " + f.path + " " + k);
+  if (body.group !== g) throw new Error("group " + f.path);
+  const keys = Object.keys(body.states || {});
+  if (keys.length !== f.n) throw new Error("count " + f.path);
+  for (const k of keys) if (k.slice(0, g.length + 1) !== g + "|") throw new Error("key " + k);
+  return body.states;
+}
+function loadGroup(g) {
+  if (groupLoaded(g)) return Promise.resolve();
+  if (_chunkPending.has(g)) return _chunkPending.get(g);
+  const entry = CHUNKED.map[g];
+  const p = Promise.all(entry.files.map(f => fetchChunk(g, f))).then(parts => {
+    // commit only when EVERY part of the group verified
+    for (const st of parts) for (const k in st) DATA.states[k] = st[k];
+    _chunkLoaded.add(g); _chunkPending.delete(g);
+  }).catch(e => { _chunkPending.delete(g); throw e; });
+  _chunkPending.set(g, p);
+  return p;
+}
+/* the states a view reads: its own state and its "none" sibling, the boys'
+   and girls' states of the same scope and cohort (the appendix tables), and
+   the whole-school state; a group is fetched only when one of those states
+   is absent — the entry page inlines the three whole-school "none" states,
+   so the default view renders with no fetch at all */
+function neededKeys() {
+  const sc = state.scope, co = state.cohort;
+  return [sc + "|" + state.gender + "|" + co, sc + "|" + state.gender + "|none",
+          sc + "|boy|" + co, sc + "|girl|" + co, "whole|all|none"];
+}
+const groupsFor = () => Array.from(new Set(
+  neededKeys().filter(k => !DATA.states[k]).map(k => k.split("|").slice(0, 2).join("|"))
+)).filter(g => !groupLoaded(g));
+function setLoading(mode, retry) {
+  const m = document.getElementById("load-mask");
+  const main = document.getElementById("report");
+  const pb = document.getElementById("btn-print");
+  if (!m) return;
+  if (!mode) {
+    m.hidden = true; document.body.classList.remove("is-loading");
+    if (main) main.removeAttribute("aria-busy");
+    if (pb) pb.disabled = false;
+    return;
+  }
+  m.hidden = false; document.body.classList.add("is-loading");
+  if (main) main.setAttribute("aria-busy", "true");
+  if (pb) pb.disabled = true;
+  m.classList.toggle("load-error", mode === "error");
+  const rb = document.getElementById("load-retry");
+  if (rb) rb.onclick = retry || null;
+}
+/* Build configuration (Final Decision Approach D3):
+   reviewMode        - review banner + provisional markers visible
+   sensitiveFilters  - chart-derived filtering by disability / learning
+                       difficulty; release default is FALSE until O09/O10
+   showSummaries     - D22: chapter/final summaries visible               */
 /* Build configuration (Final Decision Approach D3):
    reviewMode        - review banner + provisional markers visible
    sensitiveFilters  - chart-derived filtering by disability / learning
@@ -133,6 +220,8 @@ const MARKUP_FRAMES = { "ui.a11y_switch": 1, "ui.a11y_switch_desc": 1, "ui.a11y_
   "ui.alt_yac_dragon_football": 1, "ui.alt_yac_heart": 1, "ui.alt_yac_horse": 1,
   "ui.alt_yac_tennis_football": 1, "ui.alt_yac_gymnastics": 1, "ui.alt_yac_cricket": 1,
   "ui.alt_yac_basketball": 1, "ui.alt_yac_dragon_wales": 1,
+  // V6.0: the chunked-delivery loading mask (production serving)
+  "ui.loading_view": 1, "ui.load_error": 1, "ui.retry": 1,
 };
 function applyFrameAttrs() {
   for (const el of document.querySelectorAll("[data-frame-attr]")) {
@@ -1435,7 +1524,7 @@ function nearestHeading() {
   }
   return best;
 }
-function update(prefix) {
+function renderView(prefix) {
   /* v5 (build 012, owner request): stay at the nearest heading above the
      reader's position when filters re-render the page */
   const anchor = prefix && window.scrollY > 200 ? nearestHeading() : null;
@@ -1469,6 +1558,27 @@ function update(prefix) {
   }
 }
 
+/* V6.0: every state change passes through here. On the monolithic copy
+   (no DATA.chunked) it renders at once, as before. On the served package it
+   first loads the chunks the view needs; the sequence number discards a
+   late response from an earlier selection, and nothing is rendered — no
+   label, no figure — until every needed chunk has verified. */
+function update(prefix) {
+  const need = CHUNKED ? groupsFor() : [];
+  const seq = ++_viewSeq;                 // every change supersedes any load in flight
+  if (!need.length) { if (CHUNKED) setLoading(null); renderView(prefix); return; }
+  setLoading("loading");
+  Promise.all(need.map(loadGroup)).then(() => {
+    if (seq !== _viewSeq) return;
+    setLoading(null);
+    renderView(prefix);
+  }).catch(err => {
+    if (seq !== _viewSeq) return;
+    if (window.console) console.error("ILR chunk load failed:", err && err.message);
+    setLoading("error", () => update(prefix));
+  });
+}
+
 const annFilter = () => cat("filter_applied");
 function setScope(k) { state.scope = k; update(annFilter()); }
 function setGender(k) { state.gender = k; update(annFilter()); }
@@ -1488,7 +1598,7 @@ document.addEventListener("click", e => {
   if (b.dataset.cohort) setCohort(b.dataset.cohort);
   else if (b.dataset.g) setGender(b.dataset.g);
   else if (b.id === "chip-x" || b.id === "vb-clear" || b.id === "btn-reset") clearAll();
-  else if (b.id === "btn-print") window.print();
+  else if (b.id === "btn-print") { if (!document.body.classList.contains("is-loading")) window.print(); }
   else if (b.id === "btn-lang") {
     state.lang = isCy() ? "en" : "cy";
     applyLanguageState();

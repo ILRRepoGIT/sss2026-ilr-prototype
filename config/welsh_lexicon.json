@@ -1,7 +1,7 @@
 {
- "version": "v2.12",
- "framework_sha256": "19655542a70a59ae04c324d5da87be11d2e4dc31df1d2a1a2c5e2a69c019a7a0",
- "framework_file": "01_Framework_v2.12.xlsx",
+ "version": "v2.13",
+ "framework_sha256": "f0deba39abd824877529f7ad66a57f844be94f0a47837a618b1982593d199ebc",
+ "framework_file": "01_Framework_v2.13.xlsx",
  "audiences": {
   "Generated from sheet 18 by rule. Note the two divergences from English that recur in every row: (1) after a numeral with the article Welsh uses the SINGULAR head (y 12 disgybl, not y 12 ddisgyblion); (2) the scope phrase is locative and triggers the nasal mutation (ym Mlwyddyn 8). The HOLL column is the parent-audience form ('all Year 8 pupils').": {
    "bare": "",
@@ -4422,6 +4422,21 @@
   },
   "ui.a11y_switch_desc": {
    "en": "Turns on larger text in Aptos or Arial, higher-contrast colours, a colour-blind-safe chart palette, open data tables, a caption under every picture and a glossary of terms. The findings do not change.",
+   "cy": "",
+   "slots": "—"
+  },
+  "ui.loading_view": {
+   "en": "Loading this view…",
+   "cy": "",
+   "slots": "—"
+  },
+  "ui.load_error": {
+   "en": "This view could not be loaded. Check your connection and try again.",
+   "cy": "",
+   "slots": "—"
+  },
+  "ui.retry": {
+   "en": "Try again",
    "cy": "",
    "slots": "—"
   }

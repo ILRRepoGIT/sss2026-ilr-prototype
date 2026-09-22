@@ -624,6 +624,16 @@ html.a11y table:focus-visible { outline:3px solid #000; outline-offset:2px; }
     justify-content:space-between; font:600 11px var(--fd); color:var(--blue); }
   @page { size: A4; margin: 13mm 13mm 18mm; }
 }
+/* V6.0 chunked delivery: the loading mask (inert on the monolithic copy) */
+.load-mask{position:fixed;inset:0;z-index:60;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;padding:1.5rem}
+.load-mask[hidden]{display:none}
+.load-mask .load-box{max-width:28rem;border:2px solid #f5c400;border-radius:8px;background:#fff;padding:1.25rem 1.5rem;text-align:center;font-size:1.05rem;line-height:1.5}
+.load-mask .load-err{display:none}
+.load-mask.load-error .load-err{display:block}
+.load-mask.load-error .load-msg{display:none}
+.load-mask .btn{margin-top:.75rem}
+body.is-loading main.report .module.dynamic,body.is-loading #view-banner{visibility:hidden}
+@media print{body.is-loading main.report{display:none}}
 </style>
 </head>
 <body>
@@ -632,6 +642,15 @@ html.a11y table:focus-visible { outline:3px solid #000; outline-offset:2px; }
 
 <div class="app">
 <div id="mobile-stack"></div>
+<div id="load-mask" class="load-mask" hidden role="status" aria-live="polite" data-i18n-source="frame:ui.loading_view">
+  <div class="load-box">
+    <p class="load-msg" data-frame="ui.loading_view">Loading this view…</p>
+    <div class="load-err">
+      <p data-frame="ui.load_error">This view could not be loaded. Check your connection and try again.</p>
+      <button type="button" class="btn btn-primary" id="load-retry" data-frame="ui.retry">Try again</button>
+    </div>
+  </div>
+</div>
 <main class="report" id="report">
   <div id="review-banner" role="note" data-i18n-source="handoff:static-furniture">REVIEW BUILD — for Sport Wales and ILR review only,
     not for schools. Provisional measures and open decisions are marked; sensitive

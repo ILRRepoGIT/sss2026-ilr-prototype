@@ -146,9 +146,28 @@ def prepared(path: Path, max_w: int, crop: bool, clear_bg: bool) -> Image.Image:
 
 
 def data_uri(path: Path, max_w: int, crop: bool = True, clear_bg: bool = False) -> str:
+    # V6.0 (pipeline 0.31.0): an optional on-disk cache of the prepared WebP
+    # bytes, keyed by the source file's sha256 and the preparation parameters
+    # (SSS_ASSET_CACHE). The bytes are exactly what this function produces
+    # without the cache — the production runner sets it so that a thousand
+    # builds prepare the fourteen images once, not a thousand times. Written
+    # atomically so concurrent builds can share it.
+    import hashlib as _hl, os as _os
+    cache_dir = _os.environ.get("SSS_ASSET_CACHE")
+    key = None
+    if cache_dir:
+        h = _hl.sha256(path.read_bytes()).hexdigest()[:20]
+        key = Path(cache_dir) / f"yac-{h}-{max_w}-{int(crop)}-{int(clear_bg)}.webp"
+        if key.exists():
+            return "data:image/webp;base64," + base64.b64encode(key.read_bytes()).decode()
     im = prepared(path, max_w, crop, clear_bg)
     buf = io.BytesIO()
     im.save(buf, "WEBP", quality=84, method=6)
+    if key is not None:
+        key.parent.mkdir(parents=True, exist_ok=True)
+        tmp = key.with_suffix(f".{_os.getpid()}.tmp")
+        tmp.write_bytes(buf.getvalue())
+        _os.replace(tmp, key)
     return "data:image/webp;base64," + base64.b64encode(buf.getvalue()).decode()
 
 

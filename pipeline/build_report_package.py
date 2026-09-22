@@ -27,7 +27,7 @@ from .narrative2 import BASE1_GATES, T as TEMPLATES
 from .narrative2_modules import MODULE_LABELS
 from .narrative2_modules_b import FullNarrator
 
-PIPELINE_VERSION_V2 = "0.30.0"
+PIPELINE_VERSION_V2 = "0.31.0"
 # v6 (0.28.0, V5.0 real-school round): the school is the profile's, not the
 # module's. The prototype profile carries no slug or report version, so the
 # defaults keep every V4.15 name; a school profile names its own.
