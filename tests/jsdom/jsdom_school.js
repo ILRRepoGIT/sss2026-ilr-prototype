@@ -34,8 +34,18 @@ ok(txt("#faq-included").indexOf("Pupils in Years " + FIRST + " to " + LAST + " a
 // V6.0 (EN-11): a school with a year group inside its range that has no accepted
 // response takes the variant without "All" (Framework v2.14, ui.overview_note_gap)
 const GAP = !!D.school.yearsGap;
+// V6.0 (owner instruction, 22 Sep 2026): a school with fewer than five accepted
+// responses receives its report with the whole-school view suppressed — the
+// profile charts, the year-range sentence and the any-activity headline give
+// way to the msg.suppressed_* frames, and no stack renders. The expectations
+// below switch on that, derived from the payload as everything else is.
+const WSUP = !!(D.states["whole|all|none"] || {}).sup;
+const SUP_EN = "Results not shown", SUP_CY = "Canlyniadau heb eu dangos";
 const OVERVIEW_EN = (GAP ? "Year groups from Year " : "All year groups from Year ") + FIRST + " to Year " + LAST + " are represented.";
-ok(txt("#overview-note").indexOf(OVERVIEW_EN) === 0, "overview note carries the school's year range (EN-06" + (GAP ? "/EN-11 gap variant" : "") + ")", txt("#overview-note").slice(0, 90));
+ok(WSUP ? (txt("#overview-note").indexOf(SUP_EN) === 0 && txt("#static-profile").indexOf(SUP_EN) === 0 && txt("#any-activity-note") === "")
+        : txt("#overview-note").indexOf(OVERVIEW_EN) === 0,
+   WSUP ? "whole-school view suppressed (under five): overview note, profile charts and any-activity headline show the suppression message"
+        : "overview note carries the school's year range (EN-06" + (GAP ? "/EN-11 gap variant" : "") + ")", txt("#overview-note").slice(0, 90));
 ok(!/\{(first|last|school|n|hi|lo|hin|lon)\}/.test(visible()), "no unresolved frame slot in the page");
 ok(txt("#overview-table").indexOf(D.school.localAuthority) > -1 && txt("#overview-table").indexOf(D.school.regionalSportPartnership) > -1 && txt("#overview-table").indexOf(D.school.schoolStages) > -1, "profile table: authority, partnership, stages", txt("#overview-table").slice(0, 200));
 const scopeOpts = Array.from(d.querySelectorAll("#f-scope option")).map(o => o.value);
@@ -60,11 +70,13 @@ ok(Array.from(d.querySelectorAll(".bar-grey")).length >= 0, "grey (non-selectabl
 const btn = d.getElementById("btn-lang");
 btn.click();
 ok(d.documentElement.lang === "cy", "html lang cy");
-ok(txt("#h1-view").startsWith("Rydych chi’n gweld:") && /ymateb disgybl wedi’u cynnwys/.test(txt("#h1-view")), "cy banner frame", txt("#h1-view").slice(0, 80));
+ok(txt("#h1-view").startsWith("Rydych chi’n gweld:") && (N === 1 ? /ymateb disgybl wedi’i gynnwys/ : /ymateb disgybl wedi’u cynnwys/).test(txt("#h1-view")), "cy banner frame (N = 1 takes the singular form)", txt("#h1-view").slice(0, 80));
 ok(txt("#intro-sentence").indexOf("Mae’r adroddiad hwn yn cyflwyno") === 0 && txt("#intro-sentence").indexOf(String(N)) > -1 && txt("#intro-sentence").indexOf("Flynyddoedd " + FIRST + " i " + LAST) > -1, "cy intro sentence with the school's slots", txt("#intro-sentence"));
 ok(txt("#faq-included").indexOf("Disgyblion ym Mlynyddoedd " + FIRST + " i " + LAST + " yn " + SCHOOL) === 0, "cy FAQ sentence with the school's year range (EN-07)", txt("#faq-included").slice(0, 90));
 if (!GAP) {
-  ok(txt("#overview-note").indexOf("Mae’r holl grwpiau blwyddyn rhwng Blwyddyn " + FIRST + " a Blwyddyn " + LAST + " yn cael eu cynrychioli.") === 0, "cy overview note with the school's year range (EN-06)", txt("#overview-note").slice(0, 100));
+  ok(WSUP ? txt("#overview-note").indexOf(SUP_CY) === 0
+          : txt("#overview-note").indexOf("Mae’r holl grwpiau blwyddyn rhwng Blwyddyn " + FIRST + " a Blwyddyn " + LAST + " yn cael eu cynrychioli.") === 0,
+     WSUP ? "cy suppression message in the overview note" : "cy overview note with the school's year range (EN-06)", txt("#overview-note").slice(0, 100));
 } else {
   // the variant's Welsh is the translator's: until returned the English shows under the pending marking
   const gapCy = (D.welsh.frames["ui.overview_note_gap"] || {}).cy;
@@ -82,9 +94,9 @@ ok(d.body.innerHTML.indexOf("⟪missing:ui") === -1, "no bare static markers in 
 ok(visible().indexOf("tymor hir") === -1, "no 'tymor hir' (D86)");
 ok(!/\bac \d/.test(d.body.textContent) && !/Yr ail camp/.test(d.body.innerHTML), "engine rules hold: a before figures, ail + soft mutation (D84, D85)");
 ok(d.querySelector("aside.filter-rail").getAttribute("aria-label") === "Archwilio’r Canlyniadau", "cy aria-label from a frame");
-ok(txt("#any-activity-note").indexOf("Adroddodd " + D.anyActivity + " o’r " + N) === 0, "cy any-activity headline from the school's own counts", txt("#any-activity-note").slice(0, 60));
+ok(WSUP ? txt("#any-activity-note") === "" : txt("#any-activity-note").indexOf("Adroddodd " + D.anyActivity + " o’r " + N) === 0, WSUP ? "cy: no any-activity headline for a suppressed whole school" : "cy any-activity headline from the school's own counts", txt("#any-activity-note").slice(0, 60));
 const caps = Array.from(d.querySelectorAll("caption")).map(c => c.textContent).filter(t => /a ddewiswyd amlaf/.test(t));
-ok(caps.length > 0 && caps.every(t => /^Y/.test(t)), "cy stack captions capitalised", caps.filter(t => !/^Y/.test(t)).slice(0, 3));
+ok(WSUP ? caps.length === 0 : (caps.length > 0 && caps.every(t => /^Y/.test(t))), WSUP ? "cy: no stack renders for a suppressed whole school" : "cy stack captions capitalised", caps.filter(t => !/^Y/.test(t)).slice(0, 3));
 
 // ---- interaction and state --------------------------------------------------
 const gbtn = d.querySelector('[data-g="girl"]');

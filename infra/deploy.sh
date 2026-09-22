@@ -9,7 +9,7 @@
 # ~/.ssh/id_ed25519.pub (or set SSH_PUBKEY_FILE); the DASv5 quota (guide §1).
 # Re-runnable: every step is idempotent.
 set -euo pipefail
-LOC=uksouth; RG=rg-sss2026-ilr; RGB=rg-sss2026-ilr-build
+LOC=uksouth; RG=SSS2026_Interactive_Learning_reports; RGB=$RG   # one existing resource group for everything (hosting note, 22 Sep 2026)
 DATA=stsss2026ilrdata; WEB=stsss2026ilrweb; KV=kv-sss2026-ilr; AFD=afd-sss2026-ilr; EP=sss2026-reports
 SKU=Premium; DOMAIN=""; CUSTODIAN=""; ADMIN_IP=""; BUDGET=400
 SSH_PUBKEY_FILE="${SSH_PUBKEY_FILE:-$HOME/.ssh/id_ed25519.pub}"
@@ -22,8 +22,8 @@ HERE="$(cd "$(dirname "$0")" && pwd)"
 SKUNAME="${SKU}_AzureFrontDoor"
 
 echo "== resource groups"
-az group create --name $RG  --location $LOC --tags project=SSS2026-ILR owner=Industryline >/dev/null
-az group create --name $RGB --location $LOC --tags project=SSS2026-ILR owner=Industryline lifetime=temporary >/dev/null
+# the resource group already exists (created by Industryline); create only if it does not
+az group show --name $RG >/dev/null 2>&1 || az group create --name $RG --location $LOC --tags project=SSS2026-ILR owner=Industryline >/dev/null
 
 echo "== persistent estate (main.bicep, Front Door $SKU)"
 az deployment group create -g $RG -f "$HERE/main.bicep" -n ilr-main \

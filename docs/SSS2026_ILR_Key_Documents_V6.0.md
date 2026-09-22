@@ -18,7 +18,7 @@ with **0 states moved**. This document is the key record of the round; the opera
 | 8 or 16 cores, then a 64-vCPU quota approved; cut the build time | One Standard_D64as_v5 (64 vCPU / 256 GiB, UK South, 1 TB SSD); the runner builds about 50 schools at once (its default is cores − 2, with a memory guard); measured per-school cost on a two-core sandbox 209–424 s including all assurance → the ≈935 eligible schools in roughly 1½–2 hours |
 | Unique URL per school, hosted on Industryline's SSS2026 website (agreed with Welsh Government) | HMAC-SHA256 link tokens (key in Key Vault, 130 bits), static hosting on a subdomain of `schoolsportsurvey2026.co.uk` through Front Door, `noindex`, no listing, 404 for an unknown link |
 | Schools first; LA and regional reports to follow | The link scheme reserves `/2026/la/` and `/2026/region/`; the register and runner take a `family` field |
-| Colleague sets up the estate from written instructions (subscription, resource group and quota already in place); GitHub carries the build | The provisioning guide (CLI steps and Bicep), the VM bootstrap script, the runbook; the repository at `ILRRepoGIT/sss2026-ilr-prototype`, branch `production/v6.0` (tag `v6.0-rc4`; rc2 is the commit the owner's agent pushed, rc3 the handover-review corrections to the operator documents, bootstrap and publication commands, rc4 Framework v2.15 — the four local-authority rows, every school in the full run), delivered as a gitbundle in the deployment folder |
+| Colleague sets up the estate from written instructions (subscription, resource group and quota already in place); GitHub carries the build | The provisioning guide (CLI steps and Bicep), the VM bootstrap script, the runbook; the repository at `ILRRepoGIT/sss2026-ilr-prototype`, branch `production/v6.0` (tag `v6.0-rc5`; rc2 is the commit the owner's agent pushed, rc3 the handover-review corrections, rc4 Framework v2.15 — the four local-authority rows, rc5 every school including the under-fives, the website publication register and the existing resource group), delivered as a gitbundle in the deployment folder |
 
 ## 2. What was built
 
@@ -27,8 +27,8 @@ PLASC January 2026 — 1,016 schools with a matched school id (121,881 accepted 
 no reference school and get no report). Official names from PLASC for 1,013 schools; local-authority
 Welsh names from Framework sheet 53; the Regional Sport Partnership from the survey region (the five
 regions map one-to-one onto the five partnerships on sheet 53; the three V5.3 profiles are
-reproduced exactly). Status on the 22 September data after the owner's decisions: **993 eligible**, 23 below the rule-of-five
-threshold (`no_report_below_threshold`), **none held** — Framework v2.15 carries the four local-authority rows
+reproduced exactly). Status on the 22 September data after the owner's decisions: **all 1,016 eligible** (owner instruction, 22 Sep 2026:
+every school with an accepted response receives a report — the 23 under five with every view suppressed), **none held** — Framework v2.15 carries the four local-authority rows
 in the dataset's spelling (owner instruction of 22 Sep 2026, superseding the earlier hold: Carmarthenshire / Sir
 Gaerfyrddin, Conwy, Rhondda Cynon Taf, The Vale of Glamorgan / Bro Morgannwg — the authorities' own Welsh names,
 the translator asked to confirm on sheet 77). The hold (`held_la_name_cy`) stays in the register as the safety

@@ -1,6 +1,6 @@
 // SSS2026 Interactive Learning Reports — persistent estate (provisioning guide §§3–5, 7).
-// Deploy into the persistent resource group (rg-sss2026-ilr):
-//   az deployment group create -g rg-sss2026-ilr -f infra/main.bicep -p custodianObjectId=<id> adminIp=<ip>   (or run infra/deploy.sh, which passes the parameters)
+// Deploy into the existing resource group (SSS2026_Interactive_Learning_reports):
+//   az deployment group create -g SSS2026_Interactive_Learning_reports -f infra/main.bicep -p custodianObjectId=<id> adminIp=<ip>   (or run infra/deploy.sh, which passes the parameters)
 // The build VM is a separate template (infra/build-vm.bicep) in its own resource group.
 
 targetScope = 'resourceGroup'

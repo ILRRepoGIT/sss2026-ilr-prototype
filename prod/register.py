@@ -26,9 +26,12 @@ the dataset / PLASC or derived by a stated rule:
                 takes the EN-11 overview sentence (Framework v2.14)
   phase         primary if every year <= 6, secondary if every year >= 7,
                 combined otherwise (the profile family of the prototype)
-  eligible      n >= min_responses (the view-level rule of five: a whole-
-                school view under five is suppressed, so there is no report)
-                and no hold; the status column names the reason otherwise
+  eligible      n >= min_responses (default 1 — owner instruction 22 Sep 2026:
+                every school with an accepted response receives a report; where
+                the school has fewer than five the report's views are all
+                suppressed by the rule of five inside the report itself, so the
+                report is thin but exists and has its link) and no hold; the
+                status column names the reason otherwise
 
 Statuses: eligible · no_report_below_threshold · held_no_year ·
 held_la_name_cy (any authority spelling without a sheet-53 row; since Framework
@@ -165,7 +168,7 @@ def build(parquet: Path, out_dir: Path, plasc: Path | None, framework: Path, min
         n = int(len(g))
         status, reason = "eligible", ""
         if n < min_responses:
-            status, reason = "no_report_below_threshold", f"{n} accepted responses; a whole-school view under {min_responses} is suppressed"
+            status, reason = "no_report_below_threshold", f"{n} accepted responses; fewer than the --min-responses floor of {min_responses}"
         elif not years:
             status, reason = "held_no_year", "no accepted response carries a year group"
         elif hold_missing_la_cy and not la_cy:
@@ -251,7 +254,8 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     b = sub.add_parser("build"); b.add_argument("parquet"); b.add_argument("out_dir")
-    b.add_argument("--plasc"); b.add_argument("--min-responses", type=int, default=5)
+    b.add_argument("--plasc"); b.add_argument("--min-responses", type=int, default=1,
+                   help="owner instruction 22 Sep 2026: every school with an accepted response gets a report (default 1); the view-level rule of five is applied inside the report, not here")
     b.add_argument("--framework", default="config/01_Framework_v2.15.xlsx")
     b.add_argument("--allow-missing-la-cy", action="store_true",
                    help="build schools whose authority has no Welsh row on sheet 53 (default: HELD — owner decision 22 Sep 2026, option A)")

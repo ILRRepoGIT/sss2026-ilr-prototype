@@ -2,7 +2,7 @@
 
 Purpose: put the V6.0 production infrastructure into `ILRRepoGIT/sss2026-ilr-prototype` on GitHub so the repository carries everything the production run needs. The work is delivered as a git bundle because the session that built it could read the repository but its git proxy refused to push.
 
-What you are pushing: one branch, `production/v6.0`, that sits directly on top of the current `main` (commit `4f624eb`, V5.3 — "the three real-school reports rebuilt with the fourteen Welsh alt texts"), plus one annotated tag, `v6.0-rc2`, on the branch's head. `main` is not modified. Nothing in a report changed on this branch; it adds `prod/`, `infra/`, `docs/production/`, Framework v2.13–v2.14, pipeline 0.31.0, the chunked client and the release manifest.
+What you are pushing: one branch, `production/v6.0`, that sits directly on top of the current `main` (commit `4f624eb`, V5.3 — "the three real-school reports rebuilt with the fourteen Welsh alt texts"), plus one annotated tag, `v6.0-rc2`, on the branch's head. `main` is not modified. Nothing in a standard report changed on this branch; it adds `prod/`, `infra/`, `docs/production/`, Framework v2.13–v2.14, pipeline 0.31.0, the chunked client and the release manifest.
 
 ## Inputs
 

@@ -1,6 +1,6 @@
 // SSS2026 Interactive Learning Reports — the build virtual machine (provisioning guide §6).
-// Deploy into the temporary build resource group (rg-sss2026-ilr-build):
-//   az deployment group create -g rg-sss2026-ilr-build -f infra/build-vm.bicep \
+// Deploy into the existing resource group (SSS2026_Interactive_Learning_reports) — the VM and its network are deleted after the run:
+//   az deployment group create -g SSS2026_Interactive_Learning_reports -f infra/build-vm.bicep \
 //      -p adminPublicKey="$(cat ~/.ssh/id_ed25519.pub)" adminSourceIp=<your public ip>
 // Role assignments on the storage accounts and the key vault live in the persistent
 // resource group and are made by infra/build-vm-roles.bicep with this template's

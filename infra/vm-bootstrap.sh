@@ -12,7 +12,7 @@
 #   ILR_KEY_VAULT    key vault holding the link secret (default kv-sss2026-ilr)
 #   ILR_LINK_SECRET  secret name (default sss2026-link-key-v1)
 #   ILR_AFD_PROFILE / ILR_AFD_ENDPOINT / ILR_RG   Front Door profile, endpoint and
-#                    resource group (defaults afd-sss2026-ilr / sss2026-reports / rg-sss2026-ilr)
+#                    resource group (defaults afd-sss2026-ilr / sss2026-reports / SSS2026_Interactive_Learning_reports)
 #
 # What it does, in order: system packages; Python 3.11 (the interpreter every
 # V5.x lock and the V6.0 pilot were produced with — from the deadsnakes PPA on
@@ -29,7 +29,7 @@ ILR_DATA_ACCOUNT="${ILR_DATA_ACCOUNT:-stsss2026ilrdata}"
 ILR_WEB_ACCOUNT="${ILR_WEB_ACCOUNT:-stsss2026ilrweb}"
 ILR_AFD_PROFILE="${ILR_AFD_PROFILE:-afd-sss2026-ilr}"
 ILR_AFD_ENDPOINT="${ILR_AFD_ENDPOINT:-sss2026-reports}"
-ILR_RG="${ILR_RG:-rg-sss2026-ilr}"
+ILR_RG="${ILR_RG:-SSS2026_Interactive_Learning_reports}"
 export PLAYWRIGHT_BROWSERS_PATH=/data/ilr/pw-browsers
 ILR_KEY_VAULT="${ILR_KEY_VAULT:-kv-sss2026-ilr}"
 ILR_LINK_SECRET="${ILR_LINK_SECRET:-sss2026-link-key-v1}"

@@ -47,7 +47,7 @@ from collections import Counter
 from pathlib import Path
 
 from prod.chunker import canon, group_of
-from prod.ledger import Ledger
+from prod.ledger import now, Ledger
 
 REQUIRED_HEADERS = {"x-robots-tag": "noindex", "x-content-type-options": "nosniff",
                     "referrer-policy": "no-referrer", "content-security-policy": "script-src 'self'"}
@@ -63,11 +63,20 @@ def rollup(evidence: Path, release: str) -> dict:
     atts, L = load_attestations(evidence, release)
     jobs = {j["school_id"]: j for j in L.jobs(release)}
     ident_keys = ("release", "manifestSha256", "commit", "prodVersion", "schema", "pipelineVersion", "reportVersion", "mode")
+    # V6.0 (owner instruction, 22 Sep 2026): a school with fewer than five accepted
+    # responses receives a report whose whole-school view is suppressed. Its gate
+    # outcomes legitimately differ from a standard report's (no captions to
+    # dispute, every renderer path trivially complete), so the set is checked for
+    # uniformity within each of the two classes — standard, whole-school
+    # suppressed — and both expected groups are reported.
     groups = Counter()
     per = {}
     problems = []
+    classes = {}
     for sid, a in atts.items():
-        ident = tuple(a.get(k) for k in ident_keys) + (
+        cls = "whole-school suppressed" if "suppressedWholeSchool" in (a.get("figures") or {}).get("checked", []) else "standard"
+        classes[sid] = cls
+        ident = (cls,) + tuple(a.get(k) for k in ident_keys) + (
             a["identity"].get("frameworkSha256"), a["identity"].get("manifestHash"), a["identity"].get("runnerVersion"),
             a["gateStamp"].get("headline"), tuple(sorted(a["gateStamp"].get("pending") or [])),
             tuple(sorted(a["gateStamp"].get("disputed") or [])),
@@ -89,25 +98,33 @@ def rollup(evidence: Path, release: str) -> dict:
             clean.append(f"jsdom school regression {js.get('fail')} failures")
         if a["largestChunkBytes"] > 7.5 * 1024 * 1024:
             clean.append(f"chunk above 7.5 MiB ({a['largestChunkBytes']})")
-        per[sid] = {"slug": a["slug"], "status": jobs.get(sid, {}).get("status"), "problems": clean,
+        per[sid] = {"slug": a["slug"], "class": cls, "status": jobs.get(sid, {}).get("status"), "problems": clean,
                     "seconds": a["seconds"], "states": a["states"], "chunks": a["chunks"], "entryBytes": a["entryBytes"]}
         problems.extend(f"{a['slug']}: {p}" for p in clean)
-    uniform = len(groups) <= 1
+    names = ["class"] + list(ident_keys) + ["frameworkSha256", "gateManifestHash", "runnerVersion", "stampHeadline", "pending", "disputed",
+                                            "rerunDev", "rerunRelease", "paths", "failingDev", "failingRelease"]
+    by_class = {}
+    for key in groups:
+        by_class.setdefault(key[0], []).append(key)
+    uniform = all(len(v) == 1 for v in by_class.values())
     if not uniform:
-        # name the fields that vary
-        cols = list(zip(*groups.keys()))
-        names = list(ident_keys) + ["frameworkSha256", "gateManifestHash", "runnerVersion", "stampHeadline", "pending", "disputed",
-                                    "rerunDev", "rerunRelease", "paths", "failingDev", "failingRelease"]
-        varying = [names[i] for i, c in enumerate(cols) if len(set(c)) > 1]
-        problems.insert(0, f"the set is NOT uniform: {len(groups)} identity/outcome groups; varying: {varying}")
+        for cls, keys in by_class.items():
+            if len(keys) > 1:
+                cols = list(zip(*keys))
+                varying = [names[i] for i, c in enumerate(cols) if len(set(c)) > 1]
+                problems.insert(0, f"the {cls} set is NOT uniform: {len(keys)} identity/outcome groups; varying: {varying}")
+    # identity (everything but the gate outcomes) must agree ACROSS the classes too
+    ident_span = {key[1:1 + len(ident_keys) + 3] for key in groups}
+    if len(ident_span) > 1:
+        uniform = False
+        problems.insert(0, f"release identity differs across the classes: {len(ident_span)} identities")
     modes = Counter(a["mode"] for a in atts.values())
     secs = [a["seconds"] for a in atts.values()]
+    expected = {cls: {k: v for k, v in zip(names, keys[0])} for cls, keys in by_class.items() if len(keys) == 1}
     out = {"release": release, "reports": len(atts), "uniform": uniform, "groups": len(groups),
+           "classes": dict(Counter(classes.values())),
            "modes": dict(modes), "jobStatus": dict(Counter(j["status"] for j in jobs.values())),
-           "expected": ({k: v for k, v in zip(["release", "manifestSha256", "commit", "prodVersion", "schema", "pipelineVersion",
-                                              "reportVersion", "mode", "frameworkSha256", "gateManifestHash", "runnerVersion",
-                                              "stampHeadline", "pending", "disputed", "rerunDev", "rerunRelease", "paths",
-                                              "failingDev", "failingRelease"], list(groups.keys())[0])} if groups else {}),
+           "expected": expected.get("standard", {}), "expectedByClass": expected,
            "seconds": {"total": round(sum(secs), 1), "mean": round(sum(secs) / len(secs), 1) if secs else None,
                        "max": max(secs) if secs else None},
            "chunkBytesTotal": sum(a["chunkBytes"] for a in atts.values()),
@@ -118,8 +135,9 @@ def rollup(evidence: Path, release: str) -> dict:
           f"Modes: {dict(modes)} · job status: {out['jobStatus']}",
           f"Build seconds: total {out['seconds']['total']}, mean {out['seconds']['mean']}, max {out['seconds']['max']}",
           f"Served bytes (chunks): {out['chunkBytesTotal'] / 1e9:.2f} GB", ""]
-    if out["expected"]:
-        md += ["Expected (uniform) values:", ""] + [f"- {k}: {v}" for k, v in out["expected"].items()] + [""]
+    md += [f"Classes: {out['classes']}", ""]
+    for cls, exp in expected.items():
+        md += [f"Expected (uniform) values — {cls} ({out['classes'].get(cls, 0)} reports):", ""] + [f"- {k}: {v}" for k, v in exp.items()] + [""]
     md += ["Problems:", ""] + ([f"- {p}" for p in problems] or ["- none"])
     (root / "rollup.md").write_text("\n".join(md), encoding="utf-8")
     return out
@@ -319,17 +337,77 @@ def link_export(evidence: Path, release: str, base_url: str, out: Path, register
     return len(rows)
 
 
+def publication_register(evidence: Path, release: str, base_url: str, out: Path, register: Path | None) -> dict:
+    """The website's publication register (the hosting note of 22 Sep 2026): one row per
+    report the website may route to, with the fields the website's dynamic route
+    /reports/{report-family}/{public_slug}/ needs — derived from the attestations
+    and the recipient register, never typed. public_slug = the register's name
+    slug (school name, lower-case, hyphenated) + the first 8 characters of the
+    report's link token, so that two schools with one name never collide and a
+    slug cannot be assigned by hand; azure_target_path is the report's entry page;
+    package_hash is the sha256 over the report's file inventory (path + sha256 of
+    every served file, sorted). publication_status follows the ledger: built /
+    staged / verified / published / withdrawn. A publication index, when it
+    exists, restricts the rows to the approved reports and stamps its sha256."""
+    atts, L = load_attestations(evidence, release)
+    jobs = {j["school_id"]: j for j in L.jobs(release)}
+    reg = {r["school_id"]: r for r in json.loads(register.read_text(encoding="utf-8"))["schools"]} if register else {}
+    idx_p = evidence / release / "publication_index.json"
+    idx = json.loads(idx_p.read_text(encoding="utf-8")) if idx_p.exists() else None
+    approved = {r["school_id"] for r in idx["reports"]} if idx else None
+    rows, slugs, targets = [], {}, {}
+    for sid, a in sorted(atts.items()):
+        r = reg.get(sid, {})
+        name_slug = a["slug"].rsplit("-", 1)[0] if a["slug"].rsplit("-", 1)[-1] == sid else a["slug"]
+        public_slug = f"{name_slug}-{a['token'][:8].lower()}"
+        entry = f"2026/{a['token']}/index.html"
+        inv = sorted((f["path"], f["sha256"]) for f in a["inventory"])
+        package_hash = hashlib.sha256("\n".join(f"{p}  {h}" for p, h in inv).encode("utf-8")).hexdigest()
+        status = jobs.get(sid, {}).get("status", "")
+        if approved is not None and sid not in approved and status not in ("withdrawn",):
+            status = "not_in_publication_index"
+        row = {"report_id": f"{release}:{a['family']}:{sid}", "report_family": a["family"], "entity_id": sid,
+               "title_en": a["name"], "title_cy": r.get("name_cy", a["name"]),
+               "public_slug": public_slug, "release_id": release,
+               "azure_target_path": entry, "target_url": f"{base_url.rstrip('/')}/{entry.rsplit('/', 1)[0]}/",
+               "package_hash": package_hash, "files": len(inv), "publication_status": status,
+               "local_authority_en": a["la"], "local_authority_cy": r.get("la_cy", ""), "accepted_responses": a["acceptedResponses"]}
+        slugs.setdefault(public_slug, []).append(sid); targets.setdefault(entry, []).append(sid)
+        rows.append(row)
+    problems = [f"duplicate public_slug {k}: {v}" for k, v in slugs.items() if len(v) > 1]
+    problems += [f"duplicate azure_target_path {k}: {v}" for k, v in targets.items() if len(v) > 1]
+    for sid, r in sorted(reg.items()):
+        if sid not in atts:
+            rows.append({"report_id": "", "report_family": r["family"], "entity_id": sid, "title_en": r["name"],
+                         "title_cy": r.get("name_cy", r["name"]), "public_slug": "", "release_id": release,
+                         "azure_target_path": "", "target_url": "", "package_hash": "", "files": 0,
+                         "publication_status": r["status"], "local_authority_en": r["la"], "local_authority_cy": r.get("la_cy", ""),
+                         "accepted_responses": r["n"]})
+    cols = ["report_id", "report_family", "entity_id", "title_en", "title_cy", "public_slug", "release_id", "azure_target_path",
+            "target_url", "package_hash", "files", "publication_status", "local_authority_en", "local_authority_cy", "accepted_responses"]
+    fd = os.open(out, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+    with os.fdopen(fd, "w", newline="", encoding="utf-8-sig") as f:
+        w = csv.DictWriter(f, fieldnames=cols); w.writeheader(); w.writerows(rows)
+    body = {"release": release, "generatedAt": now(), "publicationIndexSha256": idx["sha256"] if idx else None,
+            "routable": sum(1 for r in rows if r["public_slug"]), "rows": len(rows), "problems": problems, "reports": rows}
+    jp = out.with_suffix(".json")
+    fd = os.open(jp, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+    with os.fdopen(fd, "w", encoding="utf-8") as f:
+        json.dump(body, f, ensure_ascii=False, indent=1)
+    return body
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
-    for name in ("rollup", "reconcile", "served-gate", "link-export"):
+    for name in ("rollup", "reconcile", "served-gate", "link-export", "publication-register"):
         p = sub.add_parser(name); p.add_argument("--evidence", required=True); p.add_argument("--release", required=True)
         if name == "reconcile":
             p.add_argument("--register", required=True); p.add_argument("--dataset", required=True)
         if name == "served-gate":
             p.add_argument("--site", required=True); p.add_argument("--sample", type=int); p.add_argument("--all-chunks", action="store_true")
             p.add_argument("--seed", type=int, default=2026)
-        if name == "link-export":
+        if name in ("link-export", "publication-register"):
             p.add_argument("--base-url", required=True); p.add_argument("--out", required=True); p.add_argument("--register")
     a = ap.parse_args(argv)
     ev = Path(a.evidence)
@@ -346,6 +424,11 @@ def main(argv=None):
     if a.cmd == "link-export":
         n = link_export(ev, a.release, a.base_url, Path(a.out), Path(a.register) if a.register else None)
         print(f"{n} rows -> {a.out} (mode 0600; contains bearer links)")
+    if a.cmd == "publication-register":
+        out = publication_register(ev, a.release, a.base_url, Path(a.out), Path(a.register) if a.register else None)
+        print(json.dumps({k: v for k, v in out.items() if k != "reports"}, indent=1))
+        print(f"{out['rows']} rows ({out['routable']} routable) -> {a.out} and {Path(a.out).with_suffix('.json')} (mode 0600; contains bearer targets)")
+        sys.exit(0 if not out["problems"] else 1)
 
 
 if __name__ == "__main__":

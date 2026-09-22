@@ -385,8 +385,15 @@ const st = () => DATA.states[key()];
    small-group values), greyed with a message box on top. */
 const viewSup = () => { const s = st(); return !s || !!s.sup; };
 let FORCE_WHOLE = false;
-const dst = () => (viewSup() || FORCE_WHOLE)
-  ? DATA.states["whole|all|none"] : st();
+/* V6.0 (owner instruction, 22 Sep 2026): a school with fewer than five
+   accepted responses still receives its report. Its whole-school state is
+   itself suppressed by the rule of five, so there is no whole-school content
+   to grey underneath a message: every view has no display state, every chart
+   and section shows the existing suppression message, and the school
+   information, FAQ and metadata stay. */
+const WHOLE_SUP = !!(DATA.states["whole|all|none"] || {}).sup;
+const dst = () => WHOLE_SUP ? null : ((viewSup() || FORCE_WHOLE)
+  ? DATA.states["whole|all|none"] : st());
 const sib = () => DATA.states[state.scope + "|" + state.gender + "|none"];
 const scopeOpt = k => DATA.filterOptions.scope.find(o => o.key === k);
 const cohortDef = () => state.cohort !== "none" ? DATA.cohorts[state.cohort] : null;
@@ -1275,7 +1282,15 @@ const cat = k => (isCy() && (CY.handoff[k] || CY.ui[k]))
   ? (CY.handoff[k] || CY.ui[k]) : (EN[k] || k);
 function renderClosing() {
   const s = dst();
-  if (!s) return;
+  if (!s) {
+    if (WHOLE_SUP) {
+      $("#h1-view").textContent = t("ui.banner_showing",
+                                    { desc: descOf(DATA.states["whole|all|none"]), n: DATA.buildMetadata.acceptedRows });
+      for (const id of ["#h1-an", "#h1-ev", "#h1-ll", "#h1-en"]) $(id).innerHTML = "<p>" + esc(t("ui.closing_none")) + "</p>";
+      $("#h2-list").innerHTML = "";
+    }
+    return;
+  }
   // sheet 43 ui.banner_showing: one typed frame, numeral service on the
   // count slot, participle agreement handled by the frame's N = 1 form.
   $("#h1-view").textContent = t("ui.banner_showing",
@@ -1339,6 +1354,30 @@ function renderProfile() {
         Math.max(3, Math.round((o.v || 0) / mx * 120)) + 'px"></span><span class="vlab">' +
         esc(optLabel(o)) + "</span></div>").join("") + "</div>" + (h || "") + "</div>";
   };
+  if (w.sup) {
+    // V6.0 (owner instruction, 22 Sep 2026): a school with fewer than five
+    // accepted responses still receives its report. Its whole-school view is
+    // suppressed by the rule of five, so the profile charts, the year-range
+    // sentence and the any-activity headline give way to the existing
+    // suppression message (msg.suppressed_* frames, both languages); the
+    // school information table and the metadata table stay.
+    host.innerHTML = stateMsg("sup");
+    const note = $("#overview-note");
+    if (note) { note.innerHTML = stateMsg("sup"); note.classList.remove("cy-missing"); note.removeAttribute("lang"); note.removeAttribute("title"); }
+    const anyS = $("#any-activity-note");
+    if (anyS) anyS.innerHTML = "";
+    const extra = $("#profile-extra");
+    if (extra) extra.innerHTML = "";
+    $("#meta-table").innerHTML =
+      cell("ui.meta_survey_year", sc.surveyYear) +
+      cell("ui.meta_report_version", t("ui.meta_version_value", { report: DATA.reportVersion, schema: DATA.schemaVersion })) +
+      cell("ui.meta_pipeline", b.pipelineVersion) +
+      cell("ui.meta_suppression", b.suppressionModel) +
+      cell("ui.meta_generated", b.generatedAt) +
+      cell("ui.meta_checksum", b.sourceChecksum.slice(0, 16) + "…") +
+      cell("ui.meta_weighting", t("ui.meta_weighting_value"));
+    return;
+  }
   host.innerHTML = mkChart("responses_by_year") + mkChart("responses_by_gender");
   const yr = w.m.responses_by_year;
   const yPairs = DATA.metricDefs.responses_by_year.opts.map((yo, i) => [yo[1], yr.v[i]]);

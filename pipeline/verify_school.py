@@ -52,8 +52,24 @@ def main():
     rows = [r for r in tbl.to_pylist()
             if r.get("year_group_num") is not None and int(r["year_group_num"]) in years
             and (r.get("status") == "completed" or "Partial" in prof.get("acceptedStatuses", ["Complete"]))]
-    W = pk["states"]["whole|all|none"]["m"]
     res = {"school": pk["school"]["name"], "acceptedRows": {"package": pk["buildMetadata"]["acceptedRows"], "recomputed": len(rows)}}
+    whole = pk["states"]["whole|all|none"]
+    if "m" not in whole:
+        # V6.0 (owner instruction, 22 Sep 2026): a school with fewer than five accepted
+        # responses still receives a report; its whole-school view — and therefore every
+        # view — is suppressed by the rule of five. The independent check then verifies
+        # the suppression itself: the recomputed accepted count is under five, the
+        # package says so, and no state in the package carries a figure.
+        with_figures = [k for k, st in pk["states"].items() if isinstance(st, dict) and "m" in st]
+        res["suppressedWholeSchool"] = {"package": bool(whole.get("sup")), "recomputedUnderFive": len(rows) < 5,
+                                        "statesWithFigures": len(with_figures), "match": bool(whole.get("sup")) and len(rows) < 5 and not with_figures}
+        res["allMatch"] = res["suppressedWholeSchool"]["match"] and res["acceptedRows"]["package"] == res["acceptedRows"]["recomputed"]
+        txt = json.dumps(res, indent=1, ensure_ascii=False)
+        if out_p:
+            Path(out_p).write_text(txt, encoding="utf-8")
+        print(txt if not out_p else f"{res['school']}: allMatch={res['allMatch']} (whole-school view suppressed, {len(rows)} accepted) -> {out_p}")
+        sys.exit(0 if res["allMatch"] else 1)
+    W = whole["m"]
 
     def cmp(mid, counts_by_code, base=None):
         d = pk["metricDefs"][mid]; m = W[mid]

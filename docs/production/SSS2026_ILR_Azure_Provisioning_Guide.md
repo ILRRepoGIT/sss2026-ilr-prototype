@@ -26,13 +26,13 @@ School reports are the first family. Local-authority and regional reports follow
 
 ## 1. Before you start
 
-**Subscription.** Industryline's Azure subscription, in which the resource group already exists; you need Owner (or Contributor plus User Access Administrator, because role assignments are part of the setup). Record the subscription id and tenant id for the hand-back sheet (section 9). If the existing resource group has a different name from `rg-sss2026-ilr`, use yours consistently in every command below.
+**Subscription.** Industryline's Azure subscription, in which the resource group already exists; you need Owner (or Contributor plus User Access Administrator, because role assignments are part of the setup). Record the subscription id and tenant id for the hand-back sheet (section 9). If the existing resource group has a different name from `SSS2026_Interactive_Learning_reports`, use yours consistently in every command below.
 
 **Quota.** The build VM draws on the `Standard DASv5 Family vCPUs` quota in UK South; an increase to 64 vCPUs has already been approved for Industryline's subscription, which is what the D64as_v5 size below needs. Check it shows in Portal → Quotas → Compute (region UK South, provider Microsoft.Compute, "DASv5") before creating the VM.
 
 **DNS.** The reports live at `reports.schoolsportsurvey2026.co.uk`, a subdomain of the School Sport Survey 2026 website (`schoolsportsurvey2026.co.uk`, owned by Industryline Research). You need access to that domain's DNS to add two records (one TXT for certificate validation, one CNAME to Front Door). Confirm who in Industryline administers the domain's DNS and that they are available on the day.
 
-**Tools on your own computer.** Install the Azure CLI (`az`), AzCopy, Git and an SSH client. Sign in with `az login` and select the subscription with `az account set --subscription <id>`. Clone the repository at the release tag and run every `bash infra/…` command below from inside that clone (`git clone https://github.com/ILRRepoGIT/sss2026-ilr-prototype.git && cd sss2026-ilr-prototype && git checkout v6.0-rc4` — the tag is named in `prod/release_manifest.json`; Alexander tells you if a later tag supersedes it). All commands below are Azure CLI and work in PowerShell, cmd or bash; long commands are shown with `\` line continuations, which PowerShell users should replace with a backtick or put on one line.
+**Tools on your own computer.** Install the Azure CLI (`az`), AzCopy, Git and an SSH client. Sign in with `az login` and select the subscription with `az account set --subscription <id>`. Clone the repository at the release tag and run every `bash infra/…` command below from inside that clone (`git clone https://github.com/ILRRepoGIT/sss2026-ilr-prototype.git && cd sss2026-ilr-prototype && git checkout v6.0-rc5` — the tag is named in `prod/release_manifest.json`; Alexander tells you if a later tag supersedes it). All commands below are Azure CLI and work in PowerShell, cmd or bash; long commands are shown with `\` line continuations, which PowerShell users should replace with a backtick or put on one line.
 
 **Role assignments take a few minutes to propagate.** Every `az role assignment create` below is followed by a data-plane command that needs it (`--auth-mode login`, AzCopy). If such a command answers `403 AuthorizationPermissionMismatch`, wait two or three minutes and repeat it; nothing needs undoing.
 
@@ -47,8 +47,7 @@ Use these names unless your organisation's naming standard requires otherwise; i
 | Purpose | Name | Notes |
 |---|---|---|
 | Region | `uksouth` | Data residency: all resources in the UK |
-| Resource group, persistent | `rg-sss2026-ilr` | Storage, Key Vault, Front Door, DNS — lives for the publication period |
-| Resource group, build | `rg-sss2026-ilr-build` | The VM and its network — deleted after the run |
+| Resource group | `SSS2026_Interactive_Learning_reports` | Already exists in Industryline's subscription; everything is deployed into it. The VM and its network are deleted after the run; the rest lives for the publication period |
 | Storage account, private data | `stsss2026ilrdata` | Dataset, recipient register, evidence, ledger exports. Never public. |
 | Storage account, web origin | `stsss2026ilrweb` | Static website (`$web`) served through Front Door; `staging` container for release candidates |
 | Key Vault | `kv-sss2026-ilr` | Holds the link-token secret; nothing else |
@@ -58,12 +57,14 @@ Use these names unless your organisation's naming standard requires otherwise; i
 | Managed identity (VM) | system-assigned | Granted read on the data account, write on the web staging container and the evidence container |
 | Budget | `budget-sss2026-ilr` | Alert at 50 / 80 / 100 % of the agreed monthly amount (recipients added in the portal, step 7) |
 
-Create the two resource groups:
+**The resource group already exists.** Industryline's subscription carries the resource group `SSS2026_Interactive_Learning_reports`, created for this run; everything below — storage, Key Vault, Front Door, Log Analytics and the build VM with its network — is deployed into it, and nothing is created in a second group. Check it and note its location (the commands below assume `uksouth`; if the group is elsewhere, use that region throughout):
 
 ```
-az group create --name rg-sss2026-ilr        --location uksouth --tags project=SSS2026-ILR owner=Industryline
-az group create --name rg-sss2026-ilr-build  --location uksouth --tags project=SSS2026-ILR owner=Industryline lifetime=temporary
+az group show --name SSS2026_Interactive_Learning_reports --query "{name:name, location:location}" -o table
+az resource list --resource-group SSS2026_Interactive_Learning_reports -o table       # what is already in it — if a VM of the right size is there, step 6 re-uses it rather than creating one
 ```
+
+The build VM is the only resource that is deleted after the run (guide §8); the rest lives for the publication period.
 
 ---
 
@@ -72,23 +73,23 @@ az group create --name rg-sss2026-ilr-build  --location uksouth --tags project=S
 This account holds the pupil dataset, the recipient register, and every piece of assurance evidence the run produces. It must never be reachable anonymously, must keep versions so that nothing can be silently overwritten, and must be readable by the build VM's identity only.
 
 ```
-az storage account create --name stsss2026ilrdata --resource-group rg-sss2026-ilr --location uksouth \
+az storage account create --name stsss2026ilrdata --resource-group SSS2026_Interactive_Learning_reports --location uksouth \
   --sku Standard_ZRS --kind StorageV2 --access-tier Hot \
   --min-tls-version TLS1_2 --allow-blob-public-access false --allow-shared-key-access false \
   --https-only true --public-network-access Enabled --default-action Deny
 
-az storage account blob-service-properties update --account-name stsss2026ilrdata --resource-group rg-sss2026-ilr \
+az storage account blob-service-properties update --account-name stsss2026ilrdata --resource-group SSS2026_Interactive_Learning_reports \
   --enable-versioning true --enable-delete-retention true --delete-retention-days 30 \
   --enable-container-delete-retention true --container-delete-retention-days 30
 
 # containers through the management plane (works with the firewall closed and before any data role exists)
 for c in dataset register evidence ledger; do
-  az storage container-rm create --name $c --storage-account stsss2026ilrdata --resource-group rg-sss2026-ilr
+  az storage container-rm create --name $c --storage-account stsss2026ilrdata --resource-group SSS2026_Interactive_Learning_reports
 done
 
 # your own account gets the data role now, so that the upload in 3.1 and the checks below can use --auth-mode login
 az role assignment create --assignee <your user principal name> --role "Storage Blob Data Contributor" \
-  --scope $(az storage account show -n stsss2026ilrdata -g rg-sss2026-ilr --query id -o tsv)
+  --scope $(az storage account show -n stsss2026ilrdata -g SSS2026_Interactive_Learning_reports --query id -o tsv)
 ```
 
 Being Owner or Contributor of the subscription does not include reading or writing blobs — those are data actions, which only the `Storage Blob Data …` roles grant — which is why the role is assigned explicitly here and again for the web account in step 5.1. `--default-action Deny` closes the account to all networks; you will add your own IP for the upload in step 3.1 and the VM's virtual network in step 6. `--allow-shared-key-access false` means nothing can use the account key: every access is by Entra identity, which is what makes the audit trail meaningful.
@@ -99,7 +100,7 @@ Allow your own public IP temporarily, upload, then remove the rule:
 
 ```
 MYIP=$(curl -s https://api.ipify.org)
-az storage account network-rule add --account-name stsss2026ilrdata --resource-group rg-sss2026-ilr --ip-address $MYIP
+az storage account network-rule add --account-name stsss2026ilrdata --resource-group SSS2026_Interactive_Learning_reports --ip-address $MYIP
 
 # unzip the handover on your machine first; upload only the three files the build reads
 azcopy login
@@ -107,7 +108,7 @@ azcopy copy "01_cleaned_files/SSS2026_pupil_stage2_full_cleaned.parquet" "https:
 azcopy copy "01_cleaned_files/CLEANED_FILES_SHA256SUMS.txt"              "https://stsss2026ilrdata.blob.core.windows.net/dataset/"
 azcopy copy "06_pipeline/plasc2026.xlsx"                                  "https://stsss2026ilrdata.blob.core.windows.net/dataset/"
 
-az storage account network-rule remove --account-name stsss2026ilrdata --resource-group rg-sss2026-ilr --ip-address $MYIP
+az storage account network-rule remove --account-name stsss2026ilrdata --resource-group SSS2026_Interactive_Learning_reports --ip-address $MYIP
 ```
 
 Check the upload: `az storage blob show --account-name stsss2026ilrdata --container-name dataset --name SSS2026_pupil_stage2_full_cleaned.parquet --auth-mode login --query properties.contentLength` should print `20447561`. The build verifies the sha256 (`802eda98…`) itself before it reads a row; if the file is wrong the run refuses to start.
@@ -121,14 +122,14 @@ Delete the local unzipped copy of the dataset when the upload is verified. The z
 Each school's link is derived from its school identifier with HMAC-SHA256 under a secret key. The key never appears in the repository, in a report, in the ledger or in a log; the build VM reads it from Key Vault at run time to compute the tokens and forgets it. If the key were ever exposed, new tokens are computed and the same files are republished under new links — the reports do not change.
 
 ```
-az keyvault create --name kv-sss2026-ilr --resource-group rg-sss2026-ilr --location uksouth \
+az keyvault create --name kv-sss2026-ilr --resource-group SSS2026_Interactive_Learning_reports --location uksouth \
   --enable-rbac-authorization true --enable-purge-protection true --retention-days 90 \
   --public-network-access Enabled --default-action Deny
 
 MYIP=$(curl -s https://api.ipify.org)
 az keyvault network-rule add --name kv-sss2026-ilr --ip-address $MYIP
 az role assignment create --assignee <your user principal name> --role "Key Vault Secrets Officer" \
-  --scope $(az keyvault show -n kv-sss2026-ilr -g rg-sss2026-ilr --query id -o tsv)
+  --scope $(az keyvault show -n kv-sss2026-ilr -g SSS2026_Interactive_Learning_reports --query id -o tsv)
 
 # 32 random bytes, base64 — generated once, never written down anywhere else
 az keyvault secret set --vault-name kv-sss2026-ilr --name sss2026-link-key-v1 \
@@ -146,41 +147,41 @@ Custody: the report owner (Sport Wales, or Industryline on its behalf) is the cu
 ### 5.1 Storage with static website hosting
 
 ```
-az storage account create --name stsss2026ilrweb --resource-group rg-sss2026-ilr --location uksouth \
+az storage account create --name stsss2026ilrweb --resource-group SSS2026_Interactive_Learning_reports --location uksouth \
   --sku Standard_ZRS --kind StorageV2 --access-tier Hot \
   --min-tls-version TLS1_2 --allow-blob-public-access false --allow-shared-key-access false --https-only true
 
 # your own account's data role on this account too (needed by every --auth-mode login command that follows)
 az role assignment create --assignee <your user principal name> --role "Storage Blob Data Contributor" \
-  --scope $(az storage account show -n stsss2026ilrweb -g rg-sss2026-ilr --query id -o tsv)
+  --scope $(az storage account show -n stsss2026ilrweb -g SSS2026_Interactive_Learning_reports --query id -o tsv)
 
 az storage blob service-properties update --account-name stsss2026ilrweb --auth-mode login \
   --static-website --index-document index.html --404-document 404.html
 
-az storage account blob-service-properties update --account-name stsss2026ilrweb --resource-group rg-sss2026-ilr \
+az storage account blob-service-properties update --account-name stsss2026ilrweb --resource-group SSS2026_Interactive_Learning_reports \
   --enable-versioning true --enable-delete-retention true --delete-retention-days 14
 
 az storage container create --name staging --account-name stsss2026ilrweb --auth-mode login
 ```
 
-Static website hosting creates the `$web` container and a web endpoint of the form `https://stsss2026ilrweb.z33.web.core.windows.net/` (the `z33` part varies; read it with `az storage account show -n stsss2026ilrweb -g rg-sss2026-ilr --query primaryEndpoints.web -o tsv`). Files in `$web` are readable by anyone who can reach that endpoint; step 5.3 restricts the endpoint so that only Front Door can. The `staging` container is private and is where a release is uploaded and verified before it is promoted into `$web`.
+Static website hosting creates the `$web` container and a web endpoint of the form `https://stsss2026ilrweb.z33.web.core.windows.net/` (the `z33` part varies; read it with `az storage account show -n stsss2026ilrweb -g SSS2026_Interactive_Learning_reports --query primaryEndpoints.web -o tsv`). Files in `$web` are readable by anyone who can reach that endpoint; step 5.3 restricts the endpoint so that only Front Door can. The `staging` container is private and is where a release is uploaded and verified before it is promoted into `$web`.
 
 Note `--allow-blob-public-access false` here applies to the ordinary blob endpoint; the static-website endpoint is a separate feature and still serves `$web`. That is intended.
 
 ### 5.2 Front Door
 
-Two tiers are possible and the choice is Sport Wales's; the reports are identical under either. **Premium** (about $330 a month base) connects to the storage origin over a Private Link, so the origin is closed to the whole internet and only this Front Door profile can reach it — the configuration the technical review asked for, with nothing to maintain. **Standard** (about $35 a month base) reaches the origin over its public endpoint; the storage firewall then has to be fed the current list of Front Door backend IP ranges (the `AzureFrontDoor.Backend` service tag, which Azure Storage cannot use by name and which Microsoft changes from time to time), so it is cheaper but needs a monthly check that the ranges are still current, and a stale list means the reports stop being served. This guide provisions Premium; the Standard variant is the same commands with `--sku Standard_AzureFrontDoor`, without the `--enable-private-link` options, plus the IP-range script `infra/afd-origin-ip-rules.sh` run instead of step 5.3.
+Two tiers are possible and the choice is Industryline's; the reports are identical under either. Since the Welsh Government has confirmed that unique-URL distribution is acceptable (the school-level content is also published through the national dashboards), the Standard tier is sufficient for this publication — the hosting note of 22 Sep 2026 says the same; Premium remains the option if the origin must be isolated. Record the confirmation in the decision register either way. **Premium** (about $330 a month base) connects to the storage origin over a Private Link, so the origin is closed to the whole internet and only this Front Door profile can reach it — the configuration the technical review asked for, with nothing to maintain. **Standard** (about $35 a month base) reaches the origin over its public endpoint; the storage firewall then has to be fed the current list of Front Door backend IP ranges (the `AzureFrontDoor.Backend` service tag, which Azure Storage cannot use by name and which Microsoft changes from time to time), so it is cheaper but needs a monthly check that the ranges are still current, and a stale list means the reports stop being served. This guide provisions Premium; the Standard variant is the same commands with `--sku Standard_AzureFrontDoor`, without the `--enable-private-link` options, plus the IP-range script `infra/afd-origin-ip-rules.sh` run instead of step 5.3.
 
 ```
-az afd profile create --profile-name afd-sss2026-ilr --resource-group rg-sss2026-ilr --sku Premium_AzureFrontDoor
-az afd endpoint create --profile-name afd-sss2026-ilr --resource-group rg-sss2026-ilr --endpoint-name sss2026-reports --enabled-state Enabled
+az afd profile create --profile-name afd-sss2026-ilr --resource-group SSS2026_Interactive_Learning_reports --sku Premium_AzureFrontDoor
+az afd endpoint create --profile-name afd-sss2026-ilr --resource-group SSS2026_Interactive_Learning_reports --endpoint-name sss2026-reports --enabled-state Enabled
 
-WEBHOST=$(az storage account show -n stsss2026ilrweb -g rg-sss2026-ilr --query primaryEndpoints.web -o tsv | sed -e 's#https://##' -e 's#/$##')
-WEB=$(az storage account show -n stsss2026ilrweb -g rg-sss2026-ilr --query id -o tsv)
-az afd origin-group create --profile-name afd-sss2026-ilr --resource-group rg-sss2026-ilr --origin-group-name og-reports \
+WEBHOST=$(az storage account show -n stsss2026ilrweb -g SSS2026_Interactive_Learning_reports --query primaryEndpoints.web -o tsv | sed -e 's#https://##' -e 's#/$##')
+WEB=$(az storage account show -n stsss2026ilrweb -g SSS2026_Interactive_Learning_reports --query id -o tsv)
+az afd origin-group create --profile-name afd-sss2026-ilr --resource-group SSS2026_Interactive_Learning_reports --origin-group-name og-reports \
   --probe-request-type HEAD --probe-protocol Https --probe-interval-in-seconds 120 --probe-path /health.txt \
   --sample-size 4 --successful-samples-required 3 --additional-latency-in-milliseconds 50
-az afd origin create --profile-name afd-sss2026-ilr --resource-group rg-sss2026-ilr --origin-group-name og-reports \
+az afd origin create --profile-name afd-sss2026-ilr --resource-group SSS2026_Interactive_Learning_reports --origin-group-name og-reports \
   --origin-name origin-web --host-name $WEBHOST --origin-host-header $WEBHOST --priority 1 --weight 1000 \
   --enabled-state Enabled --http-port 80 --https-port 443 \
   --enable-private-link true --private-link-resource $WEB --private-link-location uksouth \
@@ -190,7 +191,7 @@ az afd origin create --profile-name afd-sss2026-ilr --resource-group rg-sss2026-
 PEC=$(az network private-endpoint-connection list --id $WEB --query "[?contains(properties.privateLinkServiceConnectionState.status,'Pending')].id" -o tsv)
 az network private-endpoint-connection approve --id $PEC --description "Front Door afd-sss2026-ilr"
 
-az afd route create --profile-name afd-sss2026-ilr --resource-group rg-sss2026-ilr --endpoint-name sss2026-reports \
+az afd route create --profile-name afd-sss2026-ilr --resource-group SSS2026_Interactive_Learning_reports --endpoint-name sss2026-reports \
   --route-name route-reports --origin-group og-reports --supported-protocols Http Https --https-redirect Enabled \
   --forwarding-protocol HttpsOnly --patterns-to-match "/*" --link-to-default-domain Enabled \
   --enable-caching true --enable-compression true --query-string-caching-behavior IgnoreQueryString \
@@ -206,7 +207,7 @@ Rule `immutable-release-assets` (path begins with `/r/`): override cache to 365 
 Rule `entry-pages-revalidate` (path begins with `/2026/`): add `Cache-Control: no-cache, must-revalidate`. A school's entry page is the one file that changes when a new release is activated, so it must always be revalidated.
 
 ```
-bash infra/afd-ruleset.sh afd-sss2026-ilr rg-sss2026-ilr route-reports sss2026-reports
+bash infra/afd-ruleset.sh afd-sss2026-ilr SSS2026_Interactive_Learning_reports route-reports sss2026-reports
 ```
 
 ### 5.3 Seed the origin, then lock it to Front Door
@@ -225,10 +226,10 @@ az storage blob upload --account-name stsss2026ilrweb --container-name '$web' --
 Then, with the Private Link connection approved, close the origin's public endpoint to everything except the build VM's subnet (added in step 6):
 
 ```
-az storage account update --name stsss2026ilrweb --resource-group rg-sss2026-ilr --default-action Deny
+az storage account update --name stsss2026ilrweb --resource-group SSS2026_Interactive_Learning_reports --default-action Deny
 ```
 
-After this, a request straight to the `web.core.windows.net` endpoint from the public internet is refused (403); Front Door reaches the origin privately, and the VM reaches it through its virtual-network rule for uploads. Nothing else can. (Under the Standard-tier variant this step is replaced by `bash infra/afd-origin-ip-rules.sh stsss2026ilrweb rg-sss2026-ilr`, which loads the current Front Door backend ranges into the firewall and should be re-run monthly; another organisation's Front Door could then still reach the origin, though only with a school's unguessable link and without any ability to list what exists — a residual to be risk-accepted in writing if that tier is chosen.)
+After this, a request straight to the `web.core.windows.net` endpoint from the public internet is refused (403); Front Door reaches the origin privately, and the VM reaches it through its virtual-network rule for uploads. Nothing else can. (Under the Standard-tier variant this step is replaced by `bash infra/afd-origin-ip-rules.sh stsss2026ilrweb SSS2026_Interactive_Learning_reports`, which loads the current Front Door backend ranges into the firewall and should be re-run monthly; another organisation's Front Door could then still reach the origin, though only with a school's unguessable link and without any ability to list what exists — a residual to be risk-accepted in writing if that tier is chosen.)
 
 
 ### 5.4 Custom domain
@@ -236,17 +237,17 @@ After this, a request straight to the `web.core.windows.net` endpoint from the p
 The subdomain is `reports.schoolsportsurvey2026.co.uk`:
 
 ```
-az afd custom-domain create --profile-name afd-sss2026-ilr --resource-group rg-sss2026-ilr \
+az afd custom-domain create --profile-name afd-sss2026-ilr --resource-group SSS2026_Interactive_Learning_reports \
   --custom-domain-name reports-domain --host-name reports.schoolsportsurvey2026.co.uk \
   --certificate-type ManagedCertificate --minimum-tls-version TLS12
-az afd custom-domain show --profile-name afd-sss2026-ilr --resource-group rg-sss2026-ilr --custom-domain-name reports-domain \
+az afd custom-domain show --profile-name afd-sss2026-ilr --resource-group SSS2026_Interactive_Learning_reports --custom-domain-name reports-domain \
   --query validationProperties
 ```
 
 Add two records to the schoolsportsurvey2026.co.uk zone: the TXT record `_dnsauth.reports.schoolsportsurvey2026.co.uk` with the validation token the command prints, and a CNAME from `reports.schoolsportsurvey2026.co.uk` to the endpoint host name (`az afd endpoint show … --query hostName`). When the domain shows `Approved`, associate it with the route:
 
 ```
-az afd route update --profile-name afd-sss2026-ilr --resource-group rg-sss2026-ilr --endpoint-name sss2026-reports \
+az afd route update --profile-name afd-sss2026-ilr --resource-group SSS2026_Interactive_Learning_reports --endpoint-name sss2026-reports \
   --route-name route-reports --custom-domains reports-domain --link-to-default-domain Disabled
 ```
 
@@ -259,17 +260,17 @@ Disabling the default `azurefd.net` domain on the route means the reports answer
 The VM is created in its own resource group so that it — and its disk — can be deleted in one action when the run is over. It has no public IP: you reach it through Azure Bastion (simplest) or through an SSH rule limited to your own address; the commands below use the SSH rule because it costs nothing, and note the Bastion alternative.
 
 ```
-az network vnet create --resource-group rg-sss2026-ilr-build --name vnet-sss2026-build --address-prefix 10.40.0.0/24 \
+az network vnet create --resource-group SSS2026_Interactive_Learning_reports --name vnet-sss2026-build --address-prefix 10.40.0.0/24 \
   --subnet-name snet-build --subnet-prefix 10.40.0.0/26 --location uksouth
-az network vnet subnet update --resource-group rg-sss2026-ilr-build --vnet-name vnet-sss2026-build --name snet-build \
+az network vnet subnet update --resource-group SSS2026_Interactive_Learning_reports --vnet-name vnet-sss2026-build --name snet-build \
   --service-endpoints Microsoft.Storage Microsoft.KeyVault
 
 MYIP=$(curl -s https://api.ipify.org)
-az network nsg create --resource-group rg-sss2026-ilr-build --name nsg-sss2026-build --location uksouth
-az network nsg rule create --resource-group rg-sss2026-ilr-build --nsg-name nsg-sss2026-build --name allow-ssh-admin \
+az network nsg create --resource-group SSS2026_Interactive_Learning_reports --name nsg-sss2026-build --location uksouth
+az network nsg rule create --resource-group SSS2026_Interactive_Learning_reports --nsg-name nsg-sss2026-build --name allow-ssh-admin \
   --priority 100 --direction Inbound --access Allow --protocol Tcp --source-address-prefixes $MYIP --destination-port-ranges 22
 
-az vm create --resource-group rg-sss2026-ilr-build --name vm-sss2026-build --location uksouth \
+az vm create --resource-group SSS2026_Interactive_Learning_reports --name vm-sss2026-build --location uksouth \
   --image Canonical:ubuntu-24_04-lts:server:latest --size Standard_D64as_v5 \
   --admin-username ilrbuild --generate-ssh-keys --authentication-type ssh \
   --vnet-name vnet-sss2026-build --subnet snet-build --nsg nsg-sss2026-build --public-ip-sku Standard \
@@ -281,10 +282,10 @@ az vm create --resource-group rg-sss2026-ilr-build --name vm-sss2026-build --loc
 Give the VM's identity the roles it needs and allow its subnet through the storage and key-vault firewalls:
 
 ```
-VMID=$(az vm show -g rg-sss2026-ilr-build -n vm-sss2026-build --query identity.principalId -o tsv)
-DATA=$(az storage account show -n stsss2026ilrdata -g rg-sss2026-ilr --query id -o tsv)
-WEB=$(az storage account show -n stsss2026ilrweb -g rg-sss2026-ilr --query id -o tsv)
-KV=$(az keyvault show -n kv-sss2026-ilr -g rg-sss2026-ilr --query id -o tsv)
+VMID=$(az vm show -g SSS2026_Interactive_Learning_reports -n vm-sss2026-build --query identity.principalId -o tsv)
+DATA=$(az storage account show -n stsss2026ilrdata -g SSS2026_Interactive_Learning_reports --query id -o tsv)
+WEB=$(az storage account show -n stsss2026ilrweb -g SSS2026_Interactive_Learning_reports --query id -o tsv)
+KV=$(az keyvault show -n kv-sss2026-ilr -g SSS2026_Interactive_Learning_reports --query id -o tsv)
 az role assignment create --assignee-object-id $VMID --assignee-principal-type ServicePrincipal --role "Storage Blob Data Reader"      --scope "$DATA/blobServices/default/containers/dataset"
 az role assignment create --assignee-object-id $VMID --assignee-principal-type ServicePrincipal --role "Storage Blob Data Contributor" --scope "$DATA/blobServices/default/containers/register"
 az role assignment create --assignee-object-id $VMID --assignee-principal-type ServicePrincipal --role "Storage Blob Data Contributor" --scope "$DATA/blobServices/default/containers/evidence"
@@ -292,12 +293,12 @@ az role assignment create --assignee-object-id $VMID --assignee-principal-type S
 az role assignment create --assignee-object-id $VMID --assignee-principal-type ServicePrincipal --role "Storage Blob Data Contributor" --scope "$WEB/blobServices/default/containers/staging"
 az role assignment create --assignee-object-id $VMID --assignee-principal-type ServicePrincipal --role "Storage Blob Data Contributor" --scope "$WEB/blobServices/default/containers/\$web"
 az role assignment create --assignee-object-id $VMID --assignee-principal-type ServicePrincipal --role "Key Vault Secrets User" --scope $KV
-AFD=$(az afd profile show -g rg-sss2026-ilr --profile-name afd-sss2026-ilr --query id -o tsv)
+AFD=$(az afd profile show -g SSS2026_Interactive_Learning_reports --profile-name afd-sss2026-ilr --query id -o tsv)
 az role assignment create --assignee-object-id $VMID --assignee-principal-type ServicePrincipal --role "CDN Profile Contributor" --scope $AFD   # Front Door purge on activation
 
-SUBNET=$(az network vnet subnet show -g rg-sss2026-ilr-build --vnet-name vnet-sss2026-build -n snet-build --query id -o tsv)
-az storage account network-rule add --account-name stsss2026ilrdata --resource-group rg-sss2026-ilr --subnet $SUBNET
-az storage account network-rule add --account-name stsss2026ilrweb  --resource-group rg-sss2026-ilr --subnet $SUBNET
+SUBNET=$(az network vnet subnet show -g SSS2026_Interactive_Learning_reports --vnet-name vnet-sss2026-build -n snet-build --query id -o tsv)
+az storage account network-rule add --account-name stsss2026ilrdata --resource-group SSS2026_Interactive_Learning_reports --subnet $SUBNET
+az storage account network-rule add --account-name stsss2026ilrweb  --resource-group SSS2026_Interactive_Learning_reports --subnet $SUBNET
 az keyvault network-rule add --name kv-sss2026-ilr --subnet $SUBNET
 ```
 
@@ -310,10 +311,10 @@ SSH in (`ssh ilrbuild@<public ip>`), then run the bootstrap script from the repo
 ```
 # copy the script to the VM from your own clone (scp), or paste it — the repository is private, so raw.githubusercontent.com will not serve it
 scp infra/vm-bootstrap.sh ilrbuild@<public ip>:
-sudo ILR_GIT_URL="https://<read-only token>@github.com/ILRRepoGIT/sss2026-ilr-prototype.git" bash vm-bootstrap.sh v6.0-rc4
+sudo ILR_GIT_URL="https://<read-only token>@github.com/ILRRepoGIT/sss2026-ilr-prototype.git" bash vm-bootstrap.sh v6.0-rc5
 ```
 
-`v6.0-rc4` is the release tag this guide was written for (the value in `prod/release_manifest.json`); if Alexander names a later tag, use that. The script accepts the storage, vault and Front Door names as environment variables (`ILR_DATA_ACCOUNT`, `ILR_WEB_ACCOUNT`, `ILR_KEY_VAULT`, `ILR_AFD_PROFILE`, `ILR_AFD_ENDPOINT`, `ILR_RG`) if you changed any of them from section 2, and writes them all to `/etc/profile.d/ilr.sh` so the runbook's commands can use them.
+`v6.0-rc5` is the release tag this guide was written for (the value in `prod/release_manifest.json`); if Alexander names a later tag, use that. The script accepts the storage, vault and Front Door names as environment variables (`ILR_DATA_ACCOUNT`, `ILR_WEB_ACCOUNT`, `ILR_KEY_VAULT`, `ILR_AFD_PROFILE`, `ILR_AFD_ENDPOINT`, `ILR_RG`) if you changed any of them from section 2, and writes them all to `/etc/profile.d/ilr.sh` so the runbook's commands can use them.
 
 The script ends by printing the sha256 of every file that takes part in a build and comparing them with the release manifest; it stops if any differ. It also runs `az login --identity` and checks that the identity can list the `dataset` container and read the link secret's metadata (not its value). If both checks pass, the machine is ready for the runbook (`docs/production/SSS2026_ILR_Operations_Runbook.md`).
 
@@ -322,13 +323,13 @@ The script ends by printing the sha256 of every file that takes part in a build 
 ## 7. Logging, budget and alerts
 
 ```
-az monitor log-analytics workspace create --resource-group rg-sss2026-ilr --workspace-name law-sss2026-ilr --location uksouth --retention-time 90
-LAW=$(az monitor log-analytics workspace show -g rg-sss2026-ilr -n law-sss2026-ilr --query id -o tsv)
-AFD=$(az afd profile show -g rg-sss2026-ilr --profile-name afd-sss2026-ilr --query id -o tsv)
+az monitor log-analytics workspace create --resource-group SSS2026_Interactive_Learning_reports --workspace-name law-sss2026-ilr --location uksouth --retention-time 90
+LAW=$(az monitor log-analytics workspace show -g SSS2026_Interactive_Learning_reports -n law-sss2026-ilr --query id -o tsv)
+AFD=$(az afd profile show -g SSS2026_Interactive_Learning_reports --profile-name afd-sss2026-ilr --query id -o tsv)
 az monitor diagnostic-settings create --name afd-logs --resource $AFD --workspace $LAW \
   --logs '[{"category":"FrontDoorAccessLog","enabled":true},{"category":"FrontDoorHealthProbeLog","enabled":true}]' \
   --metrics '[{"category":"AllMetrics","enabled":true}]'
-az consumption budget create --budget-name budget-sss2026-ilr --resource-group rg-sss2026-ilr --amount 400 --time-grain Monthly \
+az consumption budget create --budget-name budget-sss2026-ilr --resource-group SSS2026_Interactive_Learning_reports --amount 400 --time-grain Monthly \
   --start-date $(date +%Y-%m-01) --end-date 2027-09-01 --category Cost
 ```
 
@@ -353,7 +354,7 @@ Indicative list prices, pay-as-you-go, September 2026, before any organisational
 
 Run time. On a two-core sandbox one 272-pupil primary school builds in 3½ minutes including its full assurance pass (peak memory 1.5 GiB); the two larger schools in the same round took 6½–7 minutes (peak 2.2 GiB). Allowing about five CPU-minutes per school all in, the 935 eligible schools are roughly 80 CPU-hours: on 64 vCPUs running about 50 builds at once that is roughly 1½–2 hours; on 16 vCPUs about 6–7 hours. The pilot in the runbook measures the real figures on the VM before the full run, and the runner adapts its concurrency to the memory it sees (about 3 GiB per job is enough).
 
-Teardown. When the publication is verified and the evidence is in the `evidence` container: `az group delete --name rg-sss2026-ilr-build --yes`. That removes the VM, both disks, the network and the NSG in one action. The persistent group stays for the life of the publication.
+Teardown. When the publication is verified and the evidence is in the `evidence` container: `az group delete --name SSS2026_Interactive_Learning_reports --yes`. That removes the VM, both disks, the network and the NSG in one action. The persistent group stays for the life of the publication.
 
 ---
 
@@ -364,7 +365,7 @@ Send Alexander the following (a plain text file is fine). None of these values i
 ```
 Tenant id:                    
 Subscription id / name:       
-Resource groups:              rg-sss2026-ilr / rg-sss2026-ilr-build
+Resource groups:              SSS2026_Interactive_Learning_reports / SSS2026_Interactive_Learning_reports
 Data storage account:         stsss2026ilrdata   (dataset container: parquet uploaded, contentLength 20447561)
 Web storage account:          stsss2026ilrweb    (static website endpoint: https://…web.core.windows.net/)
 Key Vault:                    kv-sss2026-ilr     (secret name: sss2026-link-key-v1; custodian: <name>)

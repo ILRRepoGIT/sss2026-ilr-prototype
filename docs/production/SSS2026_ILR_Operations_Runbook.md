@@ -8,7 +8,7 @@ Throughout, `$ILR_REPO`, `$ILR_VENV` and the storage/vault names come from `/etc
 
 ```
 cd $ILR_REPO && source $ILR_VENV/bin/activate
-export RELEASE=v6.0-rc4                  # the tag the VM was bootstrapped at (v6.0-rc4 today — Framework v2.15; the owner cuts v6.0 with tools/cut_release.sh)
+export RELEASE=v6.0-rc5                  # the tag the VM was bootstrapped at (v6.0-rc5 today — Framework v2.15; the owner cuts v6.0 with tools/cut_release.sh)
 export EVID=/data/ilr/evidence            # private: attestations, bundles, locks, ledger
 export OUT=/data/ilr/out                  # the served trees (release + entry pages)
 export WORK=/data/ilr/work                # per-job scratch, deleted job by job
@@ -45,7 +45,7 @@ python -m prod.register build $DATASET /data/ilr/private/register --plasc /data/
 cat /data/ilr/private/register/register_summary.json
 ```
 
-On the 22 September dataset this gives 1,016 schools: **993 eligible**, 23 below the rule-of-five threshold (no report: fewer than five accepted responses, so not even the whole-school view is reportable), none held — Framework v2.15 carries the four local-authority rows in the dataset's spelling (owner instruction, 22 Sep 2026), so every school with a reportable view is in the full run. `la_cy_missing_schools` in the summary must read 0; if it does not, the framework is not v2.15. Upload the three register files to the `register` container so the universe is on record before anything is built:
+On the 22 September dataset this gives 1,016 schools, **all 1,016 eligible**, none held: Framework v2.15 carries the four local-authority rows in the dataset's spelling, and by the owner's instruction of 22 Sep 2026 every school with an accepted response receives a report — the 23 schools with fewer than five responses included (their whole-school view, and so every view, is suppressed by the rule of five inside the report; the report is thin but exists and has its link). `la_cy_missing_schools` in the summary must read 0 and `eligible` must equal `schools`; if not, stop. Upload the three register files to the `register` container so the universe is on record before anything is built:
 
 ```
 az storage blob upload-batch --account-name $ILR_DATA_ACCOUNT --destination register/$RELEASE --source /data/ilr/private/register --auth-mode login
@@ -149,7 +149,7 @@ Then the served gate through Front Door against the staged tree. Front Door serv
 
 ```
 python -m prod.publish promote --release $RELEASE --evidence $EVID --account stsss2026ilrweb \
-   --profile afd-sss2026-ilr --rg rg-sss2026-ilr --endpoint sss2026-reports --dry-run      # read the plan first
+   --profile afd-sss2026-ilr --rg SSS2026_Interactive_Learning_reports --endpoint sss2026-reports --dry-run      # read the plan first
 ```
 
 (Before F2 there is no publication index, so the dry run lists the release-tree copy only and says so; `promote` without `--dry-run` also writes the entry pages — do not run it yet.) The full served-package check over HTTP is run after activation in Phase F within minutes, on 100 % of routes; before activation the file-mode check over the staged bytes (`verify-staging`) is the guarantee that what will be served is what was attested.
@@ -168,8 +168,8 @@ az storage blob upload-batch --account-name $ILR_DATA_ACCOUNT --destination evid
 **F1. Move the publisher role.** Before the first activation, the `$web` write role and the Front Door purge role are taken away from the VM's identity and given to the publisher — a named person — so that a build cannot publish itself. From an administrator's own machine:
 
 ```
-WEB=$(az storage account show -n stsss2026ilrweb -g rg-sss2026-ilr --query id -o tsv)
-AFD=$(az afd profile show -g rg-sss2026-ilr --profile-name afd-sss2026-ilr --query id -o tsv)
+WEB=$(az storage account show -n stsss2026ilrweb -g SSS2026_Interactive_Learning_reports --query id -o tsv)
+AFD=$(az afd profile show -g SSS2026_Interactive_Learning_reports --profile-name afd-sss2026-ilr --query id -o tsv)
 az role assignment delete --assignee <vm principal id> --role "Storage Blob Data Contributor" --scope "$WEB/blobServices/default/containers/\$web"
 az role assignment delete --assignee <vm principal id> --role "CDN Profile Contributor" --scope $AFD
 az role assignment create --assignee <publisher upn> --role "Storage Blob Data Contributor" --scope "$WEB/blobServices/default/containers/\$web"
@@ -187,20 +187,29 @@ python -m prod.publish index --release $RELEASE --evidence $EVID --approver "<na
 
 The index (`publication_index.json`) carries its own sha256, the two approvers and the waiver's hash. Both approvers read the refused list and the count before F4.
 
-**F3. The distribution list.** The CMS / email list of links, one per school (bearer links — confidential; the file is written mode 0600):
+**F3. The distribution list and the website's publication register.** Two exports, both derived from the attestations and the register, nothing typed. The first is the e-mail list of links, one per school (bearer links — confidential; the file is written mode 0600):
 
 ```
 python -m prod.checks link-export --evidence $EVID --release $RELEASE --base-url https://reports.schoolsportsurvey2026.co.uk \
    --register /data/ilr/private/register/register.json --out /data/ilr/private/links_$RELEASE.csv
 ```
 
-The list contains every school in the register, including the below-threshold and held schools with an empty URL and their status, so that no school is an unexplained gap (review P0.10). The join to the schools' contact details happens in Industryline's own systems on `school_id`; one row per school, exact.
+The list contains every school in the register (every school with an accepted response has a report — owner instruction, 22 Sep 2026); any school without a built report appears with an empty URL and its status, so that no school is an unexplained gap (review P0.10). The join to the schools' contact details happens in Industryline's own systems on `school_id`; one row per school, exact.
+
+The second is the **website publication register** — the controlled file the School Sport Survey 2026 website's dynamic route `/reports/school/{public_slug}/` reads to redirect (302/307) a school's branded address to its report on `reports.schoolsportsurvey2026.co.uk` (the hosting note of 22 Sep 2026). It is produced after F2 so that it carries the publication index's sha256 and only approved reports are routable:
+
+```
+python -m prod.checks publication-register --evidence $EVID --release $RELEASE --base-url https://reports.schoolsportsurvey2026.co.uk \
+   --register /data/ilr/private/register/register.json --out /data/ilr/private/publication_register_$RELEASE.csv
+```
+
+Columns: `report_id`, `report_family`, `entity_id`, `title_en`, `title_cy`, `public_slug` (the school's name slug + the first eight characters of its link token — stable, unique, never assigned by hand), `release_id`, `azure_target_path` (the entry page), `target_url`, `package_hash` (sha256 over the report's file inventory), `files`, `publication_status`, the authority in both languages, `accepted_responses`. The command refuses (exit 1) on a duplicate slug or target. The same rows are written as `.json`. The website team imports this file and nothing else; when a report is corrected under a new tag, a new register is produced and the slug's target changes there, never by hand.
 
 **F4. Activation.** Server-side copy of the release tree, then the entry pages, then the edge purge:
 
 ```
 python -m prod.publish promote --release $RELEASE --evidence $EVID --account stsss2026ilrweb \
-   --profile afd-sss2026-ilr --rg rg-sss2026-ilr --endpoint sss2026-reports --auth azcli
+   --profile afd-sss2026-ilr --rg SSS2026_Interactive_Learning_reports --endpoint sss2026-reports --auth azcli
 ```
 
 Then re-upload the evidence so that the private record carries the publication index and the ledger's activation events (the Phase E upload predates them):
@@ -222,7 +231,9 @@ Only after F5 passes are the links sent to schools.
 
 ---
 
-## Afterwards
+## Afterwards — and the website integration
+
+**Website integration comes after every report is built, staged, verified and activated (F5 passed).** The School Sport Survey 2026 website then adds one parameterised route, `/reports/{report-family}/{public_slug}/`, that looks the slug up in the publication register (F3) and redirects with a temporary `302`/`307` to `target_url` — the report opens as a normal top-level page, never in an iframe. The website holds no report files; the register is the only thing it imports. Its final check, before any link is sent, is the same list as the hosting note's: every school in the register has exactly one slug and one target; every slug resolves to the right school (title and `entity_id` match); `served-gate` over the website slugs returns the right headers, bytes and identities; withdrawn or unknown slugs return 404; the count of working slugs equals the count of approved reports. Cache treatment is already what the note asks for: the resolver is not cached; the entry pages are `no-cache, must-revalidate`; the release tree is `immutable`. Local-authority and constituency families use the same route with their own registers when those reports are built.
 
 Run the live check weekly for the life of the publication (`served-gate … --sample 40`), and after any change to Front Door or the storage account. Any change to the content — a lexicon row, a wording — is a new tag and a return to Phase B; the previous release's tree stays in `staging` and its evidence in the `evidence` container for the record. When the publication period ends, the plan's decommission step is: delete the entry pages (all links return 404), purge, then remove the release tree; keep the evidence.
 
