@@ -1,6 +1,6 @@
 {
- "tag": "v6.0-rc2",
- "releasedAt": "2026-09-22T22:42:55+01:00",
+ "tag": "v6.0-rc3",
+ "releasedAt": "2026-09-22T23:10:06+01:00",
  "pipelineVersion": "0.31.0",
  "prodVersion": "1.0.0",
  "servedSchema": "1",
@@ -9,7 +9,7 @@
  "gateRunner": "pipeline/vendor_welsh_gates_v8.py",
  "gateRunnerSha256": "3057fef25b5d54bd564b0ee86affd3ef34048b4c1598c27eeb86ae3da2bde4fe",
  "fileCount": 136,
- "manifestSha256": "074ca08871f1bc769c8d02100b7c12bca6566015637b0f82a2bd459a77e130fb",
+ "manifestSha256": "0643c640e5b6a4108d16a941baa94f0517c32bfb48ec6e836bdea372d9b9b51a",
  "files": {
   "pipeline/__init__.py": {
    "sha256": "314698d0f536391fc213f8571e555bc9a7e245d222c454d271133de21f0fc465",
@@ -260,8 +260,8 @@
    "bytes": 8193
   },
   "prod/publish.py": {
-   "sha256": "7a10bf328d56d4f392ca2dd70a875bcace95eb2db716eead652e86da07a77838",
-   "bytes": 14359
+   "sha256": "bdb25dcaf6d1985f0917139e06420006c1800385ecdacb1d6d2d56961f336714",
+   "bytes": 15821
   },
   "prod/register.py": {
    "sha256": "39c79fd99418f49e96922badba8720b55e6c47fb169d79f32c1f6b0ddf326613",
