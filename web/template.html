@@ -80,6 +80,26 @@ main.report { width:100%; max-width:var(--col-w); min-width:0; }
   .intro-brain-break { margin:8px auto 0; max-width:240px; }
 }
 
+/* V4.16: Young Artists Competition artwork — one entry per placement, each
+   an <img> with its alt frame (ui.alt_yac_*, Framework sheet 43). Additive
+   rules only: a small side image beside a heading, or a band at the foot
+   of a page. */
+.yac-side { float:right; width:190px; max-width:36%; margin:0 0 12px 24px; }
+.yac-side.yac-w250 { width:250px; max-width:40%; }
+.yac-side.yac-w170 { width:170px; }
+.yac-side.yac-w160 { width:160px; }
+.yac-side.yac-w140 { width:140px; }
+.yac-side.yac-w150 { width:150px; }
+.yac-side img { display:block; width:100%; height:auto; }
+.yac-host { display:flow-root; }
+.yac-band { clear:both; margin:22px auto 0; text-align:center; }
+.yac-band img { display:inline-block; width:100%; max-width:480px; height:auto; }
+.yac-band.yac-strip img { max-width:560px; }
+@media (max-width:760px){
+  .yac-side, .yac-side.yac-w250, .yac-side.yac-w170, .yac-side.yac-w160, .yac-side.yac-w150, .yac-side.yac-w140 {
+    float:none; width:auto; max-width:200px; margin:10px auto 0; }
+}
+
 /* ---------------------------------------------------------------- cover */
 .cover { position:relative; background:#fff; border-radius:12px; overflow:hidden;
   aspect-ratio: 1 / 1.28; min-height:640px; margin-bottom:18px;
@@ -527,6 +547,9 @@ html.a11y .cover-lockup img, html.a11y .chapter-char img, html.a11y .intro-brain
 html.a11y .howto-brain img { filter:saturate(.55) contrast(.95); }
 html.a11y .a11y-cap { display:block; font-size:16px; color:#333; text-align:center; margin:6px auto 0; max-width:240px; }
 html.a11y .howto-brain .a11y-cap { max-width:none; }
+/* V4.16: the artwork is muted and captioned like the character images */
+html.a11y .yac-side img, html.a11y .yac-band img { filter:saturate(.55) contrast(.95); }
+html.a11y .yac-band .a11y-cap { max-width:640px; }
 /* glossary panel */
 html.a11y .a11y-glossary { border:2px solid #5F6E76; border-radius:9px; padding:14px 18px; margin:12px 0 16px; background:#fff; }
 html.a11y .a11y-glossary ul { margin:0; padding-left:22px; } html.a11y .a11y-glossary li { margin-bottom:6px; }
@@ -559,6 +582,7 @@ html.a11y table:focus-visible { outline:3px solid #000; outline-offset:2px; }
   .module { box-shadow:none; border-radius:0; border:0; border-top:1px solid var(--line);
     margin:0; padding:14px 0; }
   .chart-card { page-break-inside:avoid; }
+  .yac-side, .yac-band { page-break-inside:avoid; break-inside:avoid; }
   .module.omitted { display:none !important; }
   .chapter-open, .cover { page-break-before:always; border:0; }
   .cover { border-radius:0; }
@@ -637,15 +661,19 @@ html.a11y table:focus-visible { outline:3px solid #000; outline-offset:2px; }
         <p class="chart-note" id="intro-sentence"></p>
       </div>
       <figure class="intro-brain-break">
-        <img src="__IMG_BRAIN_JAV__"
-          alt="Brain Break character: a smiling brain wearing a Sport Wales headband, throwing a javelin from a wheelchair" data-frame-attr="alt:ui.alt_brain_javelin">
+        <img src="__IMG_YAC_FOOTBALLER__"
+          alt="Young Artists Competition drawing: a footballer with long fair hair, in a blue number 7 shirt, white shorts and pink boots, kicking a football" data-frame-attr="alt:ui.alt_yac_footballer">
       </figure>
     </div>
+    <div class="yac-band"><img src="__IMG_YAC_WELSH_SYMBOLS__"
+      alt="Young Artists Competition drawing: symbols of Wales and sport together — a daffodil, a football, a cricket bat and ball, a red dragon, a rugby ball and a leek" data-frame-attr="alt:ui.alt_yac_welsh_symbols"></div>
   </section>
 
 
   <!-- A2b · contents page (v2, Sport Wales feedback: primary navigation hub) -->
-  <section class="module" id="m-contents" aria-labelledby="h-contents" data-i18n-source="handoff:static-furniture">
+  <section class="module yac-host" id="m-contents" aria-labelledby="h-contents" data-i18n-source="handoff:static-furniture">
+    <div class="yac-side yac-w250"><img src="__IMG_YAC_DRAGON_KIT__"
+      alt="Young Artists Competition drawing: a red dragon in a white Wales shirt numbered 11, holding a rugby ball, with one foot on a football and a leek in its tail" data-frame-attr="alt:ui.alt_yac_dragon_kit"></div>
     <span class="mod-kicker">Contents</span>
     <h2 id="h-contents">Contents</h2>
     <p class="context">Use the links below, or the navigation panel on the right hand side
@@ -670,10 +698,14 @@ html.a11y table:focus-visible { outline:3px solid #000; outline-offset:2px; }
           <span>Full data tables and the pupil profile detail for the pupils you are
           viewing.</span></li>
     </ol>
+    <div class="yac-band yac-strip"><img src="__IMG_YAC_BALLS__"
+      alt="Young Artists Competition drawing: a row of four balls — a red cricket ball, a black ball with white spots, an orange basketball and a black eight-ball" data-frame-attr="alt:ui.alt_yac_balls"></div>
   </section>
 
   <!-- A3-A5 · how to use (FAQ format, v2 Sport Wales feedback) -->
-  <section class="module" id="m-guide" aria-labelledby="h-guide" data-i18n-source="handoff:static-furniture">
+  <section class="module yac-host" id="m-guide" aria-labelledby="h-guide" data-i18n-source="handoff:static-furniture">
+    <div class="yac-side yac-w160"><img src="__IMG_YAC_DRAGON_WALES__"
+      alt="Young Artists Competition drawing: a red Welsh dragon with the word WALES in green letters across it" data-frame-attr="alt:ui.alt_yac_dragon_wales"></div>
     <span class="mod-kicker">Guide</span>
     <h2 id="h-guide">How to use this report</h2>
     <p class="context">Everything you need to read this report with confidence — select a
@@ -794,7 +826,9 @@ html.a11y table:focus-visible { outline:3px solid #000; outline-offset:2px; }
   </section>
 
   <!-- A6/B1/B2 · fixed school overview -->
-  <section class="module" id="m-overview" aria-labelledby="h-overview" data-i18n-source="handoff:static-furniture">
+  <section class="module yac-host" id="m-overview" aria-labelledby="h-overview" data-i18n-source="handoff:static-furniture">
+    <div class="yac-side"><img src="__IMG_YAC_GYMNASTICS__"
+      alt="Young Artists Competition drawing: a gymnastics club — one gymnast leaping above a balance beam, another hanging from a high bar, beside a stack of coloured rings" data-frame-attr="alt:ui.alt_yac_gymnastics"></div>
     <span class="mod-kicker">Your school</span>
     <h2 id="h-overview">Which pupils in our school took part in 2026?</h2>
     <p class="context">This section shows who in your school participated in the School Sport
@@ -821,8 +855,8 @@ html.a11y table:focus-visible { outline:3px solid #000; outline-offset:2px; }
          levels change between different settings. The Vision is for Everyone — from pupils
          who don’t yet see themselves as sporty to those who win medals. This chapter also
          explores the findings from your school by different cohorts.</p>
-      <div class="chapter-char"><img src="__IMG_BRAIN_FOOT__"
-        alt="Brain Break character: a smiling brain in glasses kicking a football" data-frame-attr="alt:ui.alt_brain_football"></div>
+      <div class="chapter-char"><img src="__IMG_YAC_FOOTBALL_SPLASH__"
+        alt="Young Artists Competition drawing: a football with red and green panels bursting out of a splash of red and green paint" data-frame-attr="alt:ui.alt_yac_football_splash"></div>
     </div>
   </section>
 
@@ -864,9 +898,11 @@ html.a11y table:focus-visible { outline:3px solid #000; outline-offset:2px; }
 
 
   <!-- v2.1 (page 10): school-based activity -->
-  <div class="module dynamic" id="m-inschool" data-i18n-source="handoff:static-furniture">
+  <div class="module dynamic yac-host" id="m-inschool" data-i18n-source="handoff:static-furniture">
     <span class="mod-kicker red">An Active Nation for Everyone</span>
     <h2 id="h-inschool">How are our pupils active through sport in School?</h2>
+    <div class="yac-side yac-w150"><img src="__IMG_YAC_BASKETBALL__"
+      alt="Young Artists Competition drawing: a basketball player with a ponytail, in a red vest and black shorts, leaping to shoot a basketball framed by a red starburst" data-frame-attr="alt:ui.alt_yac_basketball"></div>
     <p class="context">We captured pupils’ sporting habits across two school-based contexts:
        <strong>during lesson time</strong> (i.e., curricular) and <strong>at school sport
        clubs</strong> (i.e., extracurricular). Specifically, we asked pupils to tell us which
@@ -892,9 +928,11 @@ html.a11y table:focus-visible { outline:3px solid #000; outline-offset:2px; }
   </div>
 
   <!-- v2.1 (page 11): activity outside of school -->
-  <div class="module dynamic" id="m-outschool" data-i18n-source="handoff:static-furniture">
+  <div class="module dynamic yac-host" id="m-outschool" data-i18n-source="handoff:static-furniture">
     <span class="mod-kicker red">An Active Nation for Everyone</span>
     <h2 id="h-outschool">How are our pupils active through sport Outside of School?</h2>
+    <div class="yac-side"><img src="__IMG_YAC_CYCLIST__"
+      alt="Young Artists Competition drawing: a mountain biker in a helmet leaning low over a pink bike as it goes over a jump, against a blue watercolour splash" data-frame-attr="alt:ui.alt_yac_cyclist"></div>
     <p class="context">We captured pupils’ sporting habits across two contexts outside of
        school: <strong>in a club outside of school</strong> and <strong>somewhere
        else</strong>. Specifically, when we asked pupils to tell us which sports they did in
@@ -935,9 +973,11 @@ html.a11y table:focus-visible { outline:3px solid #000; outline-offset:2px; }
 
 
   <!-- E · the Everyone part of An Active Nation for Everyone -->
-  <div class="module dynamic" id="m-everyone-sub" data-i18n-source="handoff:static-furniture">
+  <div class="module dynamic yac-host" id="m-everyone-sub" data-i18n-source="handoff:static-furniture">
     <span class="mod-kicker red">An Active Nation for Everyone</span>
     <h2 id="h-everyone">How does participation differ between groups of pupils?</h2>
+    <div class="yac-side yac-w170"><img src="__IMG_YAC_HEART__"
+      alt="Young Artists Competition drawing: a red heart holding four scenes of a red dragon playing football, rugby, gymnastics and cricket" data-frame-attr="alt:ui.alt_yac_heart"></div>
     <p class="context">The Vision is for Everyone. This part of the chapter explores where
        different groups of pupils are active through sport, across all four settings, so the
        school can see where the offer is reaching everyone and where it may not be.
@@ -1024,8 +1064,8 @@ html.a11y table:focus-visible { outline:3px solid #000; outline-offset:2px; }
          positive experiences so everyone can enjoy sport. This chapter explores enjoyment in
          different settings, whether pupils feel their ideas about sport are listened to, and
          different forms of confidence.</p>
-      <div class="chapter-char"><img src="__IMG_BRAIN_BASK__"
-        alt="Brain Break character: a smiling brain in glasses dribbling a basketball" data-frame-attr="alt:ui.alt_brain_basketball"></div>
+      <div class="chapter-char"><img src="__IMG_YAC_HORSE__"
+        alt="Young Artists Competition drawing: a rider in a red jacket and black helmet jumping a brown horse" data-frame-attr="alt:ui.alt_yac_horse"></div>
     </div>
   </section>
 
@@ -1149,17 +1189,8 @@ html.a11y table:focus-visible { outline:3px solid #000; outline-offset:2px; }
          and activities pupils have done this school year, the sports they would like to do
          more of, and where demand is not being met. Use the filters, or select a
          highlighted sport, to explore any group of pupils.</p>
-      <div class="chapter-char" aria-hidden="true">
-        <!-- brand-form graphic placeholder until a further Brain Break pose is
-             supplied: sanctioned red/blue/yellow forms -->
-        <svg viewBox="0 0 220 200" role="img" aria-label="">
-          <path d="M30 150 L70 30 L110 150 Z" fill="#094B68"/>
-          <path d="M85 150 L125 45 L165 150 Z" fill="#FA2A3C" opacity=".92"/>
-          <circle cx="168" cy="60" r="26" fill="#FEBD06"/>
-          <rect x="24" y="152" width="172" height="10" rx="5" fill="#FEBD06"/>
-          <circle cx="52" cy="60" r="9" fill="#FA2A3C"/>
-        </svg>
-      </div>
+      <div class="chapter-char"><img src="__IMG_YAC_CRICKET__"
+        alt="Young Artists Competition drawing: a cricketer in a helmet, gloves and pads, swinging a bat at a red ball" data-frame-attr="alt:ui.alt_yac_cricket"></div>
     </div>
   </section>
 
@@ -1232,13 +1263,15 @@ html.a11y table:focus-visible { outline:3px solid #000; outline-offset:2px; }
   <section class="module dynamic" id="m-explore" aria-labelledby="h-explore" data-i18n-source="handoff:static-furniture">
     <span class="mod-kicker">Next steps</span>
     <h2 id="h-explore">What your findings may help you explore</h2>
-    <div class="howto-brain" style="width:140px"><img src="__IMG_BRAIN_FOOT__"
-      alt="Brain Break character: a smiling brain in glasses kicking a football" data-frame-attr="alt:ui.alt_brain_football"></div>
+    <div class="howto-brain" style="width:140px"><img src="__IMG_YAC_DRAGON_FOOTBALL__"
+      alt="Young Artists Competition drawing: a smiling red dragon with cream wings, standing beside a football" data-frame-attr="alt:ui.alt_yac_dragon_football"></div>
     <ul id="h2-list" style="padding-left:20px"></ul>
   </section>
 
 
-  <section class="module" id="m-thanks" aria-labelledby="h-thanks" data-i18n-source="handoff:static-furniture">
+  <section class="module yac-host" id="m-thanks" aria-labelledby="h-thanks" data-i18n-source="handoff:static-furniture">
+    <div class="yac-side yac-w140"><img src="__IMG_YAC_TENNIS_FOOTBALL__"
+      alt="Young Artists Competition drawing: a football above a bright green tennis ball" data-frame-attr="alt:ui.alt_yac_tennis_football"></div>
     <span class="mod-kicker">Thank you</span>
     <h2 id="h-thanks">Thank you and next steps</h2>
     <p>Thank you to every pupil who shared their views, and to the staff who made the survey

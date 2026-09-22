@@ -27,13 +27,13 @@ from .narrative2 import BASE1_GATES, T as TEMPLATES
 from .narrative2_modules import MODULE_LABELS
 from .narrative2_modules_b import FullNarrator
 
-PIPELINE_VERSION_V2 = "0.28.0"
+PIPELINE_VERSION_V2 = "0.29.0"
 # v6 (0.28.0, V5.0 real-school round): the school is the profile's, not the
 # module's. The prototype profile carries no slug or report version, so the
 # defaults keep every V4.15 name; a school profile names its own.
 _PROFILE0 = load_config()[0]
 SCHOOL_SLUG = _PROFILE0.get("slug", "ysgol-penrhyn-dewi")
-REPORT_VERSION_V2 = _PROFILE0.get("reportVersion", "2026-prototype-V4.15-bilingual")
+REPORT_VERSION_V2 = _PROFILE0.get("reportVersion", "2026-prototype-V4.16-bilingual")
 
 # v2.1: "most likely" removed from the banned list - the Sport Wales
 # page-by-page feedback mandates the sentence form "Pupils were most likely

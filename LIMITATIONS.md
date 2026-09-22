@@ -47,10 +47,9 @@
   900 schools requires the shared-asset / separate-JSON / lazy-state
   delivery workstream before generating final files; deterministic
   narrative is unaffected.
-- **Young Artist artwork** is temporarily withheld from the generated report
-  per the Corrective Brief §5. All assets remain in the supplied ZIP for
-  deliberate reintroduction; only the mandatory title-page treatment and
-  Brain Break characters are embedded.
+- **Young Artist artwork** was withheld from the generated report per the
+  Corrective Brief §5 from Prototype 4.1 to V4.15; the owner's instruction of
+  22 Sep 2026 reintroduced it (V4.16, fourteen entries, see below).
 - **Print page numbers** still come from the browser's print header/footer
   (Chromium lacks `@page` margin-box support); the repeating footer carries
   school, title and current view.
@@ -73,10 +72,9 @@
   by subtraction from visible parents (e.g. Year 11: 8 total and 5 girls
   visible → 3 boys inferable), and very small selected groups (1–4
   respondents) display their full response profiles.
-- **Fourth Brain Break character.** Only three Brain Break poses were
-  supplied (javelin, football, basketball). Active Nation, Everyone and
-  Lifelong each use one; the Enjoyment opener uses transparent Young Artist
-  artwork until a fourth character is provided.
+- **Fourth Brain Break character.** Superseded in V4.16: the Brain Break
+  characters were replaced by the Young Artists Competition artwork (see the
+  V4.16 section below).
 - **Print page numbers.** Chromium does not yet support CSS `@page` margin
   boxes, so the repeating yellow-rule footer carries the school name, title
   and current view, while page numbers come from the browser's print
@@ -211,3 +209,27 @@ patched to pass a gate, and no Welsh was composed.
   cell; R26-02 seven "None of these" co-selections) — see the compliance record.
 - **Review builds.** Like V4.15, the reports are dev-mode builds (review banner) until the translator's
   values above and the owner's D69 are signed.
+
+## V4.16 — the Young Artists Competition artwork
+
+- **Welsh alt text.** None of the fourteen alt frames (`ui.alt_yac_*`, Framework
+  v2.9 sheet 43) has Welsh: the survey instrument describes six of the entries
+  in English only. Until the translator returns the rows, the Welsh report shows
+  the English alt text under the pending marking (`lang="en"`, "Heb ei gyfieithu
+  eto — dangosir y Saesneg"), and the accessibility-mode caption under each image
+  is that English. Fifteen frames are pending in all (with `ui.a11y_glossary_heading`).
+- **No release gate for an empty frame.** The gate pack tests the handoff
+  catalogue (CAT-values) and the rendered narrative surfaces (PUB-empty) for
+  empty Welsh, not the sheet-43 frames; a release run would not fail on the
+  fifteen pending frames by itself. Raised with the pack owners; a release check
+  is needed before the production round.
+- **Publication approval.** The artwork is embedded as supplied; no pupil name or
+  signature is visible in the files and none appears in the report. Sport Wales
+  to confirm publication approval and any credit line before school-facing use
+  (Framework sheet 65).
+- **Cover.** Unchanged — the supplied title-page treatment only; the dragon in
+  the Wales kit ("top of page — full width") opens the Contents page instead.
+- **File size.** +1.3 MB against V4.15 (fourteen WebP images, 1.5 MB of data
+  URIs). The production delivery note above (shared assets, per-school JSON)
+  applies to the artwork too: fourteen images embedded in 900 files is 1.3 GB of
+  repeated bytes that a shared asset bundle would carry once.

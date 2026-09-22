@@ -126,7 +126,13 @@ const MARKUP_FRAMES = { "ui.a11y_switch": 1, "ui.a11y_glossary_heading": 1, "ui.
   "ui.chart_sports_total_pe": 1, "ui.chart_sports_total_club": 1,
   "ui.chart_sports_total_community": 1, "ui.chart_sports_total_other": 1,
   "ui.aria_cover": 1, "ui.aria_rail": 1, "ui.aria_toc": 1,
-  "ui.alt_brain_javelin": 1, "ui.alt_brain_football": 1, "ui.alt_brain_basketball": 1,
+  // V4.16: the Young Artists Competition artwork's alt frames (one per
+  // image; the Brain Break frames ui.alt_brain_* are DEPRECATED on sheet 43)
+  "ui.alt_yac_dragon_kit": 1, "ui.alt_yac_welsh_symbols": 1, "ui.alt_yac_balls": 1,
+  "ui.alt_yac_footballer": 1, "ui.alt_yac_football_splash": 1, "ui.alt_yac_cyclist": 1,
+  "ui.alt_yac_dragon_football": 1, "ui.alt_yac_heart": 1, "ui.alt_yac_horse": 1,
+  "ui.alt_yac_tennis_football": 1, "ui.alt_yac_gymnastics": 1, "ui.alt_yac_cricket": 1,
+  "ui.alt_yac_basketball": 1, "ui.alt_yac_dragon_wales": 1,
 };
 function applyFrameAttrs() {
   for (const el of document.querySelectorAll("[data-frame-attr]")) {

@@ -1,6 +1,6 @@
 {
- "report": "SSS2026_ILR_Report_V4.15_Bilingual.html",
- "reportSha256": "dd5d9959d40c2ed417cdc8eeb937171ff50d3240b690c99583f462ba45891bfd",
+ "report": "SSS2026_ILR_Report_V4.16_Bilingual.html",
+ "reportSha256": "4e565c3a7ad12404a956f6003fc3ee5bdd6cda63bcb7ca4e1ebe1e3838b8fb79",
  "headline": "72/75",
  "mode": "release",
  "runner": "8.0.0",
@@ -23,7 +23,7 @@
  "notes": [
   "sensitiveFilters = true in the client; no signed D69 value to assert against"
  ],
- "at": "2026-09-21T13:24:07+00:00",
+ "at": "2026-09-22T15:24:03+00:00",
  "dev": {
   "headline": "71/72",
   "paths": "17/18",

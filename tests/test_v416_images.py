@@ -1,0 +1,58 @@
+# -*- coding: utf-8 -*-
+"""V4.16: the Young Artists Competition artwork — fourteen entries, each
+placed once, each with an alt frame; nothing else about the page changed."""
+import json
+import re
+from pathlib import Path
+
+from pipeline.yac_assets import ALT_EN, RETIRED, YAC
+
+ROOT = Path(__file__).resolve().parents[1]
+TPL = (ROOT / "web" / "template.html").read_text(encoding="utf-8")
+APP = (ROOT / "web" / "app.js").read_text(encoding="utf-8")
+LEX = json.loads((ROOT / "config" / "welsh_lexicon.json").read_text(encoding="utf-8"))
+
+
+def _imgs():
+    return re.findall(r'<img src="(__IMG_YAC_[A-Z_]+__)"\s+alt="([^"]*)"\s+data-frame-attr="alt:([a-z_.]+)"', TPL)
+
+
+def test_fourteen_entries_each_placed_exactly_once():
+    imgs = _imgs()
+    assert len(imgs) == len(YAC) == 14
+    assert sorted(t for t, _, _ in imgs) == sorted(t for _, _, t, *_ in YAC)
+    assert len({t for t, _, _ in imgs}) == 14
+
+
+def test_every_alt_literal_equals_its_sheet43_frame_english():
+    by_token = {t: k for k, _f, t, *_ in YAC}
+    for token, alt, key in _imgs():
+        assert by_token[token] == key
+        assert alt == ALT_EN[key] == LEX["interface_frames"][key]["en"]
+
+
+def test_frames_are_pending_welsh_not_invented():
+    for key, *_ in YAC:
+        assert LEX["interface_frames"][key]["cy"] == ""
+
+
+def test_no_pupil_name_in_any_alt_text():
+    # the survey's mascot pages named the artists; the report never does
+    names = ("Isla", "Sofia", "Simay", "Chloe", "Zoe", "Ada", "Isla-Boe")
+    for key, alt in ALT_EN.items():
+        assert not any(re.search(r"\b" + n + r"\b", alt) for n in names), key
+
+
+def test_client_consumes_every_frame_and_none_of_the_retired():
+    for key, *_ in YAC:
+        assert f'"{key}": 1' in APP, key
+    for key in RETIRED:
+        assert key not in APP
+        assert key not in TPL
+        assert key in LEX["deprecated_frames"]
+        assert key not in LEX["interface_frames"]
+
+
+def test_brain_break_tokens_and_placeholder_are_gone():
+    assert "__IMG_BRAIN_" not in TPL
+    assert "brand-form graphic placeholder" not in TPL

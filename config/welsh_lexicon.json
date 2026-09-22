@@ -1,7 +1,7 @@
 {
- "version": "v2.8",
- "framework_sha256": "582e335936e91eaaa5e9147fcb8a3344acdd98ad3d4076b3f389951caf15e2ac",
- "framework_file": "01_Framework_v2.8.xlsx",
+ "version": "v2.9",
+ "framework_sha256": "556547b0f755a51fb8f0890bfea01297f159dc308a86156331089fd998b7fdc1",
+ "framework_file": "01_Framework_v2.9.xlsx",
  "audiences": {
   "Generated from sheet 18 by rule. Note the two divergences from English that recur in every row: (1) after a numeral with the article Welsh uses the SINGULAR head (y 12 disgybl, not y 12 ddisgyblion); (2) the scope phrase is locative and triggers the nasal mutation (ym Mlwyddyn 8). The HOLL column is the parent-audience form ('all Year 8 pupils').": {
    "bare": "",
@@ -3756,7 +3756,10 @@
  "deprecated_frames": [
   "ui.table_headings",
   "msg.no_data_title",
-  "msg.no_data_body"
+  "msg.no_data_body",
+  "ui.alt_brain_javelin",
+  "ui.alt_brain_football",
+  "ui.alt_brain_basketball"
  ],
  "interface_frames": {
   "ui.rail_toggle": {
@@ -4326,21 +4329,6 @@
    "cy": "Cynnwys adroddiad",
    "slots": "—"
   },
-  "ui.alt_brain_javelin": {
-   "en": "Brain Break character: a smiling brain wearing a Sport Wales headband, throwing a javelin from a wheelchair",
-   "cy": "",
-   "slots": "—"
-  },
-  "ui.alt_brain_football": {
-   "en": "Brain Break character: a smiling brain in glasses kicking a football",
-   "cy": "",
-   "slots": "—"
-  },
-  "ui.alt_brain_basketball": {
-   "en": "Brain Break character: a smiling brain in glasses dribbling a basketball",
-   "cy": "",
-   "slots": "—"
-  },
   "ui.selected_tick": {
    "en": "✓ Selected",
    "cy": "✓ Dewiswyd",
@@ -4364,6 +4352,76 @@
   "ui.a11y_glossary_intro": {
    "en": "Select a term to open its explanation in the guide.",
    "cy": "Dewiswch derm i agor ei esboniad yn y canllaw.",
+   "slots": "—"
+  },
+  "ui.alt_yac_dragon_kit": {
+   "en": "Young Artists Competition drawing: a red dragon in a white Wales shirt numbered 11, holding a rugby ball, with one foot on a football and a leek in its tail",
+   "cy": "",
+   "slots": "—"
+  },
+  "ui.alt_yac_welsh_symbols": {
+   "en": "Young Artists Competition drawing: symbols of Wales and sport together — a daffodil, a football, a cricket bat and ball, a red dragon, a rugby ball and a leek",
+   "cy": "",
+   "slots": "—"
+  },
+  "ui.alt_yac_balls": {
+   "en": "Young Artists Competition drawing: a row of four balls — a red cricket ball, a black ball with white spots, an orange basketball and a black eight-ball",
+   "cy": "",
+   "slots": "—"
+  },
+  "ui.alt_yac_footballer": {
+   "en": "Young Artists Competition drawing: a footballer with long fair hair, in a blue number 7 shirt, white shorts and pink boots, kicking a football",
+   "cy": "",
+   "slots": "—"
+  },
+  "ui.alt_yac_football_splash": {
+   "en": "Young Artists Competition drawing: a football with red and green panels bursting out of a splash of red and green paint",
+   "cy": "",
+   "slots": "—"
+  },
+  "ui.alt_yac_cyclist": {
+   "en": "Young Artists Competition drawing: a mountain biker in a helmet leaning low over a pink bike as it goes over a jump, against a blue watercolour splash",
+   "cy": "",
+   "slots": "—"
+  },
+  "ui.alt_yac_dragon_football": {
+   "en": "Young Artists Competition drawing: a smiling red dragon with cream wings, standing beside a football",
+   "cy": "",
+   "slots": "—"
+  },
+  "ui.alt_yac_heart": {
+   "en": "Young Artists Competition drawing: a red heart holding four scenes of a red dragon playing football, rugby, gymnastics and cricket",
+   "cy": "",
+   "slots": "—"
+  },
+  "ui.alt_yac_horse": {
+   "en": "Young Artists Competition drawing: a rider in a red jacket and black helmet jumping a brown horse",
+   "cy": "",
+   "slots": "—"
+  },
+  "ui.alt_yac_tennis_football": {
+   "en": "Young Artists Competition drawing: a football above a bright green tennis ball",
+   "cy": "",
+   "slots": "—"
+  },
+  "ui.alt_yac_gymnastics": {
+   "en": "Young Artists Competition drawing: a gymnastics club — one gymnast leaping above a balance beam, another hanging from a high bar, beside a stack of coloured rings",
+   "cy": "",
+   "slots": "—"
+  },
+  "ui.alt_yac_cricket": {
+   "en": "Young Artists Competition drawing: a cricketer in a helmet, gloves and pads, swinging a bat at a red ball",
+   "cy": "",
+   "slots": "—"
+  },
+  "ui.alt_yac_basketball": {
+   "en": "Young Artists Competition drawing: a basketball player with a ponytail, in a red vest and black shorts, leaping to shoot a basketball framed by a red starburst",
+   "cy": "",
+   "slots": "—"
+  },
+  "ui.alt_yac_dragon_wales": {
+   "en": "Young Artists Competition drawing: a red Welsh dragon with the word WALES in green letters across it",
+   "cy": "",
    "slots": "—"
   }
  },

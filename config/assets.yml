@@ -1,84 +1,86 @@
-# Asset manifest - School Sport Survey 2026 ILR prototype
-# All images are embedded at build time as optimised WebP (alpha preserved).
-# "credit" text should be confirmed with Sport Wales before production use.
+# Asset manifest - School Sport Survey 2026 ILR prototype (V4.16)
+# All images are embedded at build time as optimised WebP (alpha preserved)
+# through pipeline/yac_assets.py, which is the single table of files, tokens
+# and alt-frame keys; this manifest documents the placements. The Corrective
+# Brief section 5 withholding of the Young Artist artwork was lifted by the
+# owner's instruction of 22 Sep 2026 ("Finals YCA" pack, fourteen entries):
+# each entry is placed ONCE, with an alt frame on Framework sheet 43
+# (ui.alt_yac_*, English; Welsh pending the translator). No pupil's name
+# appears in any alt text. "credit" and publication approval to be confirmed
+# with Sport Wales before production use (Framework sheet 65).
 
 assets:
-  - file: "top of page - full width.png"
+  - file: "footballer yac.png"
     kind: young_artist
-    section: cover
-    token: __IMG_DRAGON__
-    alt: >-
-      Young Artist competition drawing: the Welsh dragon in a football kit,
-      balancing on a football and holding a rugby ball
-    focal_point: centre
-    credit_required: confirm with Sport Wales
-    publication_status: assumed approved (supplied in 2026 asset pack)
-
-  - file: "football eplosion .png"
-    kind: young_artist
-    section: active_nation_opener
-    token: __IMG_SPLASH__
-    alt: "Young Artist drawing: a football bursting through red and green paint"
-    publication_status: assumed approved
-
-  - file: "idependant page - heasrt.png"
-    kind: young_artist
-    section: everyone_opener
-    token: __IMG_HEART__
-    alt: >-
-      Young Artist drawing: a heart containing four scenes of the Welsh dragon
-      playing football, rugby, cricket and gymnastics
-    publication_status: assumed approved
-
-  - file: "right side of a page - horse.png"
-    kind: young_artist
-    section: lifelong_opener
-    token: __IMG_HORSE__
-    alt: "Young Artist drawing: a rider in red jumping a brown horse"
-    publication_status: assumed approved
-
-  - file: "tennis ball & football.png"
-    kind: young_artist
-    section: enjoyment_opener
-    token: __IMG_TENNIS__
-    alt: "Young Artist drawing: a football and a tennis ball"
-    publication_status: assumed approved
-
-  - file: "balls - bottom of page.png"
-    kind: young_artist
-    section: introduction_decoration
-    token: __IMG_BALLS__
-    alt: ""          # decorative
-    publication_status: assumed approved
-
+    section: introduction (the Vision figure, right column)
+    token: __IMG_YAC_FOOTBALLER__
+    alt_frame: ui.alt_yac_footballer
   - file: "walesh symbols - bottom of page.png"
     kind: young_artist
-    section: introduction_decoration
-    token: __IMG_SYMBOLS__
-    alt: ""          # decorative
-    publication_status: assumed approved
-
-  - file: "wheelchair javlin thrower.png"
-    kind: brain_break_character
-    section: how_to_use
-    token: __IMG_BRAIN_JAV__
-    alt: >-
-      Brain Break character: a smiling brain wearing a Sport Wales headband,
-      throwing a javelin from a wheelchair
-    usage_note: guide character; used sparingly per brief section 18
-
-  - file: "football.png"
-    kind: brain_break_character
-    section: conclusions
-    token: __IMG_BRAIN_FOOT__
-    alt: "Brain Break character: a smiling brain in glasses kicking a football"
-
-  - file: "basketball.png"
-    kind: brain_break_character
-    section: unused_reserve
-    token: null
-    alt: "Brain Break character dribbling a basketball"
-    usage_note: reserved; not placed in the prototype to avoid over-use
+    section: introduction (band at the foot of the page)
+    token: __IMG_YAC_WELSH_SYMBOLS__
+    alt_frame: ui.alt_yac_welsh_symbols
+  - file: "top of page - full width.png"
+    kind: young_artist
+    section: contents (top right, beside the heading)
+    token: __IMG_YAC_DRAGON_KIT__
+    alt_frame: ui.alt_yac_dragon_kit
+  - file: "balls - bottom of page.png"
+    kind: young_artist
+    section: contents (strip at the foot of the page)
+    token: __IMG_YAC_BALLS__
+    alt_frame: ui.alt_yac_balls
+  - file: "dragon with wales.png"
+    kind: young_artist
+    section: how to use this report (beside the heading)
+    token: __IMG_YAC_DRAGON_WALES__
+    alt_frame: ui.alt_yac_dragon_wales
+  - file: "YCA GYmnastics.png"
+    kind: young_artist
+    section: which pupils took part (beside the heading)
+    token: __IMG_YAC_GYMNASTICS__
+    alt_frame: ui.alt_yac_gymnastics
+  - file: "football eplosion .png"
+    kind: young_artist
+    section: An Active Nation for Everyone — chapter opener
+    token: __IMG_YAC_FOOTBALL_SPLASH__
+    alt_frame: ui.alt_yac_football_splash
+    note: supplied with its transparent background flattened to a faint checker; restored at build time (pipeline.yac_assets.clear_background)
+  - file: "Basketball image ILR.png"
+    kind: young_artist
+    section: active through sport in School (beside the heading)
+    token: __IMG_YAC_BASKETBALL__
+    alt_frame: ui.alt_yac_basketball
+  - file: "Cyclist kneeling beside his pink bike.png"
+    kind: young_artist
+    section: active through sport Outside of School (beside the heading)
+    token: __IMG_YAC_CYCLIST__
+    alt_frame: ui.alt_yac_cyclist
+  - file: "idependant page - heasrt.png"
+    kind: young_artist
+    section: participation between groups of pupils (beside the heading)
+    token: __IMG_YAC_HEART__
+    alt_frame: ui.alt_yac_heart
+  - file: "right side of a page - horse.png"
+    kind: young_artist
+    section: A Lifelong Enjoyment of Sport — chapter opener
+    token: __IMG_YAC_HORSE__
+    alt_frame: ui.alt_yac_horse
+  - file: "Cricket shot in mid-swing.png"
+    kind: young_artist
+    section: Sport Specific Data — chapter opener (replaces the brand-form placeholder)
+    token: __IMG_YAC_CRICKET__
+    alt_frame: ui.alt_yac_cricket
+  - file: "Dragon Image ILR (2).png"
+    kind: young_artist
+    section: what your findings may help you explore (beside the list)
+    token: __IMG_YAC_DRAGON_FOOTBALL__
+    alt_frame: ui.alt_yac_dragon_football
+  - file: "tennis ball & football.png"
+    kind: young_artist
+    section: thank you and next steps (beside the heading)
+    token: __IMG_YAC_TENNIS_FOOTBALL__
+    alt_frame: ui.alt_yac_tennis_football
 
   - file: "sports wales logo.svg"
     kind: logo
@@ -86,6 +88,17 @@ assets:
     token: __SW_LOGO__
     alt: "Sport Wales — Chwaraeon Cymru"
     usage_note: supplied SVG used as-is
+
+retired:
+  - file: "wheelchair javlin thrower.png"
+    kind: brain_break_character
+    note: replaced in V4.16; frame ui.alt_brain_javelin DEPRECATED on Framework sheet 43
+  - file: "football.png"
+    kind: brain_break_character
+    note: replaced in V4.16; frame ui.alt_brain_football DEPRECATED
+  - file: "basketball.png"
+    kind: brain_break_character
+    note: replaced in V4.16; frame ui.alt_brain_basketball DEPRECATED
 
 notes:
   - >-

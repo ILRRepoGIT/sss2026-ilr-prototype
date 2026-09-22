@@ -1,0 +1,447 @@
+{
+ "embedded": {
+  "ui.alt_yac_dragon_kit": 99959,
+  "ui.alt_yac_welsh_symbols": 207287,
+  "ui.alt_yac_balls": 97015,
+  "ui.alt_yac_footballer": 185431,
+  "ui.alt_yac_football_splash": 256015,
+  "ui.alt_yac_cyclist": 98791,
+  "ui.alt_yac_dragon_football": 47087,
+  "ui.alt_yac_heart": 92143,
+  "ui.alt_yac_horse": 58647,
+  "ui.alt_yac_tennis_football": 71223,
+  "ui.alt_yac_gymnastics": 76187,
+  "ui.alt_yac_cricket": 71463,
+  "ui.alt_yac_basketball": 86547,
+  "ui.alt_yac_dragon_wales": 96999
+ },
+ "en": [
+  {
+   "key": "alt:ui.alt_yac_footballer",
+   "alt": "Young Artists Competition drawing: a footballer with long fair hair, in a blue number 7 shirt, white shorts and pink boots, kicking a football",
+   "w": 397,
+   "h": 420,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a footballer with long fair hair, in a blue number 7 shirt, white shorts and pink boots, kicking a football",
+   "section": "m-intro"
+  },
+  {
+   "key": "alt:ui.alt_yac_welsh_symbols",
+   "alt": "Young Artists Competition drawing: symbols of Wales and sport together — a daffodil, a football, a cricket bat and ball, a red dragon, a rugby ball and a leek",
+   "w": 480,
+   "h": 291,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: symbols of Wales and sport together — a daffodil, a football, a cricket bat and ball, a red dragon, a rugby ball and a leek",
+   "section": "m-intro"
+  },
+  {
+   "key": "alt:ui.alt_yac_dragon_kit",
+   "alt": "Young Artists Competition drawing: a red dragon in a white Wales shirt numbered 11, holding a rugby ball, with one foot on a football and a leek in its tail",
+   "w": 250,
+   "h": 188,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a red dragon in a white Wales shirt numbered 11, holding a rugby ball, with one foot on a football and a leek in its tail",
+   "section": "m-contents"
+  },
+  {
+   "key": "alt:ui.alt_yac_balls",
+   "alt": "Young Artists Competition drawing: a row of four balls — a red cricket ball, a black ball with white spots, an orange basketball and a black eight-ball",
+   "w": 560,
+   "h": 193,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a row of four balls — a red cricket ball, a black ball with white spots, an orange basketball and a black eight-ball",
+   "section": "m-contents"
+  },
+  {
+   "key": "alt:ui.alt_yac_dragon_wales",
+   "alt": "Young Artists Competition drawing: a red Welsh dragon with the word WALES in green letters across it",
+   "w": 160,
+   "h": 110,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a red Welsh dragon with the word WALES in green letters across it",
+   "section": "m-guide"
+  },
+  {
+   "key": "alt:ui.alt_yac_gymnastics",
+   "alt": "Young Artists Competition drawing: a gymnastics club — one gymnast leaping above a balance beam, another hanging from a high bar, beside a stack of coloured rings",
+   "w": 190,
+   "h": 153,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a gymnastics club — one gymnast leaping above a balance beam, another hanging from a high bar, beside a stack of coloured rings",
+   "section": "m-overview"
+  },
+  {
+   "key": "alt:ui.alt_yac_football_splash",
+   "alt": "Young Artists Competition drawing: a football with red and green panels bursting out of a splash of red and green paint",
+   "w": 220,
+   "h": 218,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a football with red and green panels bursting out of a splash of red and green paint",
+   "section": "ch-anfe"
+  },
+  {
+   "key": "alt:ui.alt_yac_basketball",
+   "alt": "Young Artists Competition drawing: a basketball player with a ponytail, in a red vest and black shorts, leaping to shoot a basketball framed by a red starburst",
+   "w": 150,
+   "h": 202,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a basketball player with a ponytail, in a red vest and black shorts, leaping to shoot a basketball framed by a red starburst",
+   "section": "m-inschool"
+  },
+  {
+   "key": "alt:ui.alt_yac_cyclist",
+   "alt": "Young Artists Competition drawing: a mountain biker in a helmet leaning low over a pink bike as it goes over a jump, against a blue watercolour splash",
+   "w": 190,
+   "h": 124,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a mountain biker in a helmet leaning low over a pink bike as it goes over a jump, against a blue watercolour splash",
+   "section": "m-outschool"
+  },
+  {
+   "key": "alt:ui.alt_yac_heart",
+   "alt": "Young Artists Competition drawing: a red heart holding four scenes of a red dragon playing football, rugby, gymnastics and cricket",
+   "w": 170,
+   "h": 157,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a red heart holding four scenes of a red dragon playing football, rugby, gymnastics and cricket",
+   "section": "m-everyone-sub"
+  },
+  {
+   "key": "alt:ui.alt_yac_horse",
+   "alt": "Young Artists Competition drawing: a rider in a red jacket and black helmet jumping a brown horse",
+   "w": 220,
+   "h": 175,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a rider in a red jacket and black helmet jumping a brown horse",
+   "section": "ch-lifelong"
+  },
+  {
+   "key": "alt:ui.alt_yac_cricket",
+   "alt": "Young Artists Competition drawing: a cricketer in a helmet, gloves and pads, swinging a bat at a red ball",
+   "w": 220,
+   "h": 205,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a cricketer in a helmet, gloves and pads, swinging a bat at a red ball",
+   "section": "ch-sport"
+  },
+  {
+   "key": "alt:ui.alt_yac_dragon_football",
+   "alt": "Young Artists Competition drawing: a smiling red dragon with cream wings, standing beside a football",
+   "w": 140,
+   "h": 121,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a smiling red dragon with cream wings, standing beside a football",
+   "section": "m-explore"
+  },
+  {
+   "key": "alt:ui.alt_yac_tennis_football",
+   "alt": "Young Artists Competition drawing: a football above a bright green tennis ball",
+   "w": 140,
+   "h": 286,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a football above a bright green tennis ball",
+   "section": "m-thanks"
+  }
+ ],
+ "en_pdfPages": 62,
+ "cy": [
+  {
+   "key": "alt:ui.alt_yac_footballer",
+   "alt": "Young Artists Competition drawing: a footballer with long fair hair, in a blue number 7 shirt, white shorts and pink boots, kicking a football",
+   "w": 397,
+   "h": 420,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a footballer with long fair hair, in a blue number 7 shirt, white shorts and pink boots, kicking a football",
+   "section": "m-intro"
+  },
+  {
+   "key": "alt:ui.alt_yac_welsh_symbols",
+   "alt": "Young Artists Competition drawing: symbols of Wales and sport together — a daffodil, a football, a cricket bat and ball, a red dragon, a rugby ball and a leek",
+   "w": 480,
+   "h": 291,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: symbols of Wales and sport together — a daffodil, a football, a cricket bat and ball, a red dragon, a rugby ball and a leek",
+   "section": "m-intro"
+  },
+  {
+   "key": "alt:ui.alt_yac_dragon_kit",
+   "alt": "Young Artists Competition drawing: a red dragon in a white Wales shirt numbered 11, holding a rugby ball, with one foot on a football and a leek in its tail",
+   "w": 250,
+   "h": 188,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a red dragon in a white Wales shirt numbered 11, holding a rugby ball, with one foot on a football and a leek in its tail",
+   "section": "m-contents"
+  },
+  {
+   "key": "alt:ui.alt_yac_balls",
+   "alt": "Young Artists Competition drawing: a row of four balls — a red cricket ball, a black ball with white spots, an orange basketball and a black eight-ball",
+   "w": 560,
+   "h": 193,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a row of four balls — a red cricket ball, a black ball with white spots, an orange basketball and a black eight-ball",
+   "section": "m-contents"
+  },
+  {
+   "key": "alt:ui.alt_yac_dragon_wales",
+   "alt": "Young Artists Competition drawing: a red Welsh dragon with the word WALES in green letters across it",
+   "w": 160,
+   "h": 110,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a red Welsh dragon with the word WALES in green letters across it",
+   "section": "m-guide"
+  },
+  {
+   "key": "alt:ui.alt_yac_gymnastics",
+   "alt": "Young Artists Competition drawing: a gymnastics club — one gymnast leaping above a balance beam, another hanging from a high bar, beside a stack of coloured rings",
+   "w": 190,
+   "h": 153,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a gymnastics club — one gymnast leaping above a balance beam, another hanging from a high bar, beside a stack of coloured rings",
+   "section": "m-overview"
+  },
+  {
+   "key": "alt:ui.alt_yac_football_splash",
+   "alt": "Young Artists Competition drawing: a football with red and green panels bursting out of a splash of red and green paint",
+   "w": 220,
+   "h": 218,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a football with red and green panels bursting out of a splash of red and green paint",
+   "section": "ch-anfe"
+  },
+  {
+   "key": "alt:ui.alt_yac_basketball",
+   "alt": "Young Artists Competition drawing: a basketball player with a ponytail, in a red vest and black shorts, leaping to shoot a basketball framed by a red starburst",
+   "w": 150,
+   "h": 202,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a basketball player with a ponytail, in a red vest and black shorts, leaping to shoot a basketball framed by a red starburst",
+   "section": "m-inschool"
+  },
+  {
+   "key": "alt:ui.alt_yac_cyclist",
+   "alt": "Young Artists Competition drawing: a mountain biker in a helmet leaning low over a pink bike as it goes over a jump, against a blue watercolour splash",
+   "w": 190,
+   "h": 124,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a mountain biker in a helmet leaning low over a pink bike as it goes over a jump, against a blue watercolour splash",
+   "section": "m-outschool"
+  },
+  {
+   "key": "alt:ui.alt_yac_heart",
+   "alt": "Young Artists Competition drawing: a red heart holding four scenes of a red dragon playing football, rugby, gymnastics and cricket",
+   "w": 170,
+   "h": 157,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a red heart holding four scenes of a red dragon playing football, rugby, gymnastics and cricket",
+   "section": "m-everyone-sub"
+  },
+  {
+   "key": "alt:ui.alt_yac_horse",
+   "alt": "Young Artists Competition drawing: a rider in a red jacket and black helmet jumping a brown horse",
+   "w": 220,
+   "h": 175,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a rider in a red jacket and black helmet jumping a brown horse",
+   "section": "ch-lifelong"
+  },
+  {
+   "key": "alt:ui.alt_yac_cricket",
+   "alt": "Young Artists Competition drawing: a cricketer in a helmet, gloves and pads, swinging a bat at a red ball",
+   "w": 220,
+   "h": 205,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a cricketer in a helmet, gloves and pads, swinging a bat at a red ball",
+   "section": "ch-sport"
+  },
+  {
+   "key": "alt:ui.alt_yac_dragon_football",
+   "alt": "Young Artists Competition drawing: a smiling red dragon with cream wings, standing beside a football",
+   "w": 140,
+   "h": 121,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a smiling red dragon with cream wings, standing beside a football",
+   "section": "m-explore"
+  },
+  {
+   "key": "alt:ui.alt_yac_tennis_football",
+   "alt": "Young Artists Competition drawing: a football above a bright green tennis ball",
+   "w": 140,
+   "h": 286,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a football above a bright green tennis ball",
+   "section": "m-thanks"
+  }
+ ],
+ "cy_pdfPages": 65,
+ "cy_a11y": [
+  {
+   "key": "alt:ui.alt_yac_footballer",
+   "alt": "Young Artists Competition drawing: a footballer with long fair hair, in a blue number 7 shirt, white shorts and pink boots, kicking a football",
+   "w": 397,
+   "h": 420,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a footballer with long fair hair, in a blue number 7 shirt, white shorts and pink boots, kicking a football",
+   "section": "m-intro"
+  },
+  {
+   "key": "alt:ui.alt_yac_welsh_symbols",
+   "alt": "Young Artists Competition drawing: symbols of Wales and sport together — a daffodil, a football, a cricket bat and ball, a red dragon, a rugby ball and a leek",
+   "w": 480,
+   "h": 291,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: symbols of Wales and sport together — a daffodil, a football, a cricket bat and ball, a red dragon, a rugby ball and a leek",
+   "section": "m-intro"
+  },
+  {
+   "key": "alt:ui.alt_yac_dragon_kit",
+   "alt": "Young Artists Competition drawing: a red dragon in a white Wales shirt numbered 11, holding a rugby ball, with one foot on a football and a leek in its tail",
+   "w": 250,
+   "h": 188,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a red dragon in a white Wales shirt numbered 11, holding a rugby ball, with one foot on a football and a leek in its tail",
+   "section": "m-contents"
+  },
+  {
+   "key": "alt:ui.alt_yac_balls",
+   "alt": "Young Artists Competition drawing: a row of four balls — a red cricket ball, a black ball with white spots, an orange basketball and a black eight-ball",
+   "w": 560,
+   "h": 193,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a row of four balls — a red cricket ball, a black ball with white spots, an orange basketball and a black eight-ball",
+   "section": "m-contents"
+  },
+  {
+   "key": "alt:ui.alt_yac_dragon_wales",
+   "alt": "Young Artists Competition drawing: a red Welsh dragon with the word WALES in green letters across it",
+   "w": 160,
+   "h": 110,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a red Welsh dragon with the word WALES in green letters across it",
+   "section": "m-guide"
+  },
+  {
+   "key": "alt:ui.alt_yac_gymnastics",
+   "alt": "Young Artists Competition drawing: a gymnastics club — one gymnast leaping above a balance beam, another hanging from a high bar, beside a stack of coloured rings",
+   "w": 190,
+   "h": 153,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a gymnastics club — one gymnast leaping above a balance beam, another hanging from a high bar, beside a stack of coloured rings",
+   "section": "m-overview"
+  },
+  {
+   "key": "alt:ui.alt_yac_football_splash",
+   "alt": "Young Artists Competition drawing: a football with red and green panels bursting out of a splash of red and green paint",
+   "w": 220,
+   "h": 218,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a football with red and green panels bursting out of a splash of red and green paint",
+   "section": "ch-anfe"
+  },
+  {
+   "key": "alt:ui.alt_yac_basketball",
+   "alt": "Young Artists Competition drawing: a basketball player with a ponytail, in a red vest and black shorts, leaping to shoot a basketball framed by a red starburst",
+   "w": 150,
+   "h": 202,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a basketball player with a ponytail, in a red vest and black shorts, leaping to shoot a basketball framed by a red starburst",
+   "section": "m-inschool"
+  },
+  {
+   "key": "alt:ui.alt_yac_cyclist",
+   "alt": "Young Artists Competition drawing: a mountain biker in a helmet leaning low over a pink bike as it goes over a jump, against a blue watercolour splash",
+   "w": 190,
+   "h": 124,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a mountain biker in a helmet leaning low over a pink bike as it goes over a jump, against a blue watercolour splash",
+   "section": "m-outschool"
+  },
+  {
+   "key": "alt:ui.alt_yac_heart",
+   "alt": "Young Artists Competition drawing: a red heart holding four scenes of a red dragon playing football, rugby, gymnastics and cricket",
+   "w": 170,
+   "h": 157,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a red heart holding four scenes of a red dragon playing football, rugby, gymnastics and cricket",
+   "section": "m-everyone-sub"
+  },
+  {
+   "key": "alt:ui.alt_yac_horse",
+   "alt": "Young Artists Competition drawing: a rider in a red jacket and black helmet jumping a brown horse",
+   "w": 220,
+   "h": 175,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a rider in a red jacket and black helmet jumping a brown horse",
+   "section": "ch-lifelong"
+  },
+  {
+   "key": "alt:ui.alt_yac_cricket",
+   "alt": "Young Artists Competition drawing: a cricketer in a helmet, gloves and pads, swinging a bat at a red ball",
+   "w": 220,
+   "h": 205,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a cricketer in a helmet, gloves and pads, swinging a bat at a red ball",
+   "section": "ch-sport"
+  },
+  {
+   "key": "alt:ui.alt_yac_dragon_football",
+   "alt": "Young Artists Competition drawing: a smiling red dragon with cream wings, standing beside a football",
+   "w": 140,
+   "h": 121,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a smiling red dragon with cream wings, standing beside a football",
+   "section": "m-explore"
+  },
+  {
+   "key": "alt:ui.alt_yac_tennis_football",
+   "alt": "Young Artists Competition drawing: a football above a bright green tennis ball",
+   "w": 140,
+   "h": 286,
+   "ok": true,
+   "lang": null,
+   "cap": "Young Artists Competition drawing: a football above a bright green tennis ball",
+   "section": "m-thanks"
+  }
+ ],
+ "cy_a11y_pdfPages": 97
+}

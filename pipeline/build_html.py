@@ -3,7 +3,8 @@
 Injects into web/template.html (stamped with the D79 static-lane keys):
   - the report package JSON (disclosure-safe aggregates + narrative only)
   - the client application (web/app.js)
-  - optimised base64 WebP image assets (Young Artist + Brain Break)
+  - optimised base64 WebP image assets (the Young Artists Competition
+    artwork, V4.16 — pipeline.yac_assets)
   - the mandatory cover assets extracted from the supplied title-page
     Word document (white Sport Wales logo, official 2026 lockup)
   - base64 Montserrat webfonts (400 / 600 / 800, OFL licensed)
@@ -24,14 +25,12 @@ from PIL import Image
 
 from .common import GENERATED_DIR, ROOT
 
-# Young Artist artwork is temporarily withheld from the generated report
-# (Corrective Brief section 5); the assets remain in the project library for
-# deliberate reintroduction. Only the Brain Break characters are embedded.
-YAC_IMAGES = {
-    "__IMG_BRAIN_JAV__":  ("wheelchair javlin thrower.png", 560),
-    "__IMG_BRAIN_FOOT__": ("football.png", 460),
-    "__IMG_BRAIN_BASK__": ("basketball.png", 460),
-}
+# V4.16: the Young Artists Competition artwork (fourteen winning entries,
+# the "Finals YCA" pack of 22 Sep 2026) is embedded once each, through
+# pipeline.yac_assets, in place of the three Brain Break characters. The
+# Corrective Brief section 5 withholding was lifted by the owner's
+# instruction of 22 Sep 2026; <yac_assets_dir> is now that pack.
+from .yac_assets import embed_all as _embed_yac
 COVER_IMAGES = {
     "__SW_LOGO_WHITE__": ("image1.png", 500),   # white Sport Wales logo
     "__LOCKUP_2026__":   ("image3.png", 940),   # official 2026 SSS lockup
@@ -98,8 +97,7 @@ def main():
     html = html.replace("__SCHOOL_NAME__", package["school"]["name"])
     html = html.replace("/*__FONTS_CSS__*/", fonts_css(fonts_dir))
 
-    for token, (fname, w) in YAC_IMAGES.items():
-        html = html.replace(token, image_data_uri(yac_dir / fname, w))
+    html, _yac_sizes = _embed_yac(html, yac_dir)
     for token, (fname, w) in COVER_IMAGES.items():
         html = html.replace(token, image_data_uri(cover_dir / fname, w))
 

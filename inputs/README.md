@@ -3,7 +3,8 @@
 What the build needs beside this repository:
 
 * `fonts/` — Montserrat 400/600/800 (OFL), embedded into the single-file report.
-* `yac images for report/` — the three Brain Break character images (Sport Wales / YAC assets).
+* `yac images V4.16/` — the fourteen Young Artists Competition winning entries (Sport Wales, "Finals YCA", 22 Sep 2026), embedded once each by V4.16 (`pipeline/yac_assets.py`).
+* `yac images for report/` — the three Brain Break character images used up to V4.15 / V5.0 (retired in V4.16).
 * `18117 Chwaraeon Cymru 2026 School Sport Survey - School Reports.docx` — the translator's document
   of 15 Sep 2026 (also `config/SSS2026_Welsh_translation_document_15Sep2026.docx`).
 * `School Reports Accessibility Feedback.docx` — the accessibility feedback implemented in V4.13.
