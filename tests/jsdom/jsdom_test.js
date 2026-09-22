@@ -152,6 +152,12 @@ ok(els().every(e => norm(e.textContent) === norm(STATIC[e.getAttribute("data-i18
   ok(!d.documentElement.classList.contains("a11y") && !/a11y=/.test(w.location.hash), "default hash carries no a11y flag", w.location.hash);
   ok(txt("#btn-a11y .a11y-lbl") === "Accessibility features", "a11y switch label from the ui.a11y_switch frame", txt("#btn-a11y"));
   ok(!d.querySelector("#btn-a11y .a11y-lbl").classList.contains("cy-missing"), "English mode: label not marked");
+  // V4.17: the switch is described (aria-describedby → #a11y-desc, frame ui.a11y_switch_desc) and carries the symbol
+  { const desc = d.getElementById("a11y-desc");
+    ok(desc && A.getAttribute("aria-describedby") === "a11y-desc" && desc.getAttribute("data-frame") === "ui.a11y_switch_desc", "V4.17: switch described by #a11y-desc");
+    ok(desc && /larger text/.test(desc.textContent) && desc.textContent === (JSON.parse(data).welsh.frames["ui.a11y_switch_desc"] || {}).en, "V4.17: description is the frame's English", desc && desc.textContent.slice(0, 40));
+    ok(A.querySelector("svg.a11y-icon") && A.querySelector("svg.a11y-icon").getAttribute("aria-hidden") === "true", "V4.17: accessibility symbol present and hidden from AT");
+    ok(A.closest(".a11y-ctl") !== null, "V4.17: switch sits in its own bordered panel"); }
   const dtBefore = d.querySelectorAll("details.dtable[open]").length;
   const mainBefore = d.querySelector("main.report").innerHTML;
   A.click();
@@ -168,6 +174,7 @@ ok(els().every(e => norm(e.textContent) === norm(STATIC[e.getAttribute("data-i18
   btn.click();
   ok(d.documentElement.lang === "cy" && d.documentElement.classList.contains("a11y") && /a11y=1/.test(w.location.hash), "switch stays on across a language change");
   ok(txt("#btn-a11y .a11y-lbl") === "Nodweddion hygyrchedd" && !d.querySelector("#btn-a11y .a11y-lbl").classList.contains("cy-missing"), "Welsh mode: switch label translated (V4.15)", txt("#btn-a11y .a11y-lbl"));
+  ok(d.getElementById("a11y-desc").classList.contains("cy-missing") && d.getElementById("a11y-desc").getAttribute("lang") === "en" && /larger text/.test(txt("#a11y-desc")), "V4.17 Welsh mode: the description stays marked pending English until the translator returns it");
   ok(d.getElementById("h-a11y-glossary").classList.contains("cy-missing") && d.getElementById("h-a11y-glossary").getAttribute("lang") === "en" && txt("#h-a11y-glossary") === "Glossary of terms used in this report", "Welsh mode: the glossary heading the translator returned in English stays marked pending (flag 15)", txt("#h-a11y-glossary"));
   ok(d.querySelector("#a11y-glossary-list a").textContent === d.querySelector("#faqd-base summary").textContent, "glossary follows the language");
   btn.click();

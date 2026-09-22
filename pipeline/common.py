@@ -6,6 +6,8 @@ browser.
 """
 from __future__ import annotations
 
+import re as _re
+
 import hashlib
 import json
 import re
@@ -339,3 +341,16 @@ def anon_id(raw_id, salt: str) -> str:
 
 def plural(n: int, singular: str, plural_form: str | None = None) -> str:
     return singular if n == 1 else (plural_form or singular + "s")
+
+def latest_framework(config_dir=None):
+    """The newest Welsh Generation Framework workbook in config/, by VERSION
+    NUMBER (v2.10 after v2.9 — a lexicographic sort would put it before
+    v2.2). V4.17 (0.29.1): every consumer that used to take the last entry
+    of a sorted glob goes through here."""
+    d = Path(config_dir) if config_dir else CONFIG_DIR
+    cands = []
+    for f in d.glob("*Framework*v[0-9]*.xlsx"):
+        m = _re.search(r"v(\d+)\.(\d+)", f.name)
+        if m:
+            cands.append(((int(m.group(1)), int(m.group(2))), f))
+    return max(cands)[1] if cands else None

@@ -89,7 +89,8 @@ def main():
     shutil.copyfile(PIPE / "vendor_welsh_gates_v8.py", b / "welsh_acceptance_gates_v8.py")
     shutil.copyfile(PIPE / "vendor_browser_gate_v3.py", b / "browser_gate_provenance.py")
     shutil.copyfile(PROTO_BUNDLE / "write_verify.py", b / "write_verify.py")
-    fw = sorted(CONFIG_DIR.glob("*Framework*v2.[0-9]*.xlsx"))[-1]
+    from .common import latest_framework
+    fw = latest_framework(CONFIG_DIR)
     shutil.copyfile(fw, b / fw.name)
     baseline_src = tree / f"lock_{slug}_v8.json"
     assert baseline_src.exists(), f"the build did not emit {baseline_src.name}"

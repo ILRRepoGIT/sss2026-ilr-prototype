@@ -1,7 +1,7 @@
 {
- "version": "v2.9",
- "framework_sha256": "556547b0f755a51fb8f0890bfea01297f159dc308a86156331089fd998b7fdc1",
- "framework_file": "01_Framework_v2.9.xlsx",
+ "version": "v2.10",
+ "framework_sha256": "2c3a6bbf535702d1495b1491b0bbc384ceb47e71492524acf25a3cccc89de0c5",
+ "framework_file": "01_Framework_v2.10.xlsx",
  "audiences": {
   "Generated from sheet 18 by rule. Note the two divergences from English that recur in every row: (1) after a numeral with the article Welsh uses the SINGULAR head (y 12 disgybl, not y 12 ddisgyblion); (2) the scope phrase is locative and triggers the nasal mutation (ym Mlwyddyn 8). The HOLL column is the parent-audience form ('all Year 8 pupils').": {
    "bare": "",
@@ -4421,6 +4421,11 @@
   },
   "ui.alt_yac_dragon_wales": {
    "en": "Young Artists Competition drawing: a red Welsh dragon with the word WALES in green letters across it",
+   "cy": "",
+   "slots": "—"
+  },
+  "ui.a11y_switch_desc": {
+   "en": "Turns on larger text in Aptos or Arial, higher-contrast colours, a colour-blind-safe chart palette, open data tables, a caption under every picture and a glossary of terms. The findings do not change.",
    "cy": "",
    "slots": "—"
   }

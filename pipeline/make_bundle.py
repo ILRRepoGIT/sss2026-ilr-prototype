@@ -49,7 +49,8 @@ def main():
     # else the V4.8 lock for the very first emission
     shutil.copyfile(PIPE / "vendor_welsh_gates_v8.py", b / "welsh_acceptance_gates_v8.py")
     shutil.copyfile(PIPE / "vendor_browser_gate_v3.py", b / "browser_gate_provenance.py")
-    fw = sorted(CONFIG_DIR.glob("*Framework*v2.[0-9]*.xlsx"))[-1]
+    from .common import latest_framework
+    fw = latest_framework(CONFIG_DIR)
     for old in b.glob("01_Framework_v*.xlsx"):
         old.unlink()
     shutil.copyfile(fw, b / fw.name)
@@ -78,7 +79,7 @@ def main():
     run_md = re.sub(r"lock_V\d+_v8_emitted\.json", f"lock_{vtag}_v8_emitted.json", run_md)
     run_md = run_md.replace("welsh_acceptance_gates_v7.py", "welsh_acceptance_gates_v8.py")
     run_md = re.sub(r"--baseline lock_V\d+_v[78]\.json", f"--baseline {baseline}", run_md)
-    run_md = re.sub(r"01_Framework_v2\.\d\.xlsx", fw.name, run_md)
+    run_md = re.sub(r"01_Framework_v2\.\d+\.xlsx", fw.name, run_md)
     (b / "RUN.md").write_text(run_md, encoding="utf-8")
     out = {}
     for mode in ("dev", "release"):

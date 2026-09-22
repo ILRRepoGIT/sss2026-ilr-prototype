@@ -217,11 +217,12 @@ patched to pass a gate, and no Welsh was composed.
   in English only. Until the translator returns the rows, the Welsh report shows
   the English alt text under the pending marking (`lang="en"`, "Heb ei gyfieithu
   eto — dangosir y Saesneg"), and the accessibility-mode caption under each image
-  is that English. Fifteen frames are pending in all (with `ui.a11y_glossary_heading`).
+  is that English. Sixteen frames are pending in all (with `ui.a11y_switch_desc`, V4.17, and
+  `ui.a11y_glossary_heading`).
 - **No release gate for an empty frame.** The gate pack tests the handoff
   catalogue (CAT-values) and the rendered narrative surfaces (PUB-empty) for
   empty Welsh, not the sheet-43 frames; a release run would not fail on the
-  fifteen pending frames by itself. Raised with the pack owners; a release check
+  sixteen pending frames by itself. Raised with the pack owners; a release check
   is needed before the production round.
 - **Publication approval.** The artwork is embedded as supplied; no pupil name or
   signature is visible in the files and none appears in the report. Sport Wales
@@ -233,3 +234,20 @@ patched to pass a gate, and no Welsh was composed.
   URIs). The production delivery note above (shared assets, per-school JSON)
   applies to the artwork too: fourteen images embedded in 900 files is 1.3 GB of
   repeated bytes that a shared asset bundle would carry once.
+
+## V4.17 — accessibility switch, print page breaks, pipeline 0.29.1
+
+- **Print page count.** Every page of the report now starts on a new printed page
+  and no heading ends one (64 EN / 67 CY A4 pages; V4.16: 62 / 65). Long sections
+  (who took part, the chapters) still flow over several pages; a page per module
+  would double the count and was not asked for.
+- **PDF tagging.** The "first line only" screen-reader symptom of the V4.13
+  feedback (item 7) has no HTML cause; it depends on the browser's PDF export
+  tagging. The page's paragraphs are plain `<p>` elements; the switch and its
+  description are announced together (aria-describedby).
+- **Off-route answers (0.29.1).** An answer to the take-part question from a
+  respondent not routed to it is dropped by the loader and counted. The 24 such
+  rows in the Stage 2 dataset (all partial responses) are with the cleansing team;
+  if Stage 2 blanks them at source the rule becomes a no-op and can be retired.
+  Other routed questions are already charted on their routed bases; their
+  off-route answers are not yet dropped (raised in the query).

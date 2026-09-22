@@ -59,10 +59,9 @@ DISPUTED = {
 
 
 def framework_path():
-    cand = sorted(CONFIG_DIR.glob("*Framework*v2.[0-9]*.xlsx"))
-    if cand:
-        return str(cand[-1])
-    return None
+    from .common import latest_framework
+    fw = latest_framework(CONFIG_DIR)
+    return str(fw) if fw else None
 
 
 def page_head(package):

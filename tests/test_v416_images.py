@@ -56,3 +56,12 @@ def test_client_consumes_every_frame_and_none_of_the_retired():
 def test_brain_break_tokens_and_placeholder_are_gone():
     assert "__IMG_BRAIN_" not in TPL
     assert "brand-form graphic placeholder" not in TPL
+
+
+def test_v417_switch_description_frame():
+    assert '"ui.a11y_switch_desc": 1' in APP
+    fr = LEX["interface_frames"]["ui.a11y_switch_desc"]
+    assert fr["cy"] == "" and fr["en"].startswith("Turns on larger text")
+    m = re.search(r'<p class="a11y-desc" id="a11y-desc" data-frame="ui.a11y_switch_desc">([^<]*)</p>', TPL)
+    assert m and m.group(1) == fr["en"]
+    assert 'aria-describedby="a11y-desc"' in TPL

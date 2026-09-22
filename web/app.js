@@ -122,7 +122,7 @@ function setFrame(el, k, p, asHtml) {
    data-frame-attr): the consumer set is written out here so the client
    states which frames it consumes (FRAME-dormant); a markup key outside
    this set renders the marker. */
-const MARKUP_FRAMES = { "ui.a11y_switch": 1, "ui.a11y_glossary_heading": 1, "ui.a11y_glossary_intro": 1,
+const MARKUP_FRAMES = { "ui.a11y_switch": 1, "ui.a11y_switch_desc": 1, "ui.a11y_glossary_heading": 1, "ui.a11y_glossary_intro": 1,
   "ui.chart_sports_total_pe": 1, "ui.chart_sports_total_club": 1,
   "ui.chart_sports_total_community": 1, "ui.chart_sports_total_other": 1,
   "ui.aria_cover": 1, "ui.aria_rail": 1, "ui.aria_toc": 1,

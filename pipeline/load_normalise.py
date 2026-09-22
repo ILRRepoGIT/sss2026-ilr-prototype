@@ -516,6 +516,21 @@ def load_and_normalise(xlsx_path: str, sheet: str = "Responses wide",
             else:
                 log.warn(f"Unexpected take-part answer {label!r} -> invalid")
                 rec["take_part"] = None
+        # v7 (0.29.1, owner instruction 22 Sep 2026): an answer to a question
+        # the respondent was not routed to is not carried. The take-part
+        # question is asked only of pupils who answered Yes / Not sure /
+        # Prefer not to say to the disability question (the chart's base
+        # note); the live data holds a few partial responses that carry a
+        # take-part answer beside a "No" (a pupil who went back and changed
+        # the routing answer). The chart's routed base already excluded them;
+        # cohort membership (engine.cohort_member) tests the answer alone, so
+        # the selected group counted one pupil more than its chart (Ysgol Bro
+        # Pedr, V5.0 review). Dropping the off-route answer here makes the
+        # chart, the selected group and the narrative agree by construction.
+        # Counted and reported; never silent.
+        if rec["take_part"] is not None and not rec["take_part_routed"]:
+            rec["take_part"] = None
+            rec["_off_route_take_part"] = True
 
         # ---- matrix singles --------------------------------------------------
         def matrix_field(qid, row_map, col_map, qname):
@@ -605,6 +620,14 @@ def load_and_normalise(xlsx_path: str, sheet: str = "Responses wide",
         # v6: the data owner's inclusion rule admits partial responses —
         # the split is recorded so the validation summary can state it
         build_meta["acceptedByStatus"] = dict(sorted(status_counts.items()))
+    # v7 (0.29.1): off-route take-part answers dropped by the loader rule
+    off_route = sum(1 for r in records if r.pop("_off_route_take_part", False))
+    if off_route:
+        log.warn(f"{off_route} accepted response(s) carried a take-part answer without being routed "
+                 f"to the question (disability answer not Yes / Not sure / Prefer not to say); the "
+                 f"off-route answer is not carried (0.29.1 loader rule) — chart, selected group and "
+                 f"narrative agree; raised with the cleansing team")
+    build_meta["offRouteTakePartDropped"] = off_route
     discovered = {"participated": participated_labels, "demand": demand_labels}
     return records, log, build_meta, discovered
 

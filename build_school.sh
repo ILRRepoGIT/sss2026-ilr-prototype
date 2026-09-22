@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# One real school, end to end (V5.0 real-school round, pipeline 0.28.0).
+# One real school, end to end (real-school rounds V5.0 → V5.1; pipeline 0.28.0 → 0.29.1).
 #
 #   ./build_school.sh <slug> <school_id> <stage2.parquet> <private_inputs_dir> <yac_assets_dir> <fonts_dir> [<work_root>]
 #
@@ -27,8 +27,14 @@ python3 -m pipeline.staged_build states   "$X" "$WD" 4 8                        
 python3 -m pipeline.staged_build states   "$X" "$WD" 8 12                           > "$WD/s3.log" 2>&1
 python3 -m pipeline.staged_build assemble "$X" "$WD"                                > "$WD/s4.log" 2>&1
 PREV="${SSS_PREVIOUS_LOCK:-none}"
+# 0.29.1: the ruling the emitted lock records is the caller's (a rebuild
+# names what moved the corpus); a first build keeps the first-emission text
+FW=$(python3 -c 'from pipeline.common import latest_framework; print(latest_framework().stem.split("_")[-1])')
+PV=$(python3 -c 'from pipeline.build_report_package import PIPELINE_VERSION_V2 as v; print(v)')
+DEFAULT_RULING="first emission for $SLUG: the corpus lock of this school, Framework $FW, pipeline $PV"
+RULING="${SSS_EMIT_LOCK_RULING:-$DEFAULT_RULING}"
 SSS_PREVIOUS_LOCK="$PREV" SSS_EMIT_LOCK="$SSS_GENERATED_DIR/lock_${SLUG}_v8.json" \
-SSS_EMIT_LOCK_RULING="first emission for $SLUG (V5.0 real-school round): the school's own corpus lock, Framework v2.8, pipeline 0.28.0" \
+SSS_EMIT_LOCK_RULING="$RULING" \
 python3 -m pipeline.staged_build qa       "$X" "$WD"                                > "$WD/s5.log" 2>&1
 python3 -m pipeline.staged_build write    "$X" "$WD"                                > "$WD/s6.log" 2>&1
 python3 -m pipeline.build_html "$SSS_GENERATED_DIR/$SLUG.report.json" "$YAC" "$FONTS" config/cover_media \
