@@ -1,15 +1,15 @@
 {
- "tag": "v6.0-rc9",
- "releasedAt": "2026-09-23T03:53:49+01:00",
- "pipelineVersion": "0.32.0",
+ "tag": "v6.0-rc10",
+ "releasedAt": "2026-09-23T05:24:30+01:00",
+ "pipelineVersion": "0.32.1",
  "prodVersion": "1.0.0",
  "servedSchema": "1",
- "framework": "01_Framework_v2.17.xlsx",
- "frameworkSha256": "0f67b26888f01eb19009ffc271a5431e1104181fc12c11170386d88fe0aaf5d5",
+ "framework": "01_Framework_v2.18.xlsx",
+ "frameworkSha256": "20e19e9f6dab05ac0bf790611a59f9e275569ad96ec56b19de460269525d7679",
  "gateRunner": "pipeline/vendor_welsh_gates_v8.py",
  "gateRunnerSha256": "3057fef25b5d54bd564b0ee86affd3ef34048b4c1598c27eeb86ae3da2bde4fe",
- "fileCount": 142,
- "manifestSha256": "71e4d182f3eebdd4447ad360be8aa84daef52faef7aaa0cab7208cf11910b2b9",
+ "fileCount": 144,
+ "manifestSha256": "ef4507432df63069c04002c065098acdb0666189c9b01d8c3569747e9de24b91",
  "files": {
   "pipeline/__init__.py": {
    "sha256": "314698d0f536391fc213f8571e555bc9a7e245d222c454d271133de21f0fc465",
@@ -28,12 +28,12 @@
    "bytes": 5084
   },
   "pipeline/build_report_package.py": {
-   "sha256": "64a5876f8d7e38abfaab856dff9daf015b11ba3c8823b5ac9a8a403d4affb24d",
-   "bytes": 40741
+   "sha256": "a8a481eaac10cb8f6886e7239d8c5ca7fb351ceadd7ca03b5812b02ca8cd3e3b",
+   "bytes": 40965
   },
   "pipeline/build_welsh_lexicon.py": {
-   "sha256": "261bb63ce8d54c2f831c5a770f3254ca45a3f5127a1b0fb894b3c0e4c05c7a38",
-   "bytes": 23489
+   "sha256": "7e4883e21047fd56217920d8afda42da7692c3ecd15f658e3b8fd290ba51f14d",
+   "bytes": 24114
   },
   "pipeline/cleansed_to_export.py": {
    "sha256": "695022c61b0cf47c6d1f8cf68217c084dfd09dd4d42064e6501c80b257d78dd3",
@@ -90,6 +90,10 @@
   "pipeline/make_framework_v217.py": {
    "sha256": "81f6eaa338ee12c8abf786c6b1019d10346cfb74884ab2883e899d5135874ba6",
    "bytes": 13917
+  },
+  "pipeline/make_framework_v218.py": {
+   "sha256": "f91ba86aad9da5ef0d2503f49b764a3d201e7160d765f88560cce45a3e40b0aa",
+   "bytes": 6816
   },
   "pipeline/make_framework_v23.py": {
    "sha256": "4ebc2245200b89e55b238cc61c33d344230a52dae8bbf639a6ba6d822f425f9c",
@@ -244,20 +248,20 @@
    "bytes": 11905
   },
   "web/app.js": {
-   "sha256": "b543d5f2747bdf788813fe0912b165079a3eef3498cbfb5a5f7751eccb977e98",
-   "bytes": 91414
+   "sha256": "fe5ef76ccb2c354d470f9a91060383bcdc2efa232c6a043213864b1ccd126883",
+   "bytes": 91923
   },
   "web/template.html": {
-   "sha256": "5863c8e6a7396c66963c52dd65158d910885988e2db4754b345cf737139c94c4",
-   "bytes": 92897
+   "sha256": "36fcda7d446d39d59db2663df2055911513ba5cf46ecf0526fe38d07090f165c",
+   "bytes": 93343
   },
   "prod/__init__.py": {
    "sha256": "6708c210196f577d37e9a73f1647b5a6bc29d5d3e3834263eb813ddc0152898d",
    "bytes": 1311
   },
   "prod/checks.py": {
-   "sha256": "c711e5edc471e7f351714e41d54302a3cbbc0fa39a61b64bb6b018308a10c7b7",
-   "bytes": 28449
+   "sha256": "aa4fea68b0db543bba6acf144449627a986b0d7c5c5d5308cd420f5c02c6560a",
+   "bytes": 28494
   },
   "prod/chunker.py": {
    "sha256": "19fc2a1b7dc87df948954a37e1c4a564870ec8291e36f6896b50e62cd58db4cd",
@@ -276,7 +280,7 @@
    "bytes": 15821
   },
   "prod/register.py": {
-   "sha256": "7f0be131710c2f0e1bbda3e4edf0b2bc49ae16c3269b259ae3e98e0d934ee5b9",
+   "sha256": "fd995baf3abf3cf88c794747ca9158cd9a92521c9065a0ace9f3fd73ef46a32b",
    "bytes": 14816
   },
   "prod/release.py": {
@@ -288,8 +292,8 @@
    "bytes": 516
   },
   "prod/runner.py": {
-   "sha256": "4aa311f228f310e64908d26dba121cbc301586701e4defceb0e8a5b4c0a9d54b",
-   "bytes": 36946
+   "sha256": "a27ceb3eb4c54de0b8093a44cd0bea271337e094f2212a9fce7fd53e1bbb245b",
+   "bytes": 37047
   },
   "prod/serve_local.py": {
    "sha256": "81b498a65e9b44c1f720f7c53389658eda21befa9376f202cf3862f8f7293bde",
@@ -330,6 +334,10 @@
   "config/01_Framework_v2.17.xlsx": {
    "sha256": "0f67b26888f01eb19009ffc271a5431e1104181fc12c11170386d88fe0aaf5d5",
    "bytes": 401841
+  },
+  "config/01_Framework_v2.18.xlsx": {
+   "sha256": "20e19e9f6dab05ac0bf790611a59f9e275569ad96ec56b19de460269525d7679",
+   "bytes": 404827
   },
   "config/01_Framework_v2.2.xlsx": {
    "sha256": "a540189fde986765fc16c00424d6a39f424da6653ea51dde82f96c30d40c3ba8",
@@ -472,8 +480,8 @@
    "bytes": 2997
   },
   "config/welsh_lexicon.json": {
-   "sha256": "168dde73cfbffa9986fdb3028440967bbe8236a09db3c811814f329fe4fc877b",
-   "bytes": 253450
+   "sha256": "fac5c50438f793a65ff2c71d88b20e846eadcc042a145364d3182a7b15153391",
+   "bytes": 253857
   },
   "inputs/fonts/montserrat-latin-400-normal.woff2": {
    "sha256": "e66bcd2761ab6924b25ce70dafe10e57a39193c4fea1516730bd9cb5240af6c8",
@@ -548,8 +556,8 @@
    "bytes": 9855
   },
   "tests/jsdom/jsdom_school.js": {
-   "sha256": "c97754779e8b2188f643494696ed6e284f741048ef9bef8606ce15676978c546",
-   "bytes": 16845
+   "sha256": "3fcc3b4b377f692fa421004877083937c704fcfffa702aa38af17bc48bc31d0b",
+   "bytes": 17885
   },
   "tests/jsdom/jsdom_test.js": {
    "sha256": "4ffec8569610aa7367d8d64d4d96f7c74c8bbcdab8cd25ef0aa00872d345ca35",
