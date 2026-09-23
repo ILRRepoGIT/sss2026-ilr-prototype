@@ -1,15 +1,15 @@
 {
- "tag": "v6.0-rc11",
- "releasedAt": "2026-09-23T06:32:24+01:00",
- "pipelineVersion": "0.32.2",
+ "tag": "v6.0-rc12",
+ "releasedAt": "2026-09-23T10:13:06+01:00",
+ "pipelineVersion": "0.32.3",
  "prodVersion": "1.0.0",
  "servedSchema": "1",
- "framework": "01_Framework_v2.19.xlsx",
- "frameworkSha256": "d27b77ab6dc6d52956d2c4515e7b8b8379984b3a0f5f3c2fad433d503225c82c",
+ "framework": "01_Framework_v2.20.xlsx",
+ "frameworkSha256": "4dffccaf71b4d35140a396c32dc2d837930d4f8d7091364189dbdb3afb02925c",
  "gateRunner": "pipeline/vendor_welsh_gates_v8.py",
  "gateRunnerSha256": "3057fef25b5d54bd564b0ee86affd3ef34048b4c1598c27eeb86ae3da2bde4fe",
- "fileCount": 146,
- "manifestSha256": "a2d3829ba4af38e7e41ccebc41873c4b0d08ab51c06ff55a9c10e30cc1a13372",
+ "fileCount": 148,
+ "manifestSha256": "cc1bad27f0a032aa5e51f525a8b60146d0ded512ac7117219d4c7aae21c6d8b0",
  "files": {
   "pipeline/__init__.py": {
    "sha256": "314698d0f536391fc213f8571e555bc9a7e245d222c454d271133de21f0fc465",
@@ -28,8 +28,8 @@
    "bytes": 5084
   },
   "pipeline/build_report_package.py": {
-   "sha256": "1b7e9a4e6e992ef2ff493666b25a343007b53b864c28a0fc73c45013e0759892",
-   "bytes": 41788
+   "sha256": "454cd86585f43942474cdd00612a9e34e326efb1428387463c0be0e64ed625df",
+   "bytes": 42622
   },
   "pipeline/build_welsh_lexicon.py": {
    "sha256": "7e4883e21047fd56217920d8afda42da7692c3ecd15f658e3b8fd290ba51f14d",
@@ -98,6 +98,10 @@
   "pipeline/make_framework_v219.py": {
    "sha256": "3551be1cca9bac3d5d1b006a29e31d513a66f037086281f4557809bed90eedc9",
    "bytes": 11959
+  },
+  "pipeline/make_framework_v220.py": {
+   "sha256": "077f162beafcdf9c12221191f16e099292414dbe7698ad9d5293d044c4aeb72a",
+   "bytes": 10181
   },
   "pipeline/make_framework_v23.py": {
    "sha256": "4ebc2245200b89e55b238cc61c33d344230a52dae8bbf639a6ba6d822f425f9c",
@@ -244,8 +248,8 @@
    "bytes": 5609
   },
   "pipeline/welsh_render.py": {
-   "sha256": "b453848b8c198192631e64e2c01d644eb74ea2cdd1a67fa1b2d2ce52cd8c36c4",
-   "bytes": 92912
+   "sha256": "6b6354347b36eb2ec6783bd4a13f9b9a205abb3f289a2d7d2ba0d37ffabc20d1",
+   "bytes": 94055
   },
   "pipeline/yac_assets.py": {
    "sha256": "2e68e65f7f13134e1989fba4c70d8dc17776a10b1efa9518bba0e313ad8d3167",
@@ -284,8 +288,8 @@
    "bytes": 15821
   },
   "prod/register.py": {
-   "sha256": "6c7027702b53a653b81f7d05e9c656ceb7248a586f9449f452214b5648039ad1",
-   "bytes": 14816
+   "sha256": "2dc4ae92ede53b78346ae6ed3cb365203871d784ed814a79eb227d59e935dc8c",
+   "bytes": 15565
   },
   "prod/release.py": {
    "sha256": "4b0277e2d24adb20462ce52bc1f88991b5d6f7096739062a8d57a832ebf17e9c",
@@ -350,6 +354,10 @@
   "config/01_Framework_v2.2.xlsx": {
    "sha256": "a540189fde986765fc16c00424d6a39f424da6653ea51dde82f96c30d40c3ba8",
    "bytes": 317510
+  },
+  "config/01_Framework_v2.20.xlsx": {
+   "sha256": "4dffccaf71b4d35140a396c32dc2d837930d4f8d7091364189dbdb3afb02925c",
+   "bytes": 412993
   },
   "config/01_Framework_v2.3.xlsx": {
    "sha256": "9356dee97dab37bff78cf0cae8eac019dadb8d29cda236cb152568dc7c3087fa",
@@ -488,7 +496,7 @@
    "bytes": 2997
   },
   "config/welsh_lexicon.json": {
-   "sha256": "087afea03a00f473493e22c2b907b3e9fd9e3179edea3555e82ca71c40bea3f4",
+   "sha256": "6134b7142564bafb3cda9a9a0b0dcfa2afc06425ef406d6f54bdb641578aeada",
    "bytes": 253857
   },
   "inputs/fonts/montserrat-latin-400-normal.woff2": {
