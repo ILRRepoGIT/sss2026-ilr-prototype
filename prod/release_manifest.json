@@ -1,6 +1,6 @@
 {
- "tag": "v6.0-rc12",
- "releasedAt": "2026-09-23T10:13:06+01:00",
+ "tag": "v6.0-rc13",
+ "releasedAt": "2026-09-23T11:37:13+01:00",
  "pipelineVersion": "0.32.3",
  "prodVersion": "1.0.0",
  "servedSchema": "1",
@@ -9,7 +9,7 @@
  "gateRunner": "pipeline/vendor_welsh_gates_v8.py",
  "gateRunnerSha256": "3057fef25b5d54bd564b0ee86affd3ef34048b4c1598c27eeb86ae3da2bde4fe",
  "fileCount": 148,
- "manifestSha256": "cc1bad27f0a032aa5e51f525a8b60146d0ded512ac7117219d4c7aae21c6d8b0",
+ "manifestSha256": "84ad1fb7226eb70e8688d4a221a3178e4fcd9c4c7f327f8697f6c0ef302b7b6e",
  "files": {
   "pipeline/__init__.py": {
    "sha256": "314698d0f536391fc213f8571e555bc9a7e245d222c454d271133de21f0fc465",
@@ -268,8 +268,8 @@
    "bytes": 1311
   },
   "prod/checks.py": {
-   "sha256": "aa4fea68b0db543bba6acf144449627a986b0d7c5c5d5308cd420f5c02c6560a",
-   "bytes": 28494
+   "sha256": "503cd821633197345cbebce3afb8db252a282119057ba3ae54ce50116885eb98",
+   "bytes": 29929
   },
   "prod/chunker.py": {
    "sha256": "19fc2a1b7dc87df948954a37e1c4a564870ec8291e36f6896b50e62cd58db4cd",
@@ -288,8 +288,8 @@
    "bytes": 15821
   },
   "prod/register.py": {
-   "sha256": "2dc4ae92ede53b78346ae6ed3cb365203871d784ed814a79eb227d59e935dc8c",
-   "bytes": 15565
+   "sha256": "adbf21bb857915ca18979e541feb63806f467bec7f20ae56e185a1a7726f7444",
+   "bytes": 17079
   },
   "prod/release.py": {
    "sha256": "4b0277e2d24adb20462ce52bc1f88991b5d6f7096739062a8d57a832ebf17e9c",
