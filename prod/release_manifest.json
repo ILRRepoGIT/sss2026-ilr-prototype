@@ -1,15 +1,15 @@
 {
- "tag": "v6.0-rc7",
- "releasedAt": "2026-09-23T01:05:58+01:00",
- "pipelineVersion": "0.31.0",
+ "tag": "v6.0-rc8",
+ "releasedAt": "2026-09-23T02:35:17+01:00",
+ "pipelineVersion": "0.31.1",
  "prodVersion": "1.0.0",
  "servedSchema": "1",
- "framework": "01_Framework_v2.15.xlsx",
- "frameworkSha256": "5bec4bda7a3f838e40774efba786c0e92bbc7339f0a50ed0b2d3772adffa6c32",
+ "framework": "01_Framework_v2.16.xlsx",
+ "frameworkSha256": "90b6b522fb95c27581d32f4230c8cfb286d018b1ae7a66436ec9be97573c7528",
  "gateRunner": "pipeline/vendor_welsh_gates_v8.py",
  "gateRunnerSha256": "3057fef25b5d54bd564b0ee86affd3ef34048b4c1598c27eeb86ae3da2bde4fe",
- "fileCount": 138,
- "manifestSha256": "a49bd40043baf64e449a0f3e11e3f99d35d4bbc4bf0f93d140d093d3bd462bfe",
+ "fileCount": 140,
+ "manifestSha256": "993ed2195de6a8555a05b5ea6d2b543e1c5bf5daa68bdfe29c24fbda3bdfbcc4",
  "files": {
   "pipeline/__init__.py": {
    "sha256": "314698d0f536391fc213f8571e555bc9a7e245d222c454d271133de21f0fc465",
@@ -28,7 +28,7 @@
    "bytes": 5084
   },
   "pipeline/build_report_package.py": {
-   "sha256": "6291cfa122f281ec4c3f3a991d9eb81d2d65eb3c4fe4940691da8456db1fb305",
+   "sha256": "349afacf5c980a1e1dffda8922b90733ea0459423c809d71e909acdb5d146cd5",
    "bytes": 40108
   },
   "pipeline/build_welsh_lexicon.py": {
@@ -83,6 +83,10 @@
    "sha256": "64c795678419a9e3a8a8cc04eebf68022f31b415d42fa9973974203de16e8575",
    "bytes": 5353
   },
+  "pipeline/make_framework_v216.py": {
+   "sha256": "5d8612a69707d3ec615dc89ddc4baaf790c21e9e7267de4d9066d114f230ac88",
+   "bytes": 9766
+  },
   "pipeline/make_framework_v23.py": {
    "sha256": "4ebc2245200b89e55b238cc61c33d344230a52dae8bbf639a6ba6d822f425f9c",
    "bytes": 21207
@@ -124,16 +128,16 @@
    "bytes": 21395
   },
   "pipeline/narrative2.py": {
-   "sha256": "187ed0a38a4dfd3ecc0c73fdf61142982d7e1f8ac17d8da6d256dd335ad5c1c3",
-   "bytes": 40461
+   "sha256": "cc28893e7e5088de988e7737d02e9361741cfb27b44fb7a0e5389c0d10a8732e",
+   "bytes": 41614
   },
   "pipeline/narrative2_modules.py": {
    "sha256": "ae201214fe173ec456591853ac934f51bccd1e3f153e5dc15dd599213c02de00",
    "bytes": 58865
   },
   "pipeline/narrative2_modules_b.py": {
-   "sha256": "d47c6e9a45fef4be67f6870cb765f65998c77ce829278a4f71c00dd49f4cc334",
-   "bytes": 69029
+   "sha256": "c148dd6a20056a4146759d0b6597c28ca6a69b83309e560512816c0dec4166ca",
+   "bytes": 69786
   },
   "pipeline/revert_review_corrections.py": {
    "sha256": "0c6ad9a3db4053ff9991769c4621584b3626e60a19f71eefcf18f11c1bc1d03c",
@@ -184,8 +188,8 @@
    "bytes": 101982
   },
   "pipeline/verify_school.py": {
-   "sha256": "81acbbb573e89ced868ddabbc51e93ebb2595fd6564c7f5bd43c80954f49c146",
-   "bytes": 8930
+   "sha256": "079808655920efd41e03a5441e4043d250804870583a43c9a41b727ecd91e516",
+   "bytes": 10632
   },
   "pipeline/welsh.py": {
    "sha256": "adb6ceb9be7aa6735d714b97f6eecf5fb3a5dbc1c0706e64ee8f63484f791ede",
@@ -236,8 +240,8 @@
    "bytes": 11905
   },
   "web/app.js": {
-   "sha256": "86747187220e72cf513c3f9405f3afc77679b957cf371cf1592472ed5136bc71",
-   "bytes": 88399
+   "sha256": "0e19c183b57f39d552a308fc31f7da0c973e253c4ee31f14a9e509ae566fbe55",
+   "bytes": 89154
   },
   "web/template.html": {
    "sha256": "719b685251d88712168ed2d577071dacb3cb8b48a5e49773435ff22a6c156172",
@@ -248,8 +252,8 @@
    "bytes": 1311
   },
   "prod/checks.py": {
-   "sha256": "dc99514852f234f2f8e25fd7b10d87b9cdd308cb57e2f8ee7ff7a86a803be82c",
-   "bytes": 26847
+   "sha256": "97b3ad2f8cba4784539684055795ee319e7ade70cfb26f384e115ccf842d6e47",
+   "bytes": 27613
   },
   "prod/chunker.py": {
    "sha256": "19fc2a1b7dc87df948954a37e1c4a564870ec8291e36f6896b50e62cd58db4cd",
@@ -268,7 +272,7 @@
    "bytes": 15821
   },
   "prod/register.py": {
-   "sha256": "340b2699ba800d4e340f5855730469b5e882bac879134bac9c7d1eacca8c324d",
+   "sha256": "553c7ef3b04f03a4abb13dc4158a027fc51311acc2ab397b86dd06571a1a59a1",
    "bytes": 14816
   },
   "prod/release.py": {
@@ -280,8 +284,8 @@
    "bytes": 516
   },
   "prod/runner.py": {
-   "sha256": "b59bb55916aed72ae2f5ab41d21c41da93b5d7b6fed60772cf132c1ea510215e",
-   "bytes": 34581
+   "sha256": "1d2e0c34316fbb4d6e30e278ab0a1d1e46c54f6f017a9ff7b774b16c33397e68",
+   "bytes": 35601
   },
   "prod/serve_local.py": {
    "sha256": "81b498a65e9b44c1f720f7c53389658eda21befa9376f202cf3862f8f7293bde",
@@ -314,6 +318,10 @@
   "config/01_Framework_v2.15.xlsx": {
    "sha256": "5bec4bda7a3f838e40774efba786c0e92bbc7339f0a50ed0b2d3772adffa6c32",
    "bytes": 392713
+  },
+  "config/01_Framework_v2.16.xlsx": {
+   "sha256": "90b6b522fb95c27581d32f4230c8cfb286d018b1ae7a66436ec9be97573c7528",
+   "bytes": 396364
   },
   "config/01_Framework_v2.2.xlsx": {
    "sha256": "a540189fde986765fc16c00424d6a39f424da6653ea51dde82f96c30d40c3ba8",
@@ -456,8 +464,8 @@
    "bytes": 2997
   },
   "config/welsh_lexicon.json": {
-   "sha256": "f702df555704e287760e19bebc2c571b356ea2d80555ab179d5096229c24fc50",
-   "bytes": 252586
+   "sha256": "4025a4188e34f6cf0b64498cefd2c3f7305e4cac0f12080b56ec5fb0358b21f9",
+   "bytes": 253450
   },
   "inputs/fonts/montserrat-latin-400-normal.woff2": {
    "sha256": "e66bcd2761ab6924b25ce70dafe10e57a39193c4fea1516730bd9cb5240af6c8",
@@ -532,8 +540,8 @@
    "bytes": 9855
   },
   "tests/jsdom/jsdom_school.js": {
-   "sha256": "821dea4a15529bf9ebc3cf8238c0bad7f7b171f8a179dc3bbce7b0918547af15",
-   "bytes": 11322
+   "sha256": "e6a1596171190e8408c3a008f5535ebfa95cc6729f4f1577bd886fc4374bdcf2",
+   "bytes": 11997
   },
   "tests/jsdom/jsdom_test.js": {
    "sha256": "4ffec8569610aa7367d8d64d4d96f7c74c8bbcdab8cd25ef0aa00872d345ca35",
