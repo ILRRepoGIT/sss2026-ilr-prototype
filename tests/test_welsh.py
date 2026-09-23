@@ -427,3 +427,27 @@ def test_RC9_A02_tennis_mutates_after_o_and_dewisodd():
     cy = WR.render("group_codemand_top3_v12", {"top3": [("swimming", 5)], "base": 5}, "whole|all|wd_tennis", "f10", cohorts)
     assert cy.startswith("Roedd y disgyblion a ddewisodd dennis hefyd am gael mwy o nofio (5)")
     assert cy.endswith("mwy o dennis.")
+
+
+def test_RC12_FT06_singleton_parent_and_parent_gender():
+    """The full run of 23 Sep 2026: e2's comparison with a ONE-pupil parent set
+    takes the D56 singleton form (no partitive over a singular set — six
+    schools failed the AGR-partitive gate on 'nid oedd yr un o’r unig
+    ddisgybl'), and its numerator agrees with the parent audience's head
+    (RC9-A01's last site: 'dwy o’r 16 merch', not 'dau')."""
+    r = lambda facts, key: WR.render("parent_compare_v2", facts, key, "e2", {})
+    assert r({"count": 0, "base": 1, "parent": "y5|all|none"}, "y5|all|sp_badminton") == \
+        "O gymharu, nid oedd yr unig ddisgybl ym Mlwyddyn 5."
+    assert r({"count": 1, "base": 1, "parent": "y5|girl|none"}, "y5|girl|sp_badminton") == \
+        "O gymharu, yr unig ferch ym Mlwyddyn 5 oedd y ffigur."
+    assert r({"count": 0, "base": 1, "parent": "y5|boy|none"}, "y5|boy|sp_badminton") == \
+        "O gymharu, nid oedd yr unig fachgen ym Mlwyddyn 5."
+    assert "o’r unig" not in r({"count": 1, "base": 1, "parent": "whole|all|none"}, "whole|all|sp_badminton")
+    assert r({"count": 2, "base": 16, "parent": "y3|girl|none"}, "y3|girl|sp_badminton") == \
+        "O gymharu, dwy o’r 16 merch ym Mlwyddyn 3 oedd y ffigur."
+    assert r({"count": 4, "base": 79, "parent": "whole|girl|none"}, "whole|girl|sp_badminton") == \
+        "O gymharu, pedair o’r 79 merch yn yr ysgol gyfan oedd y ffigur."
+    assert r({"count": 3, "base": 25, "parent": "y7|boy|none"}, "y7|boy|sp_badminton") == \
+        "O gymharu, tri o’r 25 bachgen ym Mlwyddyn 7 oedd y ffigur."
+    assert r({"count": 0, "base": 12, "parent": "whole|all|none"}, "whole|all|sp_badminton") == \
+        "O gymharu, nid oedd yr un o’r 12 disgybl yn yr ysgol gyfan."

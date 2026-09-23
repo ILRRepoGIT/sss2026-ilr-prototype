@@ -133,7 +133,7 @@ Alun 8,244, Ysgol Bro Pedr 8,208); the independent figure check all match; jsdom
 served-package gate clean over the directory and over HTTP with the production headers; the browser
 probe 11/11 in real Chromium under the production CSP.
 
-### 4a. The production pilot and its reviews (23 September 2026; v6.0-rc8 to v6.0-rc11)
+### 4a. The production pilot, its reviews and the full run (23 September 2026; v6.0-rc8 to v6.0-rc12)
 
 The pilot on the VM (rc7) built 8 of 20 schools; the 12 failures — all at small or special schools —
 were three defects in the build's own checks and the client, corrected in **rc8** (the one-pupil hold
@@ -184,6 +184,21 @@ a recorded ruling (sheet 84): New Inn 2,097 of 7,884, Castell Alun 2,983 of 8,24
 against the V5.3 locks, every moved paragraph one of the two expected kinds, **the English byte-identical (0
 moved)**. The review's B rows (sparse trailing pages; Beddgelert's overlapping notices, already corrected at rc10;
 the f2 tie in a default view) and its list of the acceptance work still with people are on sheet 85.
+
+The full production run at rc11 (Phase D, 65 minutes at concurrency 48) built 1,004 of the 1,016 schools; twelve were
+refused by their own gates, twice, in two classes, both reproduced here from the tagged code. Six failed the Welsh
+gate AGR-partitive: e2's comparison with the parent audience met a parent set of one pupil (one Year 5 pupil had
+answered the question) and rendered the partitive over a singular set that D56 prohibits ("nid oedd yr un o'r unig
+ddisgybl ym Mlwyddyn 5"); the same frame's numerator, which derives its gender from the parent rather than the view,
+was the one site the rc11 sweep for RC9-A01 had left out ("O gymharu, dau o'r 16 merch …" in every girls' cohort
+view — in the 1,004 built reports and the reviewed rc11 pack alike). Six failed the school regression's title check
+because their PLASC names carry a doubled space, which the page and `document.title` collapse. **rc12** (pipeline
+0.32.3, Framework v2.20; compliance record addendum 11; `pilot_review/SSS2026_rc11_Full_Run_Assessment.md`) takes the
+D56 singleton form on FT-06 ("O gymharu, nid oedd yr unig ddisgybl ym Mlwyddyn 5."), the parent audience's gender on
+its numerator ("dwy o'r 16 merch"), and collapses whitespace in the register's names (spelling untouched); by rule 8
+the whole set is regenerated under the one tag. The 1,004 rc11 reports were otherwise sound — every gate passed,
+no anomaly in the scans of the rebuilt reference and sample schools — but they carry the masculine numerator in
+that one sentence and are superseded.
 
 ## 5. What stays with humans
 

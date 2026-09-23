@@ -27,7 +27,18 @@ from .narrative2 import BASE1_GATES, T as TEMPLATES
 from .narrative2_modules import MODULE_LABELS
 from .narrative2_modules_b import FullNarrator
 
-PIPELINE_VERSION_V2 = "0.32.2"
+PIPELINE_VERSION_V2 = "0.32.3"
+# 0.32.3 (V6.0-rc12, the full run of 23 Sep 2026 — 12 of 1,016 schools failed
+# their gates): FT-06, the parent comparison of e2, takes the D56 singleton
+# branch when the parent set is one pupil ('nid oedd yr unig ddisgybl ym
+# Mlwyddyn 5' / 'yr unig ferch … oedd y ffigur' — no partitive over a singular
+# set; six schools), and its numerator agrees with the parent audience's head
+# ('dwy o'r 16 merch' — the one RC9-A01 site the rc11 sweep left out); the
+# register collapses runs of whitespace in a school's name (six PLASC names
+# carry a doubled space, which the page and document.title collapse, so the
+# school regression's title check stopped the build). The Welsh corpus moves
+# in the e2 comparison sentence of every girls' cohort view (D82 re-emission,
+# Framework v2.20 sheet 86); the English is byte-identical.
 # 0.32.2 (V6.0-rc11, the reviewers' return on the rc9 pilot, 23 Sep 2026): two
 # more rules of the Welsh engine brought into line with the Framework — a
 # numeral that counts the audience takes the audience's gender (dwy/tair/

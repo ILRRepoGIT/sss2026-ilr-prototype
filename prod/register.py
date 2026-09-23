@@ -5,7 +5,7 @@ deployment plan §4.2). One row per school in the dataset; the build starts
 from this register and must finish with exactly the eligible rows built.
 
     python -m prod.register build <stage2.parquet> <out_dir> [--plasc <plasc2026.xlsx>] \\
-                                  [--min-responses 5] [--framework config/01_Framework_v2.19.xlsx]
+                                  [--min-responses 5] [--framework config/01_Framework_v2.20.xlsx]
     python -m prod.register profile <register.json> <school_id> <out.json> --release <tag>
 
 `build` writes register.json and register.csv (the same rows), a summary
@@ -13,7 +13,9 @@ from this register and must finish with exactly the eligible rows built.
 the dataset / PLASC or derived by a stated rule:
 
   name          PLASC 2026 school name when the school id matches, else the
-                dataset's; name_cy = name (no Welsh school-name source is
+                dataset's, with runs of whitespace collapsed to one space
+                (rc12: six PLASC names carry a doubled space; the spelling is
+                never changed); name_cy = name (no Welsh school-name source is
                 supplied — flagged for Sport Wales)
   la, la_cy     the dataset's local authority; Welsh from Framework sheet 53
                 by exact English match (the dataset spellings without a
@@ -162,6 +164,14 @@ def build(parquet: Path, out_dir: Path, plasc: Path | None, framework: Path, min
         region = str(g["region"].iloc[0]).strip()
         p = pl.get(sid)
         name = p["name"] if p else ds_name
+        # V6.0-rc12 (the full run of 23 Sep 2026): six PLASC names carry a doubled
+        # space ('Brynteg  School', 'CWM  IFOR  PRIMARY SCHOOL'). The spelling is
+        # PLASC's and stays; the whitespace is not part of the name — a browser
+        # collapses it in the page and in document.title, so the report's title
+        # did not match the register's string and the school regression stopped
+        # the build (58/59). Runs of whitespace are collapsed to one space; the
+        # dataset's own spelling is kept verbatim in name_dataset.
+        name = " ".join(name.split())
         la_cy = names["Local authority"].get(la, "")
         partnership = REGION_TO_PARTNERSHIP.get(region, "")
         gap = bool(years) and years != list(range(years[0], years[-1] + 1))
@@ -256,7 +266,7 @@ def main(argv=None):
     b = sub.add_parser("build"); b.add_argument("parquet"); b.add_argument("out_dir")
     b.add_argument("--plasc"); b.add_argument("--min-responses", type=int, default=1,
                    help="owner instruction 22 Sep 2026: every school with an accepted response gets a report (default 1); the view-level rule of five is applied inside the report, not here")
-    b.add_argument("--framework", default="config/01_Framework_v2.19.xlsx")
+    b.add_argument("--framework", default="config/01_Framework_v2.20.xlsx")
     b.add_argument("--allow-missing-la-cy", action="store_true",
                    help="build schools whose authority has no Welsh row on sheet 53 (default: HELD — owner decision 22 Sep 2026, option A)")
     p = sub.add_parser("profile"); p.add_argument("register"); p.add_argument("school_id"); p.add_argument("out")

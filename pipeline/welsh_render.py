@@ -690,15 +690,34 @@ def r_no_responses(f, c):
 
 
 def r_parent_compare(f, c, cohorts):
-    """FT-06 with ZERO branch."""
+    """FT-06 with ZERO branch, the singleton branch and the parent audience's
+    gender on the numerator.
+
+    V6.0-rc12 (the full run of 23 Sep 2026): six schools failed the AGR-partitive
+    gate here — a parent set of ONE pupil (one Year 5 pupil answered the
+    question) rendered as 'nid oedd yr un o’r unig ddisgybl ym Mlwyddyn 5', the
+    partitive over a singular set that D56 prohibits. The singleton set is
+    named as itself ('yr unig ddisgybl ym Mlwyddyn 5' / 'yr unig ferch …'),
+    exactly as Ctx.neg_subject realises it for the other frames (sheet 44).
+    And the numerator now agrees with the parent audience's head — 'O gymharu,
+    dwy o’r 16 merch ym Mlwyddyn 3 oedd y ffigur' — the one site the rc11
+    sweep for RC9-A01 left out (it derives the gender locally, from the
+    parent, not from the view)."""
     pk = f.get("parent", "")
     ps, pg, _ = pk.split("|") if pk.count("|") == 2 else (c.scope, c.gender, "none")
     aud = W.audience(ps, pg, "def_sg")
     g = "f" if aud.split(" ", 1)[0] in ("merch", "ferch") else "m"
     ob = W.of_base(f["base"], aud, g)
+    if f["base"] == 1:
+        # D56: no partitive over a singular set — of_base(1, …) is
+        # 'o’r unig ⟪noun⟫ …'; the subject is 'yr unig ⟪noun⟫ …'
+        unig = f"yr {ob[4:]}"
+        if f["count"] == 0:
+            return f"O gymharu, nid oedd {unig}."
+        return f"O gymharu, {unig} oedd y ffigur."
     if f["count"] == 0:
         return f"O gymharu, nid oedd yr un {ob}."
-    return f"O gymharu, {W.numerator(f['count'])} {ob} oedd y ffigur."
+    return f"O gymharu, {W.numerator(f['count'], g)} {ob} oedd y ffigur."
 
 
 def r_group_defined(f, c):
