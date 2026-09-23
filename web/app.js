@@ -1352,9 +1352,15 @@ function renderProfile() {
     const pend = framePending(k);
     const val = translatable ? nameOf(v) : v;
     const vpend = !!translatable && isCy() && !NAMES()[v];
-    return "<tr><td" + (pend ? ' class="cy-missing" lang="en"' : "") + prov((pend ? "frame:pending:" : "frame:") + k) + ">" +
-      esc(t(k)) + "</td><td" + (vpend ? ' class="cy-missing" lang="en" title="Heb ei gyfieithu eto — dangosir y Saesneg"' : "") +
-      (translatable ? prov(vpend ? "names:pending" : "names:sheet53") : "") + ">" + esc(String(val)) + "</td></tr>";
+    // V6.0-rc11 (rc9 pilot review, RC9-A03): the pending decoration sits on a
+    // span INSIDE the cell — on the cell itself its dotted red bottom border was
+    // overridden by the table's own cell border in the technical record
+    // (details.dtable td), so the marking was invisible there.
+    const pendSpan = x => '<span class="cy-missing" lang="en" title="Heb ei gyfieithu eto — dangosir y Saesneg">' + x + "</span>";
+    return "<tr><td" + prov((pend ? "frame:pending:" : "frame:") + k) + ">" +
+      (pend ? pendSpan(esc(t(k))) : esc(t(k))) + "</td><td" +
+      (translatable ? prov(vpend ? "names:pending" : "names:sheet53") : "") + ">" +
+      (vpend ? pendSpan(esc(String(val))) : esc(String(val))) + "</td></tr>";
   };
   $("#overview-table").innerHTML =
     cell("ui.profile_school_name", sc.name) +

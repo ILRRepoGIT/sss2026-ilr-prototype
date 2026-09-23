@@ -137,13 +137,16 @@ ok(!/\b(Pharkour|Barkour|Mharkour|Fadminton|Foccia|FMX|MMX|Thriathlon|Driathlon|
 ok(!/ymhlith bechgyn a [bdfgm]ê?l /.test(html) && !/ymhlith bechgyn a (redeg|ddringo|griced|dennis)/.test(html), "A03/CONJ-04: the gender-leaders sentence takes a/ac + aspirate after 'a'");
 ok(!/a ddewisodd pêl /.test(html), "T-035: the f10 cohort sentence mutates the object of 'dewisodd'");
 // A01: a data value without a sheet-53 Welsh form is MARKED (cy-missing, lang=en) in Welsh mode; one with a form shows it unmarked
+// (rc11, RC9-A03: the marking is a span inside the cell, so it shows inside details.dtable too)
+const marked = td => !!(td && td.querySelector("span.cy-missing[lang=en]"));
 const stagesCell = Array.from(d.querySelectorAll("#overview-table td")).find(td => td.textContent === (NAMES[D.school.schoolStages] || D.school.schoolStages));
-ok(stagesCell && (NAMES[D.school.schoolStages] ? !stagesCell.classList.contains("cy-missing") : (stagesCell.classList.contains("cy-missing") && stagesCell.getAttribute("lang") === "en")),
-   "A01: the school-stages value is marked pending in Welsh mode until its sheet-53 row exists", stagesCell && stagesCell.outerHTML.slice(0, 120));
+ok(stagesCell && (NAMES[D.school.schoolStages] ? !marked(stagesCell) : marked(stagesCell)),
+   "A01: the school-stages value is marked pending in Welsh mode until its sheet-53 row exists", stagesCell && stagesCell.outerHTML.slice(0, 160));
 const laCell = Array.from(d.querySelectorAll("#overview-table td")).find(td => td.textContent === (NAMES[D.school.localAuthority] || D.school.localAuthority));
-ok(laCell && !laCell.classList.contains("cy-missing") === !!NAMES[D.school.localAuthority], "A01: the authority's Welsh name (sheet 53) shows unmarked");
+ok(laCell && !marked(laCell) === !!NAMES[D.school.localAuthority], "A01: the authority's Welsh name (sheet 53) shows unmarked");
 const supCell = Array.from(d.querySelectorAll("#meta-table td")).find(td => td.textContent === (NAMES[D.buildMetadata.suppressionModel] || D.buildMetadata.suppressionModel));
-ok(supCell && (NAMES[D.buildMetadata.suppressionModel] ? !supCell.classList.contains("cy-missing") : supCell.classList.contains("cy-missing")), "A01: the suppression-model value is marked pending in Welsh mode until its sheet-53 row exists");
+ok(supCell && (NAMES[D.buildMetadata.suppressionModel] ? !marked(supCell) : marked(supCell)), "A01/RC9-A03: the suppression-model value is marked pending (span inside the technical record's cell)");
+ok(/^\.cy-missing \{ border-bottom:1px dotted/m.test(tpl) && supCell && supCell.closest("details.dtable") !== null, "RC9-A03: the technical record sits in details.dtable, whose cell border would hide a cell-level marking", supCell && supCell.closest("details.dtable") !== null);
 ok(pfR() === JSON.stringify("Arolwg Chwaraeon Ysgol 2026") && pfL().indexOf(SCHOOL) > -1, "A05: print-footer custom properties switch with the language (CY)", pfR());
 ok(d.querySelector("aside.filter-rail").getAttribute("aria-label") === "Archwilio’r Canlyniadau", "cy aria-label from a frame");
 ok(WSUP ? txt("#any-activity-note") === "" : txt("#any-activity-note").indexOf("Adroddodd " + D.anyActivity + " o’r " + N) === 0, WSUP ? "cy: no any-activity headline for a suppressed whole school" : "cy any-activity headline from the school's own counts", txt("#any-activity-note").slice(0, 60));

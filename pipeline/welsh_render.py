@@ -574,7 +574,7 @@ def r_settings_rank(f, c, group_cy=None):
     else:
         base_np = W.of_base(f["base"], c.aud("def_sg"), c.head_gender())
         t = (f"{top} oedd y lleoliad a ddewiswyd amlaf, gan "
-             f"{W.numerator(top_n, prep='gan')} {base_np}"
+             f"{W.numerator(top_n, c.head_gender(), 'gan')} {base_np}"
              f"{' ' + c.qual if c.qual else ' a ymatebodd'}")
     if runners and f.get("followers_shown", True):
         t += f", ac yna {joinlab_counts(runners)}"
@@ -592,7 +592,7 @@ def r_leader_multi(f, c):
         qual = W.sg_qual(c.qual, c.gender)
         agent = f"gan yr {ob[4:]}{' ' + qual if qual else ''}"
     else:
-        agent = (f"gan {W.numerator(f['count'], prep='gan')} {ob}"
+        agent = (f"gan {W.numerator(f['count'], c.head_gender(), 'gan')} {ob}"
                  f"{' ' + c.qual if c.qual else ' a ymatebodd'}")
     return f"{lab} oedd {hd} a ddewiswyd amlaf, {agent}."
 
@@ -788,11 +788,11 @@ def r_club_weekly_3plus(f, c):
         second = (f"ni chymerodd yr un ohonynt{pct0} ran deirgwaith neu "
                   f"fwy yr wythnos")
     elif "three_plus_pct" in f:
-        second = (f"cymerodd {W.numerator(tp)} o’r {W.numerator(f['base'])} "
+        second = (f"cymerodd {W.numerator(tp, c.head_gender())} o’r {W.numerator(f['base'], c.head_gender())} "
                   f"({f['three_plus_pct']}%) ran mewn {club} deirgwaith "
                   f"neu fwy yr wythnos")
     else:
-        second = (f"cymerodd {W.numerator(tp)} ran deirgwaith neu fwy yr "
+        second = (f"cymerodd {W.numerator(tp, c.head_gender())} ran deirgwaith neu fwy yr "
                   f"wythnos")
     conj, second = W.conj_and(second)
     return f"{first}, {conj} {second}."
@@ -806,16 +806,16 @@ def r_pe_feelings(f, c):
     # FT-05, quotation characters corrected v1.6 (D27): ‘…’, never ’…’
     if h:
         bits.append(
-            f"ni ddywedodd yr un o’r {W.numerator(h[1])} eu bod yn teimlo’n "
+            f"ni ddywedodd yr un o’r {W.numerator(h[1], c.head_gender())} eu bod yn teimlo’n "
             f"‘iach iawn’ nac yn ‘eithaf iach’" if h[0] == 0 else
-            f"dywedodd {W.numerator(h[0])} o’r {W.numerator(h[1])} eu bod yn teimlo’n "
+            f"dywedodd {W.numerator(h[0], c.head_gender())} o’r {W.numerator(h[1], c.head_gender())} eu bod yn teimlo’n "
             f"‘iach iawn’ neu’n ‘eithaf iach’")
     if cf:
         bits.append("dim un ohonynt eu bod yn hyderus" if cf[0] == 0
-                    else f"{W.numerator(cf[0])} eu bod yn hyderus")
+                    else f"{W.numerator(cf[0], c.head_gender())} eu bod yn hyderus")
     if r:
         bits.append("dim un ohonynt eu bod yn barod i ddysgu" if r[0] == 0
-                    else f"{W.numerator(r[0])} eu bod yn barod i ddysgu")
+                    else f"{W.numerator(r[0], c.head_gender())} eu bod yn barod i ddysgu")
     if not bits:
         return None
     listed = W.join_list(bits)
@@ -830,9 +830,9 @@ def r_enjoy_settings(f, c):
     hi = max(vals, key=lambda v: v[1])
     cy_set = ENJOY_SETTING_CY[hi[0]]
     if hi[1] == 0:
-        cnt = f"dim un o’r {W.numerator(hi[3])} a ymatebodd"
+        cnt = f"dim un o’r {W.numerator(hi[3], c.head_gender())} a ymatebodd"
     else:
-        cnt = f"{W.numerator(hi[1])} o’r {W.numerator(hi[3])} a ymatebodd"
+        cnt = f"{W.numerator(hi[1], c.head_gender())} o’r {W.numerator(hi[3], c.head_gender())} a ymatebodd"
     return (f"Mewn {W.soft_phrase(cy_set) if False else cy_set} yr oedd "
             f"{c.bare()} fwyaf tebygol o ddweud eu bod yn mwynhau "
             f"chwaraeon ‘Llawer’: {cnt}.")
@@ -844,9 +844,9 @@ def r_enjoy_low_setting(f, c):
     lead = (f"Ymhlith {c.aud('bare')}{' ' + c.qual if c.qual else ''}, "
             f"y mwynhad isaf oedd am chwaraeon mewn {cy_set}, ")
     if f["count"] == 0:
-        return (lead + f"lle nad atebodd yr un o’r {W.numerator(f['base'])} "
+        return (lead + f"lle nad atebodd yr un o’r {W.numerator(f['base'], c.head_gender())} "
                 f"‘Dim Llawer’ na ‘Dim o gwbl’.")
-    return (lead + f"lle atebodd {W.numerator(f['count'])} o’r {W.numerator(f['base'])} "
+    return (lead + f"lle atebodd {W.numerator(f['count'], c.head_gender())} o’r {W.numerator(f['base'], c.head_gender())} "
             f"‘Dim Llawer’ neu ‘Dim o gwbl’.")
 
 
@@ -855,8 +855,8 @@ def r_enjoy_year_extremes(f, c):
     vals = f["values"]
     hi = max(vals, key=lambda v: v[3]); lo = min(vals, key=lambda v: v[3])
     return (f"Roedd mwynhad o wersi AG ar ei uchaf ym Mlwyddyn {hi[0]} "
-            f"({numz(hi[1])} o’r {W.numerator(hi[2])} yn ateb ‘Llawer’, neu {hi[3]}%) "
-            f"ac ar ei isaf ym Mlwyddyn {lo[0]} ({numz(lo[1])} o’r {W.numerator(lo[2])}, "
+            f"({numz(hi[1], c.head_gender())} o’r {W.numerator(hi[2], c.head_gender())} yn ateb ‘Llawer’, neu {hi[3]}%) "
+            f"ac ar ei isaf ym Mlwyddyn {lo[0]} ({numz(lo[1], c.head_gender())} o’r {W.numerator(lo[2], c.head_gender())}, "
             f"neu {lo[3]}%), {c.among()}.")
 
 
@@ -866,8 +866,8 @@ def r_age_setting_extremes(f, c):
     hi = max(vals, key=lambda v: v[3]); lo = min(vals, key=lambda v: v[3])
     mewn = SETTING_MEWN[f["setting"]]
     return (f"Roedd cyfranogiad mewn chwaraeon {mewn} ar ei uchaf "
-            f"ym Mlwyddyn {hi[0]} ({numz(hi[1])} o’r {W.numerator(hi[2])}, neu {hi[3]}%) "
-            f"ac ar ei isaf ym Mlwyddyn {lo[0]} ({numz(lo[1])} o’r {W.numerator(lo[2])}, "
+            f"ym Mlwyddyn {hi[0]} ({numz(hi[1], c.head_gender())} o’r {W.numerator(hi[2], c.head_gender())}, neu {hi[3]}%) "
+            f"ac ar ei isaf ym Mlwyddyn {lo[0]} ({numz(lo[1], c.head_gender())} o’r {W.numerator(lo[2], c.head_gender())}, "
             f"neu {lo[3]}%), {c.among()}.")
 
 
@@ -877,7 +877,7 @@ def r_confidence_dims(f, c):
     hi = max(vals, key=lambda v: v[1])
     m = CONF_MEASURE_CY[hi[0]]
     return (f"Roedd {c.bare()} fwyaf tebygol o ddweud eu bod yn hyderus i "
-            f"{W.soft_phrase(m)}: dywedodd {W.numerator(hi[1])} o’r {W.numerator(hi[2])} a ymatebodd "
+            f"{W.soft_phrase(m)}: dywedodd {W.numerator(hi[1], c.head_gender())} o’r {W.numerator(hi[2], c.head_gender())} a ymatebodd "
             f"‘Hyderus Iawn’ neu ‘Eithaf hyderus’.")
 
 
@@ -887,7 +887,7 @@ def r_confidence_dims_low(f, c):
     lo = min(vals, key=lambda v: v[1])
     m = CONF_MEASURE_CY[lo[0]]
     return (f"Roeddent leiaf tebygol o ddweud eu bod yn hyderus i "
-            f"{W.soft_phrase(m)} ({numz(lo[1])} o’r {W.numerator(lo[2])}), {c.among()}.")
+            f"{W.soft_phrase(m)} ({numz(lo[1], c.head_gender())} o’r {W.numerator(lo[2], c.head_gender())}), {c.among()}.")
 
 
 def r_confidence_joint_hi(f, c):
@@ -898,9 +898,9 @@ def r_confidence_joint_hi(f, c):
     lows = [CONF_MEASURE_CY[v[0]] for v in vals if v[1] == lo_n]
     base = vals[0][2]
     return (f"Hyder wrth {W.soft_phrase(W.join_list(highs))} a gafodd yr "
-            f"ymateb cadarnhaol uchaf ar y cyd ({numz(hi_n)} o’r {W.numerator(base)}), tra mai "
+            f"ymateb cadarnhaol uchaf ar y cyd ({numz(hi_n, c.head_gender())} o’r {W.numerator(base, c.head_gender())}), tra mai "
             f"hyder wrth {W.soft_phrase(W.join_list(lows))} a gafodd yr "
-            f"ymateb isaf ({numz(lo_n)} o’r {W.numerator(base)}), {c.among()}.")
+            f"ymateb isaf ({numz(lo_n, c.head_gender())} o’r {W.numerator(base, c.head_gender())}), {c.among()}.")
 
 
 def r_confidence_equal(f, c):
@@ -912,7 +912,7 @@ def r_confidence_equal(f, c):
                 f"‘Hyderus Iawn’ neu ‘Eithaf hyderus’ ar gyfer unrhyw "
                 f"fesur.")
     return (f"Roedd hyder yr un mor uchel ar draws y pedwar mesur, gyda "
-            f"{W.numerator(n)} "
+            f"{W.numerator(n, c.head_gender())} "
             f"{W.of_base(base, c.aud('def_sg'), c.head_gender())}"
             f"{' ' + c.qual if c.qual else ''} a ymatebodd yn dewis "
             f"‘Hyderus Iawn’ neu ‘Eithaf hyderus’ ar gyfer pob mesur.")
@@ -941,7 +941,7 @@ def r_unmet_leader(f, c):
         qual = W.sg_qual(c.qual, c.gender)
         agent = f"gan yr {ob[4:]}{' ' + qual if qual else ''}"
     else:
-        agent = (f"gan {W.numerator(l['count'], prep='gan')} {ob}"
+        agent = (f"gan {W.numerator(l['count'], c.head_gender(), 'gan')} {ob}"
                  f"{' ' + c.qual if c.qual else ' a ymatebodd'}")
     return (f"Y gamp yr oedd y galw mwyaf heb ei fodloni amdani oedd "
             f"{lab}, a ddewiswyd {agent}.")
@@ -1199,8 +1199,8 @@ def r_take_part_prose(f, c):
                 return None
             # D40: the numeral after gan is realised BY THE NUMERAL SERVICE
             # with the soft mutation gan licenses (gan ddau, gan dri).
-            num = (W.numerator(n, prep="gan")
-                   if code == "prefer_not_to_say" else W.numerator(n))
+            num = (W.numerator(n, c.head_gender(), 'gan')
+                   if code == "prefer_not_to_say" else W.numerator(n, c.head_gender()))
             bits.append(forms[1] if n == 1 else forms[0].format(n=num))
     listed = W.join_list(bits, mutate_last=False)
     ob = W.of_base(f["base"], c.aud("def_sg"), c.head_gender())
@@ -1233,7 +1233,7 @@ def r_welsh_when_playing(f, c):
         return lead + "nid atebodd yr un ohonynt ‘Ydw’."
     if f["count"] == 1 and f["base"] == 1:
         return lead + "‘Ydw’ oedd yr un ateb a gafwyd."
-    return lead + f"atebodd {W.numerator(f['count'])} ohonynt ‘Ydw’."
+    return lead + f"atebodd {W.numerator(f['count'], c.head_gender())} ohonynt ‘Ydw’."
 
 
 def _group_tail(c):
@@ -1293,8 +1293,8 @@ def r_group_sibling(f, c, measure_en):
     lab = q(label_cy(l["labels"][0], "conf", form="cy"))
     m = CONF_MEASURE_CY[measure_en]
     return (f"Atebodd y rhan fwyaf o’r grŵp hwn {lab} pan ofynnwyd pa mor "
-            f"hyderus ydynt i {W.soft_phrase(m)} ({W.numerator(l['count'])} o’r "
-            f"{W.numerator(l['base'])}).")
+            f"hyderus ydynt i {W.soft_phrase(m)} ({W.numerator(l['count'], c.head_gender())} o’r "
+            f"{W.numerator(l['base'], c.head_gender())}).")
 
 
 def r_group_sibling_conf(f, c):
@@ -1302,7 +1302,7 @@ def r_group_sibling_conf(f, c):
     lab = q(label_cy(l["labels"][0], "conf", form="cy"))
     return (f"Pan ofynnwyd pa mor hyderus ydynt i roi cynnig ar gamp "
             f"newydd, atebodd y grŵp mwyaf o’r {c.aud('def_sg')} "
-            f"{c.qual or ''} ({W.numerator(l['count'])} o’r {W.numerator(l['base'])}) {lab}.")
+            f"{c.qual or ''} ({W.numerator(l['count'], c.head_gender())} o’r {W.numerator(l['base'], c.head_gender())}) {lab}.")
 
 
 # ------------------------------------------------------- remaining renderers
@@ -1338,7 +1338,7 @@ def r_barrier_none(f, c):
     """FT-16: the citation count comes from the numeral service (D40) —
     'dewisodd chwech ‘Dim un o’r rhain’', never a figure before a quote."""
     return (f"{c.among().capitalize() if False else 'Ymhlith ' + c.bare()}, "
-            f"dewisodd {W.numerator(f['count'])} {q('Dim un o’r rhain')}.")
+            f"dewisodd {W.numerator(f['count'], c.head_gender())} {q('Dim un o’r rhain')}.")
 
 
 def r_important_leader(f, c):
@@ -1355,7 +1355,7 @@ def r_important_leader(f, c):
         qual = W.sg_qual(c.qual, c.gender)
         agent = f"gan yr {ob[4:]}{' ' + qual if qual else ''}"
     else:
-        agent = (f"gan {W.numerator(l['count'], prep='gan')} {ob}"
+        agent = (f"gan {W.numerator(l['count'], c.head_gender(), 'gan')} {ob}"
                  f"{' ' + c.qual if c.qual else ' a atebodd y cwestiwn hwn'}")
     return f"{lab} oedd yr opsiwn a ddewiswyd amlaf{apart}, {agent}."
 
@@ -1503,7 +1503,7 @@ def r_cross_insight(f, c, cohorts):
         return None
     return (f"Ymhlith {c.aud('bare')} {qual}, {lab} oedd yr amod a "
             f"ddewiswyd amlaf a fyddai’n eu helpu i wneud mwy o chwaraeon "
-            f"({W.numerator(l['count'])} o’r {W.numerator(l['base'])} a ymatebodd).")
+            f"({W.numerator(l['count'], c.head_gender())} o’r {W.numerator(l['base'], c.head_gender())} a ymatebodd).")
 
 
 def r_rank_parent_same(f, c):
@@ -1600,9 +1600,9 @@ def r_gender_phase_enjoy(f, c):
         return None
     bits = []
     if pr:
-        bits.append(f"{numz(pr[0])} o’r {W.numerator(pr[1])} ({pr[2]}%) yn yr ysgol gynradd")
+        bits.append(f"{numz(pr[0], c.head_gender())} o’r {W.numerator(pr[1], c.head_gender())} ({pr[2]}%) yn yr ysgol gynradd")
     if se:
-        bits.append(f"{numz(se[0])} o’r {W.numerator(se[1])} ({se[2]}%) yn yr ysgol uwchradd")
+        bits.append(f"{numz(se[0], c.head_gender())} o’r {W.numerator(se[1], c.head_gender())} ({se[2]}%) yn yr ysgol uwchradd")
     listed = W.join_list(bits, mutate_last=False)
     return (f"Ymhlith {c.bare()}, nododd {listed} eu bod yn mwynhau "
             f"chwaraeon mewn Gwersi Addysg Gorfforol ‘Llawer’.")
@@ -1655,7 +1655,7 @@ def r_other_sports_note(f, c):
     qual = f" {c.qual}" if c.qual else ""
     return (f"Mae ‘Campau eraill’ yn cyfeirio at unrhyw gampau a ddewisodd "
             f"disgyblion o restr atodol o gampau os nad oedd eu camp wedi’i "
-            f"chynnwys yn y brif restr ({W.numerator(f['count'])} {ob}"
+            f"chynnwys yn y brif restr ({W.numerator(f['count'], c.head_gender())} {ob}"
             f"{qual}). Mae’r rhain wedi’u grwpio gyda’i gilydd "
             f"er hwylustod adrodd, ac fe’u hadroddir yn fanwl yn yr "
             f"atodiad.")
@@ -1685,7 +1685,7 @@ def r_group_excl_leader(f, c):
         qual = W.sg_qual(c.qual, c.gender)
         agent = f"gan yr {ob[4:]}{' ' + qual if qual else ''}"
     else:
-        agent = (f"gan {W.numerator(l['count'], prep='gan')} {ob}"
+        agent = (f"gan {W.numerator(l['count'], c.head_gender(), 'gan')} {ob}"
                  f"{' ' + c.qual if c.qual else ''}")
     return (f"Ar wahân i {W.label_after_soft(excl)}, sy’n diffinio’r grŵp "
             f"a ddewiswyd, {lab} oedd y gamp a ddewiswyd amlaf, {agent}.")
@@ -1694,7 +1694,7 @@ def r_group_excl_leader(f, c):
 def r_enjoy_group_next(f, c):
     cy_set = ENJOY_SETTING_CY.get(f["setting"], f["setting"])
     return (f"Ymhlith {c.bare()}, {cy_set} a gafodd y cyfrif ‘Llawer’ "
-            f"nesaf-uchaf: {numz(f['count'])} o’r {W.numerator(f['base'])} a ymatebodd.")
+            f"nesaf-uchaf: {numz(f['count'], c.head_gender())} o’r {W.numerator(f['base'], c.head_gender())} a ymatebodd.")
 
 
 def r_settings_group_next(f, c):
@@ -1782,18 +1782,18 @@ def r_h1_en_enjoy_conf(f, c):
     ep = H1_ENJOY_CY[f.get("ep_mid", "enjoy_pe")]
     ct = H1_CONF_CY[f.get("ct_mid", "confidence_try_new")]
     if f["enjoy"] == 0:
-        first = (f"nid oes yr un o’r {W.numerator(f['enjoy_base'])} yn "
+        first = (f"nid oes yr un o’r {W.numerator(f['enjoy_base'], c.head_gender())} yn "
                  f"mwynhau chwaraeon {ep} ‘Llawer’")
     else:
-        first = (f"mae {W.numerator(f['enjoy'])} o’r "
-                 f"{W.numerator(f['enjoy_base'])} "
+        first = (f"mae {W.numerator(f['enjoy'], c.head_gender())} o’r "
+                 f"{W.numerator(f['enjoy_base'], c.head_gender())} "
                  f"yn mwynhau chwaraeon {ep} ‘Llawer’")
     if f["conf"] == 0:
-        second = (f"nid oes yr un o’r {W.numerator(f['conf_base'])} yn "
+        second = (f"nid oes yr un o’r {W.numerator(f['conf_base'], c.head_gender())} yn "
                   f"hyderus iawn neu’n eithaf hyderus {ct}")
     else:
-        second = (f"mae {W.numerator(f['conf'])} o’r "
-                  f"{W.numerator(f['conf_base'])} yn hyderus iawn neu’n "
+        second = (f"mae {W.numerator(f['conf'], c.head_gender())} o’r "
+                  f"{W.numerator(f['conf_base'], c.head_gender())} yn hyderus iawn neu’n "
                   f"eithaf hyderus {ct}")
     conj, second = W.conj_and(second)
     return f"Ymhlith {c.bare()}, {first}, {conj} {second}."
@@ -1801,19 +1801,19 @@ def r_h1_en_enjoy_conf(f, c):
 
 def r_h1_en_listened(f, c):
     if f["count"] == 0:
-        return (f"Nid yw’r un o’r {W.numerator(f['base'])} a ymatebodd yn teimlo bod "
+        return (f"Nid yw’r un o’r {W.numerator(f['base'], c.head_gender())} a ymatebodd yn teimlo bod "
                 f"pobl yn gwrando ar eu syniadau am chwaraeon bob amser "
                 f"neu weithiau, {c.among()}.")
-    return (f"Mae {W.numerator(f['count'])} o’r {W.numerator(f['base'])} a ymatebodd "
+    return (f"Mae {W.numerator(f['count'], c.head_gender())} o’r {W.numerator(f['base'], c.head_gender())} a ymatebodd "
             f"yn teimlo bod pobl yn gwrando ar eu syniadau am chwaraeon "
             f"bob amser neu weithiau, {c.among()}.")
 
 
 def r_h1_ev_disability(f, c):
     if f["count"] == 0:
-        return (f"Ni nododd yr un o’r {W.numerator(f['base'])} a ymatebodd anabledd na "
+        return (f"Ni nododd yr un o’r {W.numerator(f['base'], c.head_gender())} a ymatebodd anabledd na "
                 f"{W.aspirate_phrase(W.term('long-term condition'))}, {c.among()}.")
-    return (f"Nododd {W.numerator(f['count'])} o’r {W.numerator(f['base'])} a ymatebodd "
+    return (f"Nododd {W.numerator(f['count'], c.head_gender())} o’r {W.numerator(f['base'], c.head_gender())} a ymatebodd "
             f"anabledd neu {W.soft_phrase(W.term('long-term condition'))}, {c.among()}.")
 
 
@@ -1863,7 +1863,7 @@ def r_h1_ll_barrier(f, c):
     return (f"Yr amod a ddewiswyd amlaf{aside} fel un a fyddai’n helpu "
             f"{c.bare()} "
             f"i wneud mwy o chwaraeon oedd {lab} "
-            f"({W.numerator(l['count'])} o’r {W.numerator(l['base'])}).")
+            f"({W.numerator(l['count'], c.head_gender())} o’r {W.numerator(l['base'], c.head_gender())}).")
 
 
 def r_h1_ll_demand(f, c):

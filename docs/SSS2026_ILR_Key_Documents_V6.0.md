@@ -133,7 +133,7 @@ Alun 8,244, Ysgol Bro Pedr 8,208); the independent figure check all match; jsdom
 served-package gate clean over the directory and over HTTP with the production headers; the browser
 probe 11/11 in real Chromium under the production CSP.
 
-### 4a. The production pilot and its review (23 September 2026; v6.0-rc8 and v6.0-rc9)
+### 4a. The production pilot and its reviews (23 September 2026; v6.0-rc8 to v6.0-rc11)
 
 The pilot on the VM (rc7) built 8 of 20 schools; the 12 failures — all at small or special schools —
 were three defects in the build's own checks and the client, corrected in **rc8** (the one-pupil hold
@@ -168,6 +168,22 @@ and in print (23 schools), and a one-response school read "1 pupil responses are
 corpus-move lines; the Welsh corpus is unchanged. Left for a later decision (sheet 83): the single-year
 phrases at 29 schools ("Years 6 to 6"; the largest/smallest sentence naming one year twice) and the wording of
 the whole-school suppression notice, which is Sport Wales's GDPR text.
+
+The reviewers' return on the rc9 pilot (all 21 reports, 2,484 PDF pages, six Welsh samples, two numerical cases;
+HOLD) confirmed the six rc9 corrections and the numerical consistency of every embedded state, and found three
+class-A defect types, all genuine: a numeral counting girls took the masculine form in the partitive counts ("gan
+bedwar o'r pum merch"; 17 schools); tennis, which the translator marked mutable, was left unmutated on the f10 cohort
+path ("a ddewisodd tennis", "mwy o tennis"; 18 schools) because an rc7-era identical-form reading overrode the
+sheet-23 flag on one service; and the pending marker on the technical record's suppression-model value was hidden
+by the table's own border rule (20 Welsh PDFs — the residual of rc7 A01). **rc11** (pipeline 0.32.2, Framework
+v2.19; compliance record addendum 10; `pilot_review/SSS2026_rc9_Review_Response.md`) corrects all three — the
+audience's gender on every numerator that counts the audience ("gan bedair", "dwy", "tair"; *disgybl* and
+*bachgen* unchanged), the sheet-23 flag governing on the prose paths ("a ddewisodd dennis", "mwy o dennis";
+Badminton, BMX, Parkour unchanged), the marker on a span inside the cell — and the Welsh corpus moves again under
+a recorded ruling (sheet 84): New Inn 2,097 of 7,884, Castell Alun 2,983 of 8,244, Ysgol Bro Pedr 3,804 of 8,208 states
+against the V5.3 locks, every moved paragraph one of the two expected kinds, **the English byte-identical (0
+moved)**. The review's B rows (sparse trailing pages; Beddgelert's overlapping notices, already corrected at rc10;
+the f2 tie in a default view) and its list of the acceptance work still with people are on sheet 85.
 
 ## 5. What stays with humans
 

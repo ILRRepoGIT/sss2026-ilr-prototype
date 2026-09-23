@@ -434,10 +434,18 @@ def label_after_soft(en_label, quoted=False):
     # D21 / PR-10: running prose uses the prose form, case-folded BEFORE
     # mutation; unadapted names (PR-05) and quoted citations stay put.
     cy = label_cy(en_label, "prose")
-    if e is None or not e.get("mutable"):
+    if e is None:
+        # no sheet-23 row: a form identical to the English is taken as
+        # unadapted (the V4.x inference from T-032/T-033), otherwise mutate
+        return cy if cy.strip().lower() == str(en_label).strip().lower() else soft_phrase(cy)
+    if not e.get("mutable"):
         return cy
-    if cy.strip().lower() == str(en_label).strip().lower():
-        return cy
+    # V6.0-rc11 (rc9 pilot review, RC9-A02): the sheet-23 'Mutable?' flag is
+    # the translator's data and governs. Until rc10 a label whose Welsh form
+    # equals the English was left unmutated here even when the sheet marks
+    # it mutable ('a ddewisodd tennis', 'mwy o tennis'), while every other
+    # path of the same report mutated it ('a thennis', 'mwy o dennis bwrdd');
+    # sheet 26 T-032 tests the verb's mutation, not the object's.
     return soft_phrase(cy)
 
 

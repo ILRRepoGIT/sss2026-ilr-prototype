@@ -346,7 +346,8 @@ def _build_one(spec: dict) -> dict:
         "previousLockSha256": (sha(Path(prev)) if prev != "none" else None), "lockRuling": ruling,
         # V6.0-rc9: how far the corpus moved from the previous lock, as the emitted lock
         # records it (D82) — the runbook's Phase B expects exact Welsh counts under the
-        # Framework v2.17 ruling and English 0; the rollup lists them
+        # Framework's rulings (v2.17 sheet 80; v2.19 sheet 84) and English 0; the rollup
+        # lists them
         "lockMoved": _lock_moved(gen / f"lock_{slug}_v8.json"),
         "binding": binding, "token": token, "envelope": env_,
         "identity": pkg["buildMetadata"]["identity"], "mode": mode,

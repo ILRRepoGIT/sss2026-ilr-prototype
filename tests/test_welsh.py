@@ -212,10 +212,14 @@ def test_T068_holl_parent():
 # --------------------------------------------------------------- qualifiers
 def test_T032_subject_relative_sp():
     # v1.7 D21/PR-10 supersedes the sheet-26 golden surface: running prose
-    # takes the case-folded prose form ('tennis'), unadapted so unmutated.
-    # Sheet 26 was not updated for D21 — recorded for the linguist.
+    # takes the case-folded prose form ('tennis'). V6.0-rc11 (rc9 pilot
+    # review, RC9-A02): sheet 23 marks Tennis 'Mutable? YES', and the flag
+    # governs — the object of the inflected verb takes the soft mutation
+    # (T-035), as 'tennis bwrdd' and every list-join path already did;
+    # T-032 tests the verb's mutation, and its 'Tennis' predates D21.
     cy = W.qualifier_cy("sp", "selected Tennis", answer_label="Tennis")
-    assert cy == "a ddewisodd tennis"
+    assert cy == "a ddewisodd dennis"
+    assert W.qualifier_cy("sp", "selected Badminton", answer_label="Badminton") == "a ddewisodd Badminton"
 
 
 def test_sp_football_object_mutation():
@@ -400,3 +404,26 @@ def test_T035_object_of_dewisodd_mutates_in_the_f10_cohort_sentence():
     assert cy.startswith("Roedd y disgyblion a ddewisodd bêl droed hefyd am gael mwy o nofio (10), Parkour (9) a thrampolinio (8)")
     cy = WR.render("group_codemand_top3_v12", facts, "whole|all|wd_badminton", "f10", cohorts)
     assert cy.startswith("Roedd y disgyblion a ddewisodd Badminton hefyd am gael mwy o nofio (10), Parkour (9) a thrampolinio (8)")
+
+
+def test_RC9_A01_feminine_numerator_for_a_girls_audience():
+    """rc9 pilot review (RC9-A01): a substantive numeral standing for the
+    girls of the view takes the feminine form (dwy, tair, pedair), with the
+    mutation its preposition licenses; boys and mixed audiences masculine."""
+    r = lambda tid, facts, key, module: WR.render(tid, facts, key, module, {})
+    assert r("leader_multi_v2", {"labels": ["Swimming"], "count": 4, "base": 5, "noun": "sport"}, "whole|girl|none", "f10").startswith(
+        "Nofio oedd y gamp a ddewiswyd amlaf, gan bedair o’r pum merch")
+    assert r("leader_multi_v2", {"labels": ["Swimming"], "count": 4, "base": 5, "noun": "sport"}, "whole|boy|none", "f10").startswith(
+        "Nofio oedd y gamp a ddewiswyd amlaf, gan bedwar o’r pum bachgen")
+    assert "(dwy o’r 21 merch ym Mlwyddyn 4)" in r("other_sports_note_v13", {"count": 2, "base": 21}, "y4|girl|none", "d7")
+    assert "(dau o’r 21 disgybl ym Mlwyddyn 4)" in r("other_sports_note_v13", {"count": 2, "base": 21}, "y4|all|none", "d7")
+
+
+def test_RC9_A02_tennis_mutates_after_o_and_dewisodd():
+    """rc9 pilot review (RC9-A02): 'mwy o dennis', 'a ddewisodd dennis' —
+    the sheet-23 flag over the identical-form inference."""
+    cohorts = {"wd_tennis": {"metric": "sports_wanted", "code": "tennis", "optionLabel": "Tennis"}}
+    WR.register_code_labels({"swimming": "Swimming", "tennis": "Tennis"})
+    cy = WR.render("group_codemand_top3_v12", {"top3": [("swimming", 5)], "base": 5}, "whole|all|wd_tennis", "f10", cohorts)
+    assert cy.startswith("Roedd y disgyblion a ddewisodd dennis hefyd am gael mwy o nofio (5)")
+    assert cy.endswith("mwy o dennis.")

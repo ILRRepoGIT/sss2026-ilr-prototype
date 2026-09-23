@@ -27,7 +27,18 @@ from .narrative2 import BASE1_GATES, T as TEMPLATES
 from .narrative2_modules import MODULE_LABELS
 from .narrative2_modules_b import FullNarrator
 
-PIPELINE_VERSION_V2 = "0.32.1"
+PIPELINE_VERSION_V2 = "0.32.2"
+# 0.32.2 (V6.0-rc11, the reviewers' return on the rc9 pilot, 23 Sep 2026): two
+# more rules of the Welsh engine brought into line with the Framework — a
+# numeral that counts the audience takes the audience's gender (dwy/tair/
+# pedair before 'merch'; sheet 04 row 4, sheet 08 rows 6–8, sheet 20 row 6;
+# RC9-A01), and a label the translator marked mutable on sheet 23 mutates on
+# the prose paths even when its Welsh form equals its English form (tennis
+# after 'o' and after 'dewisodd'; sheet 23 row 154, sheet 12 row 4, T-035;
+# RC9-A02). The pending marker on a data value inside the technical record is
+# carried by an inner span so the table's border rule cannot hide it (client;
+# RC9-A03). The Welsh corpus moves under the first two (D82 re-emission,
+# Framework v2.19 sheet 80); the English is byte-identical.
 # 0.32.1 (V6.0-rc10, rc9 pilot review): the one-response singular of the intro and
 # FAQ frames (EN-13; lexicon derivation), the whole-school-suppressed notices
 # flowing in the page (client); the Welsh corpus is unchanged.
