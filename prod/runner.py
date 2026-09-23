@@ -50,6 +50,7 @@ import gzip
 import hashlib
 import json
 import os
+import re
 import platform
 import random
 import shutil
@@ -111,6 +112,21 @@ def run(cmd, cwd, env, log: Path, timeout=3600):
 
 
 # --------------------------------------------------------------------------- one job
+def _holds_from_summary(path: Path) -> list:
+    """The 'narrative module <m> HELD in <n> view(s) — <why>: <views…>' lines of the
+    validation summary, as [{module, views, reason}] (the view list is capped at
+    twelve by the summary itself; the count is exact)."""
+    out = []
+    try:
+        for line in path.read_text(encoding="utf-8").splitlines():
+            m = re.search(r"narrative module (\S+) HELD in (\d+) view\(s\) — (.+?): (.*)$", line)
+            if m:
+                out.append({"module": m.group(1), "views": int(m.group(2)), "reason": m.group(3), "sample": m.group(4)[:400]})
+    except OSError:
+        pass
+    return out
+
+
 def build_one(spec: dict) -> dict:
     """Runs in a worker process. Returns the attestation, or raises RuntimeError.
     On failure every partial output of the job is removed (served tree, evidence,
@@ -313,6 +329,10 @@ def _build_one(spec: dict) -> dict:
         "identity": pkg["buildMetadata"]["identity"], "mode": mode,
         "pipelineVersion": pkg["buildMetadata"].get("pipelineVersion"), "reportVersion": pkg.get("reportVersion"),
         "gateStamp": {k: stamp.get(k) for k in ("blockingPass", "blockingTotal", "headline", "pending", "disputed", "manifestHash")},
+        # V6.0 (0.31.1 / EN-08 extended): the narrative HOLDS the build recorded — views in
+        # which a locked template with no one-pupil form was not rendered — read from the
+        # validation summary so the rollup can count them across the set (owner's list)
+        "narrativeHolds": _holds_from_summary(gen / "validation-summary.txt"),
         "bundle": bundle_summary, "figures": {"allMatch": figures.get("allMatch"), "checked": [k for k in figures if isinstance(figures[k], dict)]},
         "jsdom": {"school": {k: jsdom_school.get(k) for k in ("pass", "fail")}, "provenance": {"englishWithoutProvenance": len(provenance.get("english_without_provenance") or []),
                                  "welshWithoutProvenance": provenance.get("welsh_without_provenance", 0),

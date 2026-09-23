@@ -119,10 +119,16 @@ def rollup(evidence: Path, release: str) -> dict:
         uniform = False
         problems.insert(0, f"release identity differs across the classes: {len(ident_span)} identities")
     modes = Counter(a["mode"] for a in atts.values())
+    # V6.0 (EN-08 extended): narrative holds across the set — reports with at least one held
+    # view, held views in total, and the templates concerned (the owner's one-pupil-forms list)
+    hold_reports = sum(1 for a in atts.values() if a.get("narrativeHolds"))
+    hold_views = sum(h.get("views", 0) for a in atts.values() for h in (a.get("narrativeHolds") or []))
+    hold_templates = Counter(h["reason"].split(" has no ")[0] for a in atts.values() for h in (a.get("narrativeHolds") or []))
     secs = [a["seconds"] for a in atts.values()]
     expected = {cls: {k: v for k, v in zip(names, keys[0])} for cls, keys in by_class.items() if len(keys) == 1}
     out = {"release": release, "reports": len(atts), "uniform": uniform, "groups": len(groups),
            "classes": dict(Counter(classes.values())),
+           "narrativeHolds": {"reports": hold_reports, "views": hold_views, "templates": dict(hold_templates)},
            "modes": dict(modes), "jobStatus": dict(Counter(j["status"] for j in jobs.values())),
            "expected": expected.get("standard", {}), "expectedByClass": expected,
            "seconds": {"total": round(sum(secs), 1), "mean": round(sum(secs) / len(secs), 1) if secs else None,
@@ -135,7 +141,8 @@ def rollup(evidence: Path, release: str) -> dict:
           f"Modes: {dict(modes)} · job status: {out['jobStatus']}",
           f"Build seconds: total {out['seconds']['total']}, mean {out['seconds']['mean']}, max {out['seconds']['max']}",
           f"Served bytes (chunks): {out['chunkBytesTotal'] / 1e9:.2f} GB", ""]
-    md += [f"Classes: {out['classes']}", ""]
+    md += [f"Classes: {out['classes']}", "",
+           f"Narrative holds (EN-08, one-pupil forms pending the owner): {hold_reports} reports, {hold_views} views, templates {dict(hold_templates)}", ""]
     for cls, exp in expected.items():
         md += [f"Expected (uniform) values — {cls} ({out['classes'].get(cls, 0)} reports):", ""] + [f"- {k}: {v}" for k, v in exp.items()] + [""]
     md += ["Problems:", ""] + ([f"- {p}" for p in problems] or ["- none"])

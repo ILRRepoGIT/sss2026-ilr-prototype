@@ -411,6 +411,22 @@ class Narrator:
     # ------------------------------------------------------------ utilities
     def log(self, key, module, kind, tid, facts, text):
         text = fix_grammar(text)
+        # V6.0 (pipeline 0.31.1, pilot of 23 Sep 2026 — first seen at six
+        # small and special schools): the EN-08 hold is applied to EVERY
+        # template, not only f10's three. A selected group of one pupil is a
+        # reportable view under the agreed suppression policy (the rule of
+        # five is tested on the demographic view only), and several locked
+        # templates have no one-pupil form ("None of the 1 pupil …"). The
+        # build's own English gate rejects such a sentence; rather than refuse
+        # the whole report, the sentence is HELD — not rendered in either
+        # language, not audited, logged in the validation summary — exactly as
+        # f10's sentences have been since V5.0. Every sentence the gate accepts
+        # is unchanged (D01: the English narrative is locked; the owner's
+        # one-pupil forms lift the hold, sheet 49 EN-08).
+        if any(g.search(text) for g in BASE1_GATES):
+            self.holds.append({"module": module, "state": key,
+                               "reason": f"{tid} has no one-pupil form the gate accepts (EN-08 pending owner)"})
+            return None
         self.audit.append({"filter_state": key, "module": module, "kind": kind,
                            "template_id": tid,
                            "facts": json.dumps(facts, ensure_ascii=False, sort_keys=True),

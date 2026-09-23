@@ -34,6 +34,11 @@ ok(txt("#faq-included").indexOf("Pupils in Years " + FIRST + " to " + LAST + " a
 // V6.0 (EN-11): a school with a year group inside its range that has no accepted
 // response takes the variant without "All" (Framework v2.14, ui.overview_note_gap)
 const GAP = !!D.school.yearsGap;
+// V6.0 (EN-12, production pilot 23 Sep 2026): a blanked year bar (a year whose
+// view is under five) means the note takes its "nocounts" variant — the same
+// sentences without the largest/smallest one. Derived from the payload.
+const BLANK = (D.states["whole|all|none"].m || {}).responses_by_year
+  ? D.states["whole|all|none"].m.responses_by_year.v.some(v => v === null) : false;
 // V6.0 (owner instruction, 22 Sep 2026): a school with fewer than five accepted
 // responses receives its report with the whole-school view suppressed — the
 // profile charts, the year-range sentence and the any-activity headline give
@@ -43,7 +48,7 @@ const WSUP = !!(D.states["whole|all|none"] || {}).sup;
 const SUP_EN = "Results not shown", SUP_CY = "Canlyniadau heb eu dangos";
 const OVERVIEW_EN = (GAP ? "Year groups from Year " : "All year groups from Year ") + FIRST + " to Year " + LAST + " are represented.";
 ok(WSUP ? (txt("#overview-note").indexOf(SUP_EN) === 0 && txt("#static-profile").indexOf(SUP_EN) === 0 && txt("#any-activity-note") === "")
-        : txt("#overview-note").indexOf(OVERVIEW_EN) === 0,
+        : (txt("#overview-note").indexOf(OVERVIEW_EN) === 0 && (BLANK ? txt("#overview-note").indexOf("contributed") === -1 : txt("#overview-note").indexOf("contributed") > 0)),
    WSUP ? "whole-school view suppressed (under five): overview note, profile charts and any-activity headline show the suppression message"
         : "overview note carries the school's year range (EN-06" + (GAP ? "/EN-11 gap variant" : "") + ")", txt("#overview-note").slice(0, 90));
 ok(!/\{(first|last|school|n|hi|lo|hin|lon)\}/.test(visible()), "no unresolved frame slot in the page");
@@ -75,11 +80,12 @@ ok(txt("#intro-sentence").indexOf("Mae’r adroddiad hwn yn cyflwyno") === 0 && 
 ok(txt("#faq-included").indexOf("Disgyblion ym Mlynyddoedd " + FIRST + " i " + LAST + " yn " + SCHOOL) === 0, "cy FAQ sentence with the school's year range (EN-07)", txt("#faq-included").slice(0, 90));
 if (!GAP) {
   ok(WSUP ? txt("#overview-note").indexOf(SUP_CY) === 0
-          : txt("#overview-note").indexOf("Mae’r holl grwpiau blwyddyn rhwng Blwyddyn " + FIRST + " a Blwyddyn " + LAST + " yn cael eu cynrychioli.") === 0,
+          : (txt("#overview-note").indexOf("Mae’r holl grwpiau blwyddyn rhwng Blwyddyn " + FIRST + " a Blwyddyn " + LAST + " yn cael eu cynrychioli.") === 0
+             && (BLANK ? txt("#overview-note").indexOf("gyfrannodd") === -1 : txt("#overview-note").indexOf("gyfrannodd") > 0)),
      WSUP ? "cy suppression message in the overview note" : "cy overview note with the school's year range (EN-06)", txt("#overview-note").slice(0, 100));
 } else {
   // the variant's Welsh is the translator's: until returned the English shows under the pending marking
-  const gapCy = (D.welsh.frames["ui.overview_note_gap"] || {}).cy;
+  const gapCy = (D.welsh.frames[BLANK ? "ui.overview_note_gap_nocounts" : "ui.overview_note_gap"] || {}).cy;
   const t = txt("#overview-note");
   ok(gapCy ? (t.indexOf("Blwyddyn " + FIRST) > -1 && t.indexOf("Blwyddyn " + LAST) > -1)
            : (t.indexOf(OVERVIEW_EN) === 0 && d.getElementById("overview-note").classList.contains("cy-missing")),

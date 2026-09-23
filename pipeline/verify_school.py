@@ -71,10 +71,37 @@ def main():
         sys.exit(0 if res["allMatch"] else 1)
     W = whole["m"]
 
+    # V6.0 (pipeline 0.31.1, pilot of 23 Sep 2026 — first seen at six small
+    # schools): the two profile charts blank a bar whose corresponding VIEW is
+    # suppressed by the rule of five (engine.py, suppression policy v2: the
+    # year × gender profile charts must not print the very number a suppressed
+    # view withholds). The independent check therefore verifies the mask as
+    # well as the figures: a blanked bar (None) is right exactly when the
+    # recomputed count of that view is under the threshold, and a shown bar
+    # must equal the recomputed count. Other codes (non-binary, not stated)
+    # are never views, so they are shown exact. Nothing under five is written
+    # to the check's output for a blanked bar — only the verdict.
+    TH = int(pk.get("buildMetadata", {}).get("suppressionThreshold", 5) or 5)
+    VIEW_CODES = {"responses_by_year": lambda code: code.startswith("y"),
+                  "responses_by_gender": lambda code: code in ("boy", "girl")}
+
     def cmp(mid, counts_by_code, base=None):
         d = pk["metricDefs"][mid]; m = W[mid]
         got = [counts_by_code.get(code, 0) for code, _ in d["opts"]]
-        entry = {"codes": [c for c, _ in d["opts"]], "package": m.get("v"), "recomputed": got, "match": m.get("v") == got}
+        pv = m.get("v")
+        if mid in VIEW_CODES and isinstance(pv, list) and len(pv) == len(got):
+            is_view = VIEW_CODES[mid]
+            ok = True; masked = 0
+            for (code, _), shown, real in zip(d["opts"], pv, got):
+                if shown is None:
+                    ok = ok and is_view(code) and real < TH; masked += 1
+                else:
+                    ok = ok and shown == real and not (is_view(code) and real < TH)
+            entry = {"codes": [c for c, _ in d["opts"]], "package": pv,
+                     "recomputed": [None if (v is None) else r for v, r in zip(pv, got)],
+                     "blankedBars": masked, "blankedBarsUnderThreshold": ok, "match": ok}
+        else:
+            entry = {"codes": [c for c, _ in d["opts"]], "package": pv, "recomputed": got, "match": pv == got}
         if base is not None:
             entry["base"] = {"package": m.get("b"), "recomputed": base, "match": m.get("b") == base}
         res[mid] = entry

@@ -8,7 +8,7 @@ Throughout, `$ILR_REPO`, `$ILR_VENV` and the storage/vault names come from `/etc
 
 ```
 cd $ILR_REPO && source $ILR_VENV/bin/activate
-export RELEASE=v6.0-rc7                  # the tag the VM was bootstrapped at (v6.0-rc7 today — Framework v2.15; the owner cuts v6.0 with tools/cut_release.sh)
+export RELEASE=v6.0-rc8                  # the tag the VM was bootstrapped at (v6.0-rc8 today — Framework v2.16, pipeline 0.31.1; the owner cuts v6.0 with tools/cut_release.sh)
 export EVID=/data/ilr/evidence            # private: attestations, bundles, locks, ledger
 export OUT=/data/ilr/out                  # the served trees (release + entry pages)
 export WORK=/data/ilr/work                # per-job scratch, deleted job by job
@@ -69,7 +69,7 @@ python -m prod.runner run --release $RELEASE --register /data/ilr/private/regist
    --out $OUT --evidence $EVID --work $WORK --concurrency 3 --schools 6782320,6644017,6675500 \
    --key-vault $ILR_KEY_VAULT --jsdom $JSDOM \
    --previous-locks /data/ilr/private/v53_locks \
-   --lock-ruling "production release $RELEASE asserted against the V5.3 lock: client, template and Framework v2.15 changes only; corpus unchanged"
+   --lock-ruling "production release $RELEASE asserted against the V5.3 lock: client, template and Framework v2.16 changes only; corpus unchanged"
 ```
 
 Expected: three lines `built … (69/72, mode dev)` and, in each job's evidence (`$EVID/$RELEASE/<slug>/validation-summary.txt` and `job.log`), the note "0 of N states moved from the previous lock". If a state moved, stop: the machine does not reproduce V5.1 and the difference must be explained before anything else is built (Python or Node version, a dependency, the dataset).
@@ -101,6 +101,8 @@ python -m prod.runner run --release $RELEASE --register /data/ilr/private/regist
 python -m prod.checks rollup --evidence $EVID --release $RELEASE
 python -m prod.runner status --evidence $EVID --release $RELEASE
 ```
+
+Expected on the pilot (since v6.0-rc8): every job `built`; the rollup uniform and clean in its two classes (standard; whole-school suppressed, for a school under five responses); dev headline 69/72 or 70/72 (the under-fives, which have no stack captions to dispute) with the reruns' known items only. Three things the small and special schools exercise are **expected and not faults** — they are the pilot's findings of 23 Sep 2026, corrected in rc8: the rollup's *Narrative holds* line counts views in which a locked template with no one-pupil form was held rather than rendered (EN-08; the module is listed under "Data available in this view" there); the independent figure check reports `blankedBars` for the two profile charts where a year or a gender is under five (the check verifies the blank); and a school with a blanked year bar takes the overview note without its largest/smallest sentence (EN-12). A job that *fails* is still a stop.
 
 Read the mean and maximum `seconds` from the rollup and the peak memory from `/data/ilr/evidence/$RELEASE/<slug>/job.log` (`Maximum resident set size` is not recorded by the runner; `free -g` while the run is on, or `ps -o rss` on the workers, is enough). Set the full-run concurrency so that concurrency × peak-per-job stays under 75 % of the VM's memory and about one job per vCPU less a little headroom: on the D64s_v6 (64 vCPU, 256 GiB — or the D64as_v5, the same figures) with 2.5 GiB peaks that is about 48–56; the runner's default is cores − 2 and it also pauses new jobs when free memory drops under 3 GiB.
 

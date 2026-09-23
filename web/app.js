@@ -1381,15 +1381,26 @@ function renderProfile() {
   host.innerHTML = mkChart("responses_by_year") + mkChart("responses_by_gender");
   const yr = w.m.responses_by_year;
   const yPairs = DATA.metricDefs.responses_by_year.opts.map((yo, i) => [yo[1], yr.v[i]]);
-  const hi = yPairs.reduce((a, b) => (b[1] || 0) > (a[1] || 0) ? b : a);
-  const lo = yPairs.reduce((a, b) => (b[1] || 0) < (a[1] || 0) ? b : a);
   const yLabel = en => { const o = DATA.filterOptions.scope.find(x => x.label === en); return (isCy() && o && o.labelCy) ? o.labelCy : en; };
   // V6.0 (EN-11, owner decision 22 Sep 2026): a school with a year group inside
   // its range that has no accepted response takes the variant frame (the same
-  // sentence without "All"); the pipeline sets school.yearsGap from the profile
-  setFrame($("#overview-note"), sc.yearsGap ? "ui.overview_note_gap" : "ui.overview_note",
-    { hi: yLabel(hi[0]), hin: hi[1], lo: yLabel(lo[0]), lon: lo[1],
-      first: sc.years[0], last: sc.years[sc.years.length - 1] });   // v6 (EN-06)
+  // sentence without "All"); the pipeline sets school.yearsGap from the profile.
+  // V6.0 (EN-12, production pilot 23 Sep 2026): a year bar is BLANKED (null) when
+  // its view is under the rule of five (engine suppression policy v2). Then the
+  // sentence naming the largest and smallest year groups has no count to cite
+  // — and a "smallest" chosen among the shown bars would be false — so the
+  // "nocounts" variant of the frame is used: the same note without that
+  // sentence (Framework v2.16). 226 of the 1,016 schools take it.
+  const anyBlank = yPairs.some(p => p[1] === null || p[1] === undefined);
+  const noteKey = sc.yearsGap ? (anyBlank ? "ui.overview_note_gap_nocounts" : "ui.overview_note_gap")
+                              : (anyBlank ? "ui.overview_note_nocounts" : "ui.overview_note");
+  const slots = { first: sc.years[0], last: sc.years[sc.years.length - 1] };
+  if (!anyBlank) {
+    const hi = yPairs.reduce((a, b) => (b[1] || 0) > (a[1] || 0) ? b : a);
+    const lo = yPairs.reduce((a, b) => (b[1] || 0) < (a[1] || 0) ? b : a);
+    Object.assign(slots, { hi: yLabel(hi[0]), hin: hi[1], lo: yLabel(lo[0]), lon: lo[1] });
+  }
+  setFrame($("#overview-note"), noteKey, slots);   // v6 (EN-06)
   renderProfileExtra(w);
   const anyN = $("#any-activity-note");
   if (anyN) {

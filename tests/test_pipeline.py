@@ -145,6 +145,63 @@ def test_profile_chart_syncs_with_view_suppression(built):
     assert d["disp"][codes.index("y3")] == 6
 
 
+def test_base_one_sentence_is_held_not_shipped(built):
+    """V6.0 (0.31.1): a locked template with no one-pupil form is HELD in every
+    module — the sentence is not logged, both languages omit it, the hold is
+    recorded — and a sentence the gate accepts is logged exactly as before."""
+    from pipeline.narrative2 import BASE1_GATES
+    _, _, engine, nar, defs, _ = built
+    nar.holds.clear(); n_audit = len(nar.audit)
+    held = nar.log("whole|all|none", "g5", "primary", "unit_probe_v0", {},
+                   "None of the 1 pupil across the whole school who said their ideas are not often listened to.")
+    assert held is None and len(nar.audit) == n_audit
+    assert nar.holds and nar.holds[-1]["module"] == "g5" and "unit_probe_v0" in nar.holds[-1]["reason"]
+    kept = nar.log("whole|all|none", "g5", "primary", "unit_probe_v0", {},
+                   "None of the 5 pupils across the whole school said their ideas are not often listened to.")
+    assert kept and kept["t"].startswith("None of the 5 pupils") and len(nar.audit) == n_audit + 1
+    assert not any(g.search(kept["t"]) for g in BASE1_GATES)
+    nar.holds.clear(); del nar.audit[-1]
+
+
+def test_held_module_becomes_na_view_not_empty_ok(built):
+    """A module that loses every sentence to a hold is listed as na_view (f10's
+    precedent); a module that was ('ok', []) before is untouched."""
+    _, _, engine, nar, defs, _ = built
+    key = state_key("y7", "all", "none")
+    orig = nar.m_d7
+    try:
+        nar.m_d7 = lambda k, S, tier: ("ok", [None, None])
+        st = nar.build_state(key)
+        assert "d7" not in st["mod"] and ["d7", "na_view"] in st["avail"]
+        nar.m_d7 = lambda k, S, tier: ("ok", [])
+        st = nar.build_state(key)
+        assert st["mod"]["d7"] == {"s": "ok", "p": []} and ["d7", "na_view"] not in st["avail"]   # an empty ok stays as it was
+    finally:
+        nar.m_d7 = orig
+
+
+def test_figure_check_accepts_blanked_profile_bar():
+    """V6.0 (0.31.1): verify_school compares the profile charts through the
+    suppression mask — a blanked bar is right iff the view is under five."""
+    import importlib, json, types
+    vs = importlib.import_module("pipeline.verify_school")
+    src = Path(vs.__file__).read_text(encoding="utf-8")
+    assert "blankedBarsUnderThreshold" in src and "VIEW_CODES" in src
+    # the rule itself, as the module states it: None ⇔ view count < threshold
+    TH = 5
+    def verdict(opts, shown, real, is_view):
+        ok = True
+        for code, sh, re_ in zip(opts, shown, real):
+            if sh is None: ok = ok and is_view(code) and re_ < TH
+            else: ok = ok and sh == re_ and not (is_view(code) and re_ < TH)
+        return ok
+    isv = lambda c: c in ("boy", "girl")
+    assert verdict(["boy", "girl", "nonbinary", "not_stated"], [None, 5, 1, 0], [2, 5, 1, 0], isv)
+    assert not verdict(["boy", "girl", "nonbinary", "not_stated"], [2, 5, 1, 0], [2, 5, 1, 0], isv)      # a shown bar under five
+    assert not verdict(["boy", "girl", "nonbinary", "not_stated"], [None, 5, 1, 0], [6, 5, 1, 0], isv)   # blanked but not under five
+    assert not verdict(["boy", "girl", "nonbinary", "not_stated"], [None, 5, None, 0], [2, 5, 1, 0], isv) # a non-view code blanked
+
+
 def test_not_asked_state(built):
     _, _, engine, *_ = built
     res = engine.results[state_key("y7", "all", "none")]["take_part_method"]

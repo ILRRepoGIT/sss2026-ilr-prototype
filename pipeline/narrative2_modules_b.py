@@ -872,8 +872,9 @@ class FullNarrator(ModuleNarrator):
                 # the acceptance boundary — keep the Welsh twin the
                 # renderer produced instead of discarding it
                 p = self.custom(key, "h1", "primary", tid, facts, text)
-                out[theme].append({"t": p["t"], **({"c": p["c"]}
-                                                   if p.get("c") else {})})
+                if p:   # V6.0 (0.31.1): None = HELD (no one-pupil form)
+                    out[theme].append({"t": p["t"], **({"c": p["c"]}
+                                                       if p.get("c") else {})})
 
         # --- Active Nation
         fres = self.res(key, "club_freq_estimate")
@@ -1017,7 +1018,8 @@ class FullNarrator(ModuleNarrator):
                             f"{lu['labels'][0]} was selected by {lu['count']} {rw(lu['count'])} "
                             f"as something they would like to do more of but are not currently "
                             f"doing, {S.qual}. Do current opportunities reflect this interest?")
-            qs.append({"t": p["t"], **({"c": p["c"]} if p.get("c") else {})})
+            if p:   # V6.0 (0.31.1): None = HELD
+                qs.append({"t": p["t"], **({"c": p["c"]} if p.get("c") else {})})
         res = self.res(key, "join_in_easily")
         nj = self.count_of("join_in_easily", res, HARD_JOIN)
         if nj:
@@ -1025,7 +1027,8 @@ class FullNarrator(ModuleNarrator):
                             {"count": nj},
                             f"{nj} {rw(nj)} in this view said they do not often or never find "
                             f"it easy to join in. What would help them take part?")
-            qs.append({"t": p["t"], **({"c": p["c"]} if p.get("c") else {})})
+            if p:   # V6.0 (0.31.1): None = HELD
+                qs.append({"t": p["t"], **({"c": p["c"]} if p.get("c") else {})})
         qs.append({"t": "Which findings match what you see day to day, and "
                         "which are surprising?", "g": "h2_generic_reflect"})
         qs.append({"t": "Could further pupil discussion help explain these "
@@ -1181,6 +1184,16 @@ class FullNarrator(ModuleNarrator):
                 continue
             builder = getattr(self, f"m_{mid_}")
             status, paras = builder(key, S, tier)
+            # V6.0 (0.31.1): a HELD sentence is None (Narrator.log); it is
+            # dropped here, and a module that loses every sentence to a hold
+            # takes f10's "na_view" so the client lists it under "Data
+            # available in this view" instead of rendering an empty block. A
+            # module that was ("ok", []) before this change is left exactly
+            # as it was.
+            raw = list(paras or [])
+            paras = [p_ for p_ in raw if p_]
+            if status == "ok" and not paras and raw:
+                status = "na_view"
             mods[mid_] = {"s": status, "p": paras}
         h1 = self.build_h1(key, S, tier, mods)
         # package hygiene: only reportable modules carry narrative; every
