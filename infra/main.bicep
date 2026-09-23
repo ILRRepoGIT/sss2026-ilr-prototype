@@ -194,6 +194,8 @@ resource ruleSet 'Microsoft.Cdn/profiles/ruleSets@2024-02-01' = {
   name: 'sss2026reports'
 }
 var csp = 'default-src \'none\'; script-src \'self\'; style-src \'self\' \'unsafe-inline\'; img-src \'self\' data:; font-src \'self\' data:; connect-src \'self\'; base-uri \'none\'; frame-ancestors \'none\'; form-action \'none\''
+// Azure Front Door allows at most five actions per rule, so the six response
+// headers are split across two unconditional rules (preflight finding, 23 Sep 2026).
 resource ruleHeaders 'Microsoft.Cdn/profiles/ruleSets/rules@2024-02-01' = {
   parent: ruleSet
   name: 'noindexsecurity'
@@ -205,6 +207,18 @@ resource ruleHeaders 'Microsoft.Cdn/profiles/ruleSets/rules@2024-02-01' = {
       { name: 'ModifyResponseHeader', parameters: { typeName: 'DeliveryRuleHeaderActionParameters', headerAction: 'Overwrite', headerName: 'X-Robots-Tag', value: 'noindex, nofollow, noarchive' } }
       { name: 'ModifyResponseHeader', parameters: { typeName: 'DeliveryRuleHeaderActionParameters', headerAction: 'Overwrite', headerName: 'X-Content-Type-Options', value: 'nosniff' } }
       { name: 'ModifyResponseHeader', parameters: { typeName: 'DeliveryRuleHeaderActionParameters', headerAction: 'Overwrite', headerName: 'Referrer-Policy', value: 'no-referrer' } }
+    ]
+  }
+}
+resource ruleSecurity 'Microsoft.Cdn/profiles/ruleSets/rules@2024-02-01' = {
+  parent: ruleSet
+  name: 'securityheaders'
+  dependsOn: [ruleHeaders]
+  properties: {
+    order: 2
+    matchProcessingBehavior: 'Continue'
+    conditions: []
+    actions: [
       { name: 'ModifyResponseHeader', parameters: { typeName: 'DeliveryRuleHeaderActionParameters', headerAction: 'Overwrite', headerName: 'Strict-Transport-Security', value: 'max-age=31536000; includeSubDomains' } }
       { name: 'ModifyResponseHeader', parameters: { typeName: 'DeliveryRuleHeaderActionParameters', headerAction: 'Overwrite', headerName: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' } }
       { name: 'ModifyResponseHeader', parameters: { typeName: 'DeliveryRuleHeaderActionParameters', headerAction: 'Overwrite', headerName: 'Content-Security-Policy', value: csp } }
@@ -214,9 +228,9 @@ resource ruleHeaders 'Microsoft.Cdn/profiles/ruleSets/rules@2024-02-01' = {
 resource ruleImmutable 'Microsoft.Cdn/profiles/ruleSets/rules@2024-02-01' = {
   parent: ruleSet
   name: 'immutablerelease'
-  dependsOn: [ruleHeaders]
+  dependsOn: [ruleSecurity]
   properties: {
-    order: 2
+    order: 3
     matchProcessingBehavior: 'Continue'
     conditions: [
       { name: 'UrlPath', parameters: { typeName: 'DeliveryRuleUrlPathMatchConditionParameters', operator: 'BeginsWith', matchValues: ['/r/'], negateCondition: false, transforms: [] } }
@@ -232,7 +246,7 @@ resource ruleEntry 'Microsoft.Cdn/profiles/ruleSets/rules@2024-02-01' = {
   name: 'entryrevalidate'
   dependsOn: [ruleImmutable]
   properties: {
-    order: 3
+    order: 4
     matchProcessingBehavior: 'Continue'
     conditions: [
       { name: 'UrlPath', parameters: { typeName: 'DeliveryRuleUrlPathMatchConditionParameters', operator: 'BeginsWith', matchValues: ['/2026/'], negateCondition: false, transforms: [] } }

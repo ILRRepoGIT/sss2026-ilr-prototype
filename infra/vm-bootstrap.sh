@@ -1,12 +1,18 @@
 #!/usr/bin/env bash
 # Build-VM bootstrap for the SSS2026 ILR production run (provisioning guide §6.1).
 #
-#   sudo ILR_GIT_URL=https://github.com/<org>/<repo>.git bash vm-bootstrap.sh <tag>
+#   sudo bash vm-bootstrap.sh <tag>          # prompts for the read-only GitHub token (not echoed)
+#
+# The repository is private. The token is held in memory only: it is read from a
+# prompt (or from ILR_GIT_TOKEN if you must set it), handed to git through a
+# per-process credential helper, and unset when the clone and fetch are done. The
+# clone keeps the CLEAN URL as remote.origin.url; a URL with credentials in it is
+# refused, because git would save it in .git/config (preflight finding, 23 Sep 2026).
 #
 # Optional environment:
-#   ILR_GIT_URL      clone URL (a private repo: use a deploy key in /root/.ssh, or a
-#                    read-only token in the URL — https://<token>@github.com/<org>/<repo>.git;
-#                    the URL is not logged)
+#   ILR_GIT_URL      clean clone URL (default https://github.com/ILRRepoGIT/sss2026-ilr-prototype.git)
+#   ILR_GIT_TOKEN    the read-only token, if not given at the prompt (do not put it on the
+#                    command line — that goes into the shell history; prefer the prompt)
 #   ILR_DATA_ACCOUNT storage account holding the dataset (default stsss2026ilrdata)
 #   ILR_WEB_ACCOUNT  web-origin storage account (default stsss2026ilrweb)
 #   ILR_KEY_VAULT    key vault holding the link secret (default kv-sss2026-ilr)
@@ -24,7 +30,8 @@
 # failure. Re-runnable.
 set -euo pipefail
 TAG="${1:?release tag, e.g. v6.0}"
-ILR_GIT_URL="${ILR_GIT_URL:-}"
+ILR_GIT_URL="${ILR_GIT_URL:-https://github.com/ILRRepoGIT/sss2026-ilr-prototype.git}"
+ILR_GIT_TOKEN="${ILR_GIT_TOKEN:-}"
 ILR_DATA_ACCOUNT="${ILR_DATA_ACCOUNT:-stsss2026ilrdata}"
 ILR_WEB_ACCOUNT="${ILR_WEB_ACCOUNT:-stsss2026ilrweb}"
 ILR_AFD_PROFILE="${ILR_AFD_PROFILE:-afd-sss2026-ilr}"
@@ -91,10 +98,25 @@ az version --query '"azure-cli"' -o tsv; azcopy --version | head -1
 echo "== 5/8 repository at $TAG"
 cd /data/ilr
 if [ ! -d repo/.git ]; then
-  if [ -z "$ILR_GIT_URL" ]; then echo "ILR_GIT_URL is not set and /data/ilr/repo does not exist"; exit 1; fi
-  git clone --quiet "$ILR_GIT_URL" repo
+  case "$ILR_GIT_URL" in *@*) echo "ILR_GIT_URL must be the clean URL (no credentials in it — git would save them in .git/config); give the token at the prompt or in ILR_GIT_TOKEN"; exit 1;; esac
 fi
-cd repo && git fetch --quiet --tags && git checkout --quiet "$TAG"
+# transient authentication: a credential helper that answers from the environment of THIS process,
+# with any configured helpers disabled for the call; nothing is written to disk or logged
+if [ -z "$ILR_GIT_TOKEN" ]; then
+  if [ -t 0 ]; then read -rs -p "GitHub read-only token for the clone (not echoed, not stored): " ILR_GIT_TOKEN; echo; fi
+fi
+if [ -z "$ILR_GIT_TOKEN" ] && [ ! -d repo/.git ]; then echo "no token given and /data/ilr/repo does not exist"; exit 1; fi
+export ILR_GIT_TOKEN
+export GIT_TERMINAL_PROMPT=0
+GITAUTH=(-c credential.helper= -c 'credential.helper=!f() { echo "username=x-access-token"; echo "password=${ILR_GIT_TOKEN}"; }; f')
+if [ ! -d repo/.git ]; then
+  git "${GITAUTH[@]}" clone --quiet "$ILR_GIT_URL" repo
+fi
+cd repo
+git "${GITAUTH[@]}" fetch --quiet --tags
+unset ILR_GIT_TOKEN
+case "$(git remote get-url origin)" in *@*) echo "remote URL carries credentials — refusing to continue"; exit 1;; esac
+git checkout --quiet "$TAG"
 git status --porcelain | grep -q . && { echo "working copy is not clean — a production build runs only from the tag"; exit 1; }
 echo "at $(git describe --tags --exact-match) $(git rev-parse HEAD)"
 

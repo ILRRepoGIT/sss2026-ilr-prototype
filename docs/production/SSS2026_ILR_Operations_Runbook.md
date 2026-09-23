@@ -8,7 +8,7 @@ Throughout, `$ILR_REPO`, `$ILR_VENV` and the storage/vault names come from `/etc
 
 ```
 cd $ILR_REPO && source $ILR_VENV/bin/activate
-export RELEASE=v6.0-rc6                  # the tag the VM was bootstrapped at (v6.0-rc6 today — Framework v2.15; the owner cuts v6.0 with tools/cut_release.sh)
+export RELEASE=v6.0-rc7                  # the tag the VM was bootstrapped at (v6.0-rc7 today — Framework v2.15; the owner cuts v6.0 with tools/cut_release.sh)
 export EVID=/data/ilr/evidence            # private: attestations, bundles, locks, ledger
 export OUT=/data/ilr/out                  # the served trees (release + entry pages)
 export WORK=/data/ilr/work                # per-job scratch, deleted job by job

@@ -32,7 +32,7 @@ School reports are the first family. Local-authority and regional reports follow
 
 **DNS.** The reports live at `reports.schoolsportsurvey2026.co.uk`, a subdomain of the School Sport Survey 2026 website (`schoolsportsurvey2026.co.uk`, owned by Industryline Research). You need access to that domain's DNS to add two records (one TXT for certificate validation, one CNAME to Front Door). Confirm who in Industryline administers the domain's DNS and that they are available on the day.
 
-**Tools on your own computer.** Install the Azure CLI (`az`), AzCopy, Git and an SSH client. Sign in with `az login` and select the subscription with `az account set --subscription <id>`. Clone the repository at the release tag and run every `bash infra/…` command below from inside that clone (`git clone https://github.com/ILRRepoGIT/sss2026-ilr-prototype.git && cd sss2026-ilr-prototype && git checkout v6.0-rc6` — the tag is named in `prod/release_manifest.json`; Alexander tells you if a later tag supersedes it). All commands below are Azure CLI and work in PowerShell, cmd or bash; long commands are shown with `\` line continuations, which PowerShell users should replace with a backtick or put on one line.
+**Tools on your own computer.** Install the Azure CLI (`az`), AzCopy, Git and an SSH client. Sign in with `az login` and select the subscription with `az account set --subscription <id>`. Clone the repository at the release tag and run every `bash infra/…` command below from inside that clone (`git clone https://github.com/ILRRepoGIT/sss2026-ilr-prototype.git && cd sss2026-ilr-prototype && git checkout v6.0-rc7` — the tag is named in `prod/release_manifest.json`; Alexander tells you if a later tag supersedes it). All commands below are Azure CLI and work in PowerShell, cmd or bash; long commands are shown with `\` line continuations, which PowerShell users should replace with a backtick or put on one line.
 
 **Role assignments take a few minutes to propagate.** Every `az role assignment create` below is followed by a data-plane command that needs it (`--auth-mode login`, AzCopy). If such a command answers `403 AuthorizationPermissionMismatch`, wait two or three minutes and repeat it; nothing needs undoing.
 
@@ -61,7 +61,14 @@ Use these names unless your organisation's naming standard requires otherwise; i
 
 ```
 az group show --name SSS2026_Interactive_Learning_reports --query "{name:name, location:location}" -o table
-az resource list --resource-group SSS2026_Interactive_Learning_reports -o table       # what is already in it — if a VM of the right size is there, step 6 re-uses it rather than creating one
+az resource list --resource-group SSS2026_Interactive_Learning_reports -o table       # empty at the 23 Sep 2026 check — everything below is created
+
+# resource providers the estate uses; a subscription that has never used a service has its provider unregistered,
+# and the first create then fails with "MissingSubscriptionRegistration". Register once (a minute or two each):
+for ns in Microsoft.Storage Microsoft.KeyVault Microsoft.Cdn Microsoft.Compute Microsoft.Network Microsoft.OperationalInsights Microsoft.Consumption; do
+  az provider register --namespace $ns --wait
+done
+az provider list --query "[?namespace=='Microsoft.Cdn' || namespace=='Microsoft.KeyVault'].{ns:namespace, state:registrationState}" -o table
 ```
 
 The build VM is the only resource that is deleted after the run (guide §8); the rest lives for the publication period.
@@ -200,11 +207,11 @@ az afd route create --profile-name afd-sss2026-ilr --resource-group SSS2026_Inte
 
 The response headers, cache rules and 404 behaviour are applied by a rule set. Create it once and attach it to the route (the repository's `infra/afd-ruleset.sh` does exactly this; the rules are listed here so the intent is clear):
 
-Rule `noindex-and-security` (all requests): add response headers `X-Robots-Tag: noindex, nofollow, noarchive`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: no-referrer`, `Strict-Transport-Security: max-age=31536000; includeSubDomains`, `Permissions-Policy: camera=(), microphone=(), geolocation=()`, `Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'`.
+Rules `noindexsecurity` and `securityheaders` (all requests; Front Door allows at most five actions per rule, so the six headers are split across two unconditional rules): add response headers `X-Robots-Tag: noindex, nofollow, noarchive`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: no-referrer` (the first rule) and `Strict-Transport-Security: max-age=31536000; includeSubDomains`, `Permissions-Policy: camera=(), microphone=(), geolocation=()`, `Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'` (the second). Together they keep the reports out of search engines, forbid embedding, and confine every script and fetch to the reports host.
 
-Rule `immutable-release-assets` (path begins with `/r/`): override cache to 365 days and add `Cache-Control: public, max-age=31536000, immutable`. Everything under `/r/<release>/` has a content hash in its name and never changes.
+Rule `immutablerelease` (path begins with `/r/`): override cache to 365 days and add `Cache-Control: public, max-age=31536000, immutable`. Everything under `/r/<release>/` has a content hash in its name and never changes.
 
-Rule `entry-pages-revalidate` (path begins with `/2026/`): add `Cache-Control: no-cache, must-revalidate`. A school's entry page is the one file that changes when a new release is activated, so it must always be revalidated.
+Rule `entryrevalidate` (path begins with `/2026/`): add `Cache-Control: no-cache, must-revalidate`. A school's entry page is the one file that changes when a new release is activated, so it must always be revalidated.
 
 ```
 bash infra/afd-ruleset.sh afd-sss2026-ilr SSS2026_Interactive_Learning_reports route-reports sss2026-reports
@@ -307,15 +314,18 @@ The separation of duties the review asks for is expressed here as scopes: the VM
 
 ### 6.1 Prepare the VM
 
-SSH in (`ssh ilrbuild@<public ip>`), then run the bootstrap script from the repository, which installs Python 3.11 (the interpreter every prototype lock was produced with; Ubuntu 24.04's own is 3.12, so it comes from the deadsnakes archive), Node 22, Git, AzCopy, the Azure CLI, Playwright's Chromium for the browser gate, mounts and formats the 1 TB data disk at `/data`, and clones the tagged release. The repository is private, so the VM needs a read-only credential to clone it: a GitHub fine-grained token with *Contents: read* on this one repository (created by whoever administers `ILRRepoGIT`; it is used once and can be revoked after the bootstrap), passed in the clone URL and never written to disk or logged:
+SSH in (`ssh ilrbuild@<public ip>`), then run the bootstrap script from the repository, which installs Python 3.11 (the interpreter every prototype lock was produced with; Ubuntu 24.04's own is 3.12, so it comes from the deadsnakes archive), Node 22, Git, AzCopy, the Azure CLI, Playwright's Chromium for the browser gate, mounts and formats the 1 TB data disk at `/data`, and clones the tagged release. The repository is private, so the VM needs a read-only credential to clone it: a GitHub fine-grained token with *Contents: read* on this one repository (created by whoever administers `ILRRepoGIT`; it is used once and can be revoked after the bootstrap). The token is **never put in the clone URL** — git saves the URL in the clone's `.git/config`, credentials included — and never on the command line, which goes into the shell history. The script prompts for it, keeps it in memory for the clone and the fetch only (a per-process credential helper, with any configured helpers disabled), unsets it, and refuses a URL that carries credentials; the clone keeps the clean URL `https://github.com/ILRRepoGIT/sss2026-ilr-prototype.git`.
 
 ```
 # copy the script to the VM from your own clone (scp), or paste it — the repository is private, so raw.githubusercontent.com will not serve it
 scp infra/vm-bootstrap.sh ilrbuild@<public ip>:
-sudo ILR_GIT_URL="https://<read-only token>@github.com/ILRRepoGIT/sss2026-ilr-prototype.git" bash vm-bootstrap.sh v6.0-rc6
+sudo bash vm-bootstrap.sh v6.0-rc7
+#   → "GitHub read-only token for the clone (not echoed, not stored):"  paste the token, press Enter
 ```
 
-`v6.0-rc6` is the release tag this guide was written for (the value in `prod/release_manifest.json`); if Alexander names a later tag, use that. The script accepts the storage, vault and Front Door names as environment variables (`ILR_DATA_ACCOUNT`, `ILR_WEB_ACCOUNT`, `ILR_KEY_VAULT`, `ILR_AFD_PROFILE`, `ILR_AFD_ENDPOINT`, `ILR_RG`) if you changed any of them from section 2, and writes them all to `/etc/profile.d/ilr.sh` so the runbook's commands can use them.
+The same rule applies to your own clone on your laptop: clone the clean URL and give the token transiently (the Git Credential Manager prompt, or `git -c credential.helper= -c 'credential.helper=!f() { echo username=x-access-token; echo "password=$TOKEN"; }; f' clone …` with `TOKEN` exported for that shell only); never `git clone https://<token>@…`.
+
+`v6.0-rc7` is the release tag this guide was written for (the value in `prod/release_manifest.json`); if Alexander names a later tag, use that. The script accepts the storage, vault and Front Door names as environment variables (`ILR_DATA_ACCOUNT`, `ILR_WEB_ACCOUNT`, `ILR_KEY_VAULT`, `ILR_AFD_PROFILE`, `ILR_AFD_ENDPOINT`, `ILR_RG`) if you changed any of them from section 2, and writes them all to `/etc/profile.d/ilr.sh` so the runbook's commands can use them.
 
 The script ends by printing the sha256 of every file that takes part in a build and comparing them with the release manifest; it stops if any differ. It also runs `az login --identity` and checks that the identity can list the `dataset` container and read the link secret's metadata (not its value). If both checks pass, the machine is ready for the runbook (`docs/production/SSS2026_ILR_Operations_Runbook.md`).
 
