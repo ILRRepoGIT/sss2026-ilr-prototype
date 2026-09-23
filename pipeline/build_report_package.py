@@ -27,7 +27,16 @@ from .narrative2 import BASE1_GATES, T as TEMPLATES
 from .narrative2_modules import MODULE_LABELS
 from .narrative2_modules_b import FullNarrator
 
-PIPELINE_VERSION_V2 = "0.31.1"
+PIPELINE_VERSION_V2 = "0.32.0"
+# 0.32.0 (V6.0, production pilot review of 23 Sep 2026): four rules of the
+# Welsh engine brought into line with the Framework's confirmed rulings —
+# labels the translator marked immutable never mutate on any path (PR-05 /
+# EX-01..04, welsh.immutable_heads), the runner-up sentence's adjective
+# agrees with its feminine head (ADJ-02/07, PR-06), the h1 gender-leaders
+# sentence takes the conjunction service after 'a' (CONJ-01..05), and the
+# f10 cohort sentence mutates the object of 'dewisodd' (T-035). The Welsh
+# corpus moves under those rulings (D82 re-emission, Framework v2.17 sheet
+# 80); the English is byte-identical.
 # v6 (0.28.0, V5.0 real-school round): the school is the profile's, not the
 # module's. The prototype profile carries no slug or report version, so the
 # defaults keep every V4.15 name; a school profile names its own.

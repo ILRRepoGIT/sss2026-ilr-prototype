@@ -617,12 +617,23 @@ html.a11y table:focus-visible { outline:3px solid #000; outline-offset:2px; }
   .cover { border-radius:0; }
   .cover-red, .chapter-band, .card, .prompts, .hbar, .vbar, .mod-kicker, .reported,
   .chip, .chart-card, .cover-para { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
-  /* repeating yellow-rule footer (section 7.3); browser print settings can
-     add page numbers until @page margin boxes are widely supported */
-  #print-footer { display:flex; position:fixed; bottom:0; left:0; right:0;
-    background:#fff; border-top:3px solid var(--yellow); padding:5px 10mm 0;
-    justify-content:space-between; font:600 11px var(--fd); color:var(--blue); }
-  @page { size: A4; margin: 13mm 13mm 18mm; }
+  /* repeating yellow-rule footer (section 7.3). V6.0 (production pilot
+     review, 23 Sep 2026, finding A05): a position:fixed footer is repeated
+     on every printed page ON TOP of the page area, covering the last line of
+     each page. The footer is now a pair of @page margin boxes (Chromium and
+     Edge 131+, the print path the Chromium probe and the schools' browsers
+     take), fed by the client from the #print-footer spans through two custom
+     properties, so it sits in the bottom margin under its own yellow rule and
+     carries the page number. Browsers without margin boxes print no
+     repeating footer rather than an overlapping one. */
+  #print-footer { display:none !important; }
+  @page { size: A4; margin: 13mm 13mm 20mm;
+    @bottom-left { content: var(--pf-left, ""); width: 66%; font: 600 10px var(--fd); color: var(--blue);
+      vertical-align: top; border-top: 3px solid var(--yellow); margin-top: 4mm; padding-top: 1.5mm;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: left; }
+    @bottom-right { content: var(--pf-right, "") " · " counter(page); width: 34%; font: 600 10px var(--fd); color: var(--blue);
+      vertical-align: top; border-top: 3px solid var(--yellow); margin-top: 4mm; padding-top: 1.5mm;
+      white-space: nowrap; text-align: right; } }
 }
 /* V6.0 chunked delivery: the loading mask (inert on the monolithic copy) */
 .load-mask{position:fixed;inset:0;z-index:60;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;padding:1.5rem}

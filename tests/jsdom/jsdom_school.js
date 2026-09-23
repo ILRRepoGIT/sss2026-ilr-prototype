@@ -70,6 +70,28 @@ for (const key of Object.keys(held)) {
   ok(!D.cohorts[key], "held cohort " + key + " is not offered as a filter");
 }
 ok(Array.from(d.querySelectorAll(".bar-grey")).length >= 0, "grey (non-selectable) bars render without error");
+// V6.0 (production pilot review, 23 Sep 2026) — A06: a gender-exempt metric
+// (the gender profile) never shows Boys/Girls columns; a filtered metric does
+// when both gender views are reportable (derived from the payload).
+const appxTables = Array.from(d.querySelectorAll("#appendices table"));
+const genderTable = appxTables.find(tb => Array.from(tb.querySelectorAll("th[scope=row]")).some(th => /^Boys$/.test(th.textContent)) &&
+                                          Array.from(tb.querySelectorAll("th[scope=row]")).some(th => /^Girls$/.test(th.textContent)));
+const genderHeads = genderTable ? Array.from(genderTable.querySelectorAll("thead th")).map(th => th.textContent) : null;
+ok(WSUP ? true : (genderTable && genderHeads.length === 2 && genderHeads.indexOf("Boys") === -1),
+   "A06: the responses-by-gender appendix table has an All column only (exempt: gender)", genderHeads);
+const bothGenders = !WSUP && D.states["whole|boy|none"] && !D.states["whole|boy|none"].sup && D.states["whole|girl|none"] && !D.states["whole|girl|none"].sup;
+const anyGenderCols = appxTables.some(tb => Array.from(tb.querySelectorAll("thead th")).some(th => th.textContent === "Boys"));
+ok(bothGenders ? anyGenderCols : !anyGenderCols, "A06: filtered metrics keep their Boys/Girls columns exactly when both gender views are reportable", String(bothGenders));
+// A04: printing opens the guide's answers (details.faq) and the appendix tables, and closes them again
+const faqs = Array.from(d.querySelectorAll("details.faq"));
+ok(faqs.length === 15 && faqs.every(x => !x.open), "guide: 15 closed details.faq before printing", faqs.length);
+w.dispatchEvent(new w.Event("beforeprint"));
+ok(faqs.every(x => x.open) && Array.from(d.querySelectorAll("#m-appendices details")).every(x => x.open), "A04: beforeprint opens every guide answer and every appendix table");
+w.dispatchEvent(new w.Event("afterprint"));
+ok(faqs.every(x => !x.open), "A04: afterprint closes them again");
+// A05: the page-margin footer is fed from the #print-footer spans (school name · view | survey name)
+const pfL = () => d.documentElement.style.getPropertyValue("--pf-left"), pfR = () => d.documentElement.style.getPropertyValue("--pf-right");
+ok(pfL().indexOf(SCHOOL) > -1 && pfL().indexOf(txt("#pf-view")) > -1 && pfR() === JSON.stringify("School Sport Survey 2026"), "A05: print-footer custom properties carry the school, the view and the survey name (EN)", pfL() + " | " + pfR());
 
 // ---- Welsh ------------------------------------------------------------------
 const btn = d.getElementById("btn-lang");
@@ -99,6 +121,21 @@ ok(!els().some(e => e.classList.contains("cy-missing")), "no static node pending
 ok(d.body.innerHTML.indexOf("⟪missing:ui") === -1, "no bare static markers in Welsh mode");
 ok(visible().indexOf("tymor hir") === -1, "no 'tymor hir' (D86)");
 ok(!/\bac \d/.test(d.body.textContent) && !/Yr ail camp/.test(d.body.innerHTML), "engine rules hold: a before figures, ail + soft mutation (D84, D85)");
+// V6.0 (production pilot review, 23 Sep 2026): the four Welsh-engine findings, asserted over the whole page and payload
+ok(!/Yr ail gamp mwyaf/.test(html), "A02: 'Yr ail gamp fwyaf cyffredin' — the adjective agrees with the feminine head (ADJ-02/07)");
+ok(!/\b(Pharkour|Barkour|Mharkour|Fadminton|Foccia|FMX|MMX|Thriathlon|Driathlon|Daekwondo|Thaekwondo|Fajorettes|Fuay Thai|Bhadel|Phadel|Fadel|Phickleball|Bickleball)\b/.test(html) && !/[ ‘'](ymnasteg|olff)\b/.test(html),
+   "A03: no immutable sport name mutated anywhere in the page or the payload (PR-05, EX-01..04)");
+ok(!/ymhlith bechgyn a [bdfgm]ê?l /.test(html) && !/ymhlith bechgyn a (redeg|ddringo|griced|dennis)/.test(html), "A03/CONJ-04: the gender-leaders sentence takes a/ac + aspirate after 'a'");
+ok(!/a ddewisodd pêl /.test(html), "T-035: the f10 cohort sentence mutates the object of 'dewisodd'");
+// A01: a data value without a sheet-53 Welsh form is MARKED (cy-missing, lang=en) in Welsh mode; one with a form shows it unmarked
+const stagesCell = Array.from(d.querySelectorAll("#overview-table td")).find(td => td.textContent === (NAMES[D.school.schoolStages] || D.school.schoolStages));
+ok(stagesCell && (NAMES[D.school.schoolStages] ? !stagesCell.classList.contains("cy-missing") : (stagesCell.classList.contains("cy-missing") && stagesCell.getAttribute("lang") === "en")),
+   "A01: the school-stages value is marked pending in Welsh mode until its sheet-53 row exists", stagesCell && stagesCell.outerHTML.slice(0, 120));
+const laCell = Array.from(d.querySelectorAll("#overview-table td")).find(td => td.textContent === (NAMES[D.school.localAuthority] || D.school.localAuthority));
+ok(laCell && !laCell.classList.contains("cy-missing") === !!NAMES[D.school.localAuthority], "A01: the authority's Welsh name (sheet 53) shows unmarked");
+const supCell = Array.from(d.querySelectorAll("#meta-table td")).find(td => td.textContent === (NAMES[D.buildMetadata.suppressionModel] || D.buildMetadata.suppressionModel));
+ok(supCell && (NAMES[D.buildMetadata.suppressionModel] ? !supCell.classList.contains("cy-missing") : supCell.classList.contains("cy-missing")), "A01: the suppression-model value is marked pending in Welsh mode until its sheet-53 row exists");
+ok(pfR() === JSON.stringify("Arolwg Chwaraeon Ysgol 2026") && pfL().indexOf(SCHOOL) > -1, "A05: print-footer custom properties switch with the language (CY)", pfR());
 ok(d.querySelector("aside.filter-rail").getAttribute("aria-label") === "Archwilio’r Canlyniadau", "cy aria-label from a frame");
 ok(WSUP ? txt("#any-activity-note") === "" : txt("#any-activity-note").indexOf("Adroddodd " + D.anyActivity + " o’r " + N) === 0, WSUP ? "cy: no any-activity headline for a suppressed whole school" : "cy any-activity headline from the school's own counts", txt("#any-activity-note").slice(0, 60));
 const caps = Array.from(d.querySelectorAll("caption")).map(c => c.textContent).filter(t => /a ddewiswyd amlaf/.test(t));

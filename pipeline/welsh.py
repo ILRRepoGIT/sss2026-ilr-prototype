@@ -39,6 +39,45 @@ VOWELS = "aeiouwyâêîôûŵŷáéíóúàèìòù"
 IMMUTABLE_WORDS = {"gêm", "golff", "gamblo", "garej", "gêr", "gerbocs",
                    "gliw", "miliwn", "biliwn"}
 
+_IMMUTABLE_HEADS = None          # (id of the lexicon it was built from, set)
+_TRAIL = ",.;:!?)’'\"”"
+
+
+def _core(word):
+    """The word as a dictionary key: case-folded, trailing punctuation
+    dropped — 'golff,' and 'Parkour' look up as golff and parkour."""
+    return str(word or "").lower().rstrip(_TRAIL)
+
+
+def immutable_heads():
+    """The words that never mutate on ANY path: the exceptions register
+    (EX-01..04, IMMUTABLE_WORDS) plus the first word of every answer label
+    the translator marked 'Mutable? NO' on sheet 23 — the unadapted loans
+    (PR-05 / EX-04: Parkour, Badminton, Boccia, BMX, Padel, Pickleball,
+    Triathlon, Taekwondo, Muay Thai, Majorettes …) and the recent g-
+    borrowings (EX-01..03: golff, gymnasteg) — case-folded.
+
+    V6.0 (production pilot review, 23 Sep 2026, finding A03): label_after_soft
+    honoured the flag, but a label that had been joined into a list or a
+    counted phrase reached soft_phrase / aspirate_phrase / conj_and as plain
+    text and was mutated by its initial — 'a Pharkour', 'mwy o Barkour',
+    'am Fadminton', 'am ymnasteg', 'a Thriathlon', 'mwy o FMX', 'am olff,'
+    (the trailing comma defeated the IMMUTABLE_WORDS lookup). The flag is the
+    translator's data, read from the lexicon here; nothing is listed in code."""
+    global _IMMUTABLE_HEADS
+    lex = lexicon()
+    if _IMMUTABLE_HEADS is None or _IMMUTABLE_HEADS[0] != id(lex):
+        heads = set(IMMUTABLE_WORDS)
+        for lab in (lex.get("answer_labels") or {}).values():
+            if not isinstance(lab, dict) or lab.get("mutable", True):
+                continue
+            for form in (lab.get("cy"), lab.get("prose")):
+                head = _core(str(form or "").split(" ", 1)[0])
+                if head and head[:1].isalpha():
+                    heads.add(head)
+        _IMMUTABLE_HEADS = (id(lex), heads)
+    return _IMMUTABLE_HEADS[1]
+
 
 def _initial(word):
     """(digraph-aware initial, rest). Case-insensitive initial."""
@@ -57,7 +96,7 @@ def is_vowel_initial(word):
 def _apply_map(word, mapping, exempt_ll_rh=False):
     if not word:
         return word
-    if word.lower() in IMMUTABLE_WORDS:
+    if _core(word) in immutable_heads():
         return word
     ini, rest = _initial(word)
     if ini in ("ll", "rh") and exempt_ll_rh:

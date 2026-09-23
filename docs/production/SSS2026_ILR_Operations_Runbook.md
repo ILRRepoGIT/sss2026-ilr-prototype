@@ -8,7 +8,7 @@ Throughout, `$ILR_REPO`, `$ILR_VENV` and the storage/vault names come from `/etc
 
 ```
 cd $ILR_REPO && source $ILR_VENV/bin/activate
-export RELEASE=v6.0-rc8                  # the tag the VM was bootstrapped at (v6.0-rc8 today — Framework v2.16, pipeline 0.31.1; the owner cuts v6.0 with tools/cut_release.sh)
+export RELEASE=v6.0-rc9                  # the tag the VM was bootstrapped at (v6.0-rc9 today — Framework v2.17, pipeline 0.32.0; the owner cuts v6.0 with tools/cut_release.sh)
 export EVID=/data/ilr/evidence            # private: attestations, bundles, locks, ledger
 export OUT=/data/ilr/out                  # the served trees (release + entry pages)
 export WORK=/data/ilr/work                # per-job scratch, deleted job by job
@@ -69,10 +69,10 @@ python -m prod.runner run --release $RELEASE --register /data/ilr/private/regist
    --out $OUT --evidence $EVID --work $WORK --concurrency 3 --schools 6782320,6644017,6675500 \
    --key-vault $ILR_KEY_VAULT --jsdom $JSDOM \
    --previous-locks /data/ilr/private/v53_locks \
-   --lock-ruling "production release $RELEASE asserted against the V5.3 lock: client, template and Framework v2.16 changes only; corpus unchanged"
+   --lock-ruling "Framework v2.17 sheet 80 — the Welsh engine (pipeline 0.32.0) applies PR-05 / EX-01..04 (immutable labels on every path), ADJ-02/ADJ-07 with PR-06 (the runner-up adjective agrees with its head), CONJ-01..05 (the h1 gender-leaders sentence after 'a') and T-035 (the object of 'dewisodd' in the f10 cohort sentence) as the framework states them; production pilot review, 23 Sep 2026"
 ```
 
-Expected: three lines `built … (69/72, mode dev)` and, in each job's evidence (`$EVID/$RELEASE/<slug>/validation-summary.txt` and `job.log`), the note "0 of N states moved from the previous lock". If a state moved, stop: the machine does not reproduce V5.1 and the difference must be explained before anything else is built (Python or Node version, a dependency, the dataset).
+Expected: three lines `built … (69/72, mode dev)` and, in each job's evidence (`$EVID/$RELEASE/<slug>/validation-summary.txt` and `job.log`), the D82 note **"N of M states moved from the previous lock; ruling: Framework v2.17 sheet 80 …"** with exactly these counts — **New Inn 1,415 of 7,884, Castell Alun 2,226 of 8,244, Ysgol Bro Pedr 2,562 of 8,208** — and, in the same note, the English projection unchanged (`englishStatesMoved 0`); the rollup's *Corpus moves* lines and each attestation's `lockMoved` carry the same figures. Since v6.0-rc9 the Welsh corpus of every school moves by that ruling (the review's findings A02/A03 corrected in the engine), so a moved count is expected; the proof of reproduction is that the counts are exactly the ones recorded here from the same release on Industryline's machine. A different count, or any English state moved, is a stop: the difference must be explained before anything else is built (Python or Node version, a dependency, the dataset). (Up to rc8 the expectation was 0 moved.)
 
 Then the checks:
 
@@ -103,6 +103,8 @@ python -m prod.runner status --evidence $EVID --release $RELEASE
 ```
 
 Expected on the pilot (since v6.0-rc8): every job `built`; the rollup uniform and clean in its two classes (standard; whole-school suppressed, for a school under five responses); dev headline 69/72 or 70/72 (the under-fives, which have no stack captions to dispute) with the reruns' known items only. Three things the small and special schools exercise are **expected and not faults** — they are the pilot's findings of 23 Sep 2026, corrected in rc8: the rollup's *Narrative holds* line counts views in which a locked template with no one-pupil form was held rather than rendered (EN-08; the module is listed under "Data available in this view" there); the independent figure check reports `blankedBars` for the two profile charts where a year or a gender is under five (the check verifies the blank); and a school with a blanked year bar takes the overview note without its largest/smallest sentence (EN-12). A job that *fails* is still a stop.
+
+Since v6.0-rc9 (the review of the seven rc7 reports): each pilot school is a first build under this release (its own lock is emitted; there is no rc7 lock to assert against — the rc7 evidence root is a different release), so no "moved" note is expected here; the print PDFs in `probe/` now carry the footer in the page margin with a page number and print the guide's answers; in Welsh mode the school-stages value and the technical record's suppression model show as marked English (red dotted) until the translator's sheet-53 rows arrive — expected, not a fault (review finding A01). The review's own list of what to re-check is in `pilot_review/SSS2026_rc7_Review_Response.md` of the deployment folder.
 
 Read the mean and maximum `seconds` from the rollup and the peak memory from `/data/ilr/evidence/$RELEASE/<slug>/job.log` (`Maximum resident set size` is not recorded by the runner; `free -g` while the run is on, or `ps -o rss` on the workers, is enough). Set the full-run concurrency so that concurrency × peak-per-job stays under 75 % of the VM's memory and about one job per vCPU less a little headroom: on the D64s_v6 (64 vCPU, 256 GiB — or the D64as_v5, the same figures) with 2.5 GiB peaks that is about 48–56; the runner's default is cores − 2 and it also pauses new jobs when free memory drops under 3 GiB.
 

@@ -39,6 +39,17 @@ def page_html(wd: Path) -> str:
     if yac:
         from pipeline.yac_assets import embed_all
         html, _sizes = embed_all(html, Path(yac))
+        # V6.0-rc9: the cover media and the fonts as well, so the probe's print
+        # PDFs — the ones the reviewers and the owner read — carry the logos and
+        # paginate with the report's own typeface, as build_html ships them
+        from pipeline.build_html import COVER_IMAGES, fonts_css, image_data_uri
+        cover = Path(os.environ.get("SSS_COVER_DIR") or (ROOT / "config" / "cover_media"))
+        fonts = Path(os.environ.get("SSS_FONTS_DIR") or (ROOT / "inputs" / "fonts"))
+        for token, (fname, w) in COVER_IMAGES.items():
+            if (cover / fname).exists():
+                html = html.replace(token, image_data_uri(cover / fname, w))
+        if fonts.exists():
+            html = html.replace("/*__FONTS_CSS__*/", fonts_css(fonts))
     return html
 
 

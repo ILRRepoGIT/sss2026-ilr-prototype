@@ -954,6 +954,19 @@ function renderBanner() {
   const pf = $("#pf-view");
   // D50: the print footer tests the typed record, never an English literal
   if (pf) pf.textContent = s ? " · " + descOf(s) : "";
+  // V6.0 (production pilot review, 23 Sep 2026, finding A05): the printed
+  // footer is a page-margin box (@page @bottom-left / @bottom-right in the
+  // template) fed from the same two spans, so it sits in the page margin and
+  // never covers the last line of a page; the spans stay the single source
+  // (the school's name, the view, the static lane's "School Sport Survey
+  // 2026" in the page's language). Browsers without margin boxes print no
+  // repeating footer rather than an overlapping one.
+  const pfr = $("#print-footer");
+  if (pfr && pfr.children.length >= 2) {
+    const st = document.documentElement.style;
+    st.setProperty("--pf-left", JSON.stringify(pfr.children[0].textContent));
+    st.setProperty("--pf-right", JSON.stringify(pfr.children[1].textContent));
+  }
   // collapsed mobile rail summary (§3.3: no duplicated respondent base —
   // the banner directly above already shows it)
   const rt = $("#rail-toggle");
@@ -1321,18 +1334,28 @@ function renderProfile() {
   // v2 (Sport Wales feedback): expanded school information section —
   // V4.11: every heading is a sheet-43 frame, every data value passes
   // through the proper-names table (assessment §8)
-  const cell = (k, v, pendingKey) => {
+  /* V6.0 (production pilot review, 23 Sep 2026, finding A01): a data VALUE
+     that has a Welsh form on sheet 53 shows it (nameOf); a translatable
+     value without one — the school-stages phrase, the suppression model —
+     used to sit in Welsh mode as unmarked English. It now carries the same
+     pending decoration as an untranslated frame (cy-missing, lang="en",
+     the reviewer's hover text) until the translator's sheet-53 row arrives;
+     a proper name (the school's) is data and is never marked. */
+  const cell = (k, v, translatable) => {
     const pend = framePending(k);
+    const val = translatable ? nameOf(v) : v;
+    const vpend = !!translatable && isCy() && !NAMES()[v];
     return "<tr><td" + (pend ? ' class="cy-missing" lang="en"' : "") + prov((pend ? "frame:pending:" : "frame:") + k) + ">" +
-      esc(t(k)) + "</td><td>" + esc(String(v)) + "</td></tr>";
+      esc(t(k)) + "</td><td" + (vpend ? ' class="cy-missing" lang="en" title="Heb ei gyfieithu eto — dangosir y Saesneg"' : "") +
+      (translatable ? prov(vpend ? "names:pending" : "names:sheet53") : "") + ">" + esc(String(val)) + "</td></tr>";
   };
   $("#overview-table").innerHTML =
     cell("ui.profile_school_name", sc.name) +
-    cell("ui.profile_la", nameOf(sc.localAuthority)) +
-    cell("ui.profile_rsp", nameOf(sc.regionalSportPartnership)) +
-    cell("ui.profile_stages", sc.schoolStages) +
+    cell("ui.profile_la", sc.localAuthority, true) +
+    cell("ui.profile_rsp", sc.regionalSportPartnership, true) +
+    cell("ui.profile_stages", sc.schoolStages, true) +
     cell("ui.appendix_total_responses", b.acceptedRows) +
-    cell("ui.profile_fieldwork", nameOf(sc.fieldworkDates));
+    cell("ui.profile_fieldwork", sc.fieldworkDates, true);
   // static whole-school profile (never changes with filters); single colour
   // per the Sport Wales feedback so colours are not read as meaningful
   const w = DATA.states["whole|all|none"];
@@ -1372,7 +1395,7 @@ function renderProfile() {
       cell("ui.meta_survey_year", sc.surveyYear) +
       cell("ui.meta_report_version", t("ui.meta_version_value", { report: DATA.reportVersion, schema: DATA.schemaVersion })) +
       cell("ui.meta_pipeline", b.pipelineVersion) +
-      cell("ui.meta_suppression", b.suppressionModel) +
+      cell("ui.meta_suppression", b.suppressionModel, true) +
       cell("ui.meta_generated", b.generatedAt) +
       cell("ui.meta_checksum", b.sourceChecksum.slice(0, 16) + "…") +
       cell("ui.meta_weighting", t("ui.meta_weighting_value"));
@@ -1415,7 +1438,7 @@ function renderProfile() {
     cell("ui.meta_survey_year", sc.surveyYear) +
     cell("ui.meta_report_version", t("ui.meta_version_value", { report: DATA.reportVersion, schema: DATA.schemaVersion })) +
     cell("ui.meta_pipeline", b.pipelineVersion) +
-    cell("ui.meta_suppression", b.suppressionModel) +
+    cell("ui.meta_suppression", b.suppressionModel, true) +
     cell("ui.meta_generated", b.generatedAt) +
     cell("ui.meta_checksum", b.sourceChecksum.slice(0, 16) + "…") +
     cell("ui.meta_weighting", t("ui.meta_weighting_value"));
@@ -1460,7 +1483,12 @@ function renderAppendices() {
           ">" + esc(labelOf(def)) + "</h4>" + stateMsg(res.s);
         continue;
       }
-      const gCols = withGender && bs && !bs.sup && gs && !gs.sup &&
+      // V6.0 (production pilot review, 23 Sep 2026, finding A06): a metric
+      // the engine computes without the gender filter (exempt: "gender" —
+      // the gender profile itself) has no boys' or girls' distribution; its
+      // boy and girl states carry the whole view's figures, which the table
+      // used to print as Boys/Girls columns ("Boys | 343 | 343 | 343").
+      const gCols = withGender && def.exempt !== "gender" && bs && !bs.sup && gs && !gs.sup &&
                     bs.m[mid].s === "ok" && gs.m[mid].s === "ok";
       let tt = "<h4 style='margin:12px 0 4px'" + prov("label:" + mid) +
         ">" + esc(labelOf(def)) + "</h4>" +
@@ -1707,10 +1735,13 @@ function placeControls() {
 NARROW.addEventListener ? NARROW.addEventListener("change", placeControls)
                         : NARROW.addListener(placeControls);
 
-// print behaviour (section 22): expand the appendix tables for printing
+// print behaviour (section 22): expand the appendix tables for printing.
+// V6.0 (production pilot review, 23 Sep 2026, finding A04): the guide's
+// fifteen questions (details.faq) printed as bare headings — their answers
+// are opened for the print too, and closed again after it.
 let _openedForPrint = [];
 window.addEventListener("beforeprint", () => {
-  _openedForPrint = $$("#m-appendices details:not([open])");
+  _openedForPrint = $$("#m-appendices details:not([open]), details.faq:not([open])");
   _openedForPrint.forEach(d => { d.open = true; });
 });
 window.addEventListener("afterprint", () => {

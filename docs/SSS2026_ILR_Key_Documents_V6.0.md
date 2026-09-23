@@ -6,7 +6,8 @@ from the finalised Stage 2 cleansed dataset, served as small entry pages plus ve
 from private Azure storage behind Front Door, under an unguessable link per school on
 `reports.schoolsportsurvey2026.co.uk`. Nothing in this round changes a sentence, a number or a gate:
 the three V5.3 schools rebuilt through the production runner assert against their V5.3 corpus locks
-with **0 states moved**. This document is the key record of the round; the operator documents are
+with **0 states moved** (up to rc8; at rc9 the Welsh moves by a recorded ruling — section 4a — and the English
+remains byte-identical). This document is the key record of the round; the operator documents are
 `docs/production/SSS2026_ILR_Azure_Provisioning_Guide.md` (what the colleague sets up) and
 `docs/production/SSS2026_ILR_Operations_Runbook.md` (what the operator runs, phase by phase).
 
@@ -131,6 +132,29 @@ Alun 8,244, Ysgol Bro Pedr 8,208); the independent figure check all match; jsdom
 0 states moved and 38 / 42 / 41 chunks; the rollup uniform and clean; the reconciliation exact; the
 served-package gate clean over the directory and over HTTP with the production headers; the browser
 probe 11/11 in real Chromium under the production CSP.
+
+### 4a. The production pilot and its review (23 September 2026; v6.0-rc8 and v6.0-rc9)
+
+The pilot on the VM (rc7) built 8 of 20 schools; the 12 failures — all at small or special schools —
+were three defects in the build's own checks and the client, corrected in **rc8** (the one-pupil hold
+in every module, EN-08 extended; the figure check aware of the profile charts' blanked bars; the
+overview note without its largest/smallest sentence when a year bar is blank, EN-12; Framework v2.16,
+pipeline 0.31.1; compliance record addendum 7). The AI-assisted source/PDF review of the seven
+successful reports raised eight recurring class-A items; six were faults and are corrected in
+**rc9** (compliance record addendum 8; `pilot_review/SSS2026_rc7_Review_Response.md` of the
+deployment folder gives the verdict on every item): four rules of the Welsh engine brought into line
+with the framework's own rulings — an immutable sport name never mutates on any path (PR-05 /
+EX-01..04), the runner-up sentence's adjective agrees with its feminine head (ADJ-02/07, PR-06), the
+h1 gender-leaders sentence takes the conjunction service after "a" (CONJ-01..05), the f10 cohort
+sentence mutates the object of "dewisodd" (T-035) — and three client corrections (the guide's answers
+print, the printed footer is a page-margin box with the page number, the gender-exempt appendix table
+shows the All column only), plus the pending marking of two untranslated profile data values
+(Framework v2.17 sheet 53, 29 rows for the translator). **The Welsh corpus moves under those
+rulings** — a D82 re-emission recorded as "Framework v2.17 sheet 80 — …": New Inn 1,415 of 7,884
+states, Castell Alun 2,226 of 8,244, Ysgol Bro Pedr 2,562 of 8,208, Evenlode 276 of 3,996,
+Crownbridge 8 of 1,332 — every moved paragraph one of the four kinds, **the English byte-identical
+(0 states moved)**. Unit tests 109 pass; the jsdom school regression 54/54 (fourteen new checks);
+figures, served package and Chromium probe clean; the probe now embeds the artwork. Pipeline 0.32.0.
 
 ## 5. What stays with humans
 

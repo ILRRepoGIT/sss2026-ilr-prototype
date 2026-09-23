@@ -112,6 +112,20 @@ def run(cmd, cwd, env, log: Path, timeout=3600):
 
 
 # --------------------------------------------------------------------------- one job
+def _lock_moved(lock_path: Path) -> dict | None:
+    """The emitted lock's own record of the move from the previous lock (D82:
+    welshStatesMoved / englishStatesMoved and the lock it supersedes), or None
+    on a first emission / when the lock is absent."""
+    try:
+        em = json.loads(lock_path.read_text(encoding="utf-8")).get("emitted") or {}
+    except (OSError, ValueError):
+        return None
+    if "welshStatesMoved" not in em:
+        return None
+    return {"welsh": em.get("welshStatesMoved"), "english": em.get("englishStatesMoved"),
+            "supersedes": em.get("supersedes")}
+
+
 def _holds_from_summary(path: Path) -> list:
     """The 'narrative module <m> HELD in <n> view(s) — <why>: <views…>' lines of the
     validation summary, as [{module, views, reason}] (the view list is capped at
@@ -248,7 +262,12 @@ def _build_one(spec: dict) -> dict:
     provenance = json.loads((mini / "browser_gate_jsdom.json").read_text(encoding="utf-8"))
     probe = None
     if spec["probe"]:
-        run([PY, "-m", "tests.browser.render_probe", mini, gen / "probe"], ROOT, env, log, timeout=1800)
+        # V6.0-rc9: the artwork is embedded in the probe page as build_html embeds
+        # it (SSS_YAC_DIR, V5.3), so the print PDFs the reviewers and the owner
+        # read carry the pictures and paginate as the shipped report does — the
+        # rc7 probe printed their alt text in their place.
+        run([PY, "-m", "tests.browser.render_probe", mini, gen / "probe"], ROOT,
+            dict(env, SSS_YAC_DIR=spec["yac"], SSS_FONTS_DIR=spec["fonts"], SSS_COVER_DIR=str(ROOT / "config" / "cover_media")), log, timeout=1800)
         probe = json.loads((gen / "probe" / "probe.json").read_text(encoding="utf-8"))
     timings["assurance"] = round(time.time() - t, 1)
 
@@ -325,6 +344,10 @@ def _build_one(spec: dict) -> dict:
         "acceptedResponses": pkg["buildMetadata"]["acceptedRows"], "sourceRows": pkg["buildMetadata"]["sourceRows"],
         "releaseVerified": spec["release_verified"], "previousLock": prev if prev != "none" else None,
         "previousLockSha256": (sha(Path(prev)) if prev != "none" else None), "lockRuling": ruling,
+        # V6.0-rc9: how far the corpus moved from the previous lock, as the emitted lock
+        # records it (D82) — the runbook's Phase B expects exact Welsh counts under the
+        # Framework v2.17 ruling and English 0; the rollup lists them
+        "lockMoved": _lock_moved(gen / f"lock_{slug}_v8.json"),
         "binding": binding, "token": token, "envelope": env_,
         "identity": pkg["buildMetadata"]["identity"], "mode": mode,
         "pipelineVersion": pkg["buildMetadata"].get("pipelineVersion"), "reportVersion": pkg.get("reportVersion"),

@@ -340,3 +340,63 @@ def test_T088_girl_singular_complement():
     assert "nododd gymryd rhan yn sefyll" in cy
     assert "ohonynt" not in cy and "iddynt" not in cy
     assert "sut y mae fel arfer" in cy      # D48: singular frame
+
+
+# ------------------------------------------- V6.0 production pilot review (23 Sep 2026)
+def test_A03_immutable_labels_never_mutate_on_any_path():
+    """PR-05 / EX-04 (unadapted loans) and EX-01..03 (recent g- borrowings):
+    the sheet-23 'Mutable? NO' flag holds after a label has been joined into a
+    list or a counted phrase — the pilot's 'a Pharkour', 'mwy o Barkour',
+    'am Fadminton', 'am ymnasteg', 'a Thriathlon', 'mwy o FMX', 'am olff,'."""
+    heads = W.immutable_heads()
+    for h in ("parkour", "badminton", "boccia", "bmx", "triathlon", "gymnasteg", "golff"):
+        assert h in heads
+    assert "pêl" not in heads and "tennis" not in heads      # adapted labels still mutate
+    assert W.soft_phrase("Parkour (44), trampolinio (44) a phêl osgoi (40)").startswith("Parkour (44)")
+    assert W.soft_phrase("golff, pŵl neu snwcer") == "golff, pŵl neu snwcer"
+    assert W.soft_phrase("gymnasteg") == "gymnasteg" and W.soft_phrase("BMX (3)") == "BMX (3)"
+    assert W.soft_phrase("Badminton") == "Badminton" and W.soft_phrase("pêl droed") == "bêl droed"
+    assert W.join_list(["criced", "Parkour"]) == "criced a Parkour"
+    assert W.join_list(["athletau", "pêl fasged", "Triathlon"]) == "athletau, pêl fasged a Triathlon"
+    assert W.join_list(["nofio", "pêl droed"]) == "nofio a phêl droed"      # CONJ-04 still applies
+    assert W.aspirate_phrase("tennis") == "thennis"
+    assert W.label_after_soft("Badminton") == "Badminton" and W.label_after_soft("Football") == "bêl droed"
+
+
+def test_A02_runner_adjective_agrees_with_feminine_head():
+    """ADJ-02 / ADJ-07: 'Yr ail gamp FWYAF cyffredin' (feminine singular
+    head); masculine heads unmutated (ADJ-11: 'Yr ail opsiwn mwyaf cyffredin');
+    the coordinated 'camp neu weithgaredd' agrees with the nearer, masculine
+    conjunct (PR-06)."""
+    cy = _r("runner_v2", {"runner": {"labels": ["Football"], "count": 37}, "noun": "sport"}, module="f10")
+    assert cy.startswith("Yr ail gamp fwyaf cyffredin oedd pêl droed")
+    cy = _r("runner_v2", {"runner": {"labels": ["Swimming"], "count": 5}, "noun": "sport or activity"}, module="f10")
+    assert cy.startswith("Yr ail gamp neu weithgaredd mwyaf cyffredin oedd nofio")
+    cy = _r("runner_v2", {"runner": {"labels": ["Having fun"], "count": 5}, "noun": "option"}, module="f6")
+    assert cy.startswith("Yr ail opsiwn mwyaf cyffredin")
+
+
+def test_A03_gender_leaders_take_the_conjunction_service():
+    """CONJ-01..05: after 'a' the girls' leader takes a/ac and the ASPIRATE
+    mutation — never the soft mutation ('a bêl droed', 'a Fadminton')."""
+    def g(lbl):
+        return _r("h1_an_gender_leaders_v3", {"boys": {"labels": ["Football"], "count": 30},
+                                              "girls": {"labels": [lbl], "count": 20}, "apart": None}, module="h1")
+    assert "ymhlith bechgyn a Badminton ymhlith merched" in g("Badminton")
+    assert "ymhlith bechgyn a phêl rwyd ymhlith merched" in g("Netball")
+    assert "ymhlith bechgyn ac athletau ymhlith merched" in g("Athletics")
+    assert "ymhlith bechgyn a rhedeg neu loncian ymhlith merched" in g("Running or jogging")
+    assert "ymhlith bechgyn a nofio ymhlith merched" in g("Swimming")
+
+
+def test_T035_object_of_dewisodd_mutates_in_the_f10_cohort_sentence():
+    """T-035: 'a ddewisodd bêl droed' — as the sheet-22 qualifier of the same
+    cohort already reads; unadapted names stay put (PR-05)."""
+    cohorts = {"wd_football": {"metric": "sports_wanted", "code": "football", "optionLabel": "Football"},
+               "wd_badminton": {"metric": "sports_wanted", "code": "badminton", "optionLabel": "Badminton"}}
+    WR.register_code_labels({"swimming": "Swimming", "parkour": "Parkour", "trampolining": "Trampolining"})
+    facts = {"top3": [("swimming", 10), ("parkour", 9), ("trampolining", 8)], "base": 20}
+    cy = WR.render("group_codemand_top3_v12", facts, "whole|all|wd_football", "f10", cohorts)
+    assert cy.startswith("Roedd y disgyblion a ddewisodd bêl droed hefyd am gael mwy o nofio (10), Parkour (9) a thrampolinio (8)")
+    cy = WR.render("group_codemand_top3_v12", facts, "whole|all|wd_badminton", "f10", cohorts)
+    assert cy.startswith("Roedd y disgyblion a ddewisodd Badminton hefyd am gael mwy o nofio (10), Parkour (9) a thrampolinio (8)")

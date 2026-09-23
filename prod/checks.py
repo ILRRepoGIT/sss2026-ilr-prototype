@@ -125,10 +125,18 @@ def rollup(evidence: Path, release: str) -> dict:
     hold_views = sum(h.get("views", 0) for a in atts.values() for h in (a.get("narrativeHolds") or []))
     hold_templates = Counter(h["reason"].split(" has no ")[0] for a in atts.values() for h in (a.get("narrativeHolds") or []))
     secs = [a["seconds"] for a in atts.values()]
+    # V6.0-rc9 (D82): the corpus moves the builds recorded against a previous lock —
+    # the runbook's Phase B expects exact Welsh counts under the Framework v2.17 ruling
+    # and English 0; an English move anywhere is a problem
+    lock_moves = {slug: a["lockMoved"] for slug, a in atts.items() if a.get("lockMoved")}
+    for slug, mv in lock_moves.items():
+        if mv.get("english"):
+            problems.append(f"{slug}: {mv['english']} English states moved from the previous lock")
     expected = {cls: {k: v for k, v in zip(names, keys[0])} for cls, keys in by_class.items() if len(keys) == 1}
     out = {"release": release, "reports": len(atts), "uniform": uniform, "groups": len(groups),
            "classes": dict(Counter(classes.values())),
            "narrativeHolds": {"reports": hold_reports, "views": hold_views, "templates": dict(hold_templates)},
+           "lockMoves": lock_moves,
            "modes": dict(modes), "jobStatus": dict(Counter(j["status"] for j in jobs.values())),
            "expected": expected.get("standard", {}), "expectedByClass": expected,
            "seconds": {"total": round(sum(secs), 1), "mean": round(sum(secs) / len(secs), 1) if secs else None,
@@ -143,6 +151,9 @@ def rollup(evidence: Path, release: str) -> dict:
           f"Served bytes (chunks): {out['chunkBytesTotal'] / 1e9:.2f} GB", ""]
     md += [f"Classes: {out['classes']}", "",
            f"Narrative holds (EN-08, one-pupil forms pending the owner): {hold_reports} reports, {hold_views} views, templates {dict(hold_templates)}", ""]
+    if lock_moves:
+        md += ["Corpus moves against a previous lock (D82; Welsh by the recorded ruling, English must be 0):", ""] + \
+              [f"- {slug}: Welsh {mv.get('welsh')}, English {mv.get('english')} (supersedes {mv.get('supersedes')})" for slug, mv in sorted(lock_moves.items())] + [""]
     for cls, exp in expected.items():
         md += [f"Expected (uniform) values — {cls} ({out['classes'].get(cls, 0)} reports):", ""] + [f"- {k}: {v}" for k, v in exp.items()] + [""]
     md += ["Problems:", ""] + ([f"- {p}" for p in problems] or ["- none"])

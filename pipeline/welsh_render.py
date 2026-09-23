@@ -601,12 +601,30 @@ def _hd(f, default="answer"):
     return NOUN_CY[f.get("noun", default)]
 
 
+# PR-06 (sheet 39, translator-confirmed): after the coordinated head 'camp
+# neu weithgaredd' an adjective agrees with the NEARER conjunct, gweithgaredd
+# (masculine) — the head's own gender (f, for the article) does not carry
+# to the adjective.
+ADJ_AGREE_CY = {"camp neu weithgaredd": "m"}
+
+
+def _adj_after(noun, g, adj):
+    """ADJ-02 / ADJ-07 (sheet 14): an adjective after a feminine SINGULAR
+    noun takes the soft mutation — 'y gamp fwyaf poblogaidd' is the sheet's
+    own example ('the double effect: y gamp, then fwyaf'); masculine and
+    plural heads leave it unmutated ('Yr ail opsiwn mwyaf cyffredin',
+    ADJ-11). V6.0 (production pilot review, 23 Sep 2026, finding A02): the
+    runner-up sentence wrote 'Yr ail gamp mwyaf cyffredin' in every report."""
+    gg = ADJ_AGREE_CY.get(noun, g)
+    return W.soft(adj, mutable=True) if gg in ("f", "b") else adj
+
+
 def r_runner(f, c):
     """FT-18 singular branch: next-ranked single item."""
     r = f["runner"]
     lab = label_cy(r["labels"][0])
     noun, g, _pl = _hd(f)
-    return (f"{ail_np(noun)} mwyaf cyffredin oedd {lab}, "
+    return (f"{ail_np(noun)} {_adj_after(noun, g, 'mwyaf')} cyffredin oedd {lab}, "
             f"{W.gyda_num(r['count'], 'dewis', 'dewisiadau')}, {c.among()}.")
 
 
@@ -1419,7 +1437,13 @@ def r_group_codemand_top3(f, c):
     tail = f" {rest[1]}" if len(rest) > 1 else ""
     art = "yr" if W.is_vowel_initial(base_np) else "y"
     qual = W.sg_qual(c.qual, c.gender) if f["base"] == 1 else c.qual
-    return (f"Roedd y disgyblion a ddewisodd {label_cy(want)} hefyd am "
+    # T-035 (sheet 26): the object of the inflected verb 'dewisodd' takes
+    # the soft mutation — 'a ddewisodd bêl droed', exactly as the sheet-22
+    # qualifier of the same cohort already reads in the same report;
+    # unadapted names (PR-05) and citations stay put via label_after_soft.
+    # V6.0 (production pilot review, 23 Sep 2026): this sentence alone wrote
+    # the label unmutated ('a ddewisodd pêl droed').
+    return (f"Roedd y disgyblion a ddewisodd {W.label_after_soft(want)} hefyd am "
             f"gael mwy o {W.soft_phrase(joinlab_counts(pairs))}, "
             f"o blith {art} {base_np}{tail} {qual or ''}.")
 
@@ -1727,10 +1751,17 @@ def _apart_cy(f, cap=False):
 
 
 def r_h1_an_gender_leaders(f, c):
+    """V6.0 (production pilot review, 23 Sep 2026, finding A03 at the
+    secondary schools — 'ymhlith bechgyn a Fadminton ymhlith merched'): the
+    girls' leader follows the conjunction 'a' ('and'), so it takes the
+    conjunction service — a/ac by CONJ-01..05 and the ASPIRATE mutation
+    (CONJ-04: 'a phêl droed', 'a thennis', 'a chriced'; 'a nofio'; 'ac
+    athletau'), never the soft mutation this sentence used to apply
+    ('a bêl droed', 'a redeg neu loncian', 'a Fadminton')."""
     b = f["boys"]; g = f["girls"]
+    conj, girls = W.conj_and(joinlab(g["labels"]))
     return (f"{_apart_cy(f, cap=True)}{joinlab(b['labels'])} oedd ar y "
-            f"brig ymhlith bechgyn a "
-            f"{W.soft_phrase(joinlab(g['labels']))} ymhlith merched, "
+            f"brig ymhlith bechgyn {conj} {girls} ymhlith merched, "
             f"{aud_scope_cy(c)}.")
 
 
