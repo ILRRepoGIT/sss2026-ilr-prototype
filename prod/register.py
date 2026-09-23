@@ -28,6 +28,10 @@ the dataset / PLASC or derived by a stated rule:
                 takes the EN-11 overview sentence (Framework v2.14)
   phase         primary if every year <= 6, secondary if every year >= 7,
                 combined otherwise (the profile family of the prototype)
+  n             the responses the report accepts: analytically included matched
+                rows whose year group was resolved (rc13; the 98 responses whose
+                year the cleansing could not resolve are counted in n_no_year
+                and n_source = n + n_no_year)
   eligible      n >= min_responses (default 1 — owner instruction 22 Sep 2026:
                 every school with an accepted response receives a report; where
                 the school has fewer than five the report's views are all
@@ -159,6 +163,18 @@ def build(parquet: Path, out_dir: Path, plasc: Path | None, framework: Path, min
         years = sorted({int(y) for y in g["year_group_num"].dropna()})
         by_year = {int(y): int(n) for y, n in g["year_group_num"].dropna().astype(int).value_counts().items()}
         by_status = {str(k): int(v) for k, v in g["status"].value_counts().items()}
+        # V6.0-rc13 (the rc12 reconciliation stop, 23 Sep 2026): a response whose year
+        # group the cleansing could not resolve (dq_year_group_unresolved — the pupil
+        # named a year impossible for the school's phase; year_group_num is null) is
+        # analytically included in the national dataset but cannot enter a school
+        # report, every view of which is a year group or a union of year groups
+        # (pipeline/load_normalise.py excludes it before the canonical record). The
+        # register counts what the report accepts — n_source keeps the dataset's
+        # count and n_no_year the difference — so the reconciliation, the register
+        # and the report agree by rule rather than by coincidence. 98 responses at
+        # 83 schools on the 22 Sep dataset; no school crosses a threshold.
+        n_source = int(len(g))
+        n_no_year = int(g["year_group_num"].isna().sum())
         ds_name = str(g["school_name"].iloc[0]).strip()
         la = str(g["local_authority"].iloc[0]).strip()
         region = str(g["region"].iloc[0]).strip()
@@ -175,7 +191,7 @@ def build(parquet: Path, out_dir: Path, plasc: Path | None, framework: Path, min
         la_cy = names["Local authority"].get(la, "")
         partnership = REGION_TO_PARTNERSHIP.get(region, "")
         gap = bool(years) and years != list(range(years[0], years[-1] + 1))
-        n = int(len(g))
+        n = n_source - n_no_year
         status, reason = "eligible", ""
         if n < min_responses:
             status, reason = "no_report_below_threshold", f"{n} accepted responses; fewer than the --min-responses floor of {min_responses}"
@@ -193,11 +209,14 @@ def build(parquet: Path, out_dir: Path, plasc: Path | None, framework: Path, min
             "special": str(g["school_type"].iloc[0]) == "Special",
             "family": fam, "stages": stages, "years": years, "years_gap": gap,
             "plasc_years": (p or {}).get("years", []),
-            "n": n, "n_by_status": by_status, "n_by_year": by_year,
+            "n": n, "n_source": n_source, "n_no_year": n_no_year, "n_by_status": by_status, "n_by_year": by_year,
             "status": status, "reason": reason, "scope_groups": groups,
         })
     summary = {
         "schools": len(rows), "responses": int(sum(r["n"] for r in rows)),
+        "responses_source": int(sum(r["n_source"] for r in rows)),
+        "responses_without_year": int(sum(r["n_no_year"] for r in rows)),
+        "schools_with_responses_without_year": sum(1 for r in rows if r["n_no_year"]),
         "no_school_rows": int(len(no_school)),
         "no_school_by_status": {str(k): int(v) for k, v in no_school["school_ref_status"].value_counts().items()},
         "status": dict(Counter(r["status"] for r in rows)),
@@ -214,7 +233,7 @@ def build(parquet: Path, out_dir: Path, plasc: Path | None, framework: Path, min
     (out_dir / "register.json").write_text(json.dumps({"summary": summary, "schools": rows}, ensure_ascii=False, indent=1),
                                            encoding="utf-8")
     flat = ["school_id", "slug", "name", "name_source", "la", "la_cy", "region", "partnership", "family", "special",
-            "years", "n", "status", "reason"]
+            "years", "n", "n_source", "n_no_year", "status", "reason"]
     with (out_dir / "register.csv").open("w", newline="", encoding="utf-8-sig") as f:
         w = csv.writer(f); w.writerow(flat)
         for r in rows:

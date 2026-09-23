@@ -170,29 +170,44 @@ def reconcile(evidence: Path, release: str, register: Path, dataset: Path) -> di
     t = pq.ParquetFile(dataset).read(columns=["school_id", "school_ref_status", "analytical_inclusion_flag", "year_group_num"]).to_pandas()
     t = t[t["analytical_inclusion_flag"].astype(bool)]
     matched = t[t["school_ref_status"] == "Matched school"]
-    counts = matched.groupby("school_id").size().to_dict()
+    counts_src = matched.groupby("school_id").size().to_dict()
+    # V6.0-rc13: the report accepts the rows whose year group was resolved (the loader's
+    # rule); a response with no usable year (dq_year_group_unresolved) reaches the export
+    # and is excluded there, so exportRows/sourceRows carry the dataset's count and
+    # acceptedResponses the resolved-year count — three figures, checked separately
+    counts = matched[matched["year_group_num"].notna()].groupby("school_id").size().to_dict()
     problems = []
     eligible = {sid for sid, r in rows.items() if r["status"] == "eligible"}
     built = set(atts)
     missing = sorted(eligible - built)
     extra = sorted(built - eligible)
     for sid, a in atts.items():
-        n = int(counts.get(sid, 0))
+        n = int(counts.get(sid, 0)); n_src = int(counts_src.get(sid, 0))
         # the report's own accepted count (buildMetadata.acceptedRows, written by the pipeline)
-        # against a fresh count from the dataset, and against the rows the export received
-        if a["acceptedResponses"] != n or a.get("exportRows", n) != n:
-            problems.append(f"{a['slug']}: report accepted {a['acceptedResponses']} / export rows {a.get('exportRows')} != dataset {n}")
+        # against a fresh resolved-year count from the dataset; the rows the export received
+        # and the report's sourceRows against the dataset's full count; the register's n
+        if a["acceptedResponses"] != n:
+            problems.append(f"{a['slug']}: report accepted {a['acceptedResponses']} != dataset rows with a resolved year {n}")
+        if a.get("exportRows", n_src) != n_src or a.get("sourceRows", n_src) != n_src:
+            problems.append(f"{a['slug']}: export rows {a.get('exportRows')} / report source rows {a.get('sourceRows')} != dataset rows {n_src}")
+        if sid in rows and rows[sid].get("n") != n:
+            problems.append(f"{a['slug']}: register n {rows[sid].get('n')} != dataset rows with a resolved year {n}")
         if a["recipient"] != sid or a["profile"]["schoolId"] != sid:
             problems.append(f"{a['slug']}: recipient/profile id mismatch")
         if a["profile"]["availableYears"] != rows[sid]["years"] if sid in rows else True:
             problems.append(f"{a['slug']}: profile years differ from the register")
     total_reg = sum(r["n"] for r in rows.values())
-    total_ds = int(len(matched))
+    total_ds = int(matched["year_group_num"].notna().sum())
+    total_src = int(len(matched))
     if total_reg != total_ds:
-        problems.append(f"register rows {total_reg} != dataset matched-school rows {total_ds}")
+        problems.append(f"register rows {total_reg} != dataset matched-school rows with a resolved year {total_ds}")
+    if sum(r.get("n_source", r["n"]) for r in rows.values()) != total_src:
+        problems.append(f"register source rows {sum(r.get('n_source', r['n']) for r in rows.values())} != dataset matched-school rows {total_src}")
     by_status = Counter(r["status"] for r in rows.values())
     out = {"release": release, "eligible": len(eligible), "built": len(built), "missing": missing, "extra": extra,
            "registerStatus": dict(by_status), "responsesRegister": total_reg, "responsesDataset": total_ds,
+           "responsesDatasetSource": total_src, "responsesWithoutYear": total_src - total_ds,
+           "schoolsWithResponsesWithoutYear": sum(1 for r in rows.values() if r.get("n_no_year")),
            "responsesBuilt": sum(a["acceptedResponses"] for a in atts.values()),
            "responsesHeldOrBelow": sum(r["n"] for r in rows.values() if r["status"] != "eligible"),
            "problems": problems, "universeComplete": not missing and not extra, "ok": not problems and not extra}

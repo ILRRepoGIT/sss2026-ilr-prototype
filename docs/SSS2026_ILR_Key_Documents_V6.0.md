@@ -133,7 +133,7 @@ Alun 8,244, Ysgol Bro Pedr 8,208); the independent figure check all match; jsdom
 served-package gate clean over the directory and over HTTP with the production headers; the browser
 probe 11/11 in real Chromium under the production CSP.
 
-### 4a. The production pilot, its reviews and the full run (23 September 2026; v6.0-rc8 to v6.0-rc12)
+### 4a. The production pilot, its reviews and the full run (23 September 2026; v6.0-rc8 to v6.0-rc13)
 
 The pilot on the VM (rc7) built 8 of 20 schools; the 12 failures — all at small or special schools —
 were three defects in the build's own checks and the client, corrected in **rc8** (the one-pupil hold
@@ -199,6 +199,19 @@ its numerator ("dwy o'r 16 merch"), and collapses whitespace in the register's n
 the whole set is regenerated under the one tag. The 1,004 rc11 reports were otherwise sound — every gate passed,
 no anomaly in the scans of the rebuilt reference and sample schools — but they carry the masculine numerator in
 that one sentence and are superseded.
+
+The rc12 pilot (the 20-school sample, Beddgelert and the twelve rc11 regression schools — 33 reports, plus the two
+Phase B references; every job built; Phase B exactly the rc12 counts) stopped at the independent reconciliation:
+St Julian's has 228 analytically included responses in the dataset and 226 in its report. The two — and 98 across 83
+schools in all — are responses whose pupil named a year group impossible for the school's phase; the cleansing left
+their year unresolved, the national dataset keeps them, and the report's loader has excluded them since the
+prototype, because every view of a report is a year group or a union of year groups. The reports are right; the
+register and the reconciliation counted the dataset's rows rather than the report's rule. **rc13** (no change to any
+report; compliance record addendum 12) makes the register count what the report accepts (`n` = resolved-year
+rows, `n_source` and `n_no_year` beside it; 121,783 of 121,881) and the reconciliation check the three figures
+separately — accepted rows against resolved-year rows, export and source rows against the dataset's full count, the
+register against both. No school crosses the under-five or eligibility threshold. Industryline's review of all 33
+rc12 reports (`pilot_review/SSS2026_rc12_Pilot_Review_Assessment.md`) found every one clean.
 
 ## 5. What stays with humans
 
