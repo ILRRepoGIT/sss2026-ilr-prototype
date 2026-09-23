@@ -392,6 +392,13 @@ let FORCE_WHOLE = false;
    and section shows the existing suppression message, and the school
    information, FAQ and metadata stay. */
 const WHOLE_SUP = !!(DATA.states["whole|all|none"] || {}).sup;
+// V6.0-rc10 (rc9 pilot review, Ysgol Beddgelert): at a school whose whole-school
+// view is suppressed every module is empty, so the absolutely positioned
+// disclosure notices stacked on top of one another on screen and in print.
+// The body class lets the stylesheet let the notices flow in the page instead
+// (html.whole-sup .paywall-box); a suppressed VIEW at any other school keeps
+// the overlay over its greyed whole-school charts.
+if (WHOLE_SUP) document.documentElement.classList.add("whole-sup");
 const dst = () => WHOLE_SUP ? null : ((viewSup() || FORCE_WHOLE)
   ? DATA.states["whole|all|none"] : st());
 const sib = () => DATA.states[state.scope + "|" + state.gender + "|none"];

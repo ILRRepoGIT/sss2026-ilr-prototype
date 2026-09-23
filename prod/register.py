@@ -5,7 +5,7 @@ deployment plan §4.2). One row per school in the dataset; the build starts
 from this register and must finish with exactly the eligible rows built.
 
     python -m prod.register build <stage2.parquet> <out_dir> [--plasc <plasc2026.xlsx>] \\
-                                  [--min-responses 5] [--framework config/01_Framework_v2.17.xlsx]
+                                  [--min-responses 5] [--framework config/01_Framework_v2.18.xlsx]
     python -m prod.register profile <register.json> <school_id> <out.json> --release <tag>
 
 `build` writes register.json and register.csv (the same rows), a summary
@@ -256,7 +256,7 @@ def main(argv=None):
     b = sub.add_parser("build"); b.add_argument("parquet"); b.add_argument("out_dir")
     b.add_argument("--plasc"); b.add_argument("--min-responses", type=int, default=1,
                    help="owner instruction 22 Sep 2026: every school with an accepted response gets a report (default 1); the view-level rule of five is applied inside the report, not here")
-    b.add_argument("--framework", default="config/01_Framework_v2.17.xlsx")
+    b.add_argument("--framework", default="config/01_Framework_v2.18.xlsx")
     b.add_argument("--allow-missing-la-cy", action="store_true",
                    help="build schools whose authority has no Welsh row on sheet 53 (default: HELD — owner decision 22 Sep 2026, option A)")
     p = sub.add_parser("profile"); p.add_argument("register"); p.add_argument("school_id"); p.add_argument("out")

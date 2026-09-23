@@ -367,12 +367,20 @@ def build(framework_path, handoff_path=None):
         # that controls selection is recorded so t() tests exactly it.
         en_sg = en.replace("{n} pupil responses included",
                            "{n} pupil response included")
+        # V6.0-rc10 (EN-13, owner, 23 Sep 2026): the intro sentence and the
+        # FAQ sentence carry the count as a clause — "{n} pupil responses are
+        # included" — which read "1 pupil responses are included" at the 14
+        # one-response schools of the rc9 pilot; the sanctioned singular is
+        # the same clause with its number agreement ("1 pupil response is
+        # included"), derived here like the other singular forms.
+        en_sg = en_sg.replace("{n} pupil responses are included",
+                              "{n} pupil response is included")
         m_sl = _re.search(r"\{(\w+)\} pupils\b", en_sg)
         if m_sl:
             en_sg = en_sg.replace(f"{{{m_sl.group(1)}}} pupils",
                                   f"{{{m_sl.group(1)}}} pupil")
             f["sg_slot"] = m_sl.group(1)
-        elif "{n} pupil response included" in en_sg:
+        elif "{n} pupil response included" in en_sg or "{n} pupil response is included" in en_sg:
             f["sg_slot"] = "n"
         if en_sg != en and "en_sg" not in f:
             f["en_sg"] = en_sg

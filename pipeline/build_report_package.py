@@ -27,7 +27,10 @@ from .narrative2 import BASE1_GATES, T as TEMPLATES
 from .narrative2_modules import MODULE_LABELS
 from .narrative2_modules_b import FullNarrator
 
-PIPELINE_VERSION_V2 = "0.32.0"
+PIPELINE_VERSION_V2 = "0.32.1"
+# 0.32.1 (V6.0-rc10, rc9 pilot review): the one-response singular of the intro and
+# FAQ frames (EN-13; lexicon derivation), the whole-school-suppressed notices
+# flowing in the page (client); the Welsh corpus is unchanged.
 # 0.32.0 (V6.0, production pilot review of 23 Sep 2026): four rules of the
 # Welsh engine brought into line with the Framework's confirmed rulings —
 # labels the translator marked immutable never mutate on any path (PR-05 /

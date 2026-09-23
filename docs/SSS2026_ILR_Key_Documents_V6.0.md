@@ -156,6 +156,19 @@ Crownbridge 8 of 1,332 — every moved paragraph one of the four kinds, **the En
 (0 states moved)**. Unit tests 109 pass; the jsdom school regression 54/54 (fourteen new checks);
 figures, served package and Chromium probe clean; the probe now embeds the artwork. Pipeline 0.32.0.
 
+The rc9 pilot (21 schools — the 20 of the stratified pick and Ysgol Beddgelert, one response; every job built,
+850 served chunks and 873 staged files verified; Phase B exactly the recorded counts) was read against the six
+corrected items: all six hold in all 21 reports (no immutable name mutated anywhere, "Yr ail gamp fwyaf",
+the conjunction after "a", the object of "dewisodd"; every guide answer printed; the footer in the margin on
+every page; the gender profile All-only; the two data values marked). Two things the 20-school sample had never
+shown: at a whole-school-suppressed school the disclosure notices stacked over the empty sections, on screen
+and in print (23 schools), and a one-response school read "1 pupil responses are included" (14 schools).
+**rc10** (pipeline 0.32.1, Framework v2.18) corrects both — the notices flow in the page; the owner's singular
+"1 pupil response is included" (EN-13), Welsh already singular — and drops first emissions from the rollup's
+corpus-move lines; the Welsh corpus is unchanged. Left for a later decision (sheet 83): the single-year
+phrases at 29 schools ("Years 6 to 6"; the largest/smallest sentence naming one year twice) and the wording of
+the whole-school suppression notice, which is Sport Wales's GDPR text.
+
 ## 5. What stays with humans
 
 The translator: the two frames pending since V4.17 (`ui.a11y_switch_desc`, `ui.a11y_glossary_heading`), the three

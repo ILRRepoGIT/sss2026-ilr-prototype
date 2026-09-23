@@ -120,8 +120,8 @@ def _lock_moved(lock_path: Path) -> dict | None:
         em = json.loads(lock_path.read_text(encoding="utf-8")).get("emitted") or {}
     except (OSError, ValueError):
         return None
-    if "welshStatesMoved" not in em:
-        return None
+    if "welshStatesMoved" not in em or not em.get("supersedes"):
+        return None            # a first emission has nothing to have moved from (V6.0-rc10)
     return {"welsh": em.get("welshStatesMoved"), "english": em.get("englishStatesMoved"),
             "supersedes": em.get("supersedes")}
 

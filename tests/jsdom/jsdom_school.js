@@ -52,6 +52,15 @@ ok(WSUP ? (txt("#overview-note").indexOf(SUP_EN) === 0 && txt("#static-profile")
    WSUP ? "whole-school view suppressed (under five): overview note, profile charts and any-activity headline show the suppression message"
         : "overview note carries the school's year range (EN-06" + (GAP ? "/EN-11 gap variant" : "") + ")", txt("#overview-note").slice(0, 90));
 ok(!/\{(first|last|school|n|hi|lo|hin|lon)\}/.test(visible()), "no unresolved frame slot in the page");
+// V6.0-rc10 (rc9 pilot review): a whole-school-suppressed report carries html.whole-sup, and the
+// stylesheet lets its disclosure notices flow (position:static) instead of stacking over empty modules;
+// the intro and FAQ sentences take the sanctioned singular at one response (EN-13)
+ok(d.documentElement.classList.contains("whole-sup") === WSUP, "html.whole-sup exactly when the whole school is suppressed", String(WSUP));
+ok(/html\.whole-sup \.paywall-box \{ position:static/.test(tpl), "stylesheet: whole-sup notices flow in the page");
+ok(WSUP ? d.querySelectorAll(".paywall-box").length > 0 : true, "whole-sup: a notice in every dynamic module", d.querySelectorAll(".paywall-box").length);
+ok(N === 1 ? (txt("#intro-sentence").indexOf("1 pupil response is included") > -1 && txt("#faq-included").indexOf("1 pupil response is included") > -1)
+           : (txt("#intro-sentence").indexOf("pupil responses are included") > -1),
+   "EN-13: the one-response singular in the intro and FAQ sentences", txt("#intro-sentence").slice(-60));
 ok(txt("#overview-table").indexOf(D.school.localAuthority) > -1 && txt("#overview-table").indexOf(D.school.regionalSportPartnership) > -1 && txt("#overview-table").indexOf(D.school.schoolStages) > -1, "profile table: authority, partnership, stages", txt("#overview-table").slice(0, 200));
 const scopeOpts = Array.from(d.querySelectorAll("#f-scope option")).map(o => o.value);
 ok(scopeOpts.join(",") === offered.join(","), "scope select offers exactly the profile's scope groups", scopeOpts.join(","));

@@ -128,7 +128,7 @@ def rollup(evidence: Path, release: str) -> dict:
     # V6.0-rc9 (D82): the corpus moves the builds recorded against a previous lock —
     # the runbook's Phase B expects exact Welsh counts under the Framework v2.17 ruling
     # and English 0; an English move anywhere is a problem
-    lock_moves = {slug: a["lockMoved"] for slug, a in atts.items() if a.get("lockMoved")}
+    lock_moves = {slug: a["lockMoved"] for slug, a in atts.items() if a.get("lockMoved") and (a["lockMoved"] or {}).get("supersedes")}
     for slug, mv in lock_moves.items():
         if mv.get("english"):
             problems.append(f"{slug}: {mv['english']} English states moved from the previous lock")

@@ -1,7 +1,7 @@
 {
- "version": "v2.17",
- "framework_sha256": "0f67b26888f01eb19009ffc271a5431e1104181fc12c11170386d88fe0aaf5d5",
- "framework_file": "01_Framework_v2.17.xlsx",
+ "version": "v2.18",
+ "framework_sha256": "20e19e9f6dab05ac0bf790611a59f9e275569ad96ec56b19de460269525d7679",
+ "framework_file": "01_Framework_v2.18.xlsx",
  "audiences": {
   "Generated from sheet 18 by rule. Note the two divergences from English that recur in every row: (1) after a numeral with the article Welsh uses the SINGULAR head (y 12 disgybl, not y 12 ddisgyblion); (2) the scope phrase is locative and triggers the nasal mutation (ym Mlwyddyn 8). The HOLL column is the parent-audience form ('all Year 8 pupils').": {
    "bare": "",
@@ -4175,6 +4175,8 @@
    "en": "This report presents the responses given by pupils at {school}: {n} pupil responses are included, across Years {first} to {last}.",
    "cy": "Mae’r adroddiad hwn yn cyflwyno’r ymatebion a roddwyd gan disgyblion yn {school}: Mae {n} o ymatebion disgyblion wedi’u cynnwys, dros Flynyddoedd {first} i {last}.",
    "slots": "school, n, first, last",
+   "sg_slot": "n",
+   "en_sg": "This report presents the responses given by pupils at {school}: {n} pupil response is included, across Years {first} to {last}.",
    "cy_sg": "Mae’r adroddiad hwn yn cyflwyno’r ymatebion a roddwyd gan disgyblion yn {school}: Mae {n} o ymatebion disgyblion wedi’i gynnwys, dros Flynyddoedd {first} i {last}."
   },
   "ui.any_activity": {
@@ -4198,6 +4200,8 @@
    "en": "Pupils in Years {first} to {last} at {school} who completed the 2026 School Sport Survey: {n} pupil responses are included. The page “Which pupils in our school took part in 2026?” shows exactly who they are.",
    "cy": "Disgyblion ym Mlynyddoedd {first} i {last} yn {school} a atebodd Arolwg Chwaraeon Ysgol 2026: Mae {n} o ymatebion disgyblion wedi’u cynnwys. Mae’r dudalen “Pa ddisgyblion yn ein hysgol gymerodd ran yn 2026?” yn dangos pwy yn union ydyn nhw.",
    "slots": "school, n, first, last",
+   "sg_slot": "n",
+   "en_sg": "Pupils in Years {first} to {last} at {school} who completed the 2026 School Sport Survey: {n} pupil response is included. The page “Which pupils in our school took part in 2026?” shows exactly who they are.",
    "cy_sg": "Disgyblion ym Mlynyddoedd {first} i {last} yn {school} a atebodd Arolwg Chwaraeon Ysgol 2026: Mae {n} o ymatebion disgyblion wedi’i gynnwys. Mae’r dudalen “Pa ddisgyblion yn ein hysgol gymerodd ran yn 2026?” yn dangos pwy yn union ydyn nhw."
   },
   "ui.faq_missing": {

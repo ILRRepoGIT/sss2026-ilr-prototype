@@ -192,6 +192,12 @@ details.faq > p, details.faq > div { padding:10px 14px; margin:0; }
   filter:none; opacity:1; box-shadow:0 4px 18px rgba(9,75,104,.18); }
 .paywall-box .t { font:800 15px var(--fd); color:var(--blue); margin-bottom:4px; }
 .paywall-box .b { font-size:12.5px; color:#5F5E5A; }
+/* V6.0-rc10 (rc9 pilot review, Ysgol Beddgelert): at a whole-school-suppressed
+   school the modules are empty, so the notice flows in the page instead of
+   floating over it — one readable notice per section, none overlapping,
+   on screen and in print. A suppressed VIEW elsewhere keeps the overlay. */
+html.whole-sup .paywall-box { position:static; transform:none; margin:14px auto 4px; }
+html.whole-sup .module.paywalled { min-height:0; }
 .cosel-wrap { margin-top:10px; }
 /* v6 (build 012.1): take-part section joined to the disability section */
 [data-module="e7"] { margin-top:-16px; border-top-left-radius:0;
