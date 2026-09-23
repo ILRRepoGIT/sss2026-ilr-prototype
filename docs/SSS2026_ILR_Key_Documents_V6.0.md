@@ -133,7 +133,7 @@ Alun 8,244, Ysgol Bro Pedr 8,208); the independent figure check all match; jsdom
 served-package gate clean over the directory and over HTTP with the production headers; the browser
 probe 11/11 in real Chromium under the production CSP.
 
-### 4a. The production pilot, its reviews and the full run (23 September 2026; v6.0-rc8 to v6.0-rc13)
+### 4a. The production pilot, its reviews and the full run (23 September 2026; v6.0-rc8 to v6.0-rc14)
 
 The pilot on the VM (rc7) built 8 of 20 schools; the 12 failures — all at small or special schools —
 were three defects in the build's own checks and the client, corrected in **rc8** (the one-pupil hold
@@ -211,7 +211,24 @@ report; compliance record addendum 12) makes the register count what the report 
 rows, `n_source` and `n_no_year` beside it; 121,783 of 121,881) and the reconciliation check the three figures
 separately — accepted rows against resolved-year rows, export and source rows against the dataset's full count, the
 register against both. No school crosses the under-five or eligibility threshold. Industryline's review of all 33
-rc12 reports (`pilot_review/SSS2026_rc12_Pilot_Review_Assessment.md`) found every one clean.
+rc12 reports (`pilot_review/SSS2026_rc12_Pilot_Review_Assessment.md`) found every one clean. The owner ruled that
+the exclusion stands (no year inferred or imputed), directed that the production set be built at rc12 and the rc13
+reconciliation run afterwards over its evidence, gave the rule-9 waiver in writing (addendum 13), and named
+himself the publisher; the second approver's confirmation is on file by e-mail.
+
+**rc14** (no change to any report; compliance record addendum 14) is the rehearsal of Phases E and F on
+Industryline's machine while the full run was on, and what it found: the identity branch of `prod.publish`'s AzCopy
+sign-in called itself without bound, so `stage` — the first Phase E command — could not run (a `RecursionError`
+at once, nothing uploaded; the command had never been executed, the pilots ending at Phase C's file-mode check).
+The branch now sets AzCopy's managed-identity auto-login; the entry pages are staged with their `Cache-Control`
+and `Content-Type` from the origin, the wildcard copy giving the staged layout the served shape that
+`verify-staging` checks; the publisher's sign-in is kept in its own Azure CLI configuration directory (runbook
+F1), so the VM identity's session survives for the evidence upload. Proof: every subcommand dry-run; the
+publication index exercised on a fresh-clone rc12 build — refused without the waiver (rule 9), approved with it
+(the waiver's sha256 in the index), refused for an `--allow-dirty` build even with it; `served-gate` over HTTP
+against a stand-in for Front Door — a correct tree passes, one flipped byte in a served chunk or a missing edge
+header fails it (exit 1); six new unit tests (118 pass). The set is not rebuilt: the checkout for Phases E–F is
+rc14, `RELEASE` stays `v6.0-rc12`.
 
 ## 5. What stays with humans
 

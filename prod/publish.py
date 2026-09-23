@@ -13,10 +13,13 @@ Phase 8; review P0.8, P0.9, P0.10, G13, G14).
 All commands print what they do and take --dry-run. They use the Azure CLI
 and AzCopy. --auth chooses whose identity AzCopy uses: `identity` (default —
 the VM's managed identity, for stage/verify-staging) or `azcli` (the account
-that ran `az login` on this machine — the named publisher, for promote /
-withdraw / rollback after the runbook has moved the $web and purge roles
-away from the VM, so that the machine that built cannot also publish).
-`az afd endpoint purge` always runs as the Azure CLI's signed-in account.
+that ran `az login` in this shell's Azure CLI configuration — the named
+publisher, for promote / withdraw / rollback after the runbook has moved the
+$web and purge roles away from the VM, so that the machine that built cannot
+also publish). `az afd endpoint purge` and `az storage blob list` always run
+as the Azure CLI's signed-in account, so the publisher's sign-in is kept in
+its own AZURE_CONFIG_DIR (runbook F1) and the VM identity's session is
+untouched for the evidence upload.
 
 The model (P0.8): the release tree — /r/<tag>/assets/… and /r/<tag>/<token>/…,
 every file content-hashed and immutable — is uploaded to the PRIVATE
@@ -58,19 +61,29 @@ def sh(cmd: list, dry: bool, check=True, capture=False):
 
 
 def azcopy_login(a):
-    """AzCopy authentication for this command. identity: `azcopy login --identity`
-    (the VM's system-assigned identity). azcli: AzCopy auto-login through the
-    Azure CLI's signed-in account (AZCOPY_AUTO_LOGIN_TYPE=AZCLI) — the publisher
-    ran `az login` as themselves on this machine; nothing is stored."""
+    """AzCopy authentication for this command — AzCopy's auto-login (v10.21+),
+    so that no token is written to disk by an `azcopy login`. identity: the
+    VM's system-assigned managed identity (AZCOPY_AUTO_LOGIN_TYPE=MSI), for
+    stage. azcli: the Azure CLI's signed-in account (AZCOPY_AUTO_LOGIN_TYPE=
+    AZCLI) — the publisher, signed in as themselves with `az login
+    --use-device-code`, for promote / withdraw / rollback. Returns the mode.
+
+    rc14: the identity branch called this function again (an unbounded
+    recursion — `stage`, the first Phase E command, could not run)."""
     import os
     mode = getattr(a, "auth", "identity") or "identity"
+    os.environ.pop("AZCOPY_AUTO_LOGIN_TYPE_MSI", None)
     if mode == "azcli":
         os.environ["AZCOPY_AUTO_LOGIN_TYPE"] = "AZCLI"
-        os.environ.pop("AZCOPY_AUTO_LOGIN_TYPE_MSI", None)
         who = sh(["az", "account", "show", "--query", "user.name", "-o", "tsv"], a.dry_run, check=False, capture=True).strip()
         print(f"azcopy auth: Azure CLI account {who or '(dry run)'}", flush=True)
     else:
-        azcopy_login(a)
+        os.environ["AZCOPY_AUTO_LOGIN_TYPE"] = "MSI"
+        print("azcopy auth: the VM's managed identity", flush=True)
+    return mode
+
+
+ENTRY_PAGE_HEADERS = ["--cache-control", "no-cache, must-revalidate", "--content-type", "text/html; charset=utf-8"]
 
 
 def blob_url(account: str, container: str, path: str = "") -> str:
@@ -84,8 +97,10 @@ def stage(a):
     # the release tree only — never the private index, the evidence or the entry pages
     sh(["azcopy", "sync", str(out / "r" / a.release), blob_url(a.account, "staging", f"{a.release}/r/{a.release}"),
         "--recursive", "--put-md5", "--exclude-pattern", "package_index.json"], a.dry_run)
-    sh(["azcopy", "sync", str(out / "2026"), blob_url(a.account, "staging", f"{a.release}/2026"),
-        "--recursive", "--put-md5"], a.dry_run)
+    # the entry pages carry their headers from the origin (rc14): the wildcard copies the CONTENTS of
+    # 2026/ — <token>/index.html — so the staged layout is the served layout, which verify-staging checks
+    sh(["azcopy", "copy", str(out / "2026") + "/*", blob_url(a.account, "staging", f"{a.release}/2026"),
+        "--recursive", "--put-md5", "--overwrite=true", *ENTRY_PAGE_HEADERS], a.dry_run)
     for f in ("404.html", "robots.txt", "health.txt"):
         sh(["azcopy", "copy", str(out / f), blob_url(a.account, "staging", f"{a.release}/{f}"), "--put-md5"], a.dry_run)
     L = Ledger(Path(a.evidence) / a.release / "ledger.sqlite") if a.evidence else None
@@ -186,8 +201,7 @@ def promote(a):
     for r in idx["reports"]:
         src = blob_url(a.account, "staging", f"{a.release}/2026/{r['token']}/index.html")
         dst = blob_url(a.account, "$web", f"2026/{r['token']}/index.html")
-        sh(["azcopy", "copy", src, dst, "--overwrite=true", "--cache-control", "no-cache, must-revalidate",
-            "--content-type", "text/html; charset=utf-8"], a.dry_run)
+        sh(["azcopy", "copy", src, dst, "--overwrite=true", *ENTRY_PAGE_HEADERS], a.dry_run)
         if not a.dry_run:
             L.mark(a.release, r["school_id"], "published")
     # 3. purge the edge so no reader keeps a previous entry page
@@ -235,8 +249,7 @@ def rollback(a):
                 L.mark(a.release, r["school_id"], "withdrawn", error=f"rolled back to {a.to}")
     for r in idx["reports"]:
         sh(["azcopy", "copy", blob_url(a.account, "staging", f"{a.to}/2026/{r['token']}/index.html"),
-            blob_url(a.account, "$web", f"2026/{r['token']}/index.html"), "--overwrite=true",
-            "--cache-control", "no-cache, must-revalidate", "--content-type", "text/html; charset=utf-8"], a.dry_run)
+            blob_url(a.account, "$web", f"2026/{r['token']}/index.html"), "--overwrite=true", *ENTRY_PAGE_HEADERS], a.dry_run)
     sh(["az", "afd", "endpoint", "purge", "--profile-name", a.profile, "--resource-group", a.rg, "--endpoint-name", a.endpoint,
         "--content-paths", "/2026/*"], a.dry_run)
     if not a.dry_run:

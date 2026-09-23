@@ -8,7 +8,7 @@ Throughout, `$ILR_REPO`, `$ILR_VENV` and the storage/vault names come from `/etc
 
 ```
 cd $ILR_REPO && source $ILR_VENV/bin/activate
-export RELEASE=v6.0-rc13                 # the tag the VM was bootstrapped at (v6.0-rc13 today — Framework v2.20, pipeline 0.32.3; the owner cuts v6.0 with tools/cut_release.sh)
+export RELEASE=v6.0-rc12                 # the tag of the BUILT SET — the production set is v6.0-rc12 (Framework v2.20, pipeline 0.32.3); see the note below on the checkout
 export EVID=/data/ilr/evidence            # private: attestations, bundles, locks, ledger
 export OUT=/data/ilr/out                  # the served trees (release + entry pages)
 export WORK=/data/ilr/work                # per-job scratch, deleted job by job
@@ -16,6 +16,8 @@ export DATASET=/data/ilr/private/SSS2026_pupil_stage2_full_cleaned.parquet
 # $ILR_DATA_ACCOUNT, $ILR_WEB_ACCOUNT, $ILR_KEY_VAULT, $ILR_AFD_PROFILE, $ILR_AFD_ENDPOINT, $ILR_RG and $JSDOM come from
 # /etc/profile.d/ilr.sh, written by the bootstrap; `env | grep ILR_` shows them. The commands below use the default names.
 ```
+
+**`RELEASE` is the identity of the set, the checkout is the code.** Phases A–D build the set under the tag checked out (v6.0-rc12 for the production set: its evidence root, its out tree, its ledger and every attestation carry `v6.0-rc12`). A later tag that changes only checking or publishing code under `prod/` — no report-generating code, no framework, no register rule that changes the universe — is checked out for the phases that follow the build without rebuilding anything, and `RELEASE` stays the set's tag: **v6.0-rc13** (the register and the reconciliation count what the report accepts) and **v6.0-rc14** (the publication commands: the identity branch of `prod.publish stage` could not run before rc14, and the entry pages are now staged with their headers) are both such tags. So for the production set: the run at the v6.0-rc12 checkout; then `git fetch --tags && git checkout v6.0-rc14 && python -m prod.release verify --tag v6.0-rc14`, and Phase D's reconciliation, Phase E and Phase F from that checkout with `RELEASE=v6.0-rc12`. The register on the VM is the one the set was built from (rc12 names, 1,016 schools); rc13's `n` rule is applied by the reconciliation, which counts by it.
 
 ---
 
@@ -144,10 +146,14 @@ python -m prod.runner rebuild --release $RELEASE --register /data/ilr/private/re
 
 ## Phase E — staging and verification of the whole set
 
+From the v6.0-rc14 checkout (or later), in a shell whose Azure CLI is the VM's identity (`az account show` names the VM's managed identity — the bootstrap's `az login --identity`; never the publisher's `AZURE_CONFIG_DIR` shell of F1):
+
 ```
 python -m prod.publish stage          --release $RELEASE --out $OUT --account stsss2026ilrweb --evidence $EVID
 python -m prod.publish verify-staging --release $RELEASE --evidence $EVID --account stsss2026ilrweb
 ```
+
+`stage` prints `azcopy auth: the VM's managed identity` and then the three AzCopy commands (the release tree by `sync`; the entry pages `2026/*` by `copy` with `Cache-Control: no-cache, must-revalidate` and `Content-Type: text/html; charset=utf-8` set at the origin; the three root files). Before v6.0-rc14 the first command failed at once with `RecursionError` — a fault in the command, not in the set; nothing was uploaded. `verify-staging` must end `"ok": true` with `filesChecked` equal to the sum of the attestations' inventories and no problems: it is the check that the staged layout is the served layout (`2026/<token>/index.html`, `r/v6.0-rc12/…`), every byte attested.
 
 Then the dry run of the promotion — read the plan, promote nothing. Front Door serves `$web`, not `staging`; no report is reachable through it before Phase F, and no temporary entry page or test token is written:
 
@@ -181,7 +187,17 @@ az role assignment create --assignee <publisher upn> --role "Storage Blob Data R
 az role assignment create --assignee <publisher upn> --role "CDN Profile Contributor"       --scope $AFD
 ```
 
-The publisher then runs F2–F5 on the VM (the storage firewall admits only the VM's subnet), signed in as themselves rather than as the machine: `az login --use-device-code` (this replaces the VM's `az login --identity` session for the shell; `az account show` must print the publisher's name), and every `prod.publish` command in F4 and after carries `--auth azcli`, which makes AzCopy use that sign-in too. The ledger records the publisher's account name with the activation. Allow a few minutes for the role assignments to propagate before F4.
+`<publisher upn>` is the publisher's sign-in name in the tenant that holds the subscription. A publisher who has no account in that tenant is invited first, as a guest (Microsoft Entra admin centre → Users → New user → Invite external user; the invitation is accepted from the publisher's mailbox), and the role assignments then take the guest's UPN (`az ad user list --filter "mail eq '<address>'" --query "[].userPrincipalName" -o tsv` prints it) — allow the invitation and the assignments a few minutes to propagate before F4.
+
+The publisher then runs F2–F5 on the VM (the storage firewall admits only the VM's subnet), signed in as themselves rather than as the machine. The publisher need not be at the keyboard: the operator opens the publisher's shell and the publisher authorises the sign-in from their own browser (the device-code flow), the two on a call for the whole of F2–F5. The publisher's sign-in lives in its own Azure CLI configuration directory, so the VM identity's own session (Phases A–E, the evidence upload) is untouched:
+
+```
+export AZURE_CONFIG_DIR=/data/ilr/private/azcli_publisher      # this shell only: the publisher's sign-in, nothing of the VM identity's
+az login --use-device-code --tenant <tenant id>                 # prints a code; the publisher enters it at https://microsoft.com/devicelogin and signs in as themselves
+az account show --query "{account: user.name, subscription: name}" -o table   # must print the PUBLISHER's account — if it prints the VM identity or anyone else, stop
+```
+
+Every `prod.publish` command in F4 and after runs in that shell and carries `--auth azcli`, which makes AzCopy use that sign-in too (the command prints `azcopy auth: Azure CLI account <publisher>` first — read it). The ledger records the publisher's account name with the activation. The evidence re-upload after F4 runs in the VM identity's shell (no `AZURE_CONFIG_DIR`), exactly as in Phase E; `index`, the two exports and `served-gate` need no Azure sign-in at all. When F5 has passed, `az logout` in the publisher's shell and `rm -rf /data/ilr/private/azcli_publisher` remove the sign-in from the VM.
 
 **F2. The publication index.** Only reports whose ledger status is `verified` go in; a dev-mode report is refused unless a signed waiver from the report owner is supplied (rule 9 — until the translator's remaining values and the owner's D69 are in the framework, every build is a dev build, so this is the decision point):
 
@@ -209,14 +225,14 @@ python -m prod.checks publication-register --evidence $EVID --release $RELEASE -
 
 Columns: `report_id`, `report_family`, `entity_id`, `title_en`, `title_cy`, `public_slug` (the school's name slug + the first eight characters of its link token — stable, unique, never assigned by hand), `release_id`, `azure_target_path` (the entry page), `target_url`, `package_hash` (sha256 over the report's file inventory), `files`, `publication_status`, the authority in both languages, `accepted_responses`. The command refuses (exit 1) on a duplicate slug or target. The same rows are written as `.json`. The website team imports this file and nothing else; when a report is corrected under a new tag, a new register is produced and the slug's target changes there, never by hand.
 
-**F4. Activation.** Server-side copy of the release tree, then the entry pages, then the edge purge:
+**F4. Activation.** Server-side copy of the release tree, then the entry pages, then the edge purge. In the publisher's shell. The entry pages are written one AzCopy job each — one line printed per school; allow up to 45 minutes for 1,016 — and nothing is reachable until each one lands, so the window is harmless (no link has been sent):
 
 ```
 python -m prod.publish promote --release $RELEASE --evidence $EVID --account stsss2026ilrweb \
    --profile afd-sss2026-ilr --rg SSS2026_Interactive_Learning_reports --endpoint sss2026-reports --auth azcli
 ```
 
-Then re-upload the evidence so that the private record carries the publication index and the ledger's activation events (the Phase E upload predates them):
+Then, in the VM identity's shell (not the publisher's), re-upload the evidence so that the private record carries the publication index and the ledger's activation events (the Phase E upload predates them):
 
 ```
 python -m prod.ledger export $EVID/$RELEASE/ledger.sqlite $EVID/$RELEASE/ledger_export
@@ -229,7 +245,7 @@ az storage blob upload-batch --account-name $ILR_DATA_ACCOUNT --destination evid
 python -m prod.checks served-gate --evidence $EVID --release $RELEASE --site https://reports.schoolsportsurvey2026.co.uk --sample 40
 ```
 
-This fetches every entry page (headers, bytes, identity) and every chunk of a stratified sample of 40 reports. Any problem: withdraw the affected report at once (`prod.publish withdraw … --auth azcli`), or roll the whole release back (`prod.publish rollback --to <previous> --auth azcli`), before any link is sent. Record the result in the compliance record with the tag, the dataset hash, the index sha256 and the date.
+This fetches every entry page (headers, bytes, identity) and every chunk of a stratified sample of 40 reports — allow 20–40 minutes for 1,016 over the public host; rehearsed at rc14 over HTTP against a stand-in for Front Door (a correct tree passes; a single flipped byte in a served chunk, or a missing edge header, fails the gate with exit 1). Any problem: withdraw the affected report at once (`prod.publish withdraw … --auth azcli`), or roll the whole release back (`prod.publish rollback --to <previous> --auth azcli`), before any link is sent. Record the result in the compliance record with the tag, the dataset hash, the index sha256 and the date.
 
 Only after F5 passes are the links sent to schools.
 
